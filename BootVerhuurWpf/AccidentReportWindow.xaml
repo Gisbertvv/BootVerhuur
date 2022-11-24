@@ -1,0 +1,139 @@
+﻿<Window x:Class="BootVerhuurWpf.AccidentReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BootVerhuurWpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid HorizontalAlignment="Left" Width="800" Height="434" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="434" VerticalAlignment="Center">
+                <Button x:Name="btn1" Content="Reseveren"
+                     ClickMode="Press"
+                    Margin="10, 5" Width="130"
+                    HorizontalAlignment="Center"
+                    Foreground="Green"/>
+                <Button x:Name="btn2" Content="Schademelden"
+                    ClickMode="Press"
+                    Width="130" 
+                    Margin="10,5"
+                    Foreground="Blue"/>
+
+                <Button x:Name="btn3" Content="Routes"
+                     ClickMode="Press"
+                    Margin="10, 5" Width="130"
+                    HorizontalAlignment="Center"/>
+
+                <Button x:Name="btn4" Content="Uitloggen"
+                     ClickMode="Press"
+                    Margin="10,5" Width="130"
+                    HorizontalAlignment="Center"/>
+            </StackPanel>
+            <Canvas Grid.Column="1">
+                <StackPanel>
+                    <TextBlock Text="1. Mijn naam" Width="300"/>
+                    <TextBox x:Name="nameInput" Width="300"/>
+
+                    <TextBlock Text="2. De datum en -tijd" Width="300"/>
+                    <TextBox x:Name="time" Width="300"/>
+
+                    <TextBlock Text="3. Weersgesteldheid" Width="300"/>
+                    <TextBox x:Name="weatherConditionsInput" Width="300"/>
+
+                    <TextBlock Text="4. Plek waar het ongeluk plaatsvond" Width="300"/>
+                    <TextBox x:Name="placeInput" Width="300"/>
+
+                    <TextBlock Text="5. Mijn betrokkenheid" Width="300"/>
+                    <RadioButton x:Name="TopLeftButton"  GroupName="First Group" Content="First Choice" />
+                    <RadioButton x:Name="TopRightButton"  GroupName="First Group" Content="Second Choice" />
+                    <RadioButton x:Name="bottomLeftButton"  GroupName="First Group" Content="Third Choice" />
+                    <RadioButton x:Name="bottomRightButton"  GroupName="First Group" Content="Fourth Choice" />
+
+                    <TextBlock Text="6. De schade ontstond door" Width="300"/>
+                    <RadioButton x:Name="FirstButton"  GroupName="First Group" Content="First Choice" />
+                    <RadioButton x:Name="SecondButton"  GroupName="First Group" Content="Second Choice" />
+                    <RadioButton x:Name="ThirdButton" GroupName="First Group" Content="Third Choice" />
+                    <RadioButton x:Name="FourthButton"  GroupName="First Group" Content="Fourth Choice" />
+                    <RadioButton x:Name="FifthButton"  GroupName="First Group" Content="Fifth Choice" />
+                    <RadioButton x:Name="SixthButton"  GroupName="First Group" Content="Sixth Choice" />
+                    <RadioButton x:Name="SeventhButton"  GroupName="First Group" Content="Seventh Choice" />
+                    <RadioButton x:Name="EighthButton"  GroupName="First Group" Content="Eighth Choice" />
+
+                    <TextBlock Text="7. Namen boten, Verenegingen, roeiers en stuur" Width="300"/>
+                    <TextBox x:Name="NameBoat" Width="300"/>
+                    <TextBox x:Name="OtherObject" Width="300"/>
+                    <TextBox x:Name="association" Width="300"/>
+                    <TextBox x:Name="Otherassociation" Width="300"/>
+                    <TextBox x:Name="RowerBow" Width="300"/>
+                    <TextBox x:Name="OtherRowerBow" Width="300"/>
+                    <TextBox x:Name="SecondRower" Width="300"/>
+                    <TextBox x:Name="OtherSecondRower" Width="300"/>
+                    <TextBox x:Name="ThirdRower" Width="300"/>
+                    <TextBox x:Name="OtherThirdRower" Width="300"/>
+                    <TextBox x:Name="CoxRower" Width="300"/>
+                    <TextBox x:Name="OtherCoxRower" Width="300"/>
+                    <TextBox x:Name="RudderRower" Width="300"/>
+                    <TextBox x:Name="OtherRudderRower" Width="300"/>
+
+                    <TextBlock Text="8. Hoe is naar uw meing de schade ontstaan?" Width="300"/>
+                    <TextBox x:Name="OpinionHow"
+                         Height="200"
+                         Width="300"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         HorizontalScrollBarVisibility="Disabled"
+                         VerticalScrollBarVisibility="Auto"/>
+
+                    <TextBlock Text="9. Wat was naar uw mening de oorzaak?" Width="300"/>
+                    <TextBox x:Name="Opinioncause"
+                         Height="200"
+                         Width="300"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         HorizontalScrollBarVisibility="Disabled"
+                         VerticalScrollBarVisibility="Auto"/>
+
+                    <TextBlock Text="10. Hoe was de schade te voorkomen geweest?" Width="300"/>
+                    <TextBox x:Name="OpinionPrevent"
+                         Height="200"
+                         Width="300"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         HorizontalScrollBarVisibility="Disabled"
+                         VerticalScrollBarVisibility="Auto"/>
+
+                    <TextBlock Text="11. Wie heeft naar uw mening schuld en waarom?" Width="300"/>
+                    <TextBox x:Name="OpinionGuilt"
+                         Height="200"
+                         Width="300"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         HorizontalScrollBarVisibility="Disabled"
+                         VerticalScrollBarVisibility="Auto"/>
+
+                    <TextBlock Text="13. Indien schade met derde(n), naam en adres tegenpartij" Width="300"/>
+                    <TextBox x:Name="ThirdParty"
+                         Height="200"
+                         Width="300"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         HorizontalScrollBarVisibility="Disabled"
+                         VerticalScrollBarVisibility="Auto"/>
+
+                    <TextBlock Text="14. Maak een situatieschets" Width="300"/>
+
+                    <TextBlock Text="15. Ondertekening" Width="300"/>
+                    <Label Width="300">Ik verklaar het schadeformulier juist, volledig en naar waarheid ingevuld te hebben.</Label>
+                    <TextBox x:Name="Location" Width="300"/>
+                    <TextBox x:Name="Date" Width="300"/>
+                </StackPanel>
+            </Canvas>
+        </Grid>
+    </ScrollViewer>
+</Window>
+
