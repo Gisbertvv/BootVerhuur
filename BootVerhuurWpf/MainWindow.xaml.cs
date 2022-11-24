@@ -24,5 +24,17 @@ namespace BootVerhuurWpf
         {
             InitializeComponent();
         }
+
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+            CreateMember createMember = new CreateMember();
+            createMember.Show();
+            this.Close();
+        }
+
+        private void OpenA_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

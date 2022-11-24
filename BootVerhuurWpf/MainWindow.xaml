@@ -14,25 +14,37 @@
 
         <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="434" VerticalAlignment="Center">
             <Button x:Name="btn1" Content="Reseveren"
-                    Click="OnClick1" ClickMode="Press"
+
                     Margin="10, 5" Width="130"
                     HorizontalAlignment="Center"
                     Foreground="Green"/>
             <Button x:Name="btn2" Content="Schademelden"
-                    Click="OnClick2" ClickMode="Press"
+ 
                     Width="130" 
                     Margin="10,5"
                     Foreground="Blue"/>
 
             <Button x:Name="btn3" Content="Routes"
-                    Click="OnClick3" ClickMode="Press"
+
                     Margin="10, 5" Width="130"
                     HorizontalAlignment="Center"/>
 
             <Button x:Name="btn4" Content="Uitloggen"
-                    Click="OnClick4" ClickMode="Press"
+
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
+
+            <Button x:Name="btn5" Content="Aanmaken"
+                    Click="Open_Click"
+                    Margin="10,5" Width="130"
+                    HorizontalAlignment="Center"/>
+
+            <Button x:Name="btn6" Content="Aanmaken Admin"
+                    Click="OpenA_Click"
+                    Margin="10,5" Width="130"
+                    HorizontalAlignment="Center"/>
+
+
         </StackPanel>
     </Grid>
 </Window>
