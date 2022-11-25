@@ -34,6 +34,8 @@
  
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
+
+            <Button x:Name="btn5" Content="Terug" Margin=" 10,5" Click="Back_Click"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="269" Width="367">
@@ -48,7 +50,7 @@
             <Label Content="Email"/>
             <TextBox Name="txtEmail"/>
 
-            <Button x:Name="btn6" Content="Aanmaken" HorizontalAlignment="Right" Margin="10,10" Width="100"/>
+            <Button x:Name="btn6" Content="Aanmaken" HorizontalAlignment="Right" Margin="10,10" Width="100" Click="Create_Admin"/>
 
 
         </StackPanel>

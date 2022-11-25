@@ -38,13 +38,6 @@
                     Click="Open_Click"
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
-
-            <Button x:Name="btn6" Content="Aanmaken Admin"
-                    Click="OpenA_Click"
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
-
-
         </StackPanel>
     </Grid>
 </Window>

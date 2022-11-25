@@ -5,8 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-        
         Title="MainWindow" Height="450" Width="800">
     <Grid HorizontalAlignment="Left" Width="800" Height="434" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
@@ -36,8 +34,8 @@
 
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
+            <Button x:Name="btn5" Content="Terug" Click="Back_Click" Margin="10,5"/>
         </StackPanel>
-
 
         <StackPanel Grid.Column="1" Margin="10,10,10,10">
 
