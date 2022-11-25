@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BootVerhuur", "BootVerhuur\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BootVerhuurWpf", "BootVerhuurWpf\BootVerhuurWpf.csproj", "{AE0A8C23-1EC0-4BF1-8745-CBD1CA0B541D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UploadFile", "UploadFile\UploadFile.csproj", "{AF53823C-7163-491F-BE01-E9E7712C0BE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UploadFile", "UploadFile\UploadFile.csproj", "{AF53823C-7163-491F-BE01-E9E7712C0BE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
