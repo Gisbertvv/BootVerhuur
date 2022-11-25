@@ -42,11 +42,14 @@
         <StackPanel Grid.Column="1" Margin="10,10,10,10">
 
             <Label Content="_Rol"/>
-            <ComboBox x:Name = "Rol">
+            <ComboBox x:Name = "Rol" Width="305" HorizontalAlignment="Left">
                 <ComboBoxItem Content = "Lid" />
                 <ComboBoxItem Content = "Materiaalcommesaris" />
                 <ComboBoxItem Content = "Wedstrijdcommesaris" />
+                <ComboBoxItem Content = "Admin" />
             </ComboBox>
+
+            <Button x:Name="Check" Height="20" Margin="0,5" HorizontalAlignment="Right" Click="Check_Admin">Bevestigen</Button>
 
             <Label Content="_Voornaam:"  />
             <TextBox Name="txtVoornaam" />

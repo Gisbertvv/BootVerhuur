@@ -58,16 +58,18 @@ namespace BootVerhuurWpf
                  icon = MessageBoxImage.Error;                 
             }
                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
-            } 
-           
-        
+            }
 
-          
-        
-
-        private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Check_Admin(object sender, RoutedEventArgs e)
         {
-
+            if (Rol.Text.Equals("Admin"))
+            {
+                CreateAdmin createAdmin = new CreateAdmin();
+                createAdmin.Show();
+                this.Close();
+            }
         }
     }
+
+    
 }
