@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <Grid HorizontalAlignment="Left" Width="800" Height="434" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
@@ -34,7 +33,8 @@
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
             </StackPanel>
-            <Canvas Grid.Column="1">
+        <Canvas Grid.Column="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="1000">
                 <StackPanel>
                     <TextBlock Text="1. Mijn naam" Width="300"/>
                     <TextBox x:Name="nameInput" Width="300"/>
@@ -49,20 +49,20 @@
                     <TextBox x:Name="placeInput" Width="300"/>
 
                     <TextBlock Text="5. Mijn betrokkenheid" Width="300"/>
-                    <RadioButton x:Name="TopLeftButton"  GroupName="First Group" Content="First Choice" />
-                    <RadioButton x:Name="TopRightButton"  GroupName="First Group" Content="Second Choice" />
-                    <RadioButton x:Name="bottomLeftButton"  GroupName="First Group" Content="Third Choice" />
-                    <RadioButton x:Name="bottomRightButton"  GroupName="First Group" Content="Fourth Choice" />
+                    <RadioButton x:Name="TopLeftButton"  GroupName="First Group" Content="Ik stuurde" Checked="TopLeftButton_Checked" />
+                    <RadioButton x:Name="TopRightButton"  GroupName="First Group" Content="Ik was toeschouwer en zag het gebeuren"/>
+                    <RadioButton x:Name="bottomLeftButton"  GroupName="First Group" Content="Ik roeide op positie ...(positie 1=boeg)" />
+                    <RadioButton x:Name="bottomRightButton"  GroupName="First Group" Content="Ik trof het materiaal in deze staat aan" />
 
                     <TextBlock Text="6. De schade ontstond door" Width="300"/>
-                    <RadioButton x:Name="FirstButton"  GroupName="First Group" Content="First Choice" />
-                    <RadioButton x:Name="SecondButton"  GroupName="First Group" Content="Second Choice" />
-                    <RadioButton x:Name="ThirdButton" GroupName="First Group" Content="Third Choice" />
-                    <RadioButton x:Name="FourthButton"  GroupName="First Group" Content="Fourth Choice" />
-                    <RadioButton x:Name="FifthButton"  GroupName="First Group" Content="Fifth Choice" />
-                    <RadioButton x:Name="SixthButton"  GroupName="First Group" Content="Sixth Choice" />
-                    <RadioButton x:Name="SeventhButton"  GroupName="First Group" Content="Seventh Choice" />
-                    <RadioButton x:Name="EighthButton"  GroupName="First Group" Content="Eighth Choice" />
+                    <RadioButton x:Name="FirstButton"  GroupName="First Group" Content="een tilfout" />
+                    <RadioButton x:Name="SecondButton"  GroupName="First Group" Content="aanvaring met een andere roeiboot" />
+                    <RadioButton x:Name="ThirdButton" GroupName="First Group" Content="verkeerde behandeling van het materiaal" />
+                    <RadioButton x:Name="FourthButton"  GroupName="First Group" Content="aanvaring met beroepsvaart" />
+                    <RadioButton x:Name="FifthButton"  GroupName="First Group" Content="tijdens het transport van de boot" />
+                    <RadioButton x:Name="SixthButton"  GroupName="First Group" Content="aanvaring met een motor- of zeilboot" />
+                    <RadioButton x:Name="SeventhButton"  GroupName="First Group" Content="een onbekende oorzaak" />
+                    <RadioButton x:Name="EighthButton"  GroupName="First Group" Content="aanvaring met object (bv wal, brug of vlot)" />
 
                     <TextBlock Text="7. Namen boten, Verenegingen, roeiers en stuur" Width="300"/>
                     <TextBox x:Name="NameBoat" Width="300"/>
@@ -116,6 +116,10 @@
                          HorizontalScrollBarVisibility="Disabled"
                          VerticalScrollBarVisibility="Auto"/>
 
+                    <TextBlock Text="Mijnboot" Width="auto"/>
+                    <TextBlock Text="Andere boot/object" Width="auto"/>
+                    <TextBlock Text="12. Wie heeft naar uw mening schuld en waarom?" Width="300"/>
+
                     <TextBlock Text="13. Indien schade met derde(n), naam en adres tegenpartij" Width="300"/>
                     <TextBox x:Name="ThirdParty"
                          Height="200"
@@ -132,8 +136,8 @@
                     <TextBox x:Name="Location" Width="300"/>
                     <TextBox x:Name="Date" Width="300"/>
                 </StackPanel>
-            </Canvas>
-        </Grid>
-    </ScrollViewer>
+            </ScrollViewer>
+        </Canvas>
+    </Grid>
 </Window>
 

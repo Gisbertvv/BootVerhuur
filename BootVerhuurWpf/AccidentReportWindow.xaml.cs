@@ -24,5 +24,10 @@ namespace BootVerhuurWpf
         {
             InitializeComponent();
         }
+
+        private void TopLeftButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
