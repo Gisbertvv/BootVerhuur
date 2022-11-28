@@ -89,7 +89,7 @@ namespace BootVerhuurWpf
                     break;
                 }
             }
-            if (!IsEmailValid(txtEmail.Text) && !txtEmail.Text.EndsWith(".nl") && !txtEmail.Text.EndsWith(".com"))
+            if (!IsEmailValid(txtEmail.Text) || (!txtEmail.Text.EndsWith(".nl") && !txtEmail.Text.EndsWith(".com")))
             {
                 messageBoxText = "Email is ongeldig";
                 caption = "FAILED: Email Ongeldig";

@@ -12,6 +12,8 @@
             <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
+        
+        
 
         <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
             <Button x:Name="btn1" Content="Reseveren"

@@ -82,7 +82,7 @@ namespace BootVerhuurWpf
                 }
             }
 
-            if (!IsEmailValid(txtEmail.Text)&& !txtEmail.Text.EndsWith(".nl") && !txtEmail.Text.EndsWith(".com"))
+            if (!IsEmailValid(txtEmail.Text) || (!txtEmail.Text.EndsWith(".nl") && !txtEmail.Text.EndsWith(".com")))
             {
                 messageBoxText = "Email is ongeldig";
                 caption = "FAILED: Email Ongeldig";
@@ -123,10 +123,9 @@ namespace BootVerhuurWpf
             {
                 CreateAdmin createAdmin = new CreateAdmin();
                 createAdmin.Show();
-                this.Close();
+                this.Close();               
             }
         }
-
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow= new MainWindow();
