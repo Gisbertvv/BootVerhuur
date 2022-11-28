@@ -34,8 +34,7 @@
                     HorizontalAlignment="Center"/>
 
             <Button x:Name="btn5" Content="Aanmaken"
-                    Click="Open_Click"
-                    Click="CloseWindow" ClickMode="Press"
+                    Click="Open_Click" ClickMode="Press"
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
         </StackPanel>
