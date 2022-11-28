@@ -31,7 +31,7 @@
                     HorizontalAlignment="Center"/>
 
             <Button x:Name="btn4" Content="Uitloggen"
-
+                    Click="Logout"
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
             <Button x:Name="btn5" Content="Terug" Click="Back_Click" Margin="10,5"/>

@@ -5,14 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="auto" Width="800">
     <Grid Width="800" Height="auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
+        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="auto" VerticalAlignment="Top">
+            <Button x:Name="btn5" Content="Aanmaken"
+                    Click="Open_Click" ClickMode="Press"
+                    Margin="10,5" Width="130"
+                    HorizontalAlignment="Center"/>
             <Button x:Name="btn1" Content="Reseveren"
                     ClickMode="Press"
                     Margin="10, 5" Width="130"
@@ -30,16 +34,11 @@
                     HorizontalAlignment="Center"/>
 
             <Button x:Name="btn4" Content="Uitloggen"
-
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
-
-            <Button x:Name="btn5" Content="Aanmaken"
-                    Click="Open_Click" ClickMode="Press"
+                    Click="Logout"
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
         </StackPanel>
-        <Image Grid.Column="1" Margin="131,44,-484,44" Source="/Images/414cfec9-2bf7-4ac4-a800-d99f67985838.png" Stretch="Fill"/>
+        <Image Source="/Images/414cfec9-2bf7-4ac4-a800-d99f67985838.png" Stretch="Fill" Height="380" VerticalAlignment="Center" HorizontalAlignment="Center" Width="451" Grid.Column="1"/>
 
     </Grid>
 </Window>

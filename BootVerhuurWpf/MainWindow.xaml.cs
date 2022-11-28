@@ -56,7 +56,8 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private void CloseWindow(object sender, RoutedEventArgs e)
+
+        private void Logout(object sender, RoutedEventArgs e)
         {
             Close();
         }

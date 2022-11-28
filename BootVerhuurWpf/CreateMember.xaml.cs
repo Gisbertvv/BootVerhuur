@@ -133,6 +133,11 @@ namespace BootVerhuurWpf
             mainWindow.Show();
             this.Close();
         }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
 

@@ -28,9 +28,10 @@
                      ClickMode="Press"
                     Margin="10, 5" Width="130"
                     HorizontalAlignment="Center"/>
+                <Button x:Name="btn5" Content="Terug" Margin=" 10,5" Click="Back_Click"/>
 
                 <Button x:Name="btn4" Content="Uitloggen"
-                ClickMode="Press" Click="CloseWindow"
+                ClickMode="Press" Click="Logout"
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
             </StackPanel>

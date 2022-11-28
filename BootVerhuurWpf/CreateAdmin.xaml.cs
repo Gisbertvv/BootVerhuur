@@ -122,5 +122,10 @@ namespace BootVerhuurWpf
             }
             result = MessageBox.Show(messageBoxText, caption, button, icon);
         }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

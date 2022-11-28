@@ -35,8 +35,15 @@ namespace BootVerhuurWpf
 
         }
 
-        private void CloseWindow(object sender, RoutedEventArgs e)
+        private void Logout(object sender, RoutedEventArgs e)
         {
+            Close();
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
             Close();
         }
     }
