@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -23,6 +24,27 @@ namespace BootVerhuurWpf
         public MainWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
+
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+            Create popup = new Create();
+            popup.ShowDialog();
+            
+            /*CreateMember createMember = new CreateMember();
+            createMember.Show();
+            this.Close();*/
+        }
+
+        private void OpenA_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TogglePopupButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void AccidentReport(object sender, RoutedEventArgs e)
