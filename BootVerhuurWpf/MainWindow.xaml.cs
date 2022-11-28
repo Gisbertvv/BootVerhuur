@@ -24,5 +24,18 @@ namespace BootVerhuurWpf
         {
             InitializeComponent();
         }
+
+        private void AccidentReport(object sender, RoutedEventArgs e)
+        {
+            AccidentReportWindow window = new AccidentReportWindow();
+            
+            window.Show();
+            Close();
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-        <Grid HorizontalAlignment="Left" Width="800" Height="434" VerticalAlignment="Center">
+        Title="MainWindow" Height="auto" Width="800">
+    <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+        <Grid Width="800" Height="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="8*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="434" VerticalAlignment="Center">
+            <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="434" VerticalAlignment="Top">
                 <Button x:Name="btn1" Content="Reseveren"
                      ClickMode="Press"
                     Margin="10, 5" Width="130"
@@ -29,115 +30,114 @@
                     HorizontalAlignment="Center"/>
 
                 <Button x:Name="btn4" Content="Uitloggen"
-                     ClickMode="Press"
+                ClickMode="Press" Click="CloseWindow"
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
             </StackPanel>
-        <Canvas Grid.Column="1">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Height="1000">
-                <StackPanel>
-                    <TextBlock Text="1. Mijn naam" Width="300"/>
-                    <TextBox x:Name="nameInput" Width="300"/>
+            <StackPanel Grid.Column="1" Width="300" Height="auto" Margin="20,0,320,399">
+                <TextBlock Text="1. Mijn naam" Width="300"/>
+                <TextBox x:Name="nameInput" Width="300"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="300" Height="234" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,0,0,0">
+                <TextBlock Text="2. De datum en -tijd" Width="300"/>
+                <TextBox x:Name="time" Width="300"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="300" Height="auto" Margin="20,35,320,364">
+                <TextBlock Text="3. Weersgesteldheid" />
+                <TextBox x:Name="weatherConditionsInput"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="300" Height="auto" Margin="320,35,20,364">
+                <TextBlock Text="4. Plek waar het ongeluk plaatsvond"/>
+                <TextBox x:Name="placeInput"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="600" Height="auto" Margin="20,75,320,277">
+                <TextBlock Text="5. Mijn betrokkenheid" />
+                <RadioButton x:Name="TopLeftButton"  GroupName="First Group" Content="Ik stuurde" Checked="TopLeftButton_Checked" />
+                <RadioButton x:Name="TopRightButton"  GroupName="First Group" Content="Ik was toeschouwer en zag het gebeuren"/>
+                <RadioButton x:Name="bottomLeftButton"  GroupName="First Group" Content="Ik roeide op positie ...(positie 1=boeg)" />
+                <RadioButton x:Name="bottomRightButton"  GroupName="First Group" Content="Ik trof het materiaal in deze staat aan" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="600" Height="auto" Margin="20,157,20,140">
+                <TextBlock Text="6. De schade ontstond door" />
+                <RadioButton x:Name="FirstButton"  GroupName="First Group" Content="een tilfout" />
+                <RadioButton x:Name="SecondButton"  GroupName="First Group" Content="aanvaring met een andere roeiboot" />
+                <RadioButton x:Name="ThirdButton" GroupName="First Group" Content="verkeerde behandeling van het materiaal" />
+                <RadioButton x:Name="FourthButton"  GroupName="First Group" Content="aanvaring met beroepsvaart" />
+                <RadioButton x:Name="FifthButton"  GroupName="First Group" Content="tijdens het transport van de boot" />
+                <RadioButton x:Name="SixthButton"  GroupName="First Group" Content="aanvaring met een motor- of zeilboot" />
+                <RadioButton x:Name="SeventhButton"  GroupName="First Group" Content="een onbekende oorzaak" />
+                <RadioButton x:Name="EighthButton"  GroupName="First Group" Content="aanvaring met object (bv wal, brug of vlot)" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="600" Height="auto" Margin="20,299,20,119">
+                <TextBlock Text="7. Namen boten, Verenegingen, roeiers en stuur" />
+            </StackPanel>
 
-                    <TextBlock Text="2. De datum en -tijd" Width="300"/>
-                    <TextBox x:Name="time" Width="300"/>
-
-                    <TextBlock Text="3. Weersgesteldheid" Width="300"/>
-                    <TextBox x:Name="weatherConditionsInput" Width="300"/>
-
-                    <TextBlock Text="4. Plek waar het ongeluk plaatsvond" Width="300"/>
-                    <TextBox x:Name="placeInput" Width="300"/>
-
-                    <TextBlock Text="5. Mijn betrokkenheid" Width="300"/>
-                    <RadioButton x:Name="TopLeftButton"  GroupName="First Group" Content="Ik stuurde" Checked="TopLeftButton_Checked" />
-                    <RadioButton x:Name="TopRightButton"  GroupName="First Group" Content="Ik was toeschouwer en zag het gebeuren"/>
-                    <RadioButton x:Name="bottomLeftButton"  GroupName="First Group" Content="Ik roeide op positie ...(positie 1=boeg)" />
-                    <RadioButton x:Name="bottomRightButton"  GroupName="First Group" Content="Ik trof het materiaal in deze staat aan" />
-
-                    <TextBlock Text="6. De schade ontstond door" Width="300"/>
-                    <RadioButton x:Name="FirstButton"  GroupName="First Group" Content="een tilfout" />
-                    <RadioButton x:Name="SecondButton"  GroupName="First Group" Content="aanvaring met een andere roeiboot" />
-                    <RadioButton x:Name="ThirdButton" GroupName="First Group" Content="verkeerde behandeling van het materiaal" />
-                    <RadioButton x:Name="FourthButton"  GroupName="First Group" Content="aanvaring met beroepsvaart" />
-                    <RadioButton x:Name="FifthButton"  GroupName="First Group" Content="tijdens het transport van de boot" />
-                    <RadioButton x:Name="SixthButton"  GroupName="First Group" Content="aanvaring met een motor- of zeilboot" />
-                    <RadioButton x:Name="SeventhButton"  GroupName="First Group" Content="een onbekende oorzaak" />
-                    <RadioButton x:Name="EighthButton"  GroupName="First Group" Content="aanvaring met object (bv wal, brug of vlot)" />
-
-                    <TextBlock Text="7. Namen boten, Verenegingen, roeiers en stuur" Width="300"/>
-                    <TextBox x:Name="NameBoat" Width="300"/>
-                    <TextBox x:Name="OtherObject" Width="300"/>
-                    <TextBox x:Name="association" Width="300"/>
-                    <TextBox x:Name="Otherassociation" Width="300"/>
-                    <TextBox x:Name="RowerBow" Width="300"/>
-                    <TextBox x:Name="OtherRowerBow" Width="300"/>
-                    <TextBox x:Name="SecondRower" Width="300"/>
-                    <TextBox x:Name="OtherSecondRower" Width="300"/>
-                    <TextBox x:Name="ThirdRower" Width="300"/>
-                    <TextBox x:Name="OtherThirdRower" Width="300"/>
-                    <TextBox x:Name="CoxRower" Width="300"/>
-                    <TextBox x:Name="OtherCoxRower" Width="300"/>
-                    <TextBox x:Name="RudderRower" Width="300"/>
-                    <TextBox x:Name="OtherRudderRower" Width="300"/>
-
-                    <TextBlock Text="8. Hoe is naar uw meing de schade ontstaan?" Width="300"/>
-                    <TextBox x:Name="OpinionHow"
-                         Height="200"
-                         Width="300"
+            <StackPanel Grid.Column="1" Width="300" Height="auto" Margin="20,320,320,590">
+                <TextBlock Text="8. Hoe is naar uw meing de schade ontstaan?" Width="300"/>
+                <TextBox x:Name="OpinionHow"
+                     Height="50"
+                     Width="300"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     HorizontalScrollBarVisibility="Disabled"
+                     VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="300" Height="auto" Margin="320,320,20,47">
+                <TextBlock Text="9. Wat was naar uw mening de oorzaak?" Width="300"/>
+                <TextBox x:Name="Opinioncause"
+                     Height="50"
+                     Width="300"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     HorizontalScrollBarVisibility="Disabled"
+                     VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="300" Height="auto" Margin="20,387,320,524">
+                <TextBlock Text="10. Hoe was de schade te voorkomen geweest?" Width="300"/>
+                <TextBox x:Name="OpinionPrevent"
+                     Height="50"
+                     Width="300"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     HorizontalScrollBarVisibility="Disabled"
+                     VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="300" Height="auto" Margin="320,387,20,524">
+                <TextBlock Text="11. Wie heeft naar uw mening schuld en waarom?" Width="300"/>
+                <TextBox x:Name="OpinionGuilt"
+                     Height="50"
+                     Width="300"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     HorizontalScrollBarVisibility="Disabled"
+                     VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+            <StackPanel Width="600" Height="auto" Margin="20,456,20,405" Grid.Column="1">
+                <TextBlock Text="12. Kruis aan wat volgens u van toepassing is"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="600" Height="auto" Margin="20,577,20,330">
+                <TextBlock Width="600" Text="13. Indien schade met derde(n), naam en adres tegenpartij"/>
+                <TextBox x:Name="ThirdParty"
+                         Height="50"
+                         Width="600"
                          TextWrapping="Wrap"
                          AcceptsReturn="True"
                          HorizontalScrollBarVisibility="Disabled"
                          VerticalScrollBarVisibility="Auto"/>
-
-                    <TextBlock Text="9. Wat was naar uw mening de oorzaak?" Width="300"/>
-                    <TextBox x:Name="Opinioncause"
-                         Height="200"
-                         Width="300"
-                         TextWrapping="Wrap"
-                         AcceptsReturn="True"
-                         HorizontalScrollBarVisibility="Disabled"
-                         VerticalScrollBarVisibility="Auto"/>
-
-                    <TextBlock Text="10. Hoe was de schade te voorkomen geweest?" Width="300"/>
-                    <TextBox x:Name="OpinionPrevent"
-                         Height="200"
-                         Width="300"
-                         TextWrapping="Wrap"
-                         AcceptsReturn="True"
-                         HorizontalScrollBarVisibility="Disabled"
-                         VerticalScrollBarVisibility="Auto"/>
-
-                    <TextBlock Text="11. Wie heeft naar uw mening schuld en waarom?" Width="300"/>
-                    <TextBox x:Name="OpinionGuilt"
-                         Height="200"
-                         Width="300"
-                         TextWrapping="Wrap"
-                         AcceptsReturn="True"
-                         HorizontalScrollBarVisibility="Disabled"
-                         VerticalScrollBarVisibility="Auto"/>
-
-                    <TextBlock Text="Mijnboot" Width="auto"/>
-                    <TextBlock Text="Andere boot/object" Width="auto"/>
-                    <TextBlock Text="12. Wie heeft naar uw mening schuld en waarom?" Width="300"/>
-
-                    <TextBlock Text="13. Indien schade met derde(n), naam en adres tegenpartij" Width="300"/>
-                    <TextBox x:Name="ThirdParty"
-                         Height="200"
-                         Width="300"
-                         TextWrapping="Wrap"
-                         AcceptsReturn="True"
-                         HorizontalScrollBarVisibility="Disabled"
-                         VerticalScrollBarVisibility="Auto"/>
-
-                    <TextBlock Text="14. Maak een situatieschets" Width="300"/>
-
-                    <TextBlock Text="15. Ondertekening" Width="300"/>
-                    <Label Width="300">Ik verklaar het schadeformulier juist, volledig en naar waarheid ingevuld te hebben.</Label>
-                    <TextBox x:Name="Location" Width="300"/>
-                    <TextBox x:Name="Date" Width="300"/>
-                </StackPanel>
-            </ScrollViewer>
-        </Canvas>
-    </Grid>
+            </StackPanel>
+            <StackPanel Width="300" Height="auto" Margin="20,650,320,309" Grid.Column="1">
+                <TextBlock Text="14. Upload een situatie schets"/>
+            </StackPanel>
+            <StackPanel Width="300" Height="auto" Margin="20,682,320,277" Grid.Column="1">
+                <TextBlock Text="15. Upload schade foto's"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Width="600" Height="auto" Margin="20,716,20,176">
+                <TextBlock Text="16. Ondertekening"/>
+                <Label Width="600">Ik verklaar het schadeformulier juist, volledig en naar waarheid ingevuld te hebben.</Label>
+                <TextBox x:Name="Location" />
+                <TextBox x:Name="Date"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>
 

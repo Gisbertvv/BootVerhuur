@@ -29,5 +29,15 @@ namespace BootVerhuurWpf
         {
 
         }
+
+        private void ThirdParty_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
