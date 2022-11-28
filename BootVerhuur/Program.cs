@@ -2,7 +2,7 @@
 using BootVerhuur;
 using System.Data.SqlClient;
 
-Console.WriteLine("Hello, World!");
+/*Console.WriteLine("Hello, World!");
 Console.WriteLine("git");
 try
 {
@@ -37,4 +37,4 @@ catch (SqlException e)
 
     Console.WriteLine(e.ToString());
 }
-Console.ReadLine();
+Console.ReadLine();*/
