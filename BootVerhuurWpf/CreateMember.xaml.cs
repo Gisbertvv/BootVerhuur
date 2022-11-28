@@ -25,6 +25,7 @@ namespace BootVerhuurWpf
         public CreateMember()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private static bool IsEmailValid(string email)

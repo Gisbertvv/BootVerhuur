@@ -22,6 +22,33 @@ namespace BootVerhuurWpf
         public Create()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
-    }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CreateAdmin createAdmin = new CreateAdmin();
+            createAdmin.Show();
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            CreateMember createMember = new CreateMember();
+            createMember.Show();
+            this.Close();
+        }
+        /*
+public string ResponseText
+{
+  get { return ResponseTextBox.Text; }
+  set { ResponseTextBox.Text = value; }
 }
+
+private void OKButton_Click(object sender, System.Windows.RoutedEventArgs e)
+{
+  DialogResult = true;
+}*/
+    }
+    }
+
