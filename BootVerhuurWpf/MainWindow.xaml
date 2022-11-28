@@ -12,7 +12,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="434" VerticalAlignment="Center">
+        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
             <Button x:Name="btn1" Content="Reseveren"
 
                     Margin="10, 5" Width="130"
@@ -39,6 +39,7 @@
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
         </StackPanel>
-        
+        <Image Grid.Column="1" Margin="131,44,-484,44" Source="/Images/414cfec9-2bf7-4ac4-a800-d99f67985838.png" Stretch="Fill"/>
+
     </Grid>
 </Window>

@@ -46,9 +46,10 @@ namespace BootVerhuurWpf
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            CreateMember createMember = new CreateMember();
-            createMember.Show();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
             this.Close();
+
         }
 
         private void Create_Admin(object sender, RoutedEventArgs e)
@@ -113,7 +114,7 @@ namespace BootVerhuurWpf
             }
             else
             {
-                admin = new Admin(txtGebruikersnaam.Text, txtWachtwoord.Text, Rol.Text, txtEmail.Text);
+                /*admin = new Admin(txtGebruikersnaam.Text, txtWachtwoord.Text, Rol.Text, txtEmail.Text);*/
                 messageBoxText = "Admin is aangemaakt";
                 caption = "SUCCES";
                 button = MessageBoxButton.OK;
