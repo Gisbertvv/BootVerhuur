@@ -31,7 +31,8 @@ namespace BootVerhuurWpf
         {
             Create popup = new Create();
             popup.ShowDialog();
-            
+            this.Close();
+
             /*CreateMember createMember = new CreateMember();
             createMember.Show();
             this.Close();*/

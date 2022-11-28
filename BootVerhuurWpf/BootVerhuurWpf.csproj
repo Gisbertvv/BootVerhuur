@@ -5,11 +5,24 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Images\rowing.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\rowing.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
   </ItemGroup>
 
 </Project>
