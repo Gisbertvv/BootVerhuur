@@ -18,14 +18,14 @@ namespace BootVerhuur
 				builder.DataSource = "localhost";
 				builder.UserID = "SA";
 				builder.Password = "Havermout1325";
-				builder.InitialCatalog = "TestDB";
+				builder.InitialCatalog = "BootVerhuur";
 
 				using(SqlConnection connection = new SqlConnection(builder.ConnectionString))
 				{
 					Console.WriteLine("\n Query data example:");
 					Console.WriteLine("==============================\n");
 
-					String sql = "SELECT * FROM Inventory";
+					String sql = "SELECT * FROM accidentReportPhoto";
 					using(SqlCommand command = new SqlCommand(sql, connection))
 					{
 						connection.Open();
