@@ -1,48 +1,53 @@
-﻿<Window x:Class="BootVerhuurWpf.MainWindow"
+﻿<Window x:Class="BootVerhuurWpf.AdminPanel"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="auto" Width="800">
-    <Grid Width="800" Height="auto">
+        Title="MainWindow" Height="450" Width="800">
+    <Grid HorizontalAlignment="Left" Width="800" Height="434" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*"/>
+
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="auto" VerticalAlignment="Top">
-            <Button x:Name="btn0" Content="Admin Panel"
-                    Click="Open_AdminPanel" ClickMode="Press"
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
-            <Button x:Name="btn5" Content="Aanmaken"
-                    Click="Open_Click" ClickMode="Press"
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
+        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
             <Button x:Name="btn1" Content="Reseveren"
-                    ClickMode="Press"
+
                     Margin="10, 5" Width="130"
                     HorizontalAlignment="Center"
                     Foreground="Green"/>
             <Button x:Name="btn2" Content="Schademelden"
-                    Click="AccidentReport" ClickMode="Press"
+
                     Width="130" 
                     Margin="10,5"
                     Foreground="Blue"/>
 
             <Button x:Name="btn3" Content="Routes"
-                    ClickMode="Press"
+
                     Margin="10, 5" Width="130"
                     HorizontalAlignment="Center"/>
 
             <Button x:Name="btn4" Content="Uitloggen"
-                    Click="Logout"
+ Click="Logout"
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
+
+            <Button x:Name="btn5" Content="Terug" Margin=" 10,5" Click="Back_Click"/>
         </StackPanel>
-        <Image Source="/Images/414cfec9-2bf7-4ac4-a800-d99f67985838.png" Stretch="Fill" Height="380" VerticalAlignment="Center" HorizontalAlignment="Center" Width="451" Grid.Column="1"/>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="269" Width="367">
+            <Label Content="Primaire kleur"/>
+            <TextBox Name="PrimaryColor"/>
+            <Label Content="Secundaire kleur"/>
+            <TextBox Name="SecundaryColor"/>
+            <Label Content="Afbeelding landingspagina"/>
+            <TextBox Name="Image"/>
+
+        </StackPanel>
+
 
     </Grid>
 </Window>

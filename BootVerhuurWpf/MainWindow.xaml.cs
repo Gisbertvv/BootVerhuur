@@ -61,5 +61,13 @@ namespace BootVerhuurWpf
         {
             Close();
         }
+
+        private void Open_AdminPanel(object sender, RoutedEventArgs e)
+        {
+            AdminPanel window = new AdminPanel();
+
+            window.Show();
+            Close();
+        }
     }
 }
