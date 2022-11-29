@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 
 Console.WriteLine("Hello, World!");
 Console.WriteLine("git");
+<<<<<<< Updated upstream
 try
 {
     SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -38,3 +39,5 @@ catch (SqlException e)
     Console.WriteLine(e.ToString());
 }
 Console.ReadLine();
+=======
+>>>>>>> Stashed changes
