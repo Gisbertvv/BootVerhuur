@@ -46,5 +46,25 @@ namespace BootVerhuurWpf
             mainWindow.Show();
             Close();
         }
+
+        private void Location_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ThirdParty_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void FirstButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void c27_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
