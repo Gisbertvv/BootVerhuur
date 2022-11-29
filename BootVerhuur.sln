@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BootVerhuur", "BootVerhuur\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BootVerhuurWpf", "BootVerhuurWpf\BootVerhuurWpf.csproj", "{AE0A8C23-1EC0-4BF1-8745-CBD1CA0B541D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UploadImage", "UploadImage\UploadImage.csproj", "{36266217-0DFD-4BE0-9AD4-11E15F738DA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageUpload", "ImageUpload\ImageUpload.csproj", "{AE0E60A9-622D-42FB-816D-82AD196808E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +26,10 @@ Global
 		{AE0A8C23-1EC0-4BF1-8745-CBD1CA0B541D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE0A8C23-1EC0-4BF1-8745-CBD1CA0B541D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE0A8C23-1EC0-4BF1-8745-CBD1CA0B541D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36266217-0DFD-4BE0-9AD4-11E15F738DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36266217-0DFD-4BE0-9AD4-11E15F738DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36266217-0DFD-4BE0-9AD4-11E15F738DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36266217-0DFD-4BE0-9AD4-11E15F738DA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE0E60A9-622D-42FB-816D-82AD196808E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE0E60A9-622D-42FB-816D-82AD196808E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE0E60A9-622D-42FB-816D-82AD196808E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE0E60A9-622D-42FB-816D-82AD196808E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
