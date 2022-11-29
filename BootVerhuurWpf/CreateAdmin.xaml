@@ -40,11 +40,11 @@
             <Button x:Name="btn5" Content="Terug" Margin=" 10,5" Click="Back_Click"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="269" Width="367">
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="180" Width="367">
             <Label Content="Gebruikersnaam"/>
             <TextBox Name="txtGebruikersnaam"/>
             <Label Content="Wachtwoord"/>
-            <TextBox Name="txtWachtwoord"/>
+            <PasswordBox Name="txtWachtwoord"/>
             <Label Content="Email"/>
             <TextBox Name="txtEmail"/>
 

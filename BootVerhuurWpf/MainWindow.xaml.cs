@@ -32,10 +32,6 @@ namespace BootVerhuurWpf
             Create popup = new Create();
             popup.ShowDialog();
             this.Close();
-
-            /*CreateMember createMember = new CreateMember();
-            createMember.Show();
-            this.Close();*/
         }
 
         private void OpenA_Click(object sender, RoutedEventArgs e)
