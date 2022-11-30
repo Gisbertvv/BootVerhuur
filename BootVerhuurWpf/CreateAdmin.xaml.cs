@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
 
 namespace BootVerhuurWpf
 {
@@ -22,7 +23,7 @@ namespace BootVerhuurWpf
     public partial class CreateAdmin : Window
     {
         MainWindow mainWindow = new MainWindow();
-        public Admin admin { get; set; }
+        public Admin admin;
         bool digits = false;
         bool special = false;
 
@@ -84,6 +85,7 @@ namespace BootVerhuurWpf
             return special;
         }
 
+
         private void Create_Admin(object sender, RoutedEventArgs e)
         {
             string messageBoxText;
@@ -117,7 +119,7 @@ namespace BootVerhuurWpf
             }
             else
             {
-                //admin = new Admin(txtGebruikersnaam.Text, txtWachtwoord.Text, Rol.Text, txtEmail.Text);*/
+               admin= new Admin(txtGebruikersnaam.Text, txtWachtwoord.Password.ToString(), txtEmail.Text);
                 messageBoxText = "Admin is aangemaakt";
                 caption = "SUCCES";
                 button = MessageBoxButton.OK;
