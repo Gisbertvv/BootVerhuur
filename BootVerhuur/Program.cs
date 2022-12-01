@@ -2,5 +2,8 @@
 using BootVerhuur;
 Console.WriteLine("Hello, World!");
 Console.WriteLine("git");
-Database database =  new Database();
-database.test();
+DatabaseConnectie database = new();
+database.SSH();
+//database.OpenConnnection();
+Database database1 = new();
+database1.test();
