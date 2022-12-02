@@ -137,6 +137,7 @@
                 <Label Width="600">Ik verklaar het schadeformulier juist, volledig en naar waarheid ingevuld te hebben.</Label>
                 <TextBox x:Name="Location" />
                 <TextBox x:Name="Date"/>
+                <Button Content="Bevestigen" Click="SaveForm"/>
             </StackPanel>
         </Grid>
     </ScrollViewer>
