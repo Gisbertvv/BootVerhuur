@@ -47,6 +47,7 @@ namespace DigitalSignature
             var rect = panel1.RectangleToScreen(panel1.ClientRectangle);
             gg.CopyFromScreen(rect.Location, Point.Empty, panel1.Size);
 
+            //Add to local folder and make screen blank
             bmp.Save("D:\\OOSDDb\\BootVerhuur\\DigitalSignature\\Images\\Test.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
             Graphics g = panel1.CreateGraphics();
             g.Clear(Color.White);
