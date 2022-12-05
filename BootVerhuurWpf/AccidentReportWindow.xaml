@@ -41,7 +41,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Width="300" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,0,0,0">
                 <TextBlock Text="2. De datum en -tijd" Width="300"/>
-                <TextBox x:Name="time" Width="300"/>
+                <TextBox x:Name="timeInput" Width="300"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Width="300" Height="auto" Margin="20,35,320,1043">
                 <TextBlock Text="3. Weersgesteldheid" />
@@ -117,7 +117,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Width="300" Height="auto" Margin="320,566,20,1188">
                 <TextBlock Text="10. Wat was naar uw mening de oorzaak?" Width="300"/>
-                <TextBox x:Name="Opinioncause"
+                <TextBox x:Name="OpinionCause"
                      Height="50"
                      Width="300"
                      TextWrapping="Wrap"
@@ -176,7 +176,7 @@
             </StackPanel>
             <StackPanel Width="600" Height="auto" Margin="20,1115,20,348" Grid.Column="1">
                 <TextBlock Text="13. Kruis aan wat volgens u van toepassing is voor de externe partij"/>
-                <CheckBox x:Name="c27" Content="Andere boot/object hield niet goed eigen wal." Checked="c27_Checked"/>
+                <CheckBox x:Name="c27" Content="Andere boot/object hield niet goed eigen wal."/>
                 <CheckBox x:Name="cb28" Content="Andere boot/object heeft de andere/mijn boot aangeroepen. "/>
                 <CheckBox x:Name="cb29" Content="Andere boot/object heeft op het laatste moment proberen te stoppen."/>
                 <CheckBox x:Name="cb30" Content="Andere boot/object heeft op het laatste moment proberen uit te wijken."/>
@@ -206,7 +206,7 @@
 
             <StackPanel Grid.Column="1" Width="600" Height="auto" Margin="20,1531,20,175">
                 <TextBlock Width="600" Text="13. Indien schade met derde(n), naam en adres tegenpartij"/>
-                <TextBox x:Name="ThirdParty"
+                <TextBox x:Name="ThirdPartyInfo"
                          Height="54"
                          Width="600"
                          TextWrapping="Wrap"
@@ -227,7 +227,7 @@
                 <TextBox x:Name="Location" />
                 <Label Content="Datum"/>
                 <TextBox x:Name="Date"/>
-                <Button Width="250" Name="test" Content="Opslaan"/>
+                <Button x:Name="btn" Content="Opslaan" HorizontalAlignment="Right" Margin="10,10" Width="150" Click="createAccidentReport"/>
             </StackPanel>
         </Grid>
     </ScrollViewer>
