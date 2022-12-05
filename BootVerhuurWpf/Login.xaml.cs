@@ -24,14 +24,5 @@ namespace BootVerhuurWpf
             InitializeComponent();
         }
 
-        private void UsernameTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click()
-        {
-
-        }
     }
 }

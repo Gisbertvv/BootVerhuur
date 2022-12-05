@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="auto" Width="800">
-    <Grid Width="800" Height="auto">
+    <Grid Width="800" Height="400">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="8*"/>
@@ -42,7 +42,6 @@
                     Margin="10,5" Width="130"
                     HorizontalAlignment="Center"/>
         </StackPanel>
-        <Image Source="/Images/414cfec9-2bf7-4ac4-a800-d99f67985838.png" Stretch="Fill" Height="380" VerticalAlignment="Center" HorizontalAlignment="Center" Width="451" Grid.Column="1"/>
-
+        <Image Grid.Column="1" Margin="10,10,34,10" Source="/Images/roeienpng.png" Stretch="Fill"/>
     </Grid>
 </Window>

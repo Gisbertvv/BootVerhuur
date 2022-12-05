@@ -12,8 +12,10 @@
             <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
-        
-        
+
+        <Grid HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="630" Grid.Column="1" Margin="20,10,0,0">
+            <Image Margin="34,27,34,27" Source="/Images/roeienpng.png" Stretch="Fill" Opacity="0.2"/>
+        </Grid>
 
         <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
             <Button x:Name="btn1" Content="Reseveren"

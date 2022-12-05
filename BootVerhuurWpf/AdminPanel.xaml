@@ -6,12 +6,17 @@
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid HorizontalAlignment="Left" Width="800" Height="434" VerticalAlignment="Center">
+    <Grid HorizontalAlignment="Center" Width="800" Height="434" VerticalAlignment="Top" Margin="0,16,0,0">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="*"/>
-
         </Grid.ColumnDefinitions>
+
+
+        <Grid HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="630" Grid.Column="1" Margin="20,10,0,0">
+            <Image Margin="34,27,34,27" Source="/Images/roeienpng.png" Stretch="Fill" Opacity="0.2"/>
+        </Grid>
 
         <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
             <Button x:Name="btn1" Content="Reseveren"
@@ -39,6 +44,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="269" Width="367">
+
             <Label Content="Primaire kleur"/>
             <TextBox Name="PrimaryColor"/>
             <Label Content="Secundaire kleur"/>
@@ -47,6 +53,7 @@
             <TextBox Name="Image"/>
 
         </StackPanel>
+
 
 
     </Grid>

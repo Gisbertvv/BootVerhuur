@@ -7,17 +7,34 @@
         mc:Ignorable="d"
         Title="Login" Height="600" Width="800">
     <Grid>
-        <Image Margin="18,10,18,10" 
-               Source="/Images/414cfec9-2bf7-4ac4-a800-d99f67985838.png" 
-               Stretch="Fill" 
-               Opacity="0.2" Cursor="Hand"
-        />
+        <Image Margin="0,10,10,10" Source="/Images/roeienpng.png" Stretch="Fill" Opacity="0.2"/>
         <Label Content="Gebruikersnaam" HorizontalAlignment="Left" Margin="297,211,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="18" Foreground="#FF343434" FontWeight="Bold" />
         <TextBox x:Name="UsernameTB" HorizontalAlignment="Center" Margin="0,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="29"  FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="16" Background="#FFE8E8E8" FontStretch="Normal" />
         <Label Content="Wachtwoord" HorizontalAlignment="Left" Margin="297,290,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="Black" FontWeight="Bold" />
         <TextBox x:Name="UsernameTB_Copy" HorizontalAlignment="Center" Margin="0,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="29"  FontFamily="Microsoft Sans Serif" FontSize="16" Background="#FFE8E8E8" />
         <CheckBox x:Name="ShowPassword" Content="Toon wachtwoord" HorizontalAlignment="Left" Margin="400,352,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" Foreground="#FFA6A6A6" FontWeight="Bold" FontSize="14"/>
-        <Button Content="Button" HorizontalAlignment="Center" Margin="0,400,0,0" VerticalAlignment="Top" Height="37" Width="206" Background="#FF027B1B" BorderBrush="{x:Null}" UseLayoutRounding="False" VerticalContentAlignment="Center"/>
+        <Button 
+            Content="Login" 
+            HorizontalAlignment="Center" 
+            Margin="0,390,0,0" 
+            VerticalAlignment="Top" Height="42" 
+            Width="206" 
+            FontFamily="Microsoft Sans Serif" 
+            FontSize="14" 
+            FontWeight="Bold" Foreground="White" Cursor="Hand" BorderThickness="0,0,0,0" Background="Gainsboro"
+            
+            />
+        <Button 
+            Content="Wachtwoord vergeten&#xD;&#xA;" 
+            HorizontalAlignment="Center" 
+            Margin="0,453,0,0" 
+            VerticalAlignment="Top" Height="24" 
+            Width="206" 
+            FontFamily="Microsoft Sans Serif" 
+            FontSize="14" 
+            FontWeight="Bold" Cursor="Hand"
+            
+            />
 
 
     </Grid>
