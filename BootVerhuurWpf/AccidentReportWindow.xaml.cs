@@ -72,19 +72,6 @@ namespace BootVerhuurWpf
                 Directory.CreateDirectory(folderName);
                 count += 1;
             }
-            MoveFile();
-        }
-
-        private void MoveFile()
-        {
-            //Example testing
-            string sourceFile = @"C:\Users\rosal\source\repos\BootVerhuur\Images\Roei logo.png";
-            destinationFile = @"C:\Users\rosal\source\repos\BootVerhuur\Schadeformuliers\Roei logo.png";
-            //werkt niet met {}{} hoe naar meest recent map?
-            //destinationFile = $@"C:\Users\rosal\source\repos\BootVerhuur\Schadeformuliers\SF {today} {count}\Roei logo.png";
-
-            // To move a file or folder to a new location:
-            File.Move(sourceFile, destinationFile);
         }
          
         private void SaveForm(object sender, RoutedEventArgs e)
