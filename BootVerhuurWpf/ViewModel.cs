@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PDF
+namespace BootVerhuurWpf
 {
     public class ViewModel : INotifyPropertyChanged
     {
@@ -28,7 +28,8 @@ namespace PDF
         }
         public ViewModel()
         {
-            docStream = new FileStream(@"C:\Users\Damian\Downloads\schadeformulier-rv-naarden.pdf",FileMode.OpenOrCreate);
+            //docStream = new FileStream(@"C:\Users\Damian\Downloads\schadeformulier-rv-naarden.pdf",FileMode.OpenOrCreate);
+            docStream = new FileStream(@"C:\Users\gisbe\Downloads\schadeformulier-rv-naarden.pdf", FileMode.OpenOrCreate);
         }
     }
 }
