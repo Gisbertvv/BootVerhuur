@@ -82,6 +82,10 @@ namespace BootVerhuurWpf
                 DP.BlackoutDates.Add(new CalendarDateRange(DateTime.Now, DateTime.Now.AddDays(-1)));
                 DP.DisplayDateEnd = DateTime.Now.AddDays(2);
             }
+            else
+            {
+                DP.DisplayDateEnd = DateTime.Now.AddDays(2);
+            }
         }
 
         private void Logout(object sender, RoutedEventArgs e)
@@ -92,9 +96,22 @@ namespace BootVerhuurWpf
         private void Book(object sender, RoutedEventArgs e)
         {
             //dont know yet if correct
-            //set reservation in database or in another class
+            //add reservation in database
             string selecteddate = DP.SelectedDate.Value.Date.ToShortDateString();
-            String selectedtime = Gekozentijd.Text;          
+            String selectedtime = ;
+
+            bool Stuur;
+            if(stuur.Text.Equals("Wel")) 
+            {
+                Stuur = true;   
+            }else
+            {
+                Stuur = false;
+            }
+         
+            Boat boat = new Boat(Int32.Parse(Aantalpersonen.Text), Stuur, niveau.Text);
+
+            Reservation reservation = new Reservation(DP.SelectedDate.Value, Gekozentijd.Text, boat);
         }
 
         private void Status(object sender, RoutedEventArgs e)
@@ -107,7 +124,7 @@ namespace BootVerhuurWpf
         private void AantalPersonen(object sender, RoutedEventArgs e)
         {
             var label = sender as Label;
-            label.Content = $"Aantal Personene : ";
+            label.Content = $"Aantal Personen : ";
         }
 
         private void Stuur(object sender, RoutedEventArgs e)
@@ -125,6 +142,19 @@ namespace BootVerhuurWpf
         private void AvailibleFrom(object sender, RoutedEventArgs e)
         {
             //get time from database
+        }
+
+        private void LidniveauCheck(object sender, RoutedEventArgs e)
+        {
+            if (LidNiveauC.Text.Equals("D"))
+            {
+                niveau.Items.Add('D');
+ 
+            }
+            else
+            {
+                niveau.Items.Remove('D');
+            }
         }
     }
 }
