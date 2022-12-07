@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="LoginScreenWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="430,243,0,0" VerticalAlignment="Top" Click="Button_Click" Height="21" Width="79"/>
-        <TextBox x:Name="tbUsername" HorizontalAlignment="Center" Margin="0,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="21"/>
-        <Label x:Name="labelUsername" Content="Gebruikersnaam" HorizontalAlignment="Left" Margin="291,103,0,0" VerticalAlignment="Top" Height="26" RenderTransformOrigin="0.208,0.617"/>
-        <Label x:Name="labelPassword" Content="Wachtwoord" HorizontalAlignment="Left" Margin="291,170,0,0" VerticalAlignment="Top" Height="26"/>
-        <PasswordBox x:Name="boxPassword" HorizontalAlignment="Center" Margin="0,196,0,0" VerticalAlignment="Top" Width="218" Height="21" Password=""/>
+        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="419,198,0,0" VerticalAlignment="Top" Width="61" Click="btnLogin_Click"/>
+        <Label x:Name="lblUsername" Content="Gebruikersnaam&#xD;&#xA;" HorizontalAlignment="Left" Margin="320,75,0,0" VerticalAlignment="Top" Height="29"/>
+        <Label x:Name="lblPassword" Content="Wachtwoord" HorizontalAlignment="Left" Margin="320,126,0,0" VerticalAlignment="Top" Height="29"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Center" Margin="0,155,0,0" VerticalAlignment="Top" Width="160"/>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Center" Margin="0,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
 
     </Grid>
 </Window>
