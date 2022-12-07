@@ -46,8 +46,8 @@
             <Label Content="_Rol"/>
             <ComboBox x:Name = "Rol" Width="305" HorizontalAlignment="Left">
                 <ComboBoxItem Content = "Lid" />
-                <ComboBoxItem Content = "Materiaalcommesaris" />
-                <ComboBoxItem Content = "Wedstrijdcommesaris" />
+                <ComboBoxItem Content = "Materiaalcommissaris" />
+                <ComboBoxItem Content = "Wedstrijdcommíssaris" />
             </ComboBox>
 
             <Label Content="_Voornaam:"  />
@@ -65,10 +65,10 @@
             <Label Content="_Niveau:"/>
 
             <ComboBox x:Name = "Niveau">
-                <ComboBoxItem Content = "Niveau a" />
-                <ComboBoxItem Content = "Niveau b" />
-                <ComboBoxItem Content = "Niveau c" />
-                <ComboBoxItem Content = "Niveau d" />
+                <ComboBoxItem Content = "A" />
+                <ComboBoxItem Content = "B" />
+                <ComboBoxItem Content = "C" />
+                <ComboBoxItem Content = "D" />
 
             </ComboBox>
 

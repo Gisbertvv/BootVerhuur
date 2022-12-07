@@ -117,11 +117,38 @@ namespace BootVerhuurWpf
             }
             else
             {
-                Lid = new Member(txtVoornaam.Text, txtAchternaam.Text, txtGebruikersnaam.Text, txtWachtwoord.Password.ToString(), txtEmail.Text, _txtTelefoonnummer.Text, Rol.Text, Niveau.Text);
+                Lid = new Member(txtVoornaam.Text, txtAchternaam.Text, txtGebruikersnaam.Text, txtWachtwoord.Password, txtEmail.Text, _txtTelefoonnummer.Text, Rol.Text, Niveau.Text);
                 messageBoxText = "User is aangemaakt";
                 caption = "SUCCES";
                 button = MessageBoxButton.OK;
                 icon = MessageBoxImage.Information;
+
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "127.0.0.1";
+                builder.UserID = "sa";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "BootVerhuur";
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    String sql = "INSERT INTO member " + "(first_name, last_name, phone_number, email, boating_level, role, username, password)" + "VALUES ('" + txtVoornaam.Text + "' , '" +
+                                        txtAchternaam.Text + "', '" + _txtTelefoonnummer.Text + "', '" + txtEmail.Text + "', '" + Niveau.Text + "', '" + Rol.Text + "', '" + txtGebruikersnaam.Text + "', '" + txtWachtwoord.Password + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7} {8}", reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8));
+                            }
+                        }
+                    }
+
+                }
+
+                this.Close();
+                mainWindow.Show();
             }
             result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
         }
