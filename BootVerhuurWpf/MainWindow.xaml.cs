@@ -50,10 +50,11 @@ namespace BootVerhuurWpf
 
         private void AccidentReport(object sender, RoutedEventArgs e)
         {
-            AccidentReportWindow window = new AccidentReportWindow();
-            
+            PDFWindow window = new PDFWindow();
+            //AccidentReportWindow window = new AccidentReportWindow();
+            //PdfWindow window = new PdfWindow();
+
             window.Show();
-            Close();
         }
 
 

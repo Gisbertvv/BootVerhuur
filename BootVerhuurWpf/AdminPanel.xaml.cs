@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BoldReports.RDL.DOM;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -13,6 +15,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit;
+using WindowStartupLocation = System.Windows.WindowStartupLocation;
 
 namespace BootVerhuurWpf
 {
@@ -38,5 +42,14 @@ namespace BootVerhuurWpf
         {
             Close();
         }
+
+        private void AdminPanelInfo(object sender, RoutedEventArgs e)
+        {
+
+
+            Xceed.Wpf.Toolkit.MessageBox.Show(PrimaryColor.Color.ToString());
+            Xceed.Wpf.Toolkit.MessageBox.Show(SecondaryColor.Color.ToString());
+        }
     }
 }
+    
