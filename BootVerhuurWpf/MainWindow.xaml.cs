@@ -20,7 +20,7 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class MainWindow : Window
     { 
-        BookBoat bookBoat = new BookBoat();
+        //BookBoat bookBoat = new BookBoat();
         public MainWindow()
         {
             InitializeComponent();
@@ -33,8 +33,10 @@ namespace BootVerhuurWpf
 
         private void Open_BookBoat(object sender, RoutedEventArgs e)
         {
-            bookBoat.Show();
+            Temp tp = new Temp();
+            tp.Show();
             Close();
         }
+
     }
 }
