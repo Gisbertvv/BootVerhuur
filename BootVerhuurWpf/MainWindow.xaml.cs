@@ -32,10 +32,6 @@ namespace BootVerhuurWpf
             Create popup = new Create();
             popup.ShowDialog();
             this.Close();
-
-            /*CreateMember createMember = new CreateMember();
-            createMember.Show();
-            this.Close();*/
         }
 
         private void OpenA_Click(object sender, RoutedEventArgs e)
@@ -50,10 +46,11 @@ namespace BootVerhuurWpf
 
         private void AccidentReport(object sender, RoutedEventArgs e)
         {
-            AccidentReportWindow window = new AccidentReportWindow();
-            
+            PDFWindow window = new PDFWindow();
+            //AccidentReportWindow window = new AccidentReportWindow();
+            //PdfWindow window = new PdfWindow();
+
             window.Show();
-            Close();
         }
 
 

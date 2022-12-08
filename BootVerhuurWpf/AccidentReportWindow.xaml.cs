@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Security.Cryptography;
 
 namespace BootVerhuurWpf
 {
@@ -20,6 +22,10 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class AccidentReportWindow : Window
     {
+        private int count;
+        string folderName;
+        string destinationFile;
+        private string today = DateTime.Now.ToString("dddd, dd MMMM yyyy");
         public AccidentReportWindow()
         {
             InitializeComponent();
@@ -46,5 +52,31 @@ namespace BootVerhuurWpf
             mainWindow.Show();
             Close();
         }
+
+        private void CreateDirectory() 
+        {
+            folderName = $@"C:\Users\rosal\source\repos\BootVerhuur\Schadeformuliers\SF {today} {count}";
+            // If directory does not exist, create it
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+                count += 1;
+            }
+            else
+            {
+                while (Directory.Exists(folderName))
+                {
+                    count++;
+                    folderName = $@"C:\Users\rosal\source\repos\BootVerhuur\Schadeformuliers\SF {today} {count}";
+                }
+                Directory.CreateDirectory(folderName);
+                count += 1;
+            }
+        }
+         
+        private void SaveForm(object sender, RoutedEventArgs e)
+        {
+            CreateDirectory();
+        }   
     }
 }

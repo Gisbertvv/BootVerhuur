@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
+    <None Remove="Images\roeienpng.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,12 +18,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BoldReports.WPF" Version="4.2.61" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
+    <PackageReference Include="Syncfusion.PdfViewer.WPF" Version="20.3.0.59" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
+    <Resource Include="Images\roeienpng.png" />
   </ItemGroup>
 
 </Project>
