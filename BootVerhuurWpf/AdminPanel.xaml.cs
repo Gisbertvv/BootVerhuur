@@ -71,11 +71,17 @@ namespace BootVerhuurWpf
         {
             try
             {
-                SqlConnection connection = new SqlConnection(_builder.ConnectionString);
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "localhost";
+                builder.UserID = "SA";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "BootVerhuur";
+                SqlConnection connection = new SqlConnection(builder.ConnectionString);
                 using (connection)
                 {
                     //SQL query
-                    String sql = "UPDATE primary_color from appSettings";
+                    String sql = "UPDATE appSettings SET primary_color = ?";
+
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -99,11 +105,15 @@ namespace BootVerhuurWpf
         {
             try
             {
-                SqlConnection connection = new SqlConnection(_builder.ConnectionString);
-                using (connection)
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "localhost";
+                builder.UserID = "SA";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "BootVerhuur";
+                SqlConnection connection = new SqlConnection(builder.ConnectionString); using (connection)
                 {
                     //SQL query
-                    String sql = "UPDATE secondary_color from appSettings";
+                    String sql = "UPDATE appSettings SET secondary_color = ?";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
