@@ -4,6 +4,27 @@
              xmlns:local="clr-namespace:BootVerhuurWpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+<<<<<<< Updated upstream
          
+=======
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10"
+                                Background="DarkGray"
+                                BorderThickness="1"
+                                Padding="10 ">
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="{TemplateBinding Padding}" ></ContentPresenter>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+>>>>>>> Stashed changes
     </Application.Resources>
 </Application>
