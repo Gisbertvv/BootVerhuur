@@ -74,7 +74,7 @@ namespace BootVerhuurWpf
                 SqlConnection connection = new SqlConnection(_builder.ConnectionString);
                 using (connection)
                 {
-                    //SQL quary
+                    //SQL query
                     String sql = "UPDATE primary_color from appSettings";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -82,20 +82,7 @@ namespace BootVerhuurWpf
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            /*while (reader.Read())
-                            {
-                                if (username.Equals(reader.GetString(0)))
-                                {
-                                    connection.Close();
-                                    return true;
-                                }
-
-                                if (email.Equals(reader.GetString(1)))
-                                {
-                                    connection.Close();
-                                    return true;
-                                }
-                            }*/
+                            Console.WriteLine("{0}", reader.GetString(0));
                         }
 
                         connection.Close();
@@ -115,7 +102,7 @@ namespace BootVerhuurWpf
                 SqlConnection connection = new SqlConnection(_builder.ConnectionString);
                 using (connection)
                 {
-                    //SQL quary
+                    //SQL query
                     String sql = "UPDATE secondary_color from appSettings";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -123,21 +110,7 @@ namespace BootVerhuurWpf
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            reader.
-                            /*while (reader.Read())
-                            {
-                                if (username.Equals(reader.GetString(0)))
-                                {
-                                    connection.Close();
-                                    return true;
-                                }
-
-                                if (email.Equals(reader.GetString(1)))
-                                {
-                                    connection.Close();
-                                    return true;
-                                }
-                            }*/
+                            Console.WriteLine("{0}", reader.GetString(0));
                         }
 
                         connection.Close();
