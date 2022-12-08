@@ -162,16 +162,17 @@ namespace BootVerhuurWpf
                 result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
 
-            void Back_Click(object sender, RoutedEventArgs e)
-            {
-                mainWindow.Show();
-                Close();
-            }
+        }
 
-            void Logout(object sender, RoutedEventArgs e)
-            {
-                Close();
-            }
+        void Back_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.Show();
+            Close();
+        }
+
+        void Logout(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
