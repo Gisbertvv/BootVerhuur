@@ -52,7 +52,7 @@
             <syncfusion:ColorPicker Name="PrimaryColor" Brush="Blue"/>
             <Label Content="Secundaire kleur"/>
             <syncfusion:ColorPicker Name="SecondaryColor" Brush="Green"/>
-            <Button x:Name="btn" Content="Kleuren opslaan" HorizontalAlignment="Right" Margin="10,10" Width="100" Click="AdminPanelInfo"/>
+            <Button x:Name="btn" Content="Kleuren opslaan" HorizontalAlignment="Right" Margin="10,10" Click="AdminPanelInfo"/>
         </StackPanel>
 
 
