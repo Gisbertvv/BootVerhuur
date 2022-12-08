@@ -13,6 +13,10 @@
             <ColumnDefinition Width="325"/>
         </Grid.ColumnDefinitions>
 
+        <Grid HorizontalAlignment="Left" Height="414" VerticalAlignment="Top" Width="620" Grid.Column="1" Margin="20,20,0,0" Grid.ColumnSpan="2">
+            <Image Margin="34,27,34,27" Source="/Images/roeienpng.png" Stretch="Fill" Opacity="0.2"/>
+        </Grid>
+
         <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
             <Button x:Name="btn1" Content="Reseveren"
 
@@ -42,8 +46,8 @@
             <Label Content="_Rol"/>
             <ComboBox x:Name = "Rol" Width="305" HorizontalAlignment="Left">
                 <ComboBoxItem Content = "Lid" />
-                <ComboBoxItem Content = "Materiaalcommesaris" />
-                <ComboBoxItem Content = "Wedstrijdcommesaris" />
+                <ComboBoxItem Content = "Materiaalcommissaris" />
+                <ComboBoxItem Content = "Wedstrijdcommíssaris" />
             </ComboBox>
 
             <Label Content="_Voornaam:"  />
@@ -54,9 +58,6 @@
             <Label Content="_Gebruikersnaam"/>
             <TextBox Name="txtGebruikersnaam"/>
 
-
-
-
         </StackPanel>
 
         <StackPanel  Grid.Column="2" Margin="10,10,10,10">
@@ -64,10 +65,10 @@
             <Label Content="_Niveau:"/>
 
             <ComboBox x:Name = "Niveau">
-                <ComboBoxItem Content = "Niveau a" />
-                <ComboBoxItem Content = "Niveau b" />
-                <ComboBoxItem Content = "Niveau c" />
-                <ComboBoxItem Content = "Niveau d" />
+                <ComboBoxItem Content = "A" />
+                <ComboBoxItem Content = "B" />
+                <ComboBoxItem Content = "C" />
+                <ComboBoxItem Content = "D" />
 
             </ComboBox>
 
@@ -77,12 +78,9 @@
             <Label Content="_Email:" />
             <TextBox Name="txtEmail" />
             <Label Content="_Wachtwoord:"  />
-            <TextBox Name="txtWachtwoord" />
+            <PasswordBox Name="txtWachtwoord" />
 
             <Button x:Name="btnBevestigen" Margin="0,5,0,0" Click="ButtonAddUser_Click" Width="147" HorizontalAlignment="Right">Aanmaken</Button>
-
         </StackPanel>
-
-
     </Grid>
 </Window>

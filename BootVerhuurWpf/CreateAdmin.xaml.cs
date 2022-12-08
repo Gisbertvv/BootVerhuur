@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using Syncfusion.Windows.Shared;
 
 namespace BootVerhuurWpf
 {
@@ -21,7 +23,12 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class CreateAdmin : Window
     {
-        public Admin admin { get; set; }
+        MainWindow mainWindow = new MainWindow();
+        public Admin admin;
+        bool digits = false;
+        bool special = false;
+
+
         public CreateAdmin()
         {
             InitializeComponent();
@@ -44,31 +51,11 @@ namespace BootVerhuurWpf
             return valid;
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private bool ContainsDigit(string wachtwoord)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
-
-        }
-
-        private void Create_Admin(object sender, RoutedEventArgs e)
-        {
-            string messageBoxText;
-            string caption;
-            MessageBoxButton button;
-            MessageBoxImage icon;
-            MessageBoxResult result;
-
-            bool digits = false;
-            bool special = false;
-
-            string regexItem = @"\|!#$%&/+-()=?»«@£§€{}.-;'<>_,";
-
-           
-            foreach (char l in txtWachtwoord.Text)
+            foreach (char l in wachtwoord)
             {
-               if (Char.IsDigit(l))
+                if (Char.IsDigit(l))
                 {
                     digits = true;
                 }
@@ -79,51 +66,111 @@ namespace BootVerhuurWpf
                 }
             }
 
-            foreach( var item in regexItem)
-            {    
+            return digits;
+        }
 
-                if (txtWachtwoord.Text.Contains(item))
+        private bool ContainsSpecial(string wachtwoord)
+        {
+            string regexItem = @"\|!#$%&/+-()=?»«@£§€{}.-;'<>_,";
+
+            foreach (var item in regexItem)
+            {
+                if (wachtwoord.Contains(item))
                 {
                     special = true;
                 }
+
                 if (special)
                 {
                     break;
                 }
             }
-            if (!IsEmailValid(txtEmail.Text) || (!txtEmail.Text.EndsWith(".nl") && !txtEmail.Text.EndsWith(".com")))
-            {
-                messageBoxText = "Email is ongeldig";
-                caption = "FAILED: Email Ongeldig";
-                button = MessageBoxButton.OK;
-                icon = MessageBoxImage.Error;
-            }
-            else if (!digits || !special || txtWachtwoord.Text.Length <= 7)
-            {
-                messageBoxText = "Wachtwoord moet 8 tekens lang zijn, een cijfer en een speciale teken bevatten";
-                caption = "FAILD: Wachtwoord voldoet niet aan de eisen";
-                button = MessageBoxButton.OK;
-                icon = MessageBoxImage.Error;
-            }
-            else if (string.IsNullOrWhiteSpace(txtGebruikersnaam.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtWachtwoord.Text))
+
+            return special;
+        }
+
+
+        private void Create_Admin(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText;
+            string caption;
+            MessageBoxButton button;
+            MessageBoxImage icon;
+            MessageBoxResult result;
+            ContainsDigit(txtWachtwoord.Password.ToString());
+            ContainsSpecial(txtWachtwoord.Password.ToString());
+
+            if (string.IsNullOrWhiteSpace(txtGebruikersnaam.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                string.IsNullOrWhiteSpace(txtWachtwoord.Password.ToString()))
             {
                 messageBoxText = "Alle velden moeten ingevuld zijn";
                 caption = "FAILED: Één of meerdere velden zijn leeg";
                 button = MessageBoxButton.OK;
                 icon = MessageBoxImage.Error;
             }
+            else if (!IsEmailValid(txtEmail.Text) ||
+                     (!txtEmail.Text.EndsWith(".nl") && !txtEmail.Text.EndsWith(".com")))
+            {
+                messageBoxText = "Email is ongeldig";
+                caption = "FAILED: Email Ongeldig";
+                button = MessageBoxButton.OK;
+                icon = MessageBoxImage.Error;
+            }
+            else if (!digits || !special || txtWachtwoord.Password.ToString().Length <= 7)
+            {
+                messageBoxText = "Wachtwoord moet 8 tekens lang zijn, een cijfer en een speciale teken bevatten";
+                caption = "FAILD: Wachtwoord voldoet niet aan de eisen";
+                button = MessageBoxButton.OK;
+                icon = MessageBoxImage.Error;
+            }
             else
             {
-                /*admin = new Admin(txtGebruikersnaam.Text, txtWachtwoord.Text, Rol.Text, txtEmail.Text);*/
+                admin = new Admin(txtGebruikersnaam.Text, txtWachtwoord.Password.ToString(), txtEmail.Text);
                 messageBoxText = "Admin is aangemaakt";
                 caption = "SUCCES";
                 button = MessageBoxButton.OK;
                 icon = MessageBoxImage.Information;
+
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "127.0.0.1";
+                builder.UserID = "sa";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "BootVerhuur";
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    String sql = "INSERT INTO member " +
+                                 "(first_name, last_name, phone_number, email, boating_level, role, username, password)" +
+                                 "VALUES ('" + "X" + "' , '" +
+                                 "X" + "', '" + "X" + "', '" + txtEmail.Text + "', '" + "X" + "', '" + "X" + "', '" +
+                                 txtGebruikersnaam.Text + "', '" + txtWachtwoord.Password + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7} {8}", reader.GetInt32(0),
+                                    reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4),
+                                    reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8));
+                            }
+                        }
+                    }
+                }
+
+                result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
-            result = MessageBox.Show(messageBoxText, caption, button, icon);
+
         }
 
-        private void Logout(object sender, RoutedEventArgs e)
+        void Back_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.Show();
+            Close();
+        }
+
+        void Logout(object sender, RoutedEventArgs e)
         {
             Close();
         }
