@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using Syncfusion.Windows.Shared;
 
 namespace BootVerhuurWpf
 {
@@ -64,6 +65,7 @@ namespace BootVerhuurWpf
                     break;
                 }
             }
+
             return digits;
         }
 
@@ -77,11 +79,13 @@ namespace BootVerhuurWpf
                 {
                     special = true;
                 }
+
                 if (special)
                 {
                     break;
                 }
             }
+
             return special;
         }
 
@@ -96,14 +100,16 @@ namespace BootVerhuurWpf
             ContainsDigit(txtWachtwoord.Password.ToString());
             ContainsSpecial(txtWachtwoord.Password.ToString());
 
-            if (string.IsNullOrWhiteSpace(txtGebruikersnaam.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtWachtwoord.Password.ToString()))
+            if (string.IsNullOrWhiteSpace(txtGebruikersnaam.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                string.IsNullOrWhiteSpace(txtWachtwoord.Password.ToString()))
             {
                 messageBoxText = "Alle velden moeten ingevuld zijn";
                 caption = "FAILED: Één of meerdere velden zijn leeg";
                 button = MessageBoxButton.OK;
                 icon = MessageBoxImage.Error;
             }
-            else if (!IsEmailValid(txtEmail.Text) || (!txtEmail.Text.EndsWith(".nl") && !txtEmail.Text.EndsWith(".com")))
+            else if (!IsEmailValid(txtEmail.Text) ||
+                     (!txtEmail.Text.EndsWith(".nl") && !txtEmail.Text.EndsWith(".com")))
             {
                 messageBoxText = "Email is ongeldig";
                 caption = "FAILED: Email Ongeldig";
@@ -119,24 +125,53 @@ namespace BootVerhuurWpf
             }
             else
             {
-               admin= new Admin(txtGebruikersnaam.Text, txtWachtwoord.Password.ToString(), txtEmail.Text);
+                admin = new Admin(txtGebruikersnaam.Text, txtWachtwoord.Password.ToString(), txtEmail.Text);
                 messageBoxText = "Admin is aangemaakt";
                 caption = "SUCCES";
                 button = MessageBoxButton.OK;
                 icon = MessageBoxImage.Information;
+
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "127.0.0.1";
+                builder.UserID = "sa";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "BootVerhuur";
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    String sql = "INSERT INTO member " +
+                                 "(first_name, last_name, phone_number, email, boating_level, role, username, password)" +
+                                 "VALUES ('" + "X" + "' , '" +
+                                 "X" + "', '" + "X" + "', '" + txtEmail.Text + "', '" + "X" + "', '" + "X" + "', '" +
+                                 txtGebruikersnaam.Text + "', '" + txtWachtwoord.Password + "')";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7} {8}", reader.GetInt32(0),
+                                    reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4),
+                                    reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8));
+                            }
+                        }
+                    }
+                }
+
+                result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
-            result = MessageBox.Show(messageBoxText, caption, button, icon);
-        }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            mainWindow.Show();
-            Close();
-        }
+            void Back_Click(object sender, RoutedEventArgs e)
+            {
+                mainWindow.Show();
+                Close();
+            }
 
-        private void Logout(object sender, RoutedEventArgs e)
-        {
-            Close();
+            void Logout(object sender, RoutedEventArgs e)
+            {
+                Close();
+            }
         }
     }
 }
