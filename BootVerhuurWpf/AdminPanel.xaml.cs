@@ -1,6 +1,7 @@
 ﻿using BoldReports.RDL.DOM;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -80,7 +81,7 @@ namespace BootVerhuurWpf
                 using (connection)
                 {
                     //SQL query
-                    String sql = "UPDATE appSettings SET primary_color = ?";
+                    String sql = $"UPDATE appSettings SET primary_color = primary_color";
 
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -88,7 +89,7 @@ namespace BootVerhuurWpf
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            Console.WriteLine("{0}", reader.GetString(0));
+                            Console.WriteLine("{0}", reader.GetString(PrimaryColor));
                         }
 
                         connection.Close();
@@ -113,14 +114,14 @@ namespace BootVerhuurWpf
                 SqlConnection connection = new SqlConnection(builder.ConnectionString); using (connection)
                 {
                     //SQL query
-                    String sql = "UPDATE appSettings SET secondary_color = ?";
+                    String sql = $"UPDATE appSettings SET secondary_color = secondary_color";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            Console.WriteLine("{0}", reader.GetString(0));
+                            Console.WriteLine("{0}", reader.GetString(SecondaryColor));
                         }
 
                         connection.Close();
