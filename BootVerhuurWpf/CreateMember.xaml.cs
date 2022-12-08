@@ -24,6 +24,7 @@ namespace BootVerhuurWpf
         public Member Lid;
         bool digits = false;
         bool special = false;
+
         MainWindow mainWindow = new MainWindow();
 
         public CreateMember()

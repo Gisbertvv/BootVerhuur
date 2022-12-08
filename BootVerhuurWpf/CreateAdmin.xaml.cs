@@ -22,7 +22,7 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class CreateAdmin : Window
     {
-        MainWindow Dashboard = new MainWindow();
+        MainWindow mainWindow = new MainWindow();
         public Admin admin;
         bool digits = false;
         bool special = false;
@@ -130,7 +130,7 @@ namespace BootVerhuurWpf
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Dashboard.Show();
+            mainWindow.Show();
             Close();
         }
 

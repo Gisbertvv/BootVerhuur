@@ -54,7 +54,7 @@ namespace BootVerhuurWpf
             return null;
         }
 
-/*        public void InsertUser(SqlConnection connection, string rol, string niveau, string voornaam, string achternaam, string telefoonnummer, string email, string gebruikersnaam, string wachtwoord)
+        public void InsertUser(SqlConnection connection, string rol, string niveau, string voornaam, string achternaam, string telefoonnummer, string email, string gebruikersnaam, string wachtwoord)
         {
             String sql = $"INSERT INTO Users (Rol, Niveau, Voornaam, Achternaam, Telefoonnummer, Email, Gebruikersnaam, Wachtwoord)" +
                 $"VALUES ({rol}, {niveau}, {voornaam}, {achternaam}, {telefoonnummer}, {email}, {gebruikersnaam}, {wachtwoord});";
@@ -71,6 +71,6 @@ namespace BootVerhuurWpf
                     }
                 }
             }
-        }*/
+        }
     }
 }
