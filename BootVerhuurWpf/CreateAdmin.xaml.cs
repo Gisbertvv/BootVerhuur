@@ -161,6 +161,7 @@ namespace BootVerhuurWpf
 
                 result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
+        }
 
             void Back_Click(object sender, RoutedEventArgs e)
             {
@@ -174,4 +175,4 @@ namespace BootVerhuurWpf
             }
         }
     }
-}
+
