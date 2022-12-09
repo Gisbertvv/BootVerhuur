@@ -12,13 +12,15 @@ namespace BootVerhuurWpf
         public int AantalPersonen { get; set; } 
         public string Niveau { get; set; }
         public bool SteeringWheel { get; set; } 
+        public string Status { get; set; }  
 
-        public Boat( int boatid, int aantalPersonen, bool steeringWheel, string nivau)
+        public Boat( int boatid, int aantalPersonen, bool steeringWheel, string nivau, string status)
         {           
             BoatID = boatid;
             AantalPersonen = aantalPersonen;
             SteeringWheel = steeringWheel;
             Niveau = nivau;
+            Status = status;
         }
     }
 }

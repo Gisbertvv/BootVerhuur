@@ -26,6 +26,7 @@ namespace BootVerhuurWpf
         public bool stir;
         int Id;
         int reservationId;
+        string status;
         string reservationendtime;
 
         public BookBoat(int id)
@@ -60,6 +61,7 @@ namespace BootVerhuurWpf
             DP.DisplayDateStart = DateTime.Now;
             DateTime plusone = DateTime.Now.AddDays(1);
             DateTime plustwo = DateTime.Now.AddDays(2);
+            DP.BlackoutDates.Add(new CalendarDateRange(DateTime.Now));
 
             if (plusone.DayOfWeek == DayOfWeek.Saturday)
             {
@@ -117,7 +119,7 @@ namespace BootVerhuurWpf
             }
             else
             {
-                foreach(char ch in Gekozentijd.Text)
+                foreach (char ch in Gekozentijd.Text)
                 {
                     if (ch.Equals(':'))
                     {
@@ -125,32 +127,35 @@ namespace BootVerhuurWpf
                     }
                     else
                     {
-                        selectedtime +=  ch;
+                        selectedtime += ch;
                     }
                 }
-             
-                //DateTime selecteddate = DP.SelectedDate.Value;
-                string selecteddate = DP.SelectedDate.Value.ToString("dd/MM/yyyy");
+
+                /*                DateTime selecteddate = DP.SelectedDate.Value;
+                                InsertReservation(selecteddate, selectedtime);*/
+
+
+                string selecteddate = DP.SelectedDate.Value.ToShortDateString();
                 string twee = string.Empty;
                 foreach (char ch in selecteddate)
                 {
-                    if(ch == '-')
+                    if (ch == '-')
                     {
-                        twee += "/";
+                        //         twee += "/";
                     }
                     else
                     {
                         twee += ch;
                     }
                 }
-                    InsertReservation(twee , selectedtime);
+                InsertReservation(twee, selectedtime);
             }
         }
 
         private void Status(object sender, RoutedEventArgs e)
         {
             var label = sender as Label;
-            label.Content = $"Status : ";
+            label.Content = $"Status : {status} ";
 
         }
 
@@ -222,11 +227,11 @@ namespace BootVerhuurWpf
                 builder.UserID = "SA";
                 builder.Password = "Havermout1325";
                 builder.InitialCatalog = "Bootverhuur";
-
+                //(convert(DATETIME, {reservationdate},103)))
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
-                    //reservation date gives the wrong date
-                    String sql = $"insert into reservation values ({reservationId}, {Id}, GetDate(), {reservationtime}, {reservationendtime}, (convert(DATETIME, {reservationdate},103)))";
+                    //reservation for now string dont know how else
+                    String sql = $"insert into reservation values ({reservationId}, {Id},{reservationdate} , {reservationtime}, {reservationendtime}, GetDate())";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
@@ -301,6 +306,7 @@ namespace BootVerhuurWpf
                                aantalp = reader.GetInt32(1);
                                 bootniveau = reader.GetString(2);
                                 stir = reader.GetBoolean(3);
+                                status = reader.GetString(4);
                             }
                         }
                     }

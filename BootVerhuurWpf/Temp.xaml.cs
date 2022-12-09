@@ -28,6 +28,7 @@ namespace BootVerhuurWpf
         string bootniveau;
         bool stir;
         int count;
+        string status;
         public Temp()
         {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace BootVerhuurWpf
             while (boats.Count < 6)
             {
                 Checkeverything(id);
-                boats.Add(new Boat(id, aantalp, stir, bootniveau));
+                boats.Add(new Boat(id, aantalp, stir, bootniveau,status));
                 id++;
             }
             Boats.ItemsSource = boats;
@@ -70,6 +71,7 @@ namespace BootVerhuurWpf
                                 aantalp = reader.GetInt32(1);
                                 bootniveau = reader.GetString(2);
                                 stir = reader.GetBoolean(3);
+                                status = reader.GetString(4);
                             }
                         }
                     }
