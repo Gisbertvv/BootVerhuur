@@ -18,6 +18,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
+using Color = System.Drawing.Color;
+using MessageBox = System.Windows.MessageBox;
 using WindowStartupLocation = System.Windows.WindowStartupLocation;
 
 namespace BootVerhuurWpf
@@ -28,6 +30,7 @@ namespace BootVerhuurWpf
     public partial class AdminPanel : Window
     {
         private static SqlConnection _builder;
+
         public AdminPanel()
         {
             InitializeComponent();
@@ -48,6 +51,8 @@ namespace BootVerhuurWpf
 
         private void AdminPanelInfo(object sender, RoutedEventArgs e)
         {
+            SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString());
+
             if (PrimaryColor != null && SecondaryColor != null)
             {
                 SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString());
@@ -81,17 +86,13 @@ namespace BootVerhuurWpf
                 using (connection)
                 {
                     //SQL query
-                    String sql = $"UPDATE appSettings SET primary_color = primary_color";
+                    String sql = $"UPDATE appSettings SET primary_color='{PrimaryColor}'";
 
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            Console.WriteLine("{0}", reader.GetString(PrimaryColor));
-                        }
-
+                        command.ExecuteNonQuery();
                         connection.Close();
                     }
                 }
@@ -111,19 +112,16 @@ namespace BootVerhuurWpf
                 builder.UserID = "SA";
                 builder.Password = "Havermout1325";
                 builder.InitialCatalog = "BootVerhuur";
-                SqlConnection connection = new SqlConnection(builder.ConnectionString); using (connection)
+                SqlConnection connection = new SqlConnection(builder.ConnectionString);
+                using (connection)
                 {
                     //SQL query
-                    String sql = $"UPDATE appSettings SET secondary_color = secondary_color";
+                    String sql = $"UPDATE appSettings SET secondary_color ='{SecondaryColor}'";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            Console.WriteLine("{0}", reader.GetString(SecondaryColor));
-                        }
-
+                        command.ExecuteNonQuery();
                         connection.Close();
                     }
                 }
@@ -133,6 +131,97 @@ namespace BootVerhuurWpf
                 System.Windows.MessageBox.Show(e.ToString());
             }
         }
+
+        public string[] GetColors()
+        {
+            string[] color = null;
+
+
+            try
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "localhost";
+                builder.UserID = "SA";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "BootVerhuur";
+
+                string color1;
+                SqlConnection connection = new SqlConnection(builder.ConnectionString);
+                using (connection)
+                {
+                    //SQL quary
+                    String sql = "SELECT primary_color, secondary_color FROM appSettings";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                 color = new string[] { reader.GetString(0), reader.GetString(1)};
+                            }
+                        }
+                        connection.Close();
+                    }
+                }
+            }
+
+            catch (SqlException e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+            }
+
+            return color;
+        }
+
+        private void test(object sender, RoutedEventArgs e)
+        {
+            string[] color = GetColors();
+            MessageBox.Show(color[0], color[1]);
+        }
     }
+
+    /*public static bool DoesUserAlreadyExist(string username, string email)
+    {
+        try
+        {
+            SqlConnection connection = new SqlConnection(_builder.ConnectionString);
+            using (connection)
+            {
+                //SQL quary
+                String sql = "SELECT Gebruikersnaam, Email from Cursist";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (username.Equals(reader.GetString(0)))
+                            {
+                                connection.Close();
+                                return true;
+                            }
+
+                            if (email.Equals(reader.GetString(1)))
+                            {
+                                connection.Close();
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            connection.Close();
+        }
+        catch (SqlException e)
+        {
+            MessageBox.Show(e.ToString());
+        }
+        return false;
+    }*/
 }
     
+

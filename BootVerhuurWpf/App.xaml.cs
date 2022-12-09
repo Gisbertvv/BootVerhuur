@@ -11,7 +11,18 @@ namespace BootVerhuurWpf
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+
     public partial class App : Application
     {
+        private string PrimaryColor { get; set; }
+        private string SecondaryColor { get; set; }
+
+        public App()
+        {
+            AdminPanel panel = new AdminPanel();
+
+            PrimaryColor = panel.GetColors()[0];
+            SecondaryColor = panel.GetColors()[1];
+        }
     }
 }
