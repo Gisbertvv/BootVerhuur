@@ -136,7 +136,6 @@ namespace BootVerhuurWpf
         {
             string[] color = null;
 
-
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -174,54 +173,7 @@ namespace BootVerhuurWpf
 
             return color;
         }
-
-        private void test(object sender, RoutedEventArgs e)
-        {
-            string[] color = GetColors();
-            MessageBox.Show(color[0], color[1]);
-        }
     }
-
-    /*public static bool DoesUserAlreadyExist(string username, string email)
-    {
-        try
-        {
-            SqlConnection connection = new SqlConnection(_builder.ConnectionString);
-            using (connection)
-            {
-                //SQL quary
-                String sql = "SELECT Gebruikersnaam, Email from Cursist";
-
-                using (SqlCommand command = new SqlCommand(sql, connection))
-                {
-                    connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            if (username.Equals(reader.GetString(0)))
-                            {
-                                connection.Close();
-                                return true;
-                            }
-
-                            if (email.Equals(reader.GetString(1)))
-                            {
-                                connection.Close();
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            connection.Close();
-        }
-        catch (SqlException e)
-        {
-            MessageBox.Show(e.ToString());
-        }
-        return false;
-    }*/
 }
     
 
