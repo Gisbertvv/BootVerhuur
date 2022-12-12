@@ -109,13 +109,7 @@ namespace BootVerhuurWpf
             string selectedtime = string.Empty;
             if (DP.SelectedDate == null || string.IsNullOrEmpty(Gekozentijd.Text))
             {
-                string messageBoxText = "Vul een datum en een tijd in";
-                string caption = "ERROR : één of meerdere velden zijn leeg";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxResult result;
-
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                MessageBox.Show("Vul een datum en een tijd in ");
             }
             else
             {
@@ -198,10 +192,6 @@ namespace BootVerhuurWpf
     
         public void InsertReservation(string reservationdate, string reservationtime)
         {
-            string messageBoxText = "Reservering is aangemaakt";
-            string caption = "SUCCES;";
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Information;
             MessageBoxResult result;
             GetReservationID();
             Getendtime(reservationtime);
@@ -223,7 +213,7 @@ namespace BootVerhuurWpf
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                            result = MessageBox.Show("Reservering is aangemaakt", "SUCCES");
                         }
                     }
                 }
