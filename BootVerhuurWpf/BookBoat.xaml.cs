@@ -55,7 +55,9 @@ namespace BootVerhuurWpf
         }
 
         
-
+       /// <summary>
+       /// if role is Lid
+       /// </summary>
         private void AdjustCalender()
         {
             DP.DisplayDateStart = DateTime.Now;
@@ -113,31 +115,9 @@ namespace BootVerhuurWpf
             }
             else
             {
-                foreach (char ch in Gekozentijd.Text)
-                {
-                    if (ch.Equals(':'))
-                    {
-
-                    }
-                    else
-                    {
-                        selectedtime += ch;
-                    }
-                }
 
                 string selecteddate = DP.SelectedDate.Value.ToShortDateString();
-                string twee = string.Empty;
-                foreach (char ch in selecteddate)
-                {
-                    if (ch == '-')
-                    {
-                    }
-                    else
-                    {
-                        twee += ch;
-                    }
-                }
-                InsertReservation(twee, selectedtime);
+                InsertReservation(selecteddate, Gekozentijd.Text);
             }
         }
 
@@ -187,7 +167,18 @@ namespace BootVerhuurWpf
 
             }
              val += 0200;
-            reservationendtime = val.ToString();
+
+            StringBuilder sb= new StringBuilder(val.ToString());
+            if (sb.Length == 4)
+            {
+                sb.Insert(2, ":");
+            }
+            else
+            {
+                sb.Insert(0, "0");
+                sb.Insert(2, ":");
+            }
+            reservationendtime = sb.ToString();
         }
     
         public void InsertReservation(string reservationdate, string reservationtime)
@@ -203,11 +194,9 @@ namespace BootVerhuurWpf
                 builder.UserID = "SA";
                 builder.Password = "Havermout1325";
                 builder.InitialCatalog = "Bootverhuur";
-                //(convert(DATETIME, {reservationdate},103)))
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
-                    //reservation for now string dont know how else
-                    String sql = $"insert into reservation values ({reservationId}, {Id},{reservationdate} , 0{reservationtime}, {reservationendtime}, GetDate())";
+                    String sql = $"insert into reservation values ({reservationId}, {Id},'{reservationdate}' , '{reservationtime}', '{reservationendtime}', GetDate())";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
@@ -256,8 +245,6 @@ namespace BootVerhuurWpf
             }
             Console.ReadLine();
         }
-
-
 
         public void Checkeverything(int id)
         {
