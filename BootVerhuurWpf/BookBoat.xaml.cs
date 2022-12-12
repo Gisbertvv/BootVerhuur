@@ -131,17 +131,12 @@ namespace BootVerhuurWpf
                     }
                 }
 
-                /*                DateTime selecteddate = DP.SelectedDate.Value;
-                                InsertReservation(selecteddate, selectedtime);*/
-
-
                 string selecteddate = DP.SelectedDate.Value.ToShortDateString();
                 string twee = string.Empty;
                 foreach (char ch in selecteddate)
                 {
                     if (ch == '-')
                     {
-                        //         twee += "/";
                     }
                     else
                     {
@@ -198,25 +193,16 @@ namespace BootVerhuurWpf
 
             }
              val += 0200;
-            string numbers = val.ToString();
-            if(numbers.Length == 4)
-            {
-                StringBuilder sb = new StringBuilder(numbers);
-                //sb.Insert(2, ":");
-                reservationendtime = sb.ToString();
-            }
-            else
-            {
-                StringBuilder sb = new StringBuilder(numbers);
-               // sb.Insert(1, ":");
-                reservationendtime = sb.ToString();
-                reservationendtime = $"0{reservationendtime}";
-            }     
+            reservationendtime = val.ToString();
         }
     
         public void InsertReservation(string reservationdate, string reservationtime)
         {
-            
+            string messageBoxText = "Reservering is aangemaakt";
+            string caption = "SUCCES;";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Information;
+            MessageBoxResult result;
             GetReservationID();
             Getendtime(reservationtime);
             try
@@ -231,13 +217,13 @@ namespace BootVerhuurWpf
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     //reservation for now string dont know how else
-                    String sql = $"insert into reservation values ({reservationId}, {Id},{reservationdate} , {reservationtime}, {reservationendtime}, GetDate())";
+                    String sql = $"insert into reservation values ({reservationId}, {Id},{reservationdate} , 0{reservationtime}, {reservationendtime}, GetDate())";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-
+                            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
                         }
                     }
                 }
