@@ -16,10 +16,12 @@ namespace BootVerhuurWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+
+
             //Connect to database
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "localhost";
-            builder.UserID = "SA";
+            builder.DataSource = "127.0.0.1";
+            builder.UserID = "sa";
             builder.Password = "Havermout1325";
             builder.InitialCatalog = "BootVerhuur";
             SqlConnection connection = new SqlConnection(builder.ConnectionString);
