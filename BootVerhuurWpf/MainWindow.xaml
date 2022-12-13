@@ -31,7 +31,7 @@
                     Click="Logout"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Panel.ZIndex="1">
-            <Image Source="/Images/roeienpng.png" Width="400" />
+            <Image Source="/Images/roeienpng.png" Width="300" />
         </StackPanel>
 
     </Grid>
