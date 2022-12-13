@@ -51,6 +51,15 @@ namespace BootVerhuurWpf
 
         private void AdminPanelInfo(object sender, RoutedEventArgs e)
         {
+            //MessageBox.Show($"(R){PrimaryColor.Color.R.ToString()} (G) {PrimaryColor.Color.G.ToString()}  (B) {PrimaryColor.Color.B.ToString()}  (A) {PrimaryColor.Color.A.ToString()}");
+            //MessageBox.Show($"(R){SecondaryColor.Color.R.ToString()} (G) {SecondaryColor.Color.G.ToString()}  (B) {SecondaryColor.Color.B.ToString()}  (A) {SecondaryColor.Color.A}");
+
+       
+            /*Color myRgbColor = new Color();
+            myRgbColor = Color.FromArgb(PrimaryColor.Color.A, PrimaryColor.Color.R, PrimaryColor.Color.G, PrimaryColor.Color.B);
+            MessageBox.Show($"{myRgbColor}");
+
+            SolidColorBrush solidColorBrush = new SolidColorBrush(myRgbColor);*/
             SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString());
 
             if (PrimaryColor != null && SecondaryColor != null)

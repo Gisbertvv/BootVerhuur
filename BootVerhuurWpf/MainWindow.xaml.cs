@@ -24,7 +24,7 @@ namespace BootVerhuurWpf
         public MainWindow()
         {
             InitializeComponent();
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            WindowStartupLocation = WindowStartupLocation.CenterOwner;
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
