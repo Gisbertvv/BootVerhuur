@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="backgroundBootVerhuur.png" />
     <None Remove="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
     <None Remove="Images\backgroundBootVerhuur.png" />
     <None Remove="Images\roeienpng.png" />
@@ -30,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="backgroundBootVerhuur.png" />
     <Resource Include="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
     <Resource Include="Images\backgroundBootVerhuur.png" />
     <Resource Include="Images\roeienpng.png" />

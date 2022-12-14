@@ -27,6 +27,11 @@ namespace BootVerhuurWpf
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            AdminPanel panel = new AdminPanel();
+            Color color = (Color)ColorConverter.ConvertFromString(panel.GetColors()[2]);
+            SolidColorBrush solidColorBrush = new SolidColorBrush(color);
+            gridje.Background = solidColorBrush;
+
             if (Login.role == "admin" || Login.role == "Admin")
             {
                 btn5.Visibility = Visibility.Visible;

@@ -29,16 +29,11 @@ namespace BootVerhuurWpf
     public partial class AdminPanel : Window
     {
         private static SqlConnection _builder;
-       
-
-      
+        
         public AdminPanel()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            Color color = (Color)ColorConverter.ConvertFromString(GetColors()[0]);
-            SolidColorBrush solidColorBrush = new SolidColorBrush(color);
-            gridje.Background = solidColorBrush;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -55,37 +50,17 @@ namespace BootVerhuurWpf
 
         private void AdminPanelInfo(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show($"(R){PrimaryColor.Color.R.ToString()} (G) {PrimaryColor.Color.G.ToString()}  (B) {PrimaryColor.Color.B.ToString()}  (A) {PrimaryColor.Color.A.ToString()}");
-            //MessageBox.Show($"(R){SecondaryColor.Color.R.ToString()} (G) {SecondaryColor.Color.G.ToString()}  (B) {SecondaryColor.Color.B.ToString()}  (A) {SecondaryColor.Color.A}");
-
-       
-            /*Color myRgbColor = new Color();
-            myRgbColor = Color.FromArgb(PrimaryColor.Color.A, PrimaryColor.Color.R, PrimaryColor.Color.G, PrimaryColor.Color.B);
-            MessageBox.Show($"{myRgbColor}");
-
-            SolidColorBrush solidColorBrush = new SolidColorBrush(myRgbColor);*/
-            SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString());
-
-            if (PrimaryColor != null && SecondaryColor != null)
+            
+            if (PrimaryColor != null && SecondaryColor != null && BackgroundColor != null)
             {
-                SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString());
+                SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString(), BackgroundColor.Color.ToString());
             }
-            else if (SecondaryColor != null)
-            {
-                SetPrimaryColor(PrimaryColor.Color.ToString());
-            }
-            else if (PrimaryColor != null)
-            {
-                SetSecondaryColor(SecondaryColor.Color.ToString());
-            }
-          
-
         }
-
-        public static void SetThemeColors(string PrimaryColor, string SecondaryColor)
+        public static void SetThemeColors(string PrimaryColor, string SecondaryColor, string BackgroundColor)
         {
             SetPrimaryColor(PrimaryColor);
             SetSecondaryColor(SecondaryColor);
+            SetBackgroundColor(BackgroundColor);
         }
 
         private static void SetPrimaryColor(string PrimaryColor)
@@ -143,6 +118,35 @@ namespace BootVerhuurWpf
             }
             catch (SqlException e)
             {
+              MessageBox.Show(e.ToString());
+            }
+        }
+
+        private static void SetBackgroundColor(string BackgroundColor)
+        {
+            try
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "127.0.0.1";
+                builder.UserID = "SA";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "BootVerhuur";
+                SqlConnection connection = new SqlConnection(builder.ConnectionString);
+                using (connection)
+                {
+                    //SQL query
+                    String sql = $"UPDATE appSettings SET background_color ='{BackgroundColor}'";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
                 System.Windows.MessageBox.Show(e.ToString());
             }
         }
@@ -164,7 +168,7 @@ namespace BootVerhuurWpf
                 using (connection)
                 {
                     //SQL quary
-                    String sql = "SELECT primary_color, secondary_color FROM appSettings";
+                    String sql = "SELECT primary_color, secondary_color, background_color FROM appSettings";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -173,7 +177,7 @@ namespace BootVerhuurWpf
                         {
                             while (reader.Read())
                             {
-                                 color = new string[] { reader.GetString(0), reader.GetString(1)};
+                                 color = new string[] { reader.GetString(0), reader.GetString(1), reader.GetString(2)};
                             }
                         }
                         connection.Close();
@@ -185,8 +189,22 @@ namespace BootVerhuurWpf
             {
                MessageBox.Show(e.ToString());
             }
-
             return color;
+        }
+
+        private void Open_AdminPanel(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AccidentReport(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

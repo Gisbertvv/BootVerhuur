@@ -173,6 +173,21 @@ namespace BootVerhuurWpf
         {
             Close();
         }
+
+        private void AccidentReport(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Open_AdminPanel(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 
