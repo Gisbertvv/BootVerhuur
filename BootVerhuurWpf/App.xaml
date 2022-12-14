@@ -10,7 +10,8 @@
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="10"
                                 Background="DarkGray"
-                                BorderThickness="1">
+                                BorderThickness="1"
+                                Padding="10">
                             <ContentPresenter
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"

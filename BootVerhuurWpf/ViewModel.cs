@@ -29,7 +29,7 @@ namespace BootVerhuurWpf
         public ViewModel()
         {
             //docStream = new FileStream(@"C:\Users\Damian\Downloads\schadeformulier-rv-naarden.pdf",FileMode.OpenOrCreate);
-            docStream = new FileStream(@"C:\Users\gisbe\Downloads\schadeformulier-rv-naarden.pdf", FileMode.OpenOrCreate);
+            docStream = new FileStream(@"C:\Users\Damian\Downloads\schadeformulier-rv-naarden-1.pdf", FileMode.OpenOrCreate);
         }
     }
 }
