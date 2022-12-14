@@ -87,12 +87,11 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private void Open_BookBoat(object sender, RoutedEventArgs e)
+        private void reserve(object sender, RoutedEventArgs e)
         {
             Temp tp = new Temp();
             tp.Show();
             Close();
         }
-
     }
 }

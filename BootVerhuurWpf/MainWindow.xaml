@@ -21,7 +21,7 @@
             <Button x:Name="btn5" Content="Aanmaken"
                     Click="Open_Click" ClickMode="Press"/>
             <Button x:Name="btn1" Content="Reseveren"
-                    ClickMode="Press"/>
+                    ClickMode="Press"  Click="reserve"/>
             <Button x:Name="btn2" Content="Schademelden"
                     Click="AccidentReport" ClickMode="Press"/>
             <Button x:Name="btn3" Content="Routes"
