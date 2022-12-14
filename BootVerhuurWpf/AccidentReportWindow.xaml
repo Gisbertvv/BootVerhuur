@@ -227,7 +227,7 @@
                 <TextBox x:Name="Location" />
                 <Label Content="Datum"/>
                 <TextBox x:Name="Date"/>
-                <Button x:Name="btn" Content="Opslaan" HorizontalAlignment="Right" Margin="10,10" Width="150" Click="createAccidentReport"/>
+                <Button Content="Bevestigen" Click="SaveForm"/>
             </StackPanel>
         </Grid>
     </ScrollViewer>

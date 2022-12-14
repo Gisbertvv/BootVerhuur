@@ -161,6 +161,7 @@ namespace BootVerhuurWpf
 
                 result = MessageBox.Show(messageBoxText, caption, button, icon);
             }
+        }
 
             
         }
@@ -175,4 +176,4 @@ namespace BootVerhuurWpf
             Close();
         }
     }
-}
+

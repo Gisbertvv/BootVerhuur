@@ -1,6 +1,7 @@
 ﻿using BoldReports.RDL.DOM;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
@@ -25,6 +26,7 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class AdminPanel : Window
     {
+        private static SqlConnection _builder;
         public AdminPanel()
         {
             InitializeComponent();
@@ -45,10 +47,107 @@ namespace BootVerhuurWpf
 
         private void AdminPanelInfo(object sender, RoutedEventArgs e)
         {
+            if (PrimaryColor != null && SecondaryColor != null)
+            {
+                SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString());
+            }
+            else if (SecondaryColor != null)
+            {
+                SetPrimaryColor(PrimaryColor.Color.ToString());
+            }
+            else if (PrimaryColor != null)
+            {
+                SetSecondaryColor(SecondaryColor.Color.ToString());
+            }
+        }
 
+        public static void SetThemeColors(string PrimaryColor, string SecondaryColor)
+        {
+            SetPrimaryColor(PrimaryColor);
+            SetSecondaryColor(SecondaryColor);
+        }
 
-            Xceed.Wpf.Toolkit.MessageBox.Show(PrimaryColor.Color.ToString());
-            Xceed.Wpf.Toolkit.MessageBox.Show(SecondaryColor.Color.ToString());
+        private static void SetPrimaryColor(string PrimaryColor)
+        {
+            try
+            {
+                SqlConnection connection = new SqlConnection(_builder.ConnectionString);
+                using (connection)
+                {
+                    //SQL quary
+                    String sql = "UPDATE primary_color from appSettings";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            /*while (reader.Read())
+                            {
+                                if (username.Equals(reader.GetString(0)))
+                                {
+                                    connection.Close();
+                                    return true;
+                                }
+
+                                if (email.Equals(reader.GetString(1)))
+                                {
+                                    connection.Close();
+                                    return true;
+                                }
+                            }*/
+                        }
+
+                        connection.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+            }
+        }
+
+        private static void SetSecondaryColor(string SecondaryColor)
+        {
+            try
+            {
+                SqlConnection connection = new SqlConnection(_builder.ConnectionString);
+                using (connection)
+                {
+                    //SQL quary
+                    String sql = "UPDATE secondary_color from appSettings";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            reader.
+                            /*while (reader.Read())
+                            {
+                                if (username.Equals(reader.GetString(0)))
+                                {
+                                    connection.Close();
+                                    return true;
+                                }
+
+                                if (email.Equals(reader.GetString(1)))
+                                {
+                                    connection.Close();
+                                    return true;
+                                }
+                            }*/
+                        }
+
+                        connection.Close();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                System.Windows.MessageBox.Show(e.ToString());
+            }
         }
     }
 }
