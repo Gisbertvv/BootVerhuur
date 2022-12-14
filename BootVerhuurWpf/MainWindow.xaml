@@ -5,43 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="auto" Width="800">
-    <Grid Width="800" Height="400">
+        Title="MainWindow"
+        WindowState="Maximized">
+    <Border Background="#d4f1f9">
+    <Grid x:Name="gridje" Width="auto" Height="auto">
+        <Grid.Background>
+            <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/test1.png"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
-
-        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="auto" VerticalAlignment="Top">
+        <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
             <Button x:Name="btn0" Content="Admin Panel"
-                    Click="Open_AdminPanel" ClickMode="Press"
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
+                    Click="Open_AdminPanel" ClickMode="Press"/>
             <Button x:Name="btn5" Content="Aanmaken"
-                    Click="Open_Click" ClickMode="Press"
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
+                    Click="Open_Click" ClickMode="Press"/>
             <Button x:Name="btn1" Content="Reseveren"
-                    ClickMode="Press"
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"
-                    Foreground="Green"/>
+                    ClickMode="Press"/>
             <Button x:Name="btn2" Content="Schademelden"
-                    Click="AccidentReport" ClickMode="Press"
-                    Width="130" 
-                    Margin="10,5"
-                    Foreground="Blue"/>
-
+                    Click="AccidentReport" ClickMode="Press"/>
             <Button x:Name="btn3" Content="Routes"
-                    ClickMode="Press"
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"/>
-
+                    ClickMode="Press"/>
             <Button x:Name="btn4" Content="Uitloggen"
-                    Click="Logout"
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
+                    Click="Logout"/>
         </StackPanel>
-        <Image Grid.Column="1" Margin="10,10,34,10" Source="/Images/roeienpng.png" Stretch="Fill"/>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Panel.ZIndex="1">
+            <Image Source="/Images/roeienpng.png" Width="300" />
+        </StackPanel>
+
     </Grid>
+    </Border>
 </Window>

@@ -9,8 +9,7 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="BootVerhuurWpf.AdminPanel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid HorizontalAlignment="Center" Width="800" Height="434" VerticalAlignment="Top" Margin="0,16,0,0">
-
+    <Grid x:Name="gridje" Background="Black" HorizontalAlignment="Center" Width="800" Height="434" VerticalAlignment="Top" Margin="0,16,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="*"/>
@@ -46,7 +45,7 @@
             <Button x:Name="btn5" Content="Terug" Margin=" 10,5" Click="Back_Click"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="193" Width="366">
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="300" Width="366">
             <Label FontSize="20px">Applicatie kleur instellingen</Label>
             <Label Content="Primaire kleur"/>
             <syncfusion:ColorPicker Name="PrimaryColor" Brush="Blue"/>
