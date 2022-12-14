@@ -25,6 +25,17 @@ namespace BootVerhuurWpf
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            if (Login.role == "admin" || Login.role == "Admin")
+            {
+                btn5.Visibility = Visibility.Visible;
+                btn0.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btn5.Visibility = Visibility.Hidden;
+                btn0.Visibility = Visibility.Hidden;
+            }
+
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
