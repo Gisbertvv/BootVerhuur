@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -18,7 +18,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
-using Color = System.Drawing.Color;
 using MessageBox = System.Windows.MessageBox;
 using WindowStartupLocation = System.Windows.WindowStartupLocation;
 
@@ -30,11 +29,16 @@ namespace BootVerhuurWpf
     public partial class AdminPanel : Window
     {
         private static SqlConnection _builder;
+       
 
+      
         public AdminPanel()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            Color color = (Color)ColorConverter.ConvertFromString(GetColors()[0]);
+            SolidColorBrush solidColorBrush = new SolidColorBrush(color);
+            gridje.Background = solidColorBrush;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -74,6 +78,8 @@ namespace BootVerhuurWpf
             {
                 SetSecondaryColor(SecondaryColor.Color.ToString());
             }
+          
+
         }
 
         public static void SetThemeColors(string PrimaryColor, string SecondaryColor)
@@ -87,7 +93,7 @@ namespace BootVerhuurWpf
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "localhost";
+                builder.DataSource = "127.0.0.1";
                 builder.UserID = "SA";
                 builder.Password = "Havermout1325";
                 builder.InitialCatalog = "BootVerhuur";
@@ -117,7 +123,7 @@ namespace BootVerhuurWpf
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "localhost";
+                builder.DataSource = "127.0.0.1";
                 builder.UserID = "SA";
                 builder.Password = "Havermout1325";
                 builder.InitialCatalog = "BootVerhuur";
@@ -148,7 +154,7 @@ namespace BootVerhuurWpf
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "localhost";
+                builder.DataSource = "127.0.0.1";
                 builder.UserID = "SA";
                 builder.Password = "Havermout1325";
                 builder.InitialCatalog = "BootVerhuur";
@@ -177,7 +183,7 @@ namespace BootVerhuurWpf
 
             catch (SqlException e)
             {
-                System.Windows.MessageBox.Show(e.ToString());
+               MessageBox.Show(e.ToString());
             }
 
             return color;

@@ -8,7 +8,7 @@
         Title="MainWindow"
         WindowState="Maximized">
     <Border Background="#d4f1f9">
-    <Grid Width="auto" Height="auto">
+    <Grid x:Name="gridje" Width="auto" Height="auto">
         <Grid.Background>
             <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/test1.png"/>
         </Grid.Background>

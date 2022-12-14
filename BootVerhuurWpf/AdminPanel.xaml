@@ -9,7 +9,7 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="BootVerhuurWpf.AdminPanel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid HorizontalAlignment="Center" Width="800" Height="434" VerticalAlignment="Top" Margin="0,16,0,0">
+    <Grid x:Name="gridje" Background="Black" HorizontalAlignment="Center" Width="800" Height="434" VerticalAlignment="Top" Margin="0,16,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="*"/>
