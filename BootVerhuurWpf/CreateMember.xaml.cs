@@ -167,6 +167,7 @@ namespace BootVerhuurWpf
         {
             mainWindow.Show();
             Close();         
+            mainWindow.UpdateLayout();
         }
         private void Logout(object sender, RoutedEventArgs e)
         {

@@ -141,8 +141,8 @@ namespace BootVerhuurWpf
                 {
                     String sql = "INSERT INTO member " +
                                  "(first_name, last_name, phone_number, email, boating_level, role, username, password)" +
-                                 "VALUES ('" + "X" + "' , '" +
-                                 "X" + "', '" + "X" + "', '" + txtEmail.Text + "', '" + "X" + "', '" + "X" + "', '" +
+                                 "VALUES ('" + null + "' , '" +
+                                 null + "', '" + null + "', '" + txtEmail.Text + "', '" + null + "', '" + null + "', '" +
                                  txtGebruikersnaam.Text + "', '" + txtWachtwoord.Password + "')";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {

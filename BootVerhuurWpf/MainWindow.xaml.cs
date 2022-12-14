@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace BootVerhuurWpf
 {
@@ -35,6 +36,8 @@ namespace BootVerhuurWpf
                 btn5.Visibility = Visibility.Hidden;
                 btn0.Visibility = Visibility.Hidden;
             }
+
+            
 
         }
 
