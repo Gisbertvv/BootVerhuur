@@ -82,11 +82,6 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private void Logout(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void Open_BookBoat(object sender, RoutedEventArgs e)
         {
             Temp tp = new Temp();

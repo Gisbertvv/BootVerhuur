@@ -37,8 +37,4 @@
     <Resource Include="Images\test.png" />
     <Resource Include="Images\test1.png" />
   </ItemGroup>
-
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-  </ItemGroup>
-
 </Project>
