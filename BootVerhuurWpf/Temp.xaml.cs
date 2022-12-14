@@ -38,8 +38,8 @@ namespace BootVerhuurWpf
         private void showboats()
         {
             List<Boat> boats = new List<Boat>();
-            int id = 0;
-            while (boats.Count < 6)
+            int id = 1;
+            while (boats.Count < 30)
             {
                 Checkeverything(id);
                 boats.Add(new Boat(id, aantalp, stir, bootniveau,status));
@@ -89,7 +89,7 @@ namespace BootVerhuurWpf
 
             int i = Boats.SelectedIndex;
 
-            BookBoat bk = new BookBoat(i);
+            BookBoats bk = new BookBoats(i);
             bk.Show();
             Close();
         }

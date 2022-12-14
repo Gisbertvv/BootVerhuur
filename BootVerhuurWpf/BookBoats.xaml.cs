@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +11,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Windows.Media.Playback;
+using System.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BootVerhuurWpf
 {
     /// <summary>
     /// Interaction logic for BookBoat.xaml
     /// </summary>
-    public partial class BookBoat : Window
+    public partial class BookBoats : Window
     {
         public int aantalp;
         public string bootniveau;
@@ -29,37 +29,22 @@ namespace BootVerhuurWpf
         string status;
         string reservationendtime;
 
-        public BookBoat(int id)
-        { 
+        List<string> begintimes = new List<string>();
+        List<string> endtimes = new List<string>();
+
+        public BookBoats(int id)
+        {
             Id = id;
             InitializeComponent();
             AdjustCalender();
-            AdjustTimeBox();
-            Checkeverything(Id);          
-        }
-        /// <summary>
-        /// maybe change to get availeble time from database, or set time each 2 hours
-        /// </summary>
-        private void AdjustTimeBox()
-        {
-            int timecount =0;
-            Gekozentijd.Items.Add($"0{timecount}:00");
-            timecount = timecount + 2;
-            Gekozentijd.Items.Add($"0{timecount}:00");
-            timecount += 2;
-            Gekozentijd.Items.Add($"0{timecount}:00");
-            timecount += 2;
-            Gekozentijd.Items.Add($"0{timecount}:00");
-            timecount += 2;
-            Gekozentijd.Items.Add($"0{timecount}:00");
+            Checkeverything(Id);
         }
 
-        
-       /// <summary>
-       /// if role is Lid
-       /// </summary>
+        /// <summary>
+        /// if role is Lid
+        /// </summary>
         private void AdjustCalender()
-        {
+        {            
             DP.DisplayDateStart = DateTime.Now;
             DateTime plusone = DateTime.Now.AddDays(1);
             DateTime plustwo = DateTime.Now.AddDays(2);
@@ -130,7 +115,7 @@ namespace BootVerhuurWpf
 
         private void AantalPersonen(object sender, RoutedEventArgs e)
         {
- 
+
             var label = sender as Label;
             label.Content = $"Aantal Personen : {aantalp}";
         }
@@ -149,7 +134,7 @@ namespace BootVerhuurWpf
 
         private void AvailibleFrom(object sender, RoutedEventArgs e)
         {
-            //get time from database
+            //get date from database
         }
         public void Getendtime(string rs)
         {
@@ -166,21 +151,22 @@ namespace BootVerhuurWpf
                 val = int.Parse(str2);
 
             }
-             val += 0200;
 
-            StringBuilder sb= new StringBuilder(val.ToString());
+            val += 0200;
+
+            StringBuilder sb = new StringBuilder(val.ToString());
             if (sb.Length == 4)
             {
                 sb.Insert(2, ":");
             }
             else
             {
-                sb.Insert(0, "0");
-                sb.Insert(2, ":");
+                sb.Insert(1, ":");
             }
+
             reservationendtime = sb.ToString();
         }
-    
+
         public void InsertReservation(string reservationdate, string reservationtime)
         {
             MessageBoxResult result;
@@ -188,7 +174,7 @@ namespace BootVerhuurWpf
             Getendtime(reservationtime);
             try
             {
-                
+
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                 builder.DataSource = "127.0.0.1";
                 builder.UserID = "SA";
@@ -266,7 +252,7 @@ namespace BootVerhuurWpf
                         {
                             while (reader.Read())
                             {
-                               aantalp = reader.GetInt32(1);
+                                aantalp = reader.GetInt32(1);
                                 bootniveau = reader.GetString(2);
                                 stir = reader.GetBoolean(3);
                                 status = reader.GetString(4);
@@ -288,5 +274,164 @@ namespace BootVerhuurWpf
             tp.Show();
             Close();
         }
+
+        private void Getreservationtimes(int id, string reservationdate)
+        {
+            try
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "127.0.0.1";
+                builder.UserID = "SA";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "Bootverhuur";
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    String sql = $"SELECT * FROM reservation where boat_id = {id} AND reservationDate = '{reservationdate}' ";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                begintimes.Add(reader.GetString(3));
+                                endtimes.Add(reader.GetString(4));
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            Console.ReadLine();
+        }
+      
+        private void AdjustTimeBox()
+        {
+            Getreservationtimes(Id, DP.SelectedDate.Value.ToShortDateString());
+            int hours = 6;
+            int minutes = 30;
+            /*           Gekozentijd.Items.Add($"{hours}:00");
+                       minutes += 30;*/
+            while (hours != 17)
+            {
+                if (minutes == 60)
+                {
+                    hours += 1;
+                    minutes = 0;
+                    Gekozentijd.Items.Add($"{hours}:00");
+                }
+                else
+                {
+                    Gekozentijd.Items.Add($"{hours}:{minutes}");
+                }
+                minutes += 30;
+            }
+            hours = 0;
+            minutes = 0;
+
+
+
+            int i = 0;
+            int j = 0;
+            string h = string.Empty;
+            string m = string.Empty;
+            string check = string.Empty;
+            while (begintimes.Count > 0)
+            {
+                string[] times = begintimes.First().Split(':');
+                List<string> list = new List<string>(times);
+                h = list[0];
+                m = list[1];
+                list.RemoveAt(0);
+                list.RemoveAt(0);
+                /*                foreach (char ch in begintimes[j])
+                                {
+                                    if (ch.Equals(':'))
+                                    {
+                                        if (i == 1)
+                                        {
+                                            i += 1;
+                                        }
+                                        else
+                                        {
+                                            i += 2;
+                                        }                  
+                                    }
+
+                                    else if (i == 0 || i == 1)
+                                    {
+                                         h += ch;
+                                        i += 1;
+                                    }
+                                    else if (i == 2 || i == 3)
+                                    {
+                                        m += ch;
+                                        i += 1;
+                                    }
+
+                                }*/
+                hours = Int32.Parse(h);
+                minutes = Int32.Parse(m);
+
+                Gekozentijd.Items.Remove($"{hours}:{minutes}0");
+                
+                while (!check.Equals(endtimes.First()))
+                {
+                    if (minutes.ToString().EndsWith("60"))
+                    {
+
+                        minutes = 0;
+                        hours += 1;
+                        Gekozentijd.Items.Remove($"{hours}:00");
+                        check = $"{hours}:00";
+                    }
+                    else if (minutes.ToString().EndsWith("30"))
+                    {
+                        Gekozentijd.Items.Remove($"{hours}:{minutes}");
+                        check = $"{hours}:{minutes}";
+                        minutes += 30;
+
+
+
+                    }
+                    else if (minutes.ToString().EndsWith("0"))
+                    {
+                        minutes += 30;
+                        Gekozentijd.Items.Remove($"{hours}:{minutes}");
+                        check = $"{hours}:{minutes}";
+                    }
+
+
+                    if (hours.ToString().Length == 1 && minutes.ToString().Length == 1)
+                    {
+                        check = $"0{hours}:{minutes}0";
+                    }
+                    else if(hours.ToString().Length == 1 && minutes.ToString().Length == 2)
+                    {
+                        check = $"0{hours}:{minutes}";
+                    }
+                    else if (minutes.ToString().Length == 1 && hours.ToString().Length == 2)
+                    {
+                        check = $"{hours}:{minutes}0";
+                    }
+
+
+                }
+                begintimes.Remove(begintimes.First());
+                endtimes.Remove(endtimes.First());
+            }
+        }
+        private void SelectionDatechanged(object sender, SelectionChangedEventArgs e)
+        {          
+            AdjustTimeBox();
+        }
+
+
     }
 }
+
