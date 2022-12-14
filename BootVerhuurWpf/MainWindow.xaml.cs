@@ -16,12 +16,13 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 
 namespace BootVerhuurWpf
-{
+{  
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    { 
+        //BookBoat bookBoat = new BookBoat();
         public MainWindow()
         {
             InitializeComponent();
@@ -80,5 +81,18 @@ namespace BootVerhuurWpf
             window.Show();
             Close();
         }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Open_BookBoat(object sender, RoutedEventArgs e)
+        {
+            Temp tp = new Temp();
+            tp.Show();
+            Close();
+        }
+
     }
 }

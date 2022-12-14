@@ -1,0 +1,42 @@
+﻿<Window x:Class="BootVerhuurWpf.Temp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BootVerhuurWpf"
+        mc:Ignorable="d"
+          Title="Temp" Height="450" Width="800">
+    <Grid HorizontalAlignment="Left" Width="800" Height="434" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
+            <Button x:Name="btn1" Content="Reseveren"
+                    Margin="10, 5" Width="130"
+                    HorizontalAlignment="Center"
+                    Foreground="Green"/>
+            <Button x:Name="btn2" Content="Schademelden"
+
+                    Width="130" 
+                    Margin="10,5"
+                    Foreground="Blue"/>
+
+            <Button x:Name="btn3" Content="Routes"
+
+                    Margin="10, 5" Width="130"
+                    HorizontalAlignment="Center"/>
+
+            <Button x:Name="btn4" Content="Uitloggen"
+
+                    Margin="10,5" Width="130"
+                    HorizontalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+
+            <DataGrid Name="Boats" Height="300" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="selectedboat"/>
+        </StackPanel>
+    </Grid>
+</Window>

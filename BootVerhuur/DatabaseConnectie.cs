@@ -9,43 +9,34 @@ namespace BootVerhuur
 {
     public class DatabaseConnectie
     {
-        static void Main(string[] args)
+        public SqlConnection Connection { get; set; }
+        public void OpenConnnection()
         {
 
-			try
-			{
-			SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-				builder.DataSource = "localhost";
-				builder.UserID = "SA";
-				builder.Password = "Havermout1325";
-				builder.InitialCatalog = "TestDB";
+            try
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "127.0.0.1";
+                builder.UserID = "SA";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "BootVerhuur";
+                SqlConnection connection = new(builder.ConnectionString);
+                Connection = connection;
+                Connection.Open();
 
-				using(SqlConnection connection = new SqlConnection(builder.ConnectionString))
-				{
-					Console.WriteLine("\n Query data example:");
-					Console.WriteLine("==============================\n");
+            }
+            catch (SqlException e)
+            {
 
-					String sql = "SELECT * FROM Inventory";
-					using(SqlCommand command = new SqlCommand(sql, connection))
-					{
-						connection.Open();
-						using(SqlDataReader reader = command.ExecuteReader())
-						{
-							while (reader.Read())
-							{
-								Console.WriteLine("{0} {1} {2}", reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
-							}
-						}
-					}
-					
-				}
-			}
-			catch (SqlException e)
-			{
-
-				Console.WriteLine(e.ToString());
-			}
-			Console.ReadLine();
+                Console.WriteLine(e.ToString());
+            }
         }
+/*        public void SSH()
+        {
+            using var ps = PowerShell.Create();
+            ps.AddScript("ssh -L 1433:localhost:1433 student@145.44.233.236").Invoke();
+
+        }*/
     }
 }
+
