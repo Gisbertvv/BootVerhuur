@@ -1,11 +1,14 @@
-﻿<Window x:Class="BootVerhuurWpf.MainWindow"
+<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas/xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:BootVerhuurWpf"
+        xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="BootVerhuurWpf.AdminPanel"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="Admin panel" 
         WindowState="Maximized">
     <Grid x:Name="gridje" Width="auto" Height="auto">
         <Grid.Background>
@@ -21,7 +24,7 @@
             <Button x:Name="btn5" Content="Aanmaken"
                     Click="Open_Click" ClickMode="Press"/>
             <Button x:Name="btn1" Content="Reseveren"
-                    ClickMode="Press"  Click="reserve"/>
+                    ClickMode="Press"/>
             <Button x:Name="btn2" Content="Schademelden"
                     Click="AccidentReport" ClickMode="Press"/>
             <Button x:Name="btn3" Content="Routes"
@@ -29,8 +32,17 @@
             <Button x:Name="btn4" Content="Uitloggen"
                     Click="Logout"/>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Panel.ZIndex="1">
-            <Image Source="/Images/roeienpng.png" Width="300" />
+        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Panel.ZIndex="1">
+            <Label>Applicatie kleur instellingen</Label>
+            <Label Content="Primaire kleur"/>
+            <syncfusion:ColorPicker Name="PrimaryColor" Brush="Blue"/>
+            <Label Content="Secundaire kleur"/>
+            <syncfusion:ColorPicker Name="SecondaryColor" Brush="Green"/>
+            <Label Content="Achtergrond kleur"/>
+            <syncfusion:ColorPicker Name="BackgroundColor" Brush="LightBlue"/>
+            <Button x:Name="btn" Content="Kleuren opslaan" HorizontalAlignment="Right" Margin="10,10" Click="AdminPanelInfo"/>
         </StackPanel>
+        <!--<Image Source="/Images/roeienpng.png" Width="300" />-->
     </Grid>
 </Window>

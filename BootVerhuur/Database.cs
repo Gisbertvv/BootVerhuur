@@ -1,15 +1,16 @@
-﻿using System;
+﻿//using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BootVerhuur
 {
     internal class Database
     {
-        
         public void test()
         {
             try
@@ -18,14 +19,14 @@ namespace BootVerhuur
                 builder.DataSource = "127.0.0.1";
                 builder.UserID = "SA";
                 builder.Password = "Havermout1325";
-                builder.InitialCatalog = "TestDB";
+                builder.InitialCatalog = "bootverhuur";
 
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     Console.WriteLine("\n Query data example:");
                     Console.WriteLine("==============================\n");
 
-                    String sql = "SELECT * FROM Inventory";
+                    String sql = "SELECT * FROM boat";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
@@ -33,11 +34,10 @@ namespace BootVerhuur
                         {
                             while (reader.Read())
                             {
-                                Console.WriteLine("{0} {1} {2}", reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
+                                Console.WriteLine("{0} {1} {2} {3}", reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2) , reader.GetBoolean(3));
                             }
                         }
                     }
-
                 }
             }
             catch (SqlException e)
@@ -45,7 +45,7 @@ namespace BootVerhuur
 
                 Console.WriteLine(e.ToString());
             }
-            Console.ReadLine(); 
+            Console.ReadLine();
         }
 
         public void standardQeury(SqlConnection connection)
@@ -64,5 +64,6 @@ namespace BootVerhuur
                 }
             }
         }
+
     }
 }
