@@ -88,6 +88,7 @@ namespace BootVerhuurWpf
         {
 
             int i = Boats.SelectedIndex;
+            i++;
 
             BookBoats bk = new BookBoats(i);
             bk.Show();

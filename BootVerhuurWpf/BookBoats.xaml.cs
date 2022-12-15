@@ -37,6 +37,7 @@ namespace BootVerhuurWpf
             Id = id;
             InitializeComponent();
             AdjustCalender();
+            SetTimeBox();
             Checkeverything(Id);
         }
 
@@ -197,6 +198,8 @@ namespace BootVerhuurWpf
             {
                 Console.WriteLine(e.ToString());
             }
+
+            AdjustTimeBox();
         }
         public void GetReservationID()
         {
@@ -309,13 +312,12 @@ namespace BootVerhuurWpf
             }
             Console.ReadLine();
         }
-      
-        private void AdjustTimeBox()
+        int hours = 6;
+        int minutes = 30;
+        private void SetTimeBox()
         {
-            Getreservationtimes(Id, DP.SelectedDate.Value.ToShortDateString());
-            int hours = 6;
-            int minutes = 30;
-            /*           Gekozentijd.Items.Add($"{hours}:00");
+     
+            /*         Gekozentijd.Items.Add($"{hours}:00");
                        minutes += 30;*/
             while (hours != 17)
             {
@@ -333,8 +335,10 @@ namespace BootVerhuurWpf
             }
             hours = 0;
             minutes = 0;
-
-
+        }
+        private void AdjustTimeBox()
+        {
+            Getreservationtimes(Id, DP.SelectedDate.Value.ToShortDateString());
 
             int i = 0;
             int j = 0;
@@ -349,32 +353,7 @@ namespace BootVerhuurWpf
                 m = list[1];
                 list.RemoveAt(0);
                 list.RemoveAt(0);
-                /*                foreach (char ch in begintimes[j])
-                                {
-                                    if (ch.Equals(':'))
-                                    {
-                                        if (i == 1)
-                                        {
-                                            i += 1;
-                                        }
-                                        else
-                                        {
-                                            i += 2;
-                                        }                  
-                                    }
 
-                                    else if (i == 0 || i == 1)
-                                    {
-                                         h += ch;
-                                        i += 1;
-                                    }
-                                    else if (i == 2 || i == 3)
-                                    {
-                                        m += ch;
-                                        i += 1;
-                                    }
-
-                                }*/
                 hours = Int32.Parse(h);
                 minutes = Int32.Parse(m);
 
@@ -384,7 +363,6 @@ namespace BootVerhuurWpf
                 {
                     if (minutes.ToString().EndsWith("60"))
                     {
-
                         minutes = 0;
                         hours += 1;
                         Gekozentijd.Items.Remove($"{hours}:00");
@@ -394,27 +372,27 @@ namespace BootVerhuurWpf
                     {
                         Gekozentijd.Items.Remove($"{hours}:{minutes}");
                         check = $"{hours}:{minutes}";
-                        minutes += 30;
-
-
-
+                        // minutes += 30;
+                        minutes = 0;
+                        hours += 1;
+                        
                     }
                     else if (minutes.ToString().EndsWith("0"))
                     {
+                        
+                        Gekozentijd.Items.Remove($"{hours}:{minutes}0");
                         minutes += 30;
-                        Gekozentijd.Items.Remove($"{hours}:{minutes}");
                         check = $"{hours}:{minutes}";
+                       
                     }
-
-
                     if (hours.ToString().Length == 1 && minutes.ToString().Length == 1)
                     {
-                        check = $"0{hours}:{minutes}0";
+                        check = $"{hours}:{minutes}0";
                     }
-                    else if(hours.ToString().Length == 1 && minutes.ToString().Length == 2)
+/*                    else if(hours.ToString().Length == 1 && minutes.ToString().Length == 2)
                     {
-                        check = $"0{hours}:{minutes}";
-                    }
+                       */ //check = $"0{hours}:{minutes}";
+                    //}
                     else if (minutes.ToString().Length == 1 && hours.ToString().Length == 2)
                     {
                         check = $"{hours}:{minutes}0";
@@ -422,8 +400,14 @@ namespace BootVerhuurWpf
 
 
                 }
+                Gekozentijd.Items.Remove($"{hours}:{minutes}0");
+                Gekozentijd.Items.Remove($"{hours}:{minutes}");
                 begintimes.Remove(begintimes.First());
                 endtimes.Remove(endtimes.First());
+                if(endtimes.Count == 0)
+                {
+                    break;
+                }
             }
         }
         private void SelectionDatechanged(object sender, SelectionChangedEventArgs e)
