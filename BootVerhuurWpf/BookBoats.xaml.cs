@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
+using Syncfusion.DocIO.DLS;
 
 namespace BootVerhuurWpf
 {
@@ -28,6 +29,12 @@ namespace BootVerhuurWpf
         int reservationId;
         string status;
         string reservationendtime;
+        string date1;
+        string date2;
+        string selecteddate;
+        string timenow = DateTime.Now.ToShortTimeString();
+        string timeplus24 = DateTime.Now.AddHours(24).ToShortTimeString();
+        static int memberId = Int32.Parse(Login.id);
 
         List<string> begintimes = new List<string>();
         List<string> endtimes = new List<string>();
@@ -37,12 +44,14 @@ namespace BootVerhuurWpf
             Id = id;
             InitializeComponent();
             AdjustCalender();
-            SetTimeBox();
+
             Checkeverything(Id);
+
         }
+        
 
         /// <summary>
-        /// if role is Lid
+        /// if role is Lid only see two days ahead for reservation and no reservation for the weekend
         /// </summary>
         private void AdjustCalender()
         {            
@@ -55,35 +64,49 @@ namespace BootVerhuurWpf
             {
                 DP.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddDays(1), DateTime.Now.AddDays(2)));
                 DP.DisplayDateEnd = DateTime.Now.AddDays(3);
+                date1 = DateTime.Now.AddDays(3).ToShortDateString();
+                date2 = DateTime.Now.AddDays(4).ToShortDateString();
             }
             else if (plustwo.DayOfWeek == DayOfWeek.Saturday)
             {
                 DP.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddDays(2), DateTime.Now.AddDays(3)));
                 DP.DisplayDateEnd = DateTime.Now.AddDays(4);
+                date1 = DateTime.Now.AddDays(1).ToShortDateString();
+                date2 = DateTime.Now.AddDays(4).ToShortDateString();
             }
             else if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
             {
                 DP.BlackoutDates.Add(new CalendarDateRange(DateTime.Now, DateTime.Now.AddDays(1)));
                 DP.DisplayDateEnd = DateTime.Now.AddDays(2);
+                date1 = DateTime.Now.AddDays(2).ToShortDateString();
+                date2 = DateTime.Now.AddDays(3).ToShortDateString();
             }
             else if (plustwo.DayOfWeek == DayOfWeek.Sunday)
             {
                 DP.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddDays(1), DateTime.Now.AddDays(2)));
                 DP.DisplayDateEnd = DateTime.Now.AddDays(3);
+                date1 = DateTime.Now.AddDays(3).ToShortDateString();
+                date2 = DateTime.Now.AddDays(4).ToShortDateString();
             }
             else if (plusone.DayOfWeek == DayOfWeek.Sunday)
             {
                 DP.BlackoutDates.Add(new CalendarDateRange(DateTime.Now, DateTime.Now.AddDays(1)));
                 DP.DisplayDateEnd = DateTime.Now.AddDays(2);
+                date1 = DateTime.Now.AddDays(2).ToShortDateString();
+                date2 = DateTime.Now.AddDays(3).ToShortDateString();
             }
             else if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
             {
                 DP.BlackoutDates.Add(new CalendarDateRange(DateTime.Now, DateTime.Now.AddDays(-1)));
                 DP.DisplayDateEnd = DateTime.Now.AddDays(2);
+                date1 = DateTime.Now.AddDays(1).ToShortDateString();
+                date2 = DateTime.Now.AddDays(2).ToShortDateString();
             }
             else
             {
                 DP.DisplayDateEnd = DateTime.Now.AddDays(2);
+                date1 = DateTime.Now.AddDays(1).ToShortDateString();
+                date2 = DateTime.Now.AddDays(2).ToShortDateString();
             }
         }
 
@@ -94,7 +117,6 @@ namespace BootVerhuurWpf
 
         private void Book(object sender, RoutedEventArgs e)
         {
-            string selectedtime = string.Empty;
             if (DP.SelectedDate == null || string.IsNullOrEmpty(Gekozentijd.Text))
             {
                 MessageBox.Show("Vul een datum en een tijd in ");
@@ -102,7 +124,7 @@ namespace BootVerhuurWpf
             else
             {
 
-                string selecteddate = DP.SelectedDate.Value.ToShortDateString();
+                
                 InsertReservation(selecteddate, Gekozentijd.Text);
             }
         }
@@ -137,9 +159,14 @@ namespace BootVerhuurWpf
         {
             //get date from database
         }
+
+        /// <summary>
+        /// calculates the endtime from begintimes
+        /// </summary>
+        /// <param name="rs"></param>
         public void Getendtime(string rs)
         {
-
+            //get all the ints from the string
             string str2 = string.Empty;
             int val = 0;
             for (int i = 0; i < rs.Length; i++)
@@ -152,9 +179,10 @@ namespace BootVerhuurWpf
                 val = int.Parse(str2);
 
             }
-
+            //add 2 hours
             val += 0200;
 
+            //change back to string with : 
             StringBuilder sb = new StringBuilder(val.ToString());
             if (sb.Length == 4)
             {
@@ -167,15 +195,11 @@ namespace BootVerhuurWpf
 
             reservationendtime = sb.ToString();
         }
-
-        public void InsertReservation(string reservationdate, string reservationtime)
+        int reservationCount = 0;
+        public void GetMemberIdCountReservations(string reservationdate, string reservationdate2)
         {
-            MessageBoxResult result;
-            GetReservationID();
-            Getendtime(reservationtime);
             try
             {
-
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                 builder.DataSource = "127.0.0.1";
                 builder.UserID = "SA";
@@ -183,13 +207,61 @@ namespace BootVerhuurWpf
                 builder.InitialCatalog = "Bootverhuur";
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
-                    String sql = $"insert into reservation values ({reservationId}, {Id},'{reservationdate}' , '{reservationtime}', '{reservationendtime}', GetDate())";
+                    String sql = $"Select count(*) from reservation where member_id = {memberId} and reservationDate = '{reservationdate}' or reservationDate = '{reservationdate2}'";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            result = MessageBox.Show("Reservering is aangemaakt", "SUCCES");
+                            while (reader.Read())
+                            {
+                                reservationCount = reader.GetInt32(0);
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+        
+        public void InsertReservation(string reservationdate, string reservationtime)
+        {
+            try
+            {
+                    GetMemberIdCountReservations(date1, date2);
+                
+                if (reservationCount == 2)
+                {
+                    MessageBox.Show("Je kunt maximaal 2 reserveringen hebben");
+                }
+                else
+                {
+                    {
+                        GetReservationID();
+                        Getendtime(reservationtime);
+
+                        SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                        builder.DataSource = "127.0.0.1";
+                        builder.UserID = "SA";
+                        builder.Password = "Havermout1325";
+                        builder.InitialCatalog = "Bootverhuur";
+                        using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                        {
+                            String sql = $"insert into reservation values ({reservationId}, {Id},'{reservationdate}' , '{reservationtime}', '{reservationendtime}', GetDate(),{memberId})";
+                            using (SqlCommand command = new SqlCommand(sql, connection))
+                            {
+                                connection.Open();
+                                using (SqlDataReader reader = command.ExecuteReader())
+                                {
+                                    AdjustTimeBox();
+                                    MessageBox.Show("Reservering is aangemaakt", "SUCCES");
+                                    
+                                }
+                            }
                         }
                     }
                 }
@@ -199,7 +271,7 @@ namespace BootVerhuurWpf
                 Console.WriteLine(e.ToString());
             }
 
-            AdjustTimeBox();
+            
         }
         public void GetReservationID()
         {
@@ -278,6 +350,11 @@ namespace BootVerhuurWpf
             Close();
         }
 
+        /// <summary>
+        /// puts all the begin and end reservationtimes for a specific boatid and date in a list
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="reservationdate"></param>
         private void Getreservationtimes(int id, string reservationdate)
         {
             try
@@ -312,14 +389,96 @@ namespace BootVerhuurWpf
             }
             Console.ReadLine();
         }
+
+        string RoundMinutes(DateTime Input)
+        {
+            DateTime Output;
+            int Minute;
+
+            if ((Input.Minute <= 15) || ((Input.Minute > 30) && (Input.Minute <= 45)))
+                Minute = -1;
+            else
+                Minute = +1;
+
+            while ((Input.Minute != 0) && (Input.Minute != 30))
+                Input = Input.AddMinutes(Minute);
+
+            return Input.ToShortTimeString();
+        }
+        /// <summary>
+        /// delete all times before the 24 hour constraint
+        /// </summary>
+        public void minimumhoursreservation()
+        {
+            Gekozentijd.Items.Clear();
+            SetTimeBox();
+            string check2 = string.Empty;
+
+            while (!selecteddate.Equals(date2) && !RoundMinutes(DateTime.Now.AddHours(24)).Equals(check2))
+            {
+                if (minutes.ToString().Equals("0"))
+                {
+                    check2 = $"{hours}:{minutes}0";
+                    Gekozentijd.Items.Remove(check2);
+                    minutes += 30;
+                }
+                else if (minutes.ToString().Equals("30"))
+                {
+                    check2 = $"{hours}:{minutes}";
+                    Gekozentijd.Items.Remove(check2);
+                    hours += 1;
+                    minutes = 0;
+                }
+            }
+
+        }
+        int i = 0;
+         int j = 0;
+        /// <summary>
+        /// delete times before the reservationtime
+        /// </summary>
+        /// <param name="hour"></param>
+        /// <param name="minute"></param>
+        public void Removetimebefore(int hour, int minute)
+        {
+            int minus2 = hour - 2;
+
+            while (!$"{hour}:{minute}".Equals($"{minus2}:{minutes}"))
+            {
+                if (minute.ToString().Equals("0"))
+                {
+                    Gekozentijd.Items.Remove($"{hour}:{minute}0");
+                    minute = 30;
+                    hour = hour - 1;
+                }
+                else if (minute.ToString().Equals("30"))
+                {
+                    Gekozentijd.Items.Remove($"{hour}:{minute}");
+                    minute = minute- 30;
+                    //hour = hour - 1;
+                }                
+            }
+            if (minute.ToString().Equals("0"))
+            {
+                Gekozentijd.Items.Remove($"{hour}:{minute}0");
+            }
+            else
+            {
+                Gekozentijd.Items.Remove($"{hour}:{minute}");
+            }
+        }
+        //for the begin time
         int hours = 6;
-        int minutes = 30;
+        int minutes = 0;
         private void SetTimeBox()
         {
-     
-            /*         Gekozentijd.Items.Add($"{hours}:00");
-                       minutes += 30;*/
-            while (hours != 17)
+            if (minutes.ToString().EndsWith('0'))
+            {
+                Gekozentijd.Items.Add($"{hours}:00");
+                minutes += 30;
+            }
+            //17 is the endtime need to take 2 hours because cant row when dark.
+            while (hours != 18)
             {
                 if (minutes == 60)
                 {
@@ -336,12 +495,12 @@ namespace BootVerhuurWpf
             hours = 0;
             minutes = 0;
         }
+        /// <summary>
+        /// changes the timebox, deletes the reservationtimes out the database from the combobox
+        /// </summary>
         private void AdjustTimeBox()
         {
             Getreservationtimes(Id, DP.SelectedDate.Value.ToShortDateString());
-
-            int i = 0;
-            int j = 0;
             string h = string.Empty;
             string m = string.Empty;
             string check = string.Empty;
@@ -351,6 +510,9 @@ namespace BootVerhuurWpf
                 List<string> list = new List<string>(times);
                 h = list[0];
                 m = list[1];
+                i = Int32.Parse(h);
+                j = Int32.Parse(m);
+                Removetimebefore(i, j);
                 list.RemoveAt(0);
                 list.RemoveAt(0);
 
@@ -372,7 +534,6 @@ namespace BootVerhuurWpf
                     {
                         Gekozentijd.Items.Remove($"{hours}:{minutes}");
                         check = $"{hours}:{minutes}";
-                        // minutes += 30;
                         minutes = 0;
                         hours += 1;
                         
@@ -389,16 +550,10 @@ namespace BootVerhuurWpf
                     {
                         check = $"{hours}:{minutes}0";
                     }
-/*                    else if(hours.ToString().Length == 1 && minutes.ToString().Length == 2)
-                    {
-                       */ //check = $"0{hours}:{minutes}";
-                    //}
                     else if (minutes.ToString().Length == 1 && hours.ToString().Length == 2)
                     {
                         check = $"{hours}:{minutes}0";
                     }
-
-
                 }
                 Gekozentijd.Items.Remove($"{hours}:{minutes}0");
                 Gekozentijd.Items.Remove($"{hours}:{minutes}");
@@ -409,10 +564,15 @@ namespace BootVerhuurWpf
                     break;
                 }
             }
+            hours = 6;
+            minutes = 0;
         }
         private void SelectionDatechanged(object sender, SelectionChangedEventArgs e)
-        {          
+        {
+            selecteddate = DP.SelectedDate.Value.ToShortDateString();
+            minimumhoursreservation();
             AdjustTimeBox();
+            
         }
 
         private void AccidentReport(object sender, RoutedEventArgs e)
@@ -428,6 +588,13 @@ namespace BootVerhuurWpf
         private void Open_AdminPanel(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Backclick(object sender, RoutedEventArgs e)
+        {
+            Temp tp = new Temp();
+            tp.Show();
+            Close();
         }
     }
 }

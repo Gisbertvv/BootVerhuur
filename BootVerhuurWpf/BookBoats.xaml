@@ -29,6 +29,8 @@
                     ClickMode="Press"/>
             <Button x:Name="btn4" Content="Uitloggen"
                     Click="Logout"/>
+            <Button x:Name="Tback" Content="terug"
+                    Click="Backclick"/>
         </StackPanel>
 
 

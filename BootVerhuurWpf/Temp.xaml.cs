@@ -24,10 +24,10 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class Temp : Window
     {
+
         int aantalp;
         string bootniveau;
         bool stir;
-        int count;
         string status;
         public Temp()
         {
