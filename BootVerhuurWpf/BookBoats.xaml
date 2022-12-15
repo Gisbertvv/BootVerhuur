@@ -15,19 +15,12 @@
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-
         <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
-            <Button x:Name="btn0" Content="Admin Panel"
-                    Click="Open_AdminPanel" ClickMode="Press"/>
-            <Button x:Name="btn5" Content="Aanmaken"
-                    Click="Open_Click" ClickMode="Press"/>
-            <Button x:Name="btn1" Content="Reseveren"
-                    ClickMode="Press"/>
-            <Button x:Name="btn2" Content="Schademelden"
+            <Button x:Name="btn4" Content="Schademelden"
                     Click="AccidentReport" ClickMode="Press"/>
-            <Button x:Name="btn3" Content="Routes"
-                    ClickMode="Press"/>
-            <Button x:Name="btn4" Content="Uitloggen"
+            <Button x:Name="btn2" Content="Terug"
+                    Click="Back_Click" ClickMode="Press"/>
+            <Button x:Name="btn5" Content="Uitloggen"
                     Click="Logout"/>
         </StackPanel>
 

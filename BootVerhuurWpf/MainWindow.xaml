@@ -17,16 +17,16 @@
         </Grid.ColumnDefinitions>
         <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
             <Button x:Name="btn0" Content="Admin Panel"
-                    Click="Open_AdminPanel" ClickMode="Press"/>
-            <Button x:Name="btn5" Content="Aanmaken"
-                    Click="Open_Click" ClickMode="Press"/>
-            <Button x:Name="btn1" Content="Reseveren"
-                    ClickMode="Press"  Click="reserve"/>
-            <Button x:Name="btn2" Content="Schademelden"
+                    Click="OpenAdminPanel" ClickMode="Press"/>
+            <Button x:Name="btn1" Content="Aanmaken"
+                    Click="OpenCreateUserPanel" ClickMode="Press"/>
+            <Button x:Name="btn2" Content="Aanpassen"
+                    Click="OpenEditUserPanel" ClickMode="Press"/>
+            <Button x:Name="btn3" Content="Reseveren"
+                    ClickMode="Press" Click="OpenReservePanel"/>
+            <Button x:Name="btn4" Content="Schademelden"
                     Click="AccidentReport" ClickMode="Press"/>
-            <Button x:Name="btn3" Content="Routes"
-                    ClickMode="Press"/>
-            <Button x:Name="btn4" Content="Uitloggen"
+            <Button x:Name="btn5" Content="Uitloggen"
                     Click="Logout"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Panel.ZIndex="1">

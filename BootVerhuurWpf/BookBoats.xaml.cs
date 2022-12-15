@@ -85,12 +85,6 @@ namespace BootVerhuurWpf
                 DP.DisplayDateEnd = DateTime.Now.AddDays(2);
             }
         }
-
-        private void Logout(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void Book(object sender, RoutedEventArgs e)
         {
             string selectedtime = string.Empty;
@@ -433,17 +427,28 @@ namespace BootVerhuurWpf
 
         private void AccidentReport(object sender, RoutedEventArgs e)
         {
-
+            PDFWindow window = new PDFWindow();
+            window.Show();
         }
 
-        private void Open_Click(object sender, RoutedEventArgs e)
+        private void OpenReservePanel(object sender, RoutedEventArgs e)
         {
-
+            Temp tp = new Temp();
+            tp.Show();
+            Close();
+        }
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            Login window = new Login();
+            window.Show();
+            Close();
         }
 
-        private void Open_AdminPanel(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-
+            Temp tp = new Temp();
+            tp.Show();
+            Close();
         }
     }
 }

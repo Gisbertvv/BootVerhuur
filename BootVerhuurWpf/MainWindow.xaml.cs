@@ -34,52 +34,29 @@ namespace BootVerhuurWpf
 
             if (Login.role == "admin" || Login.role == "Admin")
             {
-                btn5.Visibility = Visibility.Visible;
                 btn0.Visibility = Visibility.Visible;
+                btn1.Visibility = Visibility.Visible;
+                btn2.Visibility = Visibility.Visible;
+                btn3.Visibility = Visibility.Hidden;
+                btn4.Visibility = Visibility.Hidden;
             }
             else
             {
-                btn5.Visibility = Visibility.Hidden;
                 btn0.Visibility = Visibility.Hidden;
+                btn1.Visibility = Visibility.Hidden;
+                btn2.Visibility = Visibility.Hidden;
+                btn3.Visibility = Visibility.Visible;
+                btn4.Visibility = Visibility.Visible;
             }
-
-            
-
-        }
-
-        private void Open_Click(object sender, RoutedEventArgs e)
-        {
-            Create popup = new Create();
-            popup.ShowDialog();
-            this.Close();
-        }
-
-        private void OpenA_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TogglePopupButton_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void AccidentReport(object sender, RoutedEventArgs e)
         {
             PDFWindow window = new PDFWindow();
-            //AccidentReportWindow window = new AccidentReportWindow();
-            //PdfWindow window = new PdfWindow();
-
             window.Show();
         }
 
-
-        private void Logout(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void Open_AdminPanel(object sender, RoutedEventArgs e)
+        private void OpenAdminPanel(object sender, RoutedEventArgs e)
         {
             AdminPanel window = new AdminPanel();
 
@@ -87,10 +64,29 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private void reserve(object sender, RoutedEventArgs e)
+
+        private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
+        {
+            Create popup = new Create();
+            popup.ShowDialog();
+            Close();
+        }
+
+        private void OpenEditUserPanel(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenReservePanel(object sender, RoutedEventArgs e)
         {
             Temp tp = new Temp();
             tp.Show();
+            Close();
+        }
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            Login window = new Login();
+            window.Show();
             Close();
         }
     }

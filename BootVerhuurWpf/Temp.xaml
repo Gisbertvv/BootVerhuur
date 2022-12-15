@@ -5,34 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-          Title="Temp" Height="450" Width="800">
-    <Grid HorizontalAlignment="Left" Width="800" Height="434" VerticalAlignment="Center">
+          Title="Temp" WindowState="Maximized">
+    <Grid  VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="8*"/>
 
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
-            <Button x:Name="btn1" Content="Reseveren"
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"
-                    Foreground="Green"/>
+        <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
+
             <Button x:Name="btn2" Content="Schademelden"
-
-                    Width="130" 
-                    Margin="10,5"
-                    Foreground="Blue"/>
-
-            <Button x:Name="btn3" Content="Routes"
-
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"/>
-
-            <Button x:Name="btn4" Content="Uitloggen"
-
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
+                    Click="AccidentReport" ClickMode="Press"/>
+            <Button x:Name="btn4" Content="Terug"
+                    Click="Back_Click" ClickMode="Press"/>
+            <Button x:Name="btn5" Content="Uitloggen"
+                    Click="Logout"/>
         </StackPanel>
         <StackPanel Grid.Column="2">
 

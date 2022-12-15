@@ -19,15 +19,11 @@
 
         <StackPanel x:Name="LayoutRoot">
             <Button x:Name="btn0" Content="Admin Panel"
-                    Click="Open_AdminPanel" ClickMode="Press"/>
-            <Button x:Name="btn5" Content="Aanmaken"
-                    Click="Open_Click" ClickMode="Press"/>
-            <Button x:Name="btn1" Content="Reseveren"
-                    ClickMode="Press"/>
-            <Button x:Name="btn2" Content="Schademelden"
-                    Click="AccidentReport" ClickMode="Press"/>
-            <Button x:Name="btn3" Content="Routes"
-                    ClickMode="Press"/>
+                    Click="OpenAdminPanel" ClickMode="Press"/>
+            <Button x:Name="btn1" Content="Aanpassen"
+                    Click="OpenEditUserPanel" ClickMode="Press"/>
+            <Button x:Name="btn3" Content="Terug"
+                    Click="Back_Click"/>
             <Button x:Name="btn4" Content="Uitloggen"
                     Click="Logout"/>
         </StackPanel>

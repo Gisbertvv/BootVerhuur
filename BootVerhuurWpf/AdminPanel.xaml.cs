@@ -36,17 +36,6 @@ namespace BootVerhuurWpf
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            Close();
-        }
-
-        private void Logout(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
 
         private void AdminPanelInfo(object sender, RoutedEventArgs e)
         {
@@ -191,20 +180,31 @@ namespace BootVerhuurWpf
             }
             return color;
         }
+        private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
+        {
+            Create popup = new Create();
+            popup.ShowDialog();
+            Close();
+        }
 
-        private void Open_AdminPanel(object sender, RoutedEventArgs e)
+        private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Open_Click(object sender, RoutedEventArgs e)
+  
+        private void Logout(object sender, RoutedEventArgs e)
         {
-
+            Login window = new Login();
+            window.Show();
+            Close();
         }
 
-        private void AccidentReport(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
         }
     }
 }
