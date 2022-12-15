@@ -20,25 +20,10 @@
         <Button x:Name="btnLogin" 
             Content="Login" 
             HorizontalAlignment="Center" 
-            Margin="0,390,0,0" 
-            VerticalAlignment="Top" Height="42" 
-            Width="206" 
-            FontFamily="Microsoft Sans Serif" 
-            FontSize="14" 
-            FontWeight="Bold" Foreground="White" Cursor="Hand" BorderThickness="0,0,0,0"  Click="btnLogin_Click"
+              Click="btnLogin_Click"
             
             />
-        <Button 
-            Content="Wachtwoord vergeten&#xD;&#xA;" 
-            HorizontalAlignment="Center" 
-            Margin="0,453,0,0" 
-            VerticalAlignment="Top" Height="24" 
-            Width="206" 
-            FontFamily="Microsoft Sans Serif" 
-            FontSize="14" 
-            FontWeight="Bold" Cursor="Hand"
-            
-            />
+   
 
 
     </Grid>
