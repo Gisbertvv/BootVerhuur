@@ -40,7 +40,9 @@ namespace BootVerhuurWpf
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            Close();
+            Login login = new Login();
+            this.Close();
+            login.Show();
         }
 
         private void AdminPanelInfo(object sender, RoutedEventArgs e)

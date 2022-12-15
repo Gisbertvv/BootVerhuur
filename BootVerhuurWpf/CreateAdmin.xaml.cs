@@ -171,8 +171,10 @@ namespace BootVerhuurWpf
 
             void Logout(object sender, RoutedEventArgs e)
             {
-                Close();
-            }
+            Login login = new Login();
+            this.Close();
+            login.Show();
+        }
         }
     }
 
