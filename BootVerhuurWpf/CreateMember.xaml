@@ -5,46 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid HorizontalAlignment="Left" Width="800" Height="434" VerticalAlignment="Center">
+        Title="Aanmaken gebruiker"
+        WindowState="Maximized">
+    <Grid VerticalAlignment="Center">
+        <Grid.Background>
+            <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/test1.png"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="325"/>
-            <ColumnDefinition Width="325"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid HorizontalAlignment="Left" Height="414" VerticalAlignment="Top" Width="620" Grid.Column="1" Margin="20,20,0,0" Grid.ColumnSpan="2">
-            <Image Margin="34,27,34,27" Source="/Images/roeienpng.png" Stretch="Fill" Opacity="0.2"/>
-        </Grid>
-
-        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
+        <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
+            <Button x:Name="btn0" Content="Admin Panel"
+                    Click="Open_AdminPanel" ClickMode="Press"/>
+            <Button x:Name="btn5" Content="Aanmaken"
+                    Click="Open_Click" ClickMode="Press"/>
             <Button x:Name="btn1" Content="Reseveren"
-
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"
-                    Foreground="Green"/>
+                    ClickMode="Press"/>
             <Button x:Name="btn2" Content="Schademelden"
-
-                    Width="130" 
-                    Margin="10,5"
-                    Foreground="Blue"/>
-
+                    Click="AccidentReport" ClickMode="Press"/>
             <Button x:Name="btn3" Content="Routes"
-
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"/>
-
+                    ClickMode="Press"/>
             <Button x:Name="btn4" Content="Uitloggen"
-                    Click="Logout"
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
-            <Button x:Name="btn5" Content="Terug" Click="Back_Click" Margin="10,5"/>
+                    Click="Logout"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="10,10,10,10">
 
             <Label Content="_Rol"/>
-            <ComboBox x:Name = "Rol" Width="305" HorizontalAlignment="Left">
+            <ComboBox x:Name = "Rol">
                 <ComboBoxItem Content = "Lid" />
                 <ComboBoxItem Content = "Materiaalcommissaris" />
                 <ComboBoxItem Content = "Wedstrijdcommíssaris" />

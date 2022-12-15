@@ -7,7 +7,8 @@
         xmlns:PdfViewer="clr-namespace:Syncfusion.Windows.PdfViewer;assembly=Syncfusion.PdfViewer.WPF"
         xmlns:bootVerhuurWpf="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-        Title="PDF" Height="450" Width="800">
+        Title="Schade formulier"  
+        WindowState="Maximized">
     <Window.DataContext>
         <bootVerhuurWpf:ViewModel/>
     </Window.DataContext>

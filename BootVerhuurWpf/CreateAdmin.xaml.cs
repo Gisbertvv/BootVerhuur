@@ -142,7 +142,8 @@ namespace BootVerhuurWpf
                     String sql = "INSERT INTO member " +
                                  "(first_name, last_name, phone_number, email, boating_level, role, username, password)" +
                                  "VALUES ('" + null + "' , '" +
-                                 null + "', '" + null + "', '" + txtEmail.Text + "', '" + null + "', '" + null + "', '" +
+                                 null + "', '" + null + "', '" + txtEmail.Text + "', '" + null + "', '" + "Admin" +
+                                 "', '" +
                                  txtGebruikersnaam.Text + "', '" + txtWachtwoord.Password + "')";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -163,18 +164,31 @@ namespace BootVerhuurWpf
             }
         }
 
-            void Back_Click(object sender, RoutedEventArgs e)
-            {
-                mainWindow.Show();
-                Close();
-            }
-
-            void Logout(object sender, RoutedEventArgs e)
-            {
-            Login login = new Login();
-            this.Close();
-            login.Show();
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.Show();
+            Close();
         }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Open_AdminPanel(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AccidentReport(object sender, RoutedEventArgs e)
+        {
+
         }
     }
+}
 

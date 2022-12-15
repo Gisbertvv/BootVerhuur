@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows10.0.22621.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Images\rowing.ico</ApplicationIcon>
@@ -10,7 +10,10 @@
 
   <ItemGroup>
     <None Remove="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
+    <None Remove="Images\backgroundBootVerhuur.png" />
     <None Remove="Images\roeienpng.png" />
+    <None Remove="Images\test.png" />
+    <None Remove="Images\test1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +30,9 @@
 
   <ItemGroup>
     <Resource Include="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
+    <Resource Include="Images\backgroundBootVerhuur.png" />
     <Resource Include="Images\roeienpng.png" />
+    <Resource Include="Images\test.png" />
+    <Resource Include="Images\test1.png" />
   </ItemGroup>
-
 </Project>

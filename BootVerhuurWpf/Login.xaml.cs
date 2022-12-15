@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Media;
 using Syncfusion.Pdf.Parsing;
 
 namespace BootVerhuurWpf
@@ -21,7 +22,12 @@ namespace BootVerhuurWpf
 
         public Login()
         {
+            AdminPanel panel = new AdminPanel();
             InitializeComponent();
+    
+            Color color = (Color)ColorConverter.ConvertFromString(panel.GetColors()[2]);
+            SolidColorBrush solidColorBrush = new SolidColorBrush(color);
+            gridje.Background = solidColorBrush;
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)

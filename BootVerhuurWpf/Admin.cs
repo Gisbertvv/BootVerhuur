@@ -13,16 +13,16 @@ namespace BootVerhuurWpf
         public String Wachtwoord { get; set; }
         public String Email { get; set; }
 
-        public Admin(String gebruikersnaam, String wachtwoord,String email) 
-        { 
+        public Admin(String gebruikersnaam, String wachtwoord, String email)
+        {
             this.Gebruikersnaam = gebruikersnaam;
             this.Wachtwoord = wachtwoord;
-            this.Email= email;
+            this.Email = email;
 
-            InsertAdmin(connection(), gebruikersnaam, email, wachtwoord);
+/*            InsertAdmin(connection(), gebruikersnaam, email, wachtwoord);*/
         }
 
-        public void InsertAdmin(SqlConnection connection, string gebruikersnaam, string email, string wachtwoord)
+        /*public void InsertAdmin(SqlConnection connection, string gebruikersnaam, string email, string wachtwoord)
         {
             String sql = $"INSERT INTO Admins (AdminUserName, Email, Password)" +
                 $"VALUES ({gebruikersnaam}, {email}, {wachtwoord});";
@@ -39,7 +39,7 @@ namespace BootVerhuurWpf
                     }
                 }
             }
-        }
+        }*/
         /// <summary>
         /// Don't know how to make use of this from Bootverhuur
         /// </summary>

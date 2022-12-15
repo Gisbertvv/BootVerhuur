@@ -16,16 +16,22 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 
 namespace BootVerhuurWpf
-{
+{  
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    { 
+        //BookBoat bookBoat = new BookBoat();
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            AdminPanel panel = new AdminPanel();
+            Color color = (Color)ColorConverter.ConvertFromString(panel.GetColors()[2]);
+            SolidColorBrush solidColorBrush = new SolidColorBrush(color);
+            gridje.Background = solidColorBrush;
+
             if (Login.role == "admin" || Login.role == "Admin")
             {
                 btn5.Visibility = Visibility.Visible;
@@ -78,6 +84,13 @@ namespace BootVerhuurWpf
             AdminPanel window = new AdminPanel();
 
             window.Show();
+            Close();
+        }
+
+        private void reserve(object sender, RoutedEventArgs e)
+        {
+            Temp tp = new Temp();
+            tp.Show();
             Close();
         }
     }

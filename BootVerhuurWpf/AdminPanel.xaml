@@ -8,54 +8,41 @@
         xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="BootVerhuurWpf.AdminPanel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid HorizontalAlignment="Center" Width="800" Height="434" VerticalAlignment="Top" Margin="0,16,0,0">
-
+        Title="Admin panel" 
+        WindowState="Maximized">
+    <Grid x:Name="gridje" Width="auto" Height="auto">
+        <Grid.Background>
+            <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/test1.png"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
-
-
-        <Grid HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="630" Grid.Column="1" Margin="20,10,0,0">
-            <Image Margin="34,27,34,27" Source="/Images/roeienpng.png" Stretch="Fill" Opacity="0.2"/>
-        </Grid>
-
-        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
+        <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
+            <Button x:Name="btn0" Content="Admin Panel"
+                    Click="Open_AdminPanel" ClickMode="Press"/>
+            <Button x:Name="btn5" Content="Aanmaken"
+                    Click="Open_Click" ClickMode="Press"/>
             <Button x:Name="btn1" Content="Reseveren"
-
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"
-                    Foreground="Green"/>
+                    ClickMode="Press"/>
             <Button x:Name="btn2" Content="Schademelden"
-
-                    Width="130" 
-                    Margin="10,5"
-                    Foreground="Blue"/>
-
+                    Click="AccidentReport" ClickMode="Press"/>
             <Button x:Name="btn3" Content="Routes"
-
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"/>
-
+                    ClickMode="Press"/>
             <Button x:Name="btn4" Content="Uitloggen"
- Click="Logout"
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
-
-            <Button x:Name="btn5" Content="Terug" Margin=" 10,5" Click="Back_Click"/>
+                    Click="Logout"/>
         </StackPanel>
-
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="193" Width="366">
-            <Label FontSize="20px">Applicatie kleur instellingen</Label>
+        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Panel.ZIndex="1">
+            <Label>Applicatie kleur instellingen</Label>
             <Label Content="Primaire kleur"/>
             <syncfusion:ColorPicker Name="PrimaryColor" Brush="Blue"/>
             <Label Content="Secundaire kleur"/>
             <syncfusion:ColorPicker Name="SecondaryColor" Brush="Green"/>
-            <Button x:Name="btn" Content="Kleuren opslaan" HorizontalAlignment="Right" Margin="10,10" Width="100" Click="AdminPanelInfo"/>
+            <Label Content="Achtergrond kleur"/>
+            <syncfusion:ColorPicker Name="BackgroundColor" Brush="LightBlue"/>
+            <Button x:Name="btn" Content="Kleuren opslaan" HorizontalAlignment="Right" Margin="10,10" Click="AdminPanelInfo"/>
         </StackPanel>
-
-
-
+        <!--<Image Source="/Images/roeienpng.png" Width="300" />-->
     </Grid>
 </Window>
