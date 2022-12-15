@@ -163,17 +163,25 @@ namespace BootVerhuurWpf
             }
         }
 
-            
-        }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.Show();
-            Close();
+            //
         }
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            Close();
+            //
         }
     }
+    //private void Back_Click(object sender, RoutedEventArgs e)
+    //{
+    //    mainWindow.Show();
+    //    Close();
+    //}
+
+    //private void Logout(object sender, RoutedEventArgs e)
+    //{
+    //    Close();
+    //}
+}
 

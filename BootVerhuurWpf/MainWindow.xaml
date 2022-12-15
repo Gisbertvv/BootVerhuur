@@ -26,7 +26,7 @@
             <Button x:Name="btn2" Content="Schademelden"
                     Click="AccidentReport" ClickMode="Press"/>
             <Button x:Name="btn3" Content="Routes"
-                    ClickMode="Press"/>
+                    ClickMode="Press" Click="btn3_Click"/>
             <Button x:Name="btn4" Content="Uitloggen"
                     Click="Logout"/>
         </StackPanel>

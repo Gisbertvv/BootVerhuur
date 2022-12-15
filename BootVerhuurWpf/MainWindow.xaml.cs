@@ -80,5 +80,10 @@ namespace BootVerhuurWpf
             window.Show();
             Close();
         }
+
+        private void btn3_Click(object sender, RoutedEventArgs e)
+        {
+            SendEmail.send("daan220@hotmail.com");
+        }
     }
 }
