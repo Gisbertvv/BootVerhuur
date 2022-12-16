@@ -7,37 +7,33 @@
         mc:Ignorable="d"
         Title="Aanmaken Admin" 
         WindowState="Maximized">
-    <Grid x:Name="gridje" Width="auto" Height="auto">
-        <Grid.Background>
-            <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/test1.png"/>
-        </Grid.Background>
+    <Border Style="{DynamicResource Bordervisual}">
+        <Grid Style="{DynamicResource GridFocusVisual}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="8*"/>
-
         </Grid.ColumnDefinitions>
-
-        <StackPanel x:Name="LayoutRoot">
+            <Image Grid.Column="1" Style="{DynamicResource LogoVisual}"/>
+            <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
             <Button x:Name="btn0" Content="Admin Panel"
-                    Click="OpenAdminPanel" ClickMode="Press"/>
+                    Click="OpenAdminPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn1" Content="Aanpassen"
-                    Click="OpenEditUserPanel" ClickMode="Press"/>
+                    Click="OpenEditUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn3" Content="Terug"
-                    Click="Back_Click"/>
+                    Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn4" Content="Uitloggen"
-                    Click="Logout"/>
+                    Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1">
-            <Label Content="Gebruikersnaam"/>
-            <TextBox Name="txtGebruikersnaam"/>
-            <Label Content="Wachtwoord"/>
-            <PasswordBox Name="txtWachtwoord"/>
-            <Label Content="Email"/>
-            <TextBox Name="txtEmail"/>
-            <Button x:Name="btn6" Content="Aanmaken" HorizontalAlignment="Right" Margin="10,10" Click="Create_Admin"/>
+                <Label Content="Gebruikersnaam" Style="{DynamicResource LabelVisual}"/>
+                <TextBox Name="txtGebruikersnaam" Style="{DynamicResource TextboxVisual}"/>
+                <Label Content="Wachtwoord" Style="{DynamicResource LabelVisual}"/>
+            <PasswordBox Name="txtWachtwoord" Style="{DynamicResource PasswordBoxVisual}"/>
+                <Label Content="Email" Style="{DynamicResource LabelVisual}"/>
+                <TextBox Name="txtEmail" Style="{DynamicResource TextboxVisual}"/>
+                <Button x:Name="btn6" Content="Aanmaken" HorizontalAlignment="Right" Margin="10,10" Click="Create_Admin" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
-
-
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

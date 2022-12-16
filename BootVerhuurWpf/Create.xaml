@@ -6,15 +6,18 @@
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
         Title="Create" Height="250" Width="450">
-        
 
-    <Grid>
-        <Grid.ColumnDefinitions>
+
+    <Border Style="{DynamicResource Bordervisual}">
+        <Grid Style="{DynamicResource GridFocusVisual}">
+            <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Admin"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" MaxWidth="100" Click="Button_Click"/>
-        <Button Content="Gebruiker" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" MaxWidth="100"  Click="Button_Click_1"/>
-        <Label Content="Wat voor gebruiker wilt u aanmaken?" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image Grid.Column="1" Style="{DynamicResource LogoVisual}"/>
+            <Button Content="Admin" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" MaxWidth="100" Click="Button_Click" Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button Content="Gebruiker" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" MaxWidth="100"  Click="Button_Click_1" Style="{DynamicResource ButtonFocusVisual}"/>
+            <Label Content="Wat voor gebruiker wilt u aanmaken?" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource LabelVisual}" Foreground="Black"/>
 
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

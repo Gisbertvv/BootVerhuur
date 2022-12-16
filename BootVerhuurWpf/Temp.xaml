@@ -6,25 +6,27 @@
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
           Title="Temp" WindowState="Maximized">
-    <Grid  VerticalAlignment="Center">
-        <Grid.ColumnDefinitions>
+    <Border Style="{DynamicResource Bordervisual}">
+        <Grid Style="{DynamicResource GridFocusVisual}">
+            <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
 
-        </Grid.ColumnDefinitions>
-
-        <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
+            <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
 
             <Button x:Name="btn2" Content="Schademelden"
-                    Click="AccidentReport" ClickMode="Press"/>
+                    Click="AccidentReport" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn4" Content="Terug"
-                    Click="Back_Click" ClickMode="Press"/>
+                    Click="Back_Click" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn5" Content="Uitloggen"
-                    Click="Logout"/>
+                    Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
         <StackPanel Grid.Column="2">
 
             <DataGrid Name="Boats" Height="300" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="selectedboat"/>
         </StackPanel>
     </Grid>
+    </Border>
 </Window>

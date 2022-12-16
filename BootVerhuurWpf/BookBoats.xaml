@@ -6,41 +6,41 @@
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
            Title="bookboat" WindowState="Maximized">
-    <Grid VerticalAlignment="Center">
-        <Grid.Background>
-            <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/test1.png"/>
-        </Grid.Background>
-        <Grid.ColumnDefinitions>
+    <Border Style="{DynamicResource Bordervisual}">
+        <Grid Style="{DynamicResource GridFocusVisual}">
+            <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
+            <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
+            <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
             <Button x:Name="btn4" Content="Schademelden"
-                    Click="AccidentReport" ClickMode="Press"/>
+                    Click="AccidentReport" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn2" Content="Terug"
-                    Click="Back_Click" ClickMode="Press"/>
+                    Click="Back_Click" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn5" Content="Uitloggen"
-                    Click="Logout"/>
+                    Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
 
 
         <StackPanel Grid.Column="2" Name="stackpanel2" Margin ="10" >
-            <Label Content="Status : " Loaded="Status"/>
-            <Label Content="Aantal personen : " Loaded="AantalPersonen"/>
-            <Label Content="Stuur : " Loaded="Stuur"/>
-            <Label Content="Niveau : " Loaded="BootNiveau"/>
-            <Label Content="Te reserveren vanaf : " Loaded="AvailibleFrom"/>
+                <Label Content="Status : " Loaded="Status" Style="{DynamicResource LabelVisual}"/>
+                <Label Content="Aantal personen : " Loaded="AantalPersonen" Style="{DynamicResource LabelVisual}"/>
+                <Label Content="Stuur : " Loaded="Stuur" Style="{DynamicResource LabelVisual}"/>
+                <Label Content="Niveau : " Loaded="BootNiveau" Style="{DynamicResource LabelVisual}"/>
+                <Label Content="Te reserveren vanaf : " Loaded="AvailibleFrom" Style="{DynamicResource LabelVisual}"/>
             <DatePicker x:Name="DP" AllowDrop="True" SelectedDateFormat="Short" Margin="10,5,10,10" SelectedDateChanged="SelectionDatechanged" />
-            <Label Content="Selecteer een tijd" />
-            <ComboBox Name="Gekozentijd" Margin="10,0,10,10">
+            <Label Content="Selecteer een tijd" Style="{DynamicResource LabelVisual}"/>
+            <ComboBox Name="Gekozentijd" Margin="10,0,10,10" Style="{DynamicResource ComboBoxVisual}">
 
             </ComboBox>
 
 
 
-            <Button Content="Bevestigen" Click="Book" HorizontalAlignment="Right" Margin ="0,10,10,0"/>
+                <Button Content="Bevestigen" Click="Book" HorizontalAlignment="Right" Margin ="0,10,10,0" Style="{DynamicResource ButtonFocusVisual}"/>
 
         </StackPanel>
     </Grid>
+    </Border>
 </Window>
