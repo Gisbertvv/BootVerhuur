@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace BootVerhuur
     {
         static SqlConnectionStringBuilder _builder = new SqlConnectionStringBuilder();
 
-        public Database()
+        /*public Database()
         {
             try
             {
@@ -29,112 +30,19 @@ namespace BootVerhuur
                 Console.WriteLine(e);
                 throw;
             }
-        }
-   
-        public string[] GetColors()
+        }*/
+
+        private  static string _connectionString;
+
+        public Database()
         {
-            string[] color = null;
-            try
-            {
-                SqlConnection connection = new SqlConnection(_builder.ConnectionString);
-                using (connection)
-                {
-                    //SQL quary
-                    String sql = "SELECT primary_color, secondary_color, background_color FROM appSettings";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                color = new string[] { reader.GetString(0), reader.GetString(1), reader.GetString(2) };
-                            }
-                        }
-                        connection.Close();
-                    }
-                }
-            }
-
-            catch (SqlException e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-            return color;
+            _connectionString = ConfigurationManager.ConnectionStrings["127.0.0.1, SA, Havermout1325, BootVerhuur"].ConnectionString;
         }
 
-        public static void SetPrimaryColor(string PrimaryColor)
+
+        protected static SqlConnection GetConnection()
         {
-            try
-            {
-                SqlConnection connection = new SqlConnection(_builder.ConnectionString);
-                using (connection)
-                {
-                    //SQL query
-                    String sql = $"UPDATE appSettings SET primary_color='{PrimaryColor}'";
-
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-        }
-        public static void SetSecondaryColor(string SecondaryColor)
-        {
-            try
-            {
-                SqlConnection connection = new SqlConnection(_builder.ConnectionString);
-                using (connection)
-                {
-                    //SQL query
-                    String sql = $"UPDATE appSettings SET secondary_color ='{SecondaryColor}'";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-        }
-
-        public static void SetBackgroundColor(string BackgroundColor)
-        {
-
-            try
-            {
-                SqlConnection connection = new SqlConnection(_builder.ConnectionString);
-                using (connection)
-                {
-                    //SQL query
-                    String sql = $"UPDATE appSettings SET background_color ='{BackgroundColor}'";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show(e.ToString());
-            }
+            return new SqlConnection(_connectionString);
         }
     }
 }

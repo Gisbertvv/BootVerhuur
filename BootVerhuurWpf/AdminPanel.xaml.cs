@@ -18,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BootVerhuur;
 using Xceed.Wpf.Toolkit;
 using MessageBox = System.Windows.MessageBox;
 using WindowStartupLocation = System.Windows.WindowStartupLocation;
@@ -29,13 +30,12 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class AdminPanel : Window
     {
-        private static SqlConnection _builder;
-        
         public AdminPanel()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
+
 
 
         private void AdminPanelInfo(object sender, RoutedEventArgs e)
@@ -57,69 +57,12 @@ namespace BootVerhuurWpf
 
         public static void SetThemeColors(string PrimaryColor, string SecondaryColor, string BackgroundColor)
         {
-            SetPrimaryColor(PrimaryColor);
-            SetSecondaryColor(SecondaryColor);
-            SetBackgroundColor(BackgroundColor);
+            Colors.SetPrimaryColor(PrimaryColor);
+            Colors.SetSecondaryColor(SecondaryColor);
+            Colors.SetBackgroundColor(BackgroundColor);
         }
 
-        private static void SetSecondaryColor(string SecondaryColor)
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-                SqlConnection connection = new SqlConnection(builder.ConnectionString);
-                using (connection)
-                {
-                    //SQL query
-                    String sql = $"UPDATE appSettings SET secondary_color ='{SecondaryColor}'";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-              MessageBox.Show(e.ToString());
-            }
-        }
-
-        private static void SetBackgroundColor(string BackgroundColor)
-        {
-
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-                SqlConnection connection = new SqlConnection(builder.ConnectionString);
-                using (connection)
-                {
-                    //SQL query
-                    String sql = $"UPDATE appSettings SET background_color ='{BackgroundColor}'";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                System.Windows.MessageBox.Show(e.ToString());
-            }
-        }
+    
 
         private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
         {
