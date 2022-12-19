@@ -20,6 +20,7 @@ namespace BootVerhuurWpf
                 using (var connection = GetConnection())
                 {
                     String sql = "SELECT primary_color, secondary_color, background_color FROM appSettings";
+                    connection.Open();
                     using (var command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -47,9 +48,8 @@ namespace BootVerhuurWpf
             {
                 using (var connection = GetConnection())
                 {
-                    //SQL query
+                    //SQL query 
                     String sql = $"UPDATE appSettings SET primary_color='{PrimaryColor}'";
-
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
@@ -72,7 +72,6 @@ namespace BootVerhuurWpf
             {
                 //SQL query
                 String sql = $"UPDATE appSettings SET secondary_color ='{SecondaryColor}'";
-
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     connection.Open();
@@ -95,9 +94,9 @@ namespace BootVerhuurWpf
             using (var connection = GetConnection())
             {
                     //SQL query
-                    String sql = $"UPDATE appSettings SET background_color ='{BackgroundColor}'";
+                String sql = $"UPDATE appSettings SET background_color ='{BackgroundColor}'";
 
-                using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     connection.Open();
                     command.ExecuteNonQuery();

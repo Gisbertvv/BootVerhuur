@@ -16,33 +16,18 @@ namespace BootVerhuur
     {
         static SqlConnectionStringBuilder _builder = new SqlConnectionStringBuilder();
 
-        /*public Database()
-        {
-            try
-            {
-                _builder.DataSource = "127.0.0.1";
-                _builder.UserID = "SA";
-                _builder.Password = "Havermout1325";
-                _builder.InitialCatalog = "BootVerhuur";
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }*/
-
-        private  static string _connectionString;
-
         public Database()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["127.0.0.1, SA, Havermout1325, BootVerhuur"].ConnectionString;
+            _builder.DataSource = "127.0.0.1";
+            _builder.UserID = "sa";
+            _builder.Password = "Havermout1325";
+            _builder.InitialCatalog = "BootVerhuur";
         }
 
 
         protected static SqlConnection GetConnection()
         {
-            return new SqlConnection(_connectionString);
+            return new SqlConnection(_builder.ConnectionString);
         }
     }
 }
