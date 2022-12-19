@@ -22,14 +22,13 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class MainWindow : Window
     { 
-        //BookBoat bookBoat = new BookBoat();
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
   
 
-            if (LoginWindow.role == "admin" || LoginWindow.role == "Admin")
+            if (Login.role == "admin" || Login.role == "Admin")
             {
                 btn0.Visibility = Visibility.Visible;
                 btn1.Visibility = Visibility.Visible;

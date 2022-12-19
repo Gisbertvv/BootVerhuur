@@ -12,14 +12,6 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public static string id;
-        public static string firstName;
-        public static string lastName;
-        public static string phoneNumber;
-        public static string email;
-        public static string boatingLevel;
-        public static string role;
-
         public LoginWindow()
         {
             AdminPanel panel = new AdminPanel();
