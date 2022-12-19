@@ -39,7 +39,7 @@
         </StackPanel>
         <StackPanel Grid.Column="2">
 
-            <DataGrid Name="Boats" Height="300" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="selectedboat"/>
+            <DataGrid Name="Boats" Height="416" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="selectedboat"  IsReadOnly="True" SelectionUnit="FullRow"/>
         </StackPanel>
     </Grid>
 </Window>

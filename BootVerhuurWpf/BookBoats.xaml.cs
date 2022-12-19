@@ -32,24 +32,21 @@ namespace BootVerhuurWpf
         string date1;
         string date2;
         string selecteddate;
-        string timenow = DateTime.Now.ToShortTimeString();
-        string timeplus24 = DateTime.Now.AddHours(24).ToShortTimeString();
         static int memberId = Int32.Parse(Login.id);
 
         List<string> begintimes = new List<string>();
         List<string> endtimes = new List<string>();
+        List<string> Alltimes = new List<string>();
 
         public BookBoats(int id)
         {
             Id = id;
             InitializeComponent();
             AdjustCalender();
-
             Checkeverything(Id);
 
         }
-        
-
+       
         /// <summary>
         /// if role is Lid only see two days ahead for reservation and no reservation for the weekend
         /// </summary>
@@ -123,10 +120,8 @@ namespace BootVerhuurWpf
             }
             else
             {
-
-                
                 InsertReservation(selecteddate, Gekozentijd.Text);
-            }
+            }                         
         }
 
         private void Status(object sender, RoutedEventArgs e)
@@ -257,7 +252,7 @@ namespace BootVerhuurWpf
                                 connection.Open();
                                 using (SqlDataReader reader = command.ExecuteReader())
                                 {
-                                    AdjustTimeBox();
+                                    Getreservationtimes(Id,reservationdate);                              
                                     MessageBox.Show("Reservering is aangemaakt", "SUCCES");
                                     
                                 }
@@ -375,13 +370,14 @@ namespace BootVerhuurWpf
                         {
                             while (reader.Read())
                             {
+  
                                 begintimes.Add(reader.GetString(3));
                                 endtimes.Add(reader.GetString(4));
                             }
                         }
                     }
                 }
-
+                t();
             }
             catch (SqlException e)
             {
@@ -390,14 +386,49 @@ namespace BootVerhuurWpf
             Console.ReadLine();
         }
 
+        private void t()
+        {
+                     
+          while (begintimes.Count > 0)
+            {
+                int index = Alltimes.IndexOf(begintimes[0]);
+                try
+                {
+                    int before = index- 4;
+                    
+                    Alltimes.RemoveRange(before, index);
+                    begintimes.RemoveAt(0);                  
+                }
+
+                catch(ArgumentOutOfRangeException ae)
+                {
+                    break;
+                }
+           
+            }
+           
+           Gekozentijd.Items.Clear();
+
+            foreach (string s in Alltimes)
+            {
+                Gekozentijd.Items.Add(s);
+            }
+        }
+
+        /// <summary>
+        /// rounds the time to the closest half hour or hour
+        /// </summary>
+        /// <param name="Input"></param>
+        /// <returns></returns>
         string RoundMinutes(DateTime Input)
         {
             DateTime Output;
             int Minute;
+           
 
-            if ((Input.Minute <= 15) || ((Input.Minute > 30) && (Input.Minute <= 45)))
+/*            if ((Input.Minute <= 15) || ((Input.Minute > 30) && (Input.Minute <= 45)))
                 Minute = -1;
-            else
+            else*/
                 Minute = +1;
 
             while ((Input.Minute != 0) && (Input.Minute != 30))
@@ -405,174 +436,59 @@ namespace BootVerhuurWpf
 
             return Input.ToShortTimeString();
         }
-        /// <summary>
-        /// delete all times before the 24 hour constraint
-        /// </summary>
-        public void minimumhoursreservation()
+
+        private void Minimum()
         {
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
+            {               
+            }
+            else if(selecteddate.Equals(date1))
+            {
+                int index = Alltimes.IndexOf(RoundMinutes(DateTime.Now));
+                Alltimes.RemoveRange(0, index);
+            }
+        }
+
+                private void SetTimeBox()
+                {
             Gekozentijd.Items.Clear();
-            SetTimeBox();
-            string check2 = string.Empty;
-
-            while (!selecteddate.Equals(date2) && !RoundMinutes(DateTime.Now.AddHours(24)).Equals(check2))
-            {
-                if (minutes.ToString().Equals("0"))
-                {
-                    check2 = $"{hours}:{minutes}0";
-                    Gekozentijd.Items.Remove(check2);
-                    minutes += 30;
-                }
-                else if (minutes.ToString().Equals("30"))
-                {
-                    check2 = $"{hours}:{minutes}";
-                    Gekozentijd.Items.Remove(check2);
-                    hours += 1;
-                    minutes = 0;
-                }
-            }
-
-        }
-        int i = 0;
-         int j = 0;
-        /// <summary>
-        /// delete times before the reservationtime
-        /// </summary>
-        /// <param name="hour"></param>
-        /// <param name="minute"></param>
-        public void Removetimebefore(int hour, int minute)
-        {
-            int minus2 = hour - 2;
-
-            while (!$"{hour}:{minute}".Equals($"{minus2}:{minutes}"))
-            {
-                if (minute.ToString().Equals("0"))
-                {
-                    Gekozentijd.Items.Remove($"{hour}:{minute}0");
-                    minute = 30;
-                    hour = hour - 1;
-                }
-                else if (minute.ToString().Equals("30"))
-                {
-                    Gekozentijd.Items.Remove($"{hour}:{minute}");
-                    minute = minute- 30;
-                    //hour = hour - 1;
-                }                
-            }
-            if (minute.ToString().Equals("0"))
-            {
-                Gekozentijd.Items.Remove($"{hour}:{minute}0");
-            }
-            else
-            {
-                Gekozentijd.Items.Remove($"{hour}:{minute}");
-            }
-        }
-        //for the begin time
-        int hours = 6;
-        int minutes = 0;
-        private void SetTimeBox()
-        {
+            Alltimes.Clear();
+            int hours = 6;
+            int minutes = 0;
             if (minutes.ToString().EndsWith('0'))
             {
                 Gekozentijd.Items.Add($"{hours}:00");
+                Alltimes.Add($"{hours}:00");
                 minutes += 30;
             }
-            //17 is the endtime need to take 2 hours because cant row when dark.
+            // is the endtime need to take 2 hours because cant row when dark.
             while (hours != 18)
             {
                 if (minutes == 60)
                 {
                     hours += 1;
                     minutes = 0;
-                    Gekozentijd.Items.Add($"{hours}:00");
+                    Alltimes.Add($"{hours}:00");
                 }
                 else
                 {
-                    Gekozentijd.Items.Add($"{hours}:{minutes}");
+                    Alltimes.Add($"{hours}:{minutes}");
                 }
                 minutes += 30;
             }
-            hours = 0;
-            minutes = 0;
-        }
-        /// <summary>
-        /// changes the timebox, deletes the reservationtimes out the database from the combobox
-        /// </summary>
-        private void AdjustTimeBox()
-        {
-            Getreservationtimes(Id, DP.SelectedDate.Value.ToShortDateString());
-            string h = string.Empty;
-            string m = string.Empty;
-            string check = string.Empty;
-            while (begintimes.Count > 0)
+            foreach(string s in Alltimes)
             {
-                string[] times = begintimes.First().Split(':');
-                List<string> list = new List<string>(times);
-                h = list[0];
-                m = list[1];
-                i = Int32.Parse(h);
-                j = Int32.Parse(m);
-                Removetimebefore(i, j);
-                list.RemoveAt(0);
-                list.RemoveAt(0);
-
-                hours = Int32.Parse(h);
-                minutes = Int32.Parse(m);
-
-                Gekozentijd.Items.Remove($"{hours}:{minutes}0");
-                
-                while (!check.Equals(endtimes.First()))
-                {
-                    if (minutes.ToString().EndsWith("60"))
-                    {
-                        minutes = 0;
-                        hours += 1;
-                        Gekozentijd.Items.Remove($"{hours}:00");
-                        check = $"{hours}:00";
-                    }
-                    else if (minutes.ToString().EndsWith("30"))
-                    {
-                        Gekozentijd.Items.Remove($"{hours}:{minutes}");
-                        check = $"{hours}:{minutes}";
-                        minutes = 0;
-                        hours += 1;
-                        
-                    }
-                    else if (minutes.ToString().EndsWith("0"))
-                    {
-                        
-                        Gekozentijd.Items.Remove($"{hours}:{minutes}0");
-                        minutes += 30;
-                        check = $"{hours}:{minutes}";
-                       
-                    }
-                    if (hours.ToString().Length == 1 && minutes.ToString().Length == 1)
-                    {
-                        check = $"{hours}:{minutes}0";
-                    }
-                    else if (minutes.ToString().Length == 1 && hours.ToString().Length == 2)
-                    {
-                        check = $"{hours}:{minutes}0";
-                    }
-                }
-                Gekozentijd.Items.Remove($"{hours}:{minutes}0");
-                Gekozentijd.Items.Remove($"{hours}:{minutes}");
-                begintimes.Remove(begintimes.First());
-                endtimes.Remove(endtimes.First());
-                if(endtimes.Count == 0)
-                {
-                    break;
-                }
+                Gekozentijd.Items.Add(s);   
             }
-            hours = 6;
-            minutes = 0;
         }
+
         private void SelectionDatechanged(object sender, SelectionChangedEventArgs e)
         {
             selecteddate = DP.SelectedDate.Value.ToShortDateString();
-            minimumhoursreservation();
-            AdjustTimeBox();
-            
+            SetTimeBox();
+            Minimum();
+            Getreservationtimes(Id, DP.SelectedDate.Value.ToShortDateString());
+
         }
 
         private void AccidentReport(object sender, RoutedEventArgs e)
