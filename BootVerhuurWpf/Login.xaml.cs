@@ -24,10 +24,6 @@ namespace BootVerhuurWpf
         {
             AdminPanel panel = new AdminPanel();
             InitializeComponent();
-    
-            Color color = (Color)ColorConverter.ConvertFromString(panel.GetColors()[2]);
-            SolidColorBrush solidColorBrush = new SolidColorBrush(color);
-            //gridje.Background = solidColorBrush;
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)

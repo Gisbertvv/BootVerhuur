@@ -14,7 +14,7 @@
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-            <Image Grid.Column="1" Style="{DynamicResource LogoVisual}"/>
+            <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
             <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
             <Button x:Name="btn0" Content="Admin Panel"
                     Click="OpenAdminPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>

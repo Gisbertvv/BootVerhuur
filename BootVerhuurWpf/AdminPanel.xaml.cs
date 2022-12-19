@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -39,47 +40,26 @@ namespace BootVerhuurWpf
 
         private void AdminPanelInfo(object sender, RoutedEventArgs e)
         {
-            
+
             if (PrimaryColor != null && SecondaryColor != null && BackgroundColor != null)
             {
-                SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString(), BackgroundColor.Color.ToString());
+                SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString(),
+                    BackgroundColor.Color.ToString());
+            }
+
+            MessageBoxResult dresult =
+                MessageBox.Show("Om de wijzigingen toe te passen moet de applicatie opnieuw opgestart worden", "Alert", MessageBoxButton.YesNo);
+            if (dresult == MessageBoxResult.Yes)
+            {
+                System.Windows.Application.Current.Shutdown();
             }
         }
+
         public static void SetThemeColors(string PrimaryColor, string SecondaryColor, string BackgroundColor)
         {
             SetPrimaryColor(PrimaryColor);
             SetSecondaryColor(SecondaryColor);
             SetBackgroundColor(BackgroundColor);
-        }
-
-        private static void SetPrimaryColor(string PrimaryColor)
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-                SqlConnection connection = new SqlConnection(builder.ConnectionString);
-                using (connection)
-                {
-                    //SQL query
-                    String sql = $"UPDATE appSettings SET primary_color='{PrimaryColor}'";
-
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                System.Windows.MessageBox.Show(e.ToString());
-            }
         }
 
         private static void SetSecondaryColor(string SecondaryColor)
@@ -113,6 +93,7 @@ namespace BootVerhuurWpf
 
         private static void SetBackgroundColor(string BackgroundColor)
         {
+
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -140,46 +121,6 @@ namespace BootVerhuurWpf
             }
         }
 
-        public string[] GetColors()
-        {
-            string[] color = null;
-
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-
-                string color1;
-                SqlConnection connection = new SqlConnection(builder.ConnectionString);
-                using (connection)
-                {
-                    //SQL quary
-                    String sql = "SELECT primary_color, secondary_color, background_color FROM appSettings";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                 color = new string[] { reader.GetString(0), reader.GetString(1), reader.GetString(2)};
-                            }
-                        }
-                        connection.Close();
-                    }
-                }
-            }
-
-            catch (SqlException e)
-            {
-               MessageBox.Show(e.ToString());
-            }
-            return color;
-        }
         private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
         {
             Create popup = new Create();
