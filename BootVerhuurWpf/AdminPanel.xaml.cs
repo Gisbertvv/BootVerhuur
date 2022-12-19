@@ -176,7 +176,7 @@ namespace BootVerhuurWpf
 
             catch (SqlException e)
             {
-               MessageBox.Show(e.ToString());
+               MessageBox.Show("er is geen database connectie :(");
             }
             return color;
         }

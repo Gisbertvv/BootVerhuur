@@ -31,12 +31,7 @@ namespace BootVerhuur
                 Console.WriteLine(e.ToString());
             }
         }
-/*        public void SSH()
-        {
-            using var ps = PowerShell.Create();
-            ps.AddScript("ssh -L 1433:localhost:1433 student@145.44.233.236").Invoke();
 
-        }*/
     }
 }
 
