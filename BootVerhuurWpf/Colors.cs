@@ -95,7 +95,7 @@ namespace BootVerhuurWpf
                     //SQL query
                 String sql = $"UPDATE appSettings SET background_color ='{BackgroundColor}'";
 
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     connection.Open();
                     command.ExecuteNonQuery();

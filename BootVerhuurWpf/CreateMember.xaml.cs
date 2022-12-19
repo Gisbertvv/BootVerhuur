@@ -148,7 +148,7 @@ namespace BootVerhuurWpf
 
                 }
 
-                this.Close();
+                Close();
                 mainWindow.Show();
             }
             result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);

@@ -21,9 +21,7 @@ namespace BootVerhuurWpf
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             new Login(txtUsername.Text, txtPassword.Password);
-            MainWindow mainWindow = new MainWindow();
             Close();
-            mainWindow.Show();
         }
     }
 }

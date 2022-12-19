@@ -60,7 +60,8 @@ namespace BootVerhuurWpf
                         //id = dataTable.Columns.Add("id").ColumnName;
                         //id = dataTable.Columns.Contains();
                         connection.Close();
-                      
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
                     }
                     else
                     {
