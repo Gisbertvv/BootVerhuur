@@ -148,7 +148,7 @@ namespace BootVerhuurWpf
 
                 }
 
-                this.Close();
+                Close();
                 mainWindow.Show();
             }
             result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
@@ -163,31 +163,34 @@ namespace BootVerhuurWpf
                 Close();               
             }
         }
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void OpenAdminPanel(object sender, RoutedEventArgs e)
         {
-            mainWindow.Show();
-            Close();         
-            mainWindow.UpdateLayout();
-        }
-        private void Logout(object sender, RoutedEventArgs e)
-        {
+            AdminPanel window = new AdminPanel();
+
+            window.Show();
             Close();
         }
 
-        private void AccidentReport(object sender, RoutedEventArgs e)
+        private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Open_Click(object sender, RoutedEventArgs e)
+        private void Logout(object sender, RoutedEventArgs e)
         {
-
+            LoginWindow window = new LoginWindow();
+            window.Show();
+            Close();
         }
 
-        private void Open_AdminPanel(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
         }
+
+
     }
 }
 
