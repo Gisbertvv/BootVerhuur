@@ -32,7 +32,6 @@ namespace BootVerhuurWpf
                         }
                     }
 
-                    connection.Close();
                 }
             }
             catch (SqlException e)

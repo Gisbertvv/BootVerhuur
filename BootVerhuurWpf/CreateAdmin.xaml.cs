@@ -179,7 +179,7 @@ namespace BootVerhuurWpf
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            Login window = new Login();
+            LoginWindow window = new LoginWindow();
             window.Show();
             Close();
         }

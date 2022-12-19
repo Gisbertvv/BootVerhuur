@@ -29,7 +29,7 @@ namespace BootVerhuurWpf
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
   
 
-            if (Login.role == "admin" || Login.role == "Admin")
+            if (LoginWindow.role == "admin" || LoginWindow.role == "Admin")
             {
                 btn0.Visibility = Visibility.Visible;
                 btn1.Visibility = Visibility.Visible;
@@ -82,7 +82,7 @@ namespace BootVerhuurWpf
         }
         private void Logout(object sender, RoutedEventArgs e)
         {
-            Login window = new Login();
+            LoginWindow window = new LoginWindow();
             window.Show();
             Close();
         }
