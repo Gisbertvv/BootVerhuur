@@ -24,8 +24,9 @@ namespace BootVerhuurWpf
         public static string boatingLevel;
         public static string role;
 
-        public Login(string username, string password)
+        public static bool getLogin(string username, string password)
         {
+            bool s = false;
             try
             {
              
@@ -60,12 +61,7 @@ namespace BootVerhuurWpf
                         //id = dataTable.Columns.Add("id").ColumnName;
                         //id = dataTable.Columns.Contains();
                         connection.Close();
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Usename of password not correct");
+                        s = true;
                     }
                 }
             }
@@ -73,6 +69,8 @@ namespace BootVerhuurWpf
             {
                 Console.WriteLine(ex.ToString());
             }
+
+            return s;
         }
     }
 }

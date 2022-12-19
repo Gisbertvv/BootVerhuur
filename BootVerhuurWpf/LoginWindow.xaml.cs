@@ -20,8 +20,16 @@ namespace BootVerhuurWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            new Login(txtUsername.Text, txtPassword.Password);
-            Close();
+            bool s = Login.getLogin(txtUsername.Text, txtPassword.Password);
+
+            if (s) { 
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                Close();
+            }else if (!s)
+            {
+                MessageBox.Show("Usename of password not correct");
+            }
         }
     }
 }
