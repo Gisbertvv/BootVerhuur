@@ -91,5 +91,11 @@ namespace BootVerhuurWpf
                 connection.Close();
             }
         }
+/*        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
+        }*/
     }
 }

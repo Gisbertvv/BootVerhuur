@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Syncfusion.XlsIO.Implementation.PivotAnalysis;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,22 +78,42 @@ namespace BootVerhuurWpf
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            Close();
+            Login login = new Login();
+            this.Close();
+            login.Show();
         }
+
+
 
         private void Open_AdminPanel(object sender, RoutedEventArgs e)
         {
             AdminPanel window = new AdminPanel();
-
+            this.Close();
             window.Show();
-            Close();
+            
         }
 
         private void reserve(object sender, RoutedEventArgs e)
         {
             Temp tp = new Temp();
+            this.Close();
             tp.Show();
-            Close();
+            
+        }
+/*        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
+        }*/
+
+        private void Edit(object sender, RoutedEventArgs e)
+        {
+            Edit_member edit = new Edit_member();
+
+            edit.Show();
+
+
         }
     }
 }

@@ -28,6 +28,8 @@
                     ClickMode="Press"/>
             <Button x:Name="btn4" Content="Uitloggen"
                     Click="Logout"/>
+            <Button x:Name="btn6" Content="Aanpassen user"
+                    Click="Edit"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Panel.ZIndex="1">
             <Image Source="/Images/roeienpng.png" Width="300" />

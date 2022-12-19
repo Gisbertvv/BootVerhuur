@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace BootVerhuur
 {
-    internal class Database
+    public static class Database
     {
 
-        public void test()
+        public static void test()
         {
             try
             {
@@ -48,7 +48,7 @@ namespace BootVerhuur
             Console.ReadLine();
         }
 
-        public void standardQeury(SqlConnection connection)
+        public static void standardQeury(SqlConnection connection)
         {
             String sql = "SELECT name, collation_name FROM sys.databases";
             connection.Open();
@@ -63,6 +63,15 @@ namespace BootVerhuur
                     }
                 }
             }
+        }
+
+        public static void basicConnection()
+        {
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            builder.DataSource = "127.0.0.1";
+            builder.UserID = "sa";
+            builder.Password = "Havermout1325";
+            builder.InitialCatalog = "BootVerhuur";
         }
 
     }
