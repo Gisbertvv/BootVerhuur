@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
 using Syncfusion.DocIO.DLS;
+using Syncfusion.XPS;
+using System.Reflection;
 
 namespace BootVerhuurWpf
 {
@@ -107,10 +109,7 @@ namespace BootVerhuurWpf
             }
         }
 
-        private void Logout(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+ 
 
         private void Book(object sender, RoutedEventArgs e)
         {
@@ -185,7 +184,8 @@ namespace BootVerhuurWpf
             }
             else
             {
-                sb.Insert(1, ":");
+                sb.Insert(0, "0");
+                sb.Insert(2, ":");
             }
 
             reservationendtime = sb.ToString();
@@ -238,7 +238,8 @@ namespace BootVerhuurWpf
                     {
                         GetReservationID();
                         Getendtime(reservationtime);
-
+/*                        int index = Alltimes.IndexOf(reservationtime);
+                        string endtime = Alltimes[index + 4];*/
                         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                         builder.DataSource = "127.0.0.1";
                         builder.UserID = "SA";
@@ -388,21 +389,40 @@ namespace BootVerhuurWpf
 
         private void t()
         {
-                     
+            int indexb;
+            int indexe;
+            int ee = 9;
+            SetTimeBox();
           while (begintimes.Count > 0)
-            {
-                int index = Alltimes.IndexOf(begintimes[0]);
+            {                
                 try
                 {
-                    int before = index- 4;
-                    
-                    Alltimes.RemoveRange(before, index);
-                    begintimes.RemoveAt(0);                  
+
+                    if (begintimes[0].Equals(Alltimes[0]))
+                    {
+                        indexb = 0;
+                        Alltimes.RemoveRange(indexb, 5);
+                        begintimes.RemoveAt(0);
+                        endtimes.RemoveAt(0);
+                    }
+                    else
+                    {
+                        indexb = Alltimes.IndexOf(begintimes[0]);                      
+                        indexb -= 4;
+                        
+                        Alltimes.RemoveRange(indexb, ee);
+                        begintimes.RemoveAt(0);
+                        endtimes.RemoveAt(0);
+                    }
                 }
 
                 catch(ArgumentOutOfRangeException ae)
-                {
+                {                  
                     break;
+                }
+                catch(ArgumentException e)
+                {                
+                    ee--;
                 }
            
             }
@@ -416,7 +436,7 @@ namespace BootVerhuurWpf
         }
 
         /// <summary>
-        /// rounds the time to the closest half hour or hour
+        /// rounds the time up to the closest half hour or hour
         /// </summary>
         /// <param name="Input"></param>
         /// <returns></returns>
@@ -445,6 +465,7 @@ namespace BootVerhuurWpf
             else if(selecteddate.Equals(date1))
             {
                 int index = Alltimes.IndexOf(RoundMinutes(DateTime.Now));
+                //return 09:00 in alltimes = 9:00
                 Alltimes.RemoveRange(0, index);
             }
         }
@@ -455,26 +476,32 @@ namespace BootVerhuurWpf
             Alltimes.Clear();
             int hours = 6;
             int minutes = 0;
-            if (minutes.ToString().EndsWith('0'))
-            {
-                Gekozentijd.Items.Add($"{hours}:00");
-                Alltimes.Add($"{hours}:00");
-                minutes += 30;
-            }
             // is the endtime need to take 2 hours because cant row when dark.
             while (hours != 18)
             {
-                if (minutes == 60)
+                if(hours.ToString().Length == 1 && minutes.ToString().Length == 1)
                 {
-                    hours += 1;
-                    minutes = 0;
-                    Alltimes.Add($"{hours}:00");
+                    Alltimes.Add($"0{hours}:{minutes}0");
+                    minutes+= 30;
                 }
-                else
+                else if (hours.ToString().Length == 1 && minutes.ToString().Length ==2)
+                {
+                    Alltimes.Add($"0{hours}:{minutes}");
+                    hours += 1;
+                    minutes= 0;
+                }
+                else if(hours.ToString().Length == 2&&minutes.ToString().Equals("0"))
+                {
+                    Alltimes.Add($"{hours}:{minutes}0");
+                    minutes = 30;                   
+                }
+                else if (hours.ToString().Length == 2 && minutes.ToString().Equals("30"))
                 {
                     Alltimes.Add($"{hours}:{minutes}");
+                    minutes = 0;
+                    hours += 1;
                 }
-                minutes += 30;
+
             }
             foreach(string s in Alltimes)
             {
@@ -504,6 +531,10 @@ namespace BootVerhuurWpf
         private void Open_AdminPanel(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void Backclick(object sender, RoutedEventArgs e)

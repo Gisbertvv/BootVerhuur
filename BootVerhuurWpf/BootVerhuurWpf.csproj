@@ -8,6 +8,14 @@
     <ApplicationIcon>Images\rowing.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
     <None Remove="Images\backgroundBootVerhuur.png" />
