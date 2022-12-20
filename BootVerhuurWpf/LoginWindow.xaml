@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
         Title="Login"
+        Name="Login"
         WindowState="Maximized">
     <Border Style="{DynamicResource Bordervisual}">
         <Grid Style="{DynamicResource GridFocusVisual}">

@@ -27,6 +27,7 @@ namespace BootVerhuurWpf
         public static bool getLogin(string username, string password)
         {
             bool s = false;
+            OpenConnnection();
             try
             {
              
