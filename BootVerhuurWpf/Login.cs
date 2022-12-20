@@ -26,6 +26,7 @@ namespace BootVerhuurWpf
 
         public Login(string username, string password)
         {
+            OpenConnnection();
             try
             {
              

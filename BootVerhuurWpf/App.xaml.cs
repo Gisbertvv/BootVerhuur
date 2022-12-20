@@ -18,7 +18,8 @@ namespace BootVerhuurWpf
         {
             //Register Syncfusion license
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Nzc2NjE5QDMyMzAyZTMzMmUzMGd1bDJuL0U4UUZJOVpmZVlBWjYvSU9uazROWXJITUg4blFINmc0SEtEaE09");
-
+            Database database= new Database();
+            database.OpenConnnection();
             Colors panel = new Colors();
             Color color = (Color)ColorConverter.ConvertFromString(panel.GetColors()[0]);
             SolidColorBrush solidColorBrush = new SolidColorBrush(color);

@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Management.Automation;
 
 
@@ -13,6 +14,22 @@ namespace BootVerhuur
 
             try
             {
+                string filename;
+                if (File.Exists("..\\..\\..\\..\\lib\\Test.bat"))
+                {
+                    Console.WriteLine("Specified file exists.");
+                    filename = "..\\..\\..\\..\\lib\\Test.bat";
+                    Process process = new Process();
+                    process.StartInfo.FileName = filename;
+                    process.StartInfo.CreateNoWindow = true;
+                    process.Start();
+                    process.Close();
+                }
+                else
+                {
+                    Console.WriteLine("Specified file does not " +
+                                      "exist in the current directory.");
+                }
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                 builder.DataSource = "127.0.0.1";
                 builder.UserID = "SA";
@@ -29,12 +46,10 @@ namespace BootVerhuur
                 Console.WriteLine(e.ToString());
             }
         }
-/*        public void SSH()
-        {
-            using var ps = PowerShell.Create();
-            ps.AddScript("ssh -L 1433:localhost:1433 student@145.44.233.236").Invoke();
 
-        }*/
+
+
+
     }
 }
 
