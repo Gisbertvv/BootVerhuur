@@ -24,7 +24,6 @@ namespace BootVerhuur
             _builder.InitialCatalog = "BootVerhuur";
         }
 
-
         protected static SqlConnection GetConnection()
         {
             return new SqlConnection(_builder.ConnectionString);
@@ -50,15 +49,6 @@ namespace BootVerhuur
                     Console.WriteLine("Specified file does not " +
                                       "exist in the current directory.");
                 }
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-                SqlConnection connection = new(builder.ConnectionString);
-                
-                connection.Open();
-
             }
             catch (SqlException e)
             {

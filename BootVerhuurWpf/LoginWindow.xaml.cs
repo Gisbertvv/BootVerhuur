@@ -23,7 +23,9 @@ namespace BootVerhuurWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            bool s = Login.getLogin(txtUsername.Text, txtPassword.Password);
+            Login login = new Login();
+            bool s = login.getLogin(txtUsername.Text, txtPassword.Password);
+
 
             if (s) { 
                 MainWindow mainWindow = new MainWindow();
@@ -34,6 +36,7 @@ namespace BootVerhuurWpf
                 MessageBox.Show("Usename of password not correct");
             }
         }
+
         private void LoginWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string filename;
