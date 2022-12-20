@@ -22,6 +22,11 @@ using BootVerhuur;
 using Xceed.Wpf.Toolkit;
 using MessageBox = System.Windows.MessageBox;
 using WindowStartupLocation = System.Windows.WindowStartupLocation;
+using Syncfusion.CompoundFile.DocIO.Net;
+using Windows.System.Profile;
+using System.IO;
+using System.IO.Packaging;
+using Microsoft.Identity.Client;
 
 namespace BootVerhuurWpf
 {
@@ -91,31 +96,58 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private string OpenExplorer()
+        private void OpenExplorer(string path, string fileName)
         {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            //Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
 
-            bool? response = openFileDialog.ShowDialog();
+            //bool? response = openFileDialog.ShowDialog();
 
-            if (response == true)
+            //if (response == true)
+            //{
+            //    string filePath = openFileDialog.FileName;
+
+            //    return filePath;
+            //}
+
+            //return null;
+            
+            try
             {
-                string filePath = openFileDialog.FileName;
+                OpenFileDialog dialog = new OpenFileDialog();
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                    // Get selected file name
+                    var getFileName = System.IO.Path.GetFileName(dialog.FileName);
+                    
+                    // Change file name
 
-                return filePath;
+                    //if (File.Exists(getFileName))
+                    //{
+                        System.IO.File.Move(getFileName, fileName);
+                    //}
+                    path = path + fileName;
+                    File.Copy(dialog.FileName, path);
+                }
             }
-
-            return null;
+            catch(Exception ex) {
+                
+            }
         }
         private void UploadLogo(object sender, RoutedEventArgs e)
         {
-            string fileLogo = OpenExplorer();
-            MessageBox.Show(fileLogo);
+            // Path and name of file are here
+            OpenExplorer("D:\\OOSDDb\\BootVerhuur\\BootVerhuurWpf\\Logo\\", "logo1.png");
+
+            //string fileLogo = OpenExplorer();
+            //MessageBox.Show(fileLogo);
         }
 
         private void UploadBackground(object sender, RoutedEventArgs e)
         {
-            string fileBackground = OpenExplorer();
-            MessageBox.Show(fileBackground);
+            // Path and name of file are here
+            OpenExplorer("D:\\OOSDDb\\BootVerhuur\\BootVerhuurWpf\\BackgroundImage\\", "background1.png");
+
+            //string fileBackground = OpenExplorer();
+            //MessageBox.Show(fileBackground);
 
         }
     }

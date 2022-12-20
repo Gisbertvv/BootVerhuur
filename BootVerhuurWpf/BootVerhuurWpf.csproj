@@ -35,4 +35,9 @@
     <Resource Include="Images\test.png" />
     <Resource Include="Images\test1.png" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logo\" />
+    <Folder Include="BackgroundImage\" />
+  </ItemGroup>
 </Project>
