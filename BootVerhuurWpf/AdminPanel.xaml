@@ -14,9 +14,10 @@
         <Grid Style="{DynamicResource GridFocusVisual}" Width="auto" Height="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="1" Style="{DynamicResource LogoVisual}"/>
+            <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
             <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
             <Button x:Name="btn0" Content="Aanmaken"
                     Click="OpenCreateUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
@@ -29,15 +30,25 @@
         </StackPanel>
         
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Panel.ZIndex="1">
-                <Label Style="{DynamicResource LabelVisual}">Applicatie kleur instellingen</Label>
+                <Label Style="{DynamicResource LabelVisual}">Applicatie instellingen</Label>
                 <Label Content="Primaire kleur" Style="{DynamicResource LabelVisual}"/>
                 <syncfusion:ColorPicker Name="PrimaryColor" Brush="#FF61A18E" FontFamily="Microsoft Sans Serif" FontSize="18" Foreground="Black" Background="White" BorderThickness="0" FontWeight="Bold" FontStretch="Normal"/>
                 <Label Content="Secundaire kleur" Style="{DynamicResource LabelVisual}"/>
                 <syncfusion:ColorPicker Name="SecondaryColor" Brush="#FF5495BB " FontFamily="Microsoft Sans Serif" FontSize="18" Foreground="Black" Background="White" BorderThickness="0" FontWeight="Bold" FontStretch="Normal"/>
                 <Label Content="Achtergrond kleur" Style="{DynamicResource LabelVisual}"/>
                 <syncfusion:ColorPicker Name="BackgroundColor" Brush="LightBlue" FontFamily="Microsoft Sans Serif" FontSize="18" Foreground="Black" Background="White" BorderThickness="0" FontWeight="Bold" FontStretch="Normal"/>
+
                 <Button x:Name="btn" Content="Kleuren opslaan" HorizontalAlignment="Right" Margin="10,10" Click="AdminPanelInfo" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
-    </Grid>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Panel.ZIndex="1">
+                <Label Content="Afbeelding logo" Style="{DynamicResource LabelVisual}"/>
+                <Button x:Name="UploadLogoButton" Content="Upload file" Click="UploadLogo"/>
+
+                <Label Content="Achtergrond afbeelding" Style="{DynamicResource LabelVisual}"/>
+                <Button x:Name="UploadBackgroundButton" Content="Upload file" Click="UploadBackground"/>
+            </StackPanel>
+
+
+</Grid>
     </Border>
 </Window>

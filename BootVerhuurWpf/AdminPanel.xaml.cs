@@ -90,6 +90,34 @@ namespace BootVerhuurWpf
             mainWindow.Show();
             Close();
         }
+
+        private string OpenExplorer()
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+
+            bool? response = openFileDialog.ShowDialog();
+
+            if (response == true)
+            {
+                string filePath = openFileDialog.FileName;
+
+                return filePath;
+            }
+
+            return null;
+        }
+        private void UploadLogo(object sender, RoutedEventArgs e)
+        {
+            string fileLogo = OpenExplorer();
+            MessageBox.Show(fileLogo);
+        }
+
+        private void UploadBackground(object sender, RoutedEventArgs e)
+        {
+            string fileBackground = OpenExplorer();
+            MessageBox.Show(fileBackground);
+
+        }
     }
 }
     
