@@ -14,11 +14,16 @@ namespace BootVerhuurWpf
     {
         public string[] GetColors()
         {
+            /// <summary>
+            ///  Returns a the primary color, secondary color, background color from the database
+            /// </summary>
+            /// <returns>string array with colors </returns>
             string[] color = null;
             try
             {
                 using (var connection = GetConnection())
                 {
+     
                     String sql = "SELECT primary_color, secondary_color, background_color FROM appSettings";
                     connection.Open();
                     using (var command = new SqlCommand(sql, connection))
@@ -43,6 +48,11 @@ namespace BootVerhuurWpf
 
         public static void SetPrimaryColor(string PrimaryColor)
         {
+            /// <summary>
+            ///  Returns a the primary color, secondary color, background color from the database
+            /// </summary>
+            /// <param name="num"></param>
+            /// <returns>string array with colors </returns>
             try
             {
                 using (var connection = GetConnection())
