@@ -39,10 +39,6 @@ namespace BootVerhuur
                 Console.WriteLine(e.ToString());
             }
         }
-
-
-
-
     }
 }
 
