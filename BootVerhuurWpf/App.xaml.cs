@@ -27,7 +27,7 @@ namespace BootVerhuurWpf
 
             Color colorSecundary = (Color)ColorConverter.ConvertFromString(panel.GetColors()[1]);
             SolidColorBrush solidColorBrushSecundary = new SolidColorBrush(colorSecundary);
-            Resources.Add("SecundaryColor", solidColorBrushSecundary);
+            Resources.Add("SecondaryColor", solidColorBrushSecundary);
 
             Color colorBackground = (Color)ColorConverter.ConvertFromString(panel.GetColors()[2]);
             SolidColorBrush solidColorBrushBackground = new SolidColorBrush(colorBackground);

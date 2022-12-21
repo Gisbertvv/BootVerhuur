@@ -18,8 +18,6 @@ namespace BootVerhuurWpf
             this.Gebruikersnaam = gebruikersnaam;
             this.Wachtwoord = wachtwoord;
             this.Email = email;
-
-/*            InsertAdmin(connection(), gebruikersnaam, email, wachtwoord);*/
         }
     }
 }

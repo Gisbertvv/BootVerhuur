@@ -37,18 +37,20 @@
                 <syncfusion:ColorPicker Name="SecondaryColor" Brush="#FF5495BB " FontFamily="Microsoft Sans Serif" FontSize="18" Foreground="Black" Background="White" BorderThickness="0" FontWeight="Bold" FontStretch="Normal"/>
                 <Label Content="Achtergrond kleur" Style="{DynamicResource LabelVisual}"/>
                 <syncfusion:ColorPicker Name="BackgroundColor" Brush="LightBlue" FontFamily="Microsoft Sans Serif" FontSize="18" Foreground="Black" Background="White" BorderThickness="0" FontWeight="Bold" FontStretch="Normal"/>
-
-                <Button x:Name="btn" Content="Kleuren opslaan" HorizontalAlignment="Right" Margin="10,10" Click="AdminPanelInfo" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Panel.ZIndex="1">
                 <Label Content="Afbeelding logo" Style="{DynamicResource LabelVisual}"/>
-                <Button x:Name="UploadLogoButton" Content="Upload file" Click="UploadLogo"/>
+                <Button x:Name="UploadLogoButton" Content="Upload file" Click="UploadLogo"  Style="{DynamicResource ButtonUploadVisual}"/>
 
                 <Label Content="Achtergrond afbeelding" Style="{DynamicResource LabelVisual}"/>
-                <Button x:Name="UploadBackgroundButton" Content="Upload file" Click="UploadBackground"/>
+                <Button x:Name="UploadBackgroundButton" Content="Upload file" Click="UploadBackground"  Style="{DynamicResource ButtonUploadVisual}"/>
+
+                <Label Content="Pfd voor schadeformulier" Style="{DynamicResource LabelVisual}"/>
+                <Button x:Name="UploadPDFButton" Content="Upload file" Click="UploadBackground" Style="{DynamicResource ButtonUploadVisual}"/>
             </StackPanel>
-
-
-</Grid>
+            <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 350, 200, 0">
+                <Button x:Name="btn" Content="Opslaan" Margin="10,10" Click="AdminPanelInfo" Style="{DynamicResource ButtonFocusVisual}"/>
+            </StackPanel>
+        </Grid>
     </Border>
 </Window>

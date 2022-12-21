@@ -48,7 +48,7 @@
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="{StaticResource SecundaryColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontStretch" Value="Normal" />
         </Style>
@@ -59,7 +59,7 @@
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="{StaticResource SecundaryColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="FontStretch" Value="Normal" />
@@ -72,7 +72,7 @@
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="{StaticResource SecundaryColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource SecondaryColor}"/>
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontStretch" Value="Normal" />
             <Setter Property="MinWidth" Value="200" />
@@ -102,12 +102,50 @@
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource SecundaryColor}" />
+                                <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
                                 <Setter Property="Foreground" Value="White" />
                             </Trigger>
 
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="{StaticResource SecundaryColor}" />
+                                <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonUploadVisual" TargetType="{x:Type Button}">
+
+            <Setter Property="Background" Value="{StaticResource SecondaryColor}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="MinWidth" Value="200"/>
+            <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="5 ,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource PrimairyColor}" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{StaticResource PrimairyColor}" />
                                 <Setter Property="Foreground" Value="White" />
                             </Trigger>
                         </ControlTemplate.Triggers>
