@@ -111,7 +111,7 @@ namespace BootVerhuurWpf
                                      "',phone_number='" + this.phoneTXTBX.Text + "',boating_level='" +
                                      this.boating_levelTXTBX.Text + "',username='" + this.usernameTXTBX.Text +
                                      "',password='" + this.passwordTXTBX.Text + "' WHERE id = '"+this.IDTXTBOX.Text+"'";
-               
+
                 using (SqlCommand command = new SqlCommand(updateQuery, connection))
                 {
                     connection.Open();
@@ -126,7 +126,40 @@ namespace BootVerhuurWpf
 
             }
 
-            MessageBox.Show("Gebruiker is aangepast!");
+            MessageBox.Show("De gebruiker is aangepast!");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Weet u zeker dat u deze gebruiker permanent wilt verwijderen?",
+                    "Confirmatie",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "127.0.0.1";
+                builder.UserID = "sa";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "BootVerhuur";
+
+                SqlConnection connection = new SqlConnection(builder.ConnectionString);
+                try
+                {
+                    connection.Open();
+                    String query = "DELETE FROM member WHERE id = '" + this.IDTXTBOX.Text + "'";
+                    SqlCommand sqlCmd = new SqlCommand(query, connection);
+
+                    sqlCmd.ExecuteNonQuery();
+
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("howdydoody");
+                }
+            }
+
+
         }
     }
 }

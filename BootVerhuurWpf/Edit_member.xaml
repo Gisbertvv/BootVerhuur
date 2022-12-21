@@ -29,8 +29,9 @@
         <TextBox x:Name="usernameTXTBX" HorizontalAlignment="Left" Margin="169,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Height="22"/>
         <TextBox x:Name="passwordTXTBX" HorizontalAlignment="Left" Margin="169,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Height="22"/>
         <TextBox x:Name="IDTXTBOX" HorizontalAlignment="Left" Margin="169,9,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" IsReadOnly="True" Height="22"/>
-        <Button x:Name="updateBTN" Content="Update" HorizontalAlignment="Left" Margin="238,227,0,0" VerticalAlignment="Top" Width="67" Click="updateBTN_Click"/>
-        <Button x:Name="reloadBTN" Content="Reload Table" HorizontalAlignment="Left" Height="31" Margin="664,229,0,0" VerticalAlignment="Top" Width="126" Click="reloadBTN_Click"/>
+        <Button x:Name="updateBTN" Content="Update" HorizontalAlignment="Left" Margin="244,229,0,0" VerticalAlignment="Top" Width="60" Click="updateBTN_Click" Height="26" Background="#FF32BE00"/>
+        <Button x:Name="reloadBTN" Content="Update Table" HorizontalAlignment="Left" Height="31" Margin="654,229,0,0" VerticalAlignment="Top" Width="126" Click="reloadBTN_Click" Background="#FFA0A0A0" BorderBrush="Black" FontWeight="Bold"/>
+        <Button Content="Remove" HorizontalAlignment="Left" Margin="169,229,0,0" VerticalAlignment="Top" Width="60" Height="26" Background="Red" Click="Button_Click"/>
 
     </Grid>
 </Window>
