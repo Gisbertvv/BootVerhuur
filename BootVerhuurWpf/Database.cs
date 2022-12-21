@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Diagnostics;
+using System.IO;
+
+
 
 
 namespace BootVerhuur
@@ -24,10 +24,37 @@ namespace BootVerhuur
             _builder.InitialCatalog = "BootVerhuur";
         }
 
-
         protected static SqlConnection GetConnection()
         {
             return new SqlConnection(_builder.ConnectionString);
+        }
+        public void OpenConnnection()
+        {
+
+            try
+            {
+                string filename;
+                if (File.Exists("..\\..\\..\\..\\lib\\Test.bat"))
+                {
+                    Console.WriteLine("Specified file exists.");
+                    filename = "..\\..\\..\\..\\lib\\Test.bat";
+                    Process process = new Process();
+                    process.StartInfo.FileName = filename;
+                    process.StartInfo.CreateNoWindow = true;
+                    process.Start();
+                    process.Close();
+                }
+                else
+                {
+                    Console.WriteLine("Specified file does not " +
+                                      "exist in the current directory.");
+                }
+            }
+            catch (SqlException e)
+            {
+
+                Console.WriteLine(e.ToString());
+            }
         }
     }
 }

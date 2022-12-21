@@ -24,7 +24,7 @@ namespace BootVerhuurWpf
         public static string boatingLevel;
         public static string role;
 
-        public static bool getLogin(string username, string password)
+        public bool getLogin(string username, string password)
         {
             bool s = false;
             try
@@ -38,7 +38,7 @@ namespace BootVerhuurWpf
                     SqlCommand sqlCmd = new SqlCommand(query, connection);
                         
 
-                        //Check if username and password are correct
+                    //Check if username and password are correct
                     sqlCmd.CommandType = System.Data.CommandType.Text;
                     sqlCmd.Parameters.AddWithValue("@username", username);
                     sqlCmd.Parameters.AddWithValue("@password", password);
@@ -72,5 +72,11 @@ namespace BootVerhuurWpf
 
             return s;
         }
+/*        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
+        }*/
     }
 }

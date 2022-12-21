@@ -9,14 +9,14 @@ namespace BootVerhuurWpf
 {
     public class Member
     {
-        public static String Voornaam { get; set; }
-        public static String Achternaam { get; set; }
-        public static String Gebruikersnaam { get; set; }
-        public static String Wachtwoord { get; set; }
-        public static String Email { get; set; }
-        public static String Telefoonnummer { get; set; }
-        public static String Rol { get; set; }
-        public static String Niveau { get; set; }
+        public static String? Voornaam { get; set; }
+        public static String? Achternaam { get; set; }
+        public static String? Gebruikersnaam { get; set; }
+        public static String? Wachtwoord { get; set; }
+        public static String? Email { get; set; }
+        public static String? Telefoonnummer { get; set; }
+        public static String? Rol { get; set; }
+        public static String? Niveau { get; set; }
 
         public Member(string voornaam, string achternaam, string gebruikersnaam, string wachtwoord, string email, string telefoonnummer, string rol, string niveau)
         {

@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Media;
 using Syncfusion.Pdf.Parsing;
+using System.Diagnostics;
+using System.IO;
 
 namespace BootVerhuurWpf
 {
@@ -20,7 +22,9 @@ namespace BootVerhuurWpf
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            bool s = Login.getLogin(txtUsername.Text, txtPassword.Password);
+            Login login = new Login();
+            bool s = login.getLogin(txtUsername.Text, txtPassword.Password);
+
 
             if (s) { 
                 MainWindow mainWindow = new MainWindow();
@@ -31,5 +35,6 @@ namespace BootVerhuurWpf
                 MessageBox.Show("Usename of password not correct");
             }
         }
+       
     }
 }
