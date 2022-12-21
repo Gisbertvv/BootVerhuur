@@ -12,18 +12,17 @@
         <Style x:Key="GridFocusVisual" TargetType="{x:Type Grid}">
             <Setter Property="Background">
                 <Setter.Value>
-                    <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/test1.png"/>
+                    <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/Background/background.png"/>
                 </Setter.Value>
             </Setter>
         </Style>
         <Style x:Key="LogoVisual" TargetType="{x:Type Image}">
-            <Setter Property="Source" Value="/Images/roeienpng.png" />
+            <Setter Property="Source" Value="/Images/Logo/logo.png" />
             <Setter Property="Margin" Value="25" />
             <Setter Property="Width" Value="150" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="Opacity" Value="0.4" />
-            <Setter Property="Source" Value="/Images/roeienpng.png" />
         </Style>
 
 

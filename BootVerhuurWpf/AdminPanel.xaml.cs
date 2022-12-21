@@ -27,6 +27,8 @@ using Windows.System.Profile;
 using System.IO;
 using System.IO.Packaging;
 using Microsoft.Identity.Client;
+using System.Drawing;
+using System.Resources;
 
 namespace BootVerhuurWpf
 {
@@ -35,6 +37,8 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class AdminPanel : Window
     {
+        string pathLogo = @"D:/OOSDDb/BootVerhuur/BootVerhuurWpf/Images/Logo/";
+        string pathBackground = @"D:/OOSDDb/BootVerhuur/BootVerhuurWpf/Images/Background/";
         public AdminPanel()
         {
             InitializeComponent();
@@ -110,32 +114,87 @@ namespace BootVerhuurWpf
             //}
 
             //return null;
-            
-            try
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-                    // Get selected file name
-                    var getFileName = System.IO.Path.GetFileName(dialog.FileName);
-                    
-                    // Change file name
 
-                    //if (File.Exists(getFileName))
-                    //{
-                        System.IO.File.Move(getFileName, fileName);
-                    //}
-                    path = path + fileName;
-                    File.Copy(dialog.FileName, path);
+            //try
+            //{
+
+            //OpenFileDialog dialog = new OpenFileDialog();
+            //if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+            //    // Get selected file name
+
+            //    var getFileName = System.IO.Path.GetFileName(dialog.FileName);
+
+            // Change file name
+
+            //if (File.Exists(getFileName))
+            //{
+            //}
+
+
+            //path = path + getFileName;
+            //File.Copy(getFileName, path);
+            //System.IO.File.Move(getFileName, fileName);
+            //    }
+            //}
+            //catch(Exception ex) {
+
+            //}
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Images only. | *.png;";
+
+            DialogResult dialogResult = openFile.ShowDialog();
+
+            if (dialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                System.Drawing.Image img = System.Drawing.Image.FromFile(openFile.FileName);
+
+
+
+
+                // assign safe name for saving
+                string imgSafeName = fileName + ".png";
+
+                // give generic banner name so only one file exists at a time
+                string[] nameArray = imgSafeName.Split('.');
+                string imgTempName = nameArray[0];
+                string extension = nameArray[1];
+                imgTempName = fileName;
+
+                string pngString = imgTempName + ".png";
+
+                // get debug folder path
+                string appPath = path;
+
+                // check if file path exits
+                if (!System.IO.Directory.Exists(appPath))
+                {
+                    System.IO.Directory.CreateDirectory(appPath);
                 }
-            }
-            catch(Exception ex) {
-                
+
+                // if file exists, delete existing banner ad
+                if (File.Exists(appPath + imgSafeName))
+                {
+                    File.Delete(appPath + imgSafeName);
+                }
+
+                // save new banner ad
+                File.Copy(openFile.FileName, appPath + imgSafeName);
+
+                // If the file was not a png, reopen file and save it as a png
+                if (!extension.Equals("png"))
+                {
+                    // resave as png
+                    System.Drawing.Image bannerImg = System.Drawing.Image.FromFile(appPath + imgSafeName);
+                    bannerImg.Save(appPath + pngString, System.Drawing.Imaging.ImageFormat.Png);
+
+                    //ResXResourceWriter.AddResource(bannerImg, "Resource");
+                }
             }
         }
         private void UploadLogo(object sender, RoutedEventArgs e)
         {
             // Path and name of file are here
-            OpenExplorer("D:\\OOSDDb\\BootVerhuur\\BootVerhuurWpf\\Logo\\", "logo1.png");
+            OpenExplorer(pathLogo, "logo");
 
             //string fileLogo = OpenExplorer();
             //MessageBox.Show(fileLogo);
@@ -144,7 +203,7 @@ namespace BootVerhuurWpf
         private void UploadBackground(object sender, RoutedEventArgs e)
         {
             // Path and name of file are here
-            OpenExplorer("D:\\OOSDDb\\BootVerhuur\\BootVerhuurWpf\\BackgroundImage\\", "background1.png");
+            OpenExplorer(pathBackground, "background");
 
             //string fileBackground = OpenExplorer();
             //MessageBox.Show(fileBackground);
