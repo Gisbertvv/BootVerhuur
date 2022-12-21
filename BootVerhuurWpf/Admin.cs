@@ -41,7 +41,7 @@ namespace BootVerhuurWpf
             }
         }*/
         /// <summary>
-        /// Don't know how to make use of this from Bootverhuur
+        /// Don'AdjustTimeBox know how to make use of this from Bootverhuur
         /// </summary>
         /// <returns></returns>
         public SqlConnection connection()

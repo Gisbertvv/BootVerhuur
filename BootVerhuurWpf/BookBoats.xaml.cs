@@ -16,6 +16,7 @@ using System.Security.Cryptography.X509Certificates;
 using Syncfusion.DocIO.DLS;
 using Syncfusion.XPS;
 using System.Reflection;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace BootVerhuurWpf
 {
@@ -28,6 +29,7 @@ namespace BootVerhuurWpf
         public string bootniveau;
         public bool stir;
         int Id;
+        int reservationCount = 0;
         int reservationId;
         string status;
         string reservationendtime;
@@ -39,6 +41,7 @@ namespace BootVerhuurWpf
         List<string> begintimes = new List<string>();
         List<string> endtimes = new List<string>();
         List<string> Alltimes = new List<string>();
+        List<string> testlist = new List<string>();
 
         public BookBoats(int id)
         {
@@ -190,7 +193,11 @@ namespace BootVerhuurWpf
 
             reservationendtime = sb.ToString();
         }
-        int reservationCount = 0;
+        /// <summary>
+        /// check how many reservations a member has on the availible dates
+        /// </summary>
+        /// <param name="reservationdate"></param>
+        /// <param name="reservationdate2"></param>
         public void GetMemberIdCountReservations(string reservationdate, string reservationdate2)
         {
             try
@@ -202,7 +209,7 @@ namespace BootVerhuurWpf
                 builder.InitialCatalog = "Bootverhuur";
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
-                    String sql = $"Select count(*) from reservation where member_id = {memberId} and reservationDate = '{reservationdate}' or reservationDate = '{reservationdate2}'";
+                    String sql = $"Select count(*) from reservation where member_id = {memberId} and (reservationDate = '{reservationdate}' or reservationDate = '{reservationdate2}')";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();
@@ -234,12 +241,9 @@ namespace BootVerhuurWpf
                     MessageBox.Show("Je kunt maximaal 2 reserveringen hebben");
                 }
                 else
-                {
-                    {
+                {            
                         GetReservationID();
                         Getendtime(reservationtime);
-/*                        int index = Alltimes.IndexOf(reservationtime);
-                        string endtime = Alltimes[index + 4];*/
                         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                         builder.DataSource = "127.0.0.1";
                         builder.UserID = "SA";
@@ -259,7 +263,6 @@ namespace BootVerhuurWpf
                                 }
                             }
                         }
-                    }
                 }
             }
             catch (SqlException e)
@@ -269,6 +272,9 @@ namespace BootVerhuurWpf
 
             
         }
+        /// <summary>
+        /// gets the next id to insert the reservation
+        /// </summary>
         public void GetReservationID()
         {
             try
@@ -378,7 +384,7 @@ namespace BootVerhuurWpf
                         }
                     }
                 }
-                t();
+                AdjustTimeBox();
             }
             catch (SqlException e)
             {
@@ -387,47 +393,55 @@ namespace BootVerhuurWpf
             Console.ReadLine();
         }
 
-        private void t()
+        /// <summary>
+        /// deletes the unavailible timeslots out of the combobox
+        /// </summary>
+        private void AdjustTimeBox()
         {
             int indexb;
-            int indexe;
             int ee = 9;
+            int bb = 5;
             SetTimeBox();
           while (begintimes.Count > 0)
-            {                
+            {
                 try
                 {
 
-                    if (begintimes[0].Equals(Alltimes[0]))
+                    if (begintimes[0].Contains(Alltimes[0]))
                     {
                         indexb = 0;
-                        Alltimes.RemoveRange(indexb, 5);
+                        Alltimes.RemoveRange(indexb, bb);
                         begintimes.RemoveAt(0);
                         endtimes.RemoveAt(0);
                     }
                     else
                     {
-                        indexb = Alltimes.IndexOf(begintimes[0]);                      
+                        indexb = Alltimes.IndexOf(begintimes[0]);
                         indexb -= 4;
-                        
+
                         Alltimes.RemoveRange(indexb, ee);
                         begintimes.RemoveAt(0);
                         endtimes.RemoveAt(0);
                     }
                 }
 
-                catch(ArgumentOutOfRangeException ae)
-                {                  
+                catch (ArgumentOutOfRangeException ae)
+                {
                     break;
                 }
-                catch(ArgumentException e)
-                {                
-                    ee--;
-                }
-           
+                catch (ArgumentException e)
+                {
+                    if (begintimes[0].Contains(Alltimes[0]))
+                    {
+                        bb--;
+                    }
+                    else
+                    {
+                        ee--;
+                    }
+                }          
             }
-           
-           Gekozentijd.Items.Clear();
+            Gekozentijd.Items.Clear();
 
             foreach (string s in Alltimes)
             {
@@ -457,6 +471,9 @@ namespace BootVerhuurWpf
             return Input.ToShortTimeString();
         }
 
+        /// <summary>
+        /// Deletes all the times that fall in the 24 hours constraint
+        /// </summary>
         private void Minimum()
         {
             if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
@@ -465,15 +482,17 @@ namespace BootVerhuurWpf
             else if(selecteddate.Equals(date1))
             {
                 int index = Alltimes.IndexOf(RoundMinutes(DateTime.Now));
-                //return 09:00 in alltimes = 9:00
                 Alltimes.RemoveRange(0, index);
             }
         }
-
+        /// <summary>
+        /// fills the combobox with times with half hour between
+        /// </summary>
                 private void SetTimeBox()
                 {
             Gekozentijd.Items.Clear();
             Alltimes.Clear();
+           
             int hours = 6;
             int minutes = 0;
             // is the endtime need to take 2 hours because cant row when dark.
@@ -482,27 +501,32 @@ namespace BootVerhuurWpf
                 if(hours.ToString().Length == 1 && minutes.ToString().Length == 1)
                 {
                     Alltimes.Add($"0{hours}:{minutes}0");
+                    testlist.Add($"0{hours}:{minutes}0");
                     minutes+= 30;
                 }
                 else if (hours.ToString().Length == 1 && minutes.ToString().Length ==2)
                 {
                     Alltimes.Add($"0{hours}:{minutes}");
+                    testlist.Add($"0{hours}:{minutes}");
                     hours += 1;
                     minutes= 0;
                 }
                 else if(hours.ToString().Length == 2&&minutes.ToString().Equals("0"))
                 {
                     Alltimes.Add($"{hours}:{minutes}0");
+                    testlist.Add($"{hours}:{minutes}0");
                     minutes = 30;                   
                 }
                 else if (hours.ToString().Length == 2 && minutes.ToString().Equals("30"))
                 {
                     Alltimes.Add($"{hours}:{minutes}");
+                    testlist.Add($"{hours}:{minutes}");
                     minutes = 0;
                     hours += 1;
                 }
-
+               
             }
+            Minimum();
             foreach(string s in Alltimes)
             {
                 Gekozentijd.Items.Add(s);   
@@ -512,10 +536,7 @@ namespace BootVerhuurWpf
         private void SelectionDatechanged(object sender, SelectionChangedEventArgs e)
         {
             selecteddate = DP.SelectedDate.Value.ToShortDateString();
-            SetTimeBox();
-            Minimum();
             Getreservationtimes(Id, DP.SelectedDate.Value.ToShortDateString());
-
         }
 
         private void AccidentReport(object sender, RoutedEventArgs e)
