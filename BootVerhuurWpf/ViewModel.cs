@@ -30,7 +30,10 @@ namespace BootVerhuurWpf
         {
             
             //docStream = new FileStream(@"C:\Users\Damian\Downloads\schadeformulier-rv-naarden.pdf",FileMode.OpenOrCreate);
-            docStream = new FileStream(@"C:\Users\gisbe\Downloads\schadeformulier-rv-naarden.pdf", FileMode.OpenOrCreate);
+            //docStream = new FileStream(@"C:\Users\gisbe\Downloads\schadeformulier-rv-naarden.pdf", FileMode.OpenOrCreate);
+            docStream = new FileStream(@"C:\Users\gisbe\source\repos\BootVerhuur\BootVerhuurWpf\PDF\pdf.pdf", FileMode.OpenOrCreate);
+
+
 
         }
     }

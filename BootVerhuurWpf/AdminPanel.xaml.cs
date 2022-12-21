@@ -37,9 +37,10 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class AdminPanel : Window
     {
-        string pathLogo = @"D:/OOSDDb/BootVerhuur/BootVerhuurWpf/Images/Logo/";
-        string pathBackground = @"D:/OOSDDb/BootVerhuur/BootVerhuurWpf/Images/Background/";
-        string pathPDF = @"D:/OOSDDb/BootVerhuur/BootVerhuurWpf/PDF/";
+        string pathLogo = @"C:/Users/gisbe/source/repos/BootVerhuur/BootVerhuurWpf/Images/Logo/";
+        string pathBackground = @"C:/Users/gisbe/source/repos//BootVerhuur/BootVerhuurWpf/Images/Background/";
+        string pathPDF = @"C:/Users/gisbe/source/repos/BootVerhuur/BootVerhuurWpf/PDF/";
+
         public AdminPanel()
         {
             InitializeComponent();
@@ -150,8 +151,6 @@ namespace BootVerhuurWpf
                     // resave as png
                     System.Drawing.Image bannerImg = System.Drawing.Image.FromFile(appPath + imgSafeName);
                     bannerImg.Save(appPath + pngString, System.Drawing.Imaging.ImageFormat.Png);
-
-                    //ResXResourceWriter.AddResource(bannerImg, "Resource");
                 }
             }
         }
@@ -165,12 +164,13 @@ namespace BootVerhuurWpf
 
             if (dialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                MessageBox.Show();
+                string filePath = openFile.FileName;
+                //MessageBox.Show(filePath);
 
 
 
-                /*// assign safe name for saving
-                string imgSafeName = fileName + ".png";
+                // assign safe name for saving
+                string imgSafeName = fileName + ".pdf";
 
                 // give generic banner name so only one file exists at a time
                 string[] nameArray = imgSafeName.Split('.');
@@ -178,7 +178,7 @@ namespace BootVerhuurWpf
                 string extension = nameArray[1];
                 imgTempName = fileName;
 
-                string pngString = imgTempName + ".png";
+                string pngString = imgTempName + ".pdf";
 
                 // get debug folder path
                 string appPath = path;
@@ -197,17 +197,6 @@ namespace BootVerhuurWpf
 
                 // save new banner ad
                 File.Copy(openFile.FileName, appPath + imgSafeName);
-
-                // If the file was not a png, reopen file and save it as a png
-                if (!extension.Equals("png"))
-                {
-                    // resave as png
-                    System.Drawing.Image bannerImg = System.Drawing.Image.FromFile(appPath + imgSafeName);
-                    bannerImg.Save(appPath + pngString, System.Drawing.Imaging.ImageFormat.Png);
-
-                    //ResXResourceWriter.AddResource(bannerImg, "Resource");
-                }
-            }*/
             }
         }
 
