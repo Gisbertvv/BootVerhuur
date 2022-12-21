@@ -25,4 +25,8 @@
     <Resource Include="Images\Background\background.png" />
     <Resource Include="Images\Logo\logo.png" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PDF\" />
+  </ItemGroup>
 </Project>

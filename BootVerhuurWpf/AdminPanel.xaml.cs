@@ -39,6 +39,7 @@ namespace BootVerhuurWpf
     {
         string pathLogo = @"D:/OOSDDb/BootVerhuur/BootVerhuurWpf/Images/Logo/";
         string pathBackground = @"D:/OOSDDb/BootVerhuur/BootVerhuurWpf/Images/Background/";
+        string pathPDF = @"D:/OOSDDb/BootVerhuur/BootVerhuurWpf/PDF/";
         public AdminPanel()
         {
             InitializeComponent();
@@ -102,43 +103,6 @@ namespace BootVerhuurWpf
 
         private void OpenExplorer(string path, string fileName)
         {
-            //Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-
-            //bool? response = openFileDialog.ShowDialog();
-
-            //if (response == true)
-            //{
-            //    string filePath = openFileDialog.FileName;
-
-            //    return filePath;
-            //}
-
-            //return null;
-
-            //try
-            //{
-
-            //OpenFileDialog dialog = new OpenFileDialog();
-            //if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-            //    // Get selected file name
-
-            //    var getFileName = System.IO.Path.GetFileName(dialog.FileName);
-
-            // Change file name
-
-            //if (File.Exists(getFileName))
-            //{
-            //}
-
-
-            //path = path + getFileName;
-            //File.Copy(getFileName, path);
-            //System.IO.File.Move(getFileName, fileName);
-            //    }
-            //}
-            //catch(Exception ex) {
-
-            //}
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "Images only. | *.png;";
 
@@ -191,23 +155,78 @@ namespace BootVerhuurWpf
                 }
             }
         }
+
+        private void OpenExplorerPDF(string path, string fileName)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "PDF only. | *.PDF;";
+
+            DialogResult dialogResult = openFile.ShowDialog();
+
+            if (dialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                MessageBox.Show();
+
+
+
+                /*// assign safe name for saving
+                string imgSafeName = fileName + ".png";
+
+                // give generic banner name so only one file exists at a time
+                string[] nameArray = imgSafeName.Split('.');
+                string imgTempName = nameArray[0];
+                string extension = nameArray[1];
+                imgTempName = fileName;
+
+                string pngString = imgTempName + ".png";
+
+                // get debug folder path
+                string appPath = path;
+
+                // check if file path exits
+                if (!System.IO.Directory.Exists(appPath))
+                {
+                    System.IO.Directory.CreateDirectory(appPath);
+                }
+
+                // if file exists, delete existing banner ad
+                if (File.Exists(appPath + imgSafeName))
+                {
+                    File.Delete(appPath + imgSafeName);
+                }
+
+                // save new banner ad
+                File.Copy(openFile.FileName, appPath + imgSafeName);
+
+                // If the file was not a png, reopen file and save it as a png
+                if (!extension.Equals("png"))
+                {
+                    // resave as png
+                    System.Drawing.Image bannerImg = System.Drawing.Image.FromFile(appPath + imgSafeName);
+                    bannerImg.Save(appPath + pngString, System.Drawing.Imaging.ImageFormat.Png);
+
+                    //ResXResourceWriter.AddResource(bannerImg, "Resource");
+                }
+            }*/
+            }
+        }
+
         private void UploadLogo(object sender, RoutedEventArgs e)
         {
             // Path and name of file are here
             OpenExplorer(pathLogo, "logo");
-
-            //string fileLogo = OpenExplorer();
-            //MessageBox.Show(fileLogo);
         }
 
         private void UploadBackground(object sender, RoutedEventArgs e)
         {
             // Path and name of file are here
             OpenExplorer(pathBackground, "background");
+        }
 
-            //string fileBackground = OpenExplorer();
-            //MessageBox.Show(fileBackground);
-
+        private void UploadPdf(object sender, RoutedEventArgs e)
+        {
+            // Path and name of file are here
+            OpenExplorerPDF(pathPDF, "pdf");
         }
     }
 }

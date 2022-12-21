@@ -46,7 +46,7 @@
                 <Button x:Name="UploadBackgroundButton" Content="Upload file" Click="UploadBackground"  Style="{DynamicResource ButtonUploadVisual}"/>
 
                 <Label Content="Pfd voor schadeformulier" Style="{DynamicResource LabelVisual}"/>
-                <Button x:Name="UploadPDFButton" Content="Upload file" Click="UploadBackground" Style="{DynamicResource ButtonUploadVisual}"/>
+                <Button x:Name="UploadPDFButton" Content="Upload file" Click="UploadPdf" Style="{DynamicResource ButtonUploadVisual}"/>
             </StackPanel>
             <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 350, 200, 0">
                 <Button x:Name="btn" Content="Opslaan" Margin="10,10" Click="AdminPanelInfo" Style="{DynamicResource ButtonFocusVisual}"/>
