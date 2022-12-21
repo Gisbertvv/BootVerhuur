@@ -22,6 +22,7 @@
             Content="Login" 
             HorizontalAlignment="Center" 
               Click="btnLogin_Click"
+            IsDefault="true"
         />
         </Grid>
         </Border>

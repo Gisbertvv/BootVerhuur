@@ -72,7 +72,9 @@ namespace BootVerhuurWpf
 
         private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
+            Edit_member edit = new Edit_member();
 
+            edit.Show();
         }
 
         private void OpenReservePanel(object sender, RoutedEventArgs e)
@@ -91,9 +93,7 @@ namespace BootVerhuurWpf
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            Edit_member edit = new Edit_member();
-
-            edit.Show();
+            
 
 
         }
