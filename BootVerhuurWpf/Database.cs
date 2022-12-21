@@ -1,14 +1,33 @@
-﻿using System.Data.SqlClient;
+﻿//using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Management.Automation;
+using System.IO;
+
 
 
 
 namespace BootVerhuur
 {
-    public class DatabaseConnectie
+    public class Database
     {
-        public SqlConnection Connection { get; set; }
+        static SqlConnectionStringBuilder _builder = new SqlConnectionStringBuilder();
+
+        public Database()
+        {
+            _builder.DataSource = "127.0.0.1";
+            _builder.UserID = "sa";
+            _builder.Password = "Havermout1325";
+            _builder.InitialCatalog = "BootVerhuur";
+        }
+
+        protected static SqlConnection GetConnection()
+        {
+            return new SqlConnection(_builder.ConnectionString);
+        }
         public void OpenConnnection()
         {
 
@@ -30,8 +49,6 @@ namespace BootVerhuur
                     Console.WriteLine("Specified file does not " +
                                       "exist in the current directory.");
                 }
-             
-
             }
             catch (SqlException e)
             {
@@ -41,4 +58,3 @@ namespace BootVerhuur
         }
     }
 }
-

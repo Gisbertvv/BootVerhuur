@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using BootVerhuur;
-
 Console.WriteLine("Hello, World!");
 Console.WriteLine("git");
 DatabaseConnectie database = new();

@@ -7,32 +7,33 @@
         mc:Ignorable="d"
         Title="MainWindow"
         WindowState="Maximized">
-    <Grid x:Name="gridje" Width="auto" Height="auto">
-        <Grid.Background>
-            <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/test1.png"/>
-        </Grid.Background>
+    <Border Style="{DynamicResource Bordervisual}">
+    <Grid Style="{DynamicResource GridFocusVisual}" Width="auto" Height="auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
+        <Image Grid.Column="1" Style="{DynamicResource LogoVisual}"/>
         <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
             <Button x:Name="btn0" Content="Admin Panel"
-                    Click="Open_AdminPanel" ClickMode="Press"/>
-            <Button x:Name="btn5" Content="Aanmaken"
-                    Click="Open_Click" ClickMode="Press"/>
-            <Button x:Name="btn1" Content="Reseveren"
-                    ClickMode="Press"  Click="reserve"/>
-            <Button x:Name="btn2" Content="Schademelden"
-                    Click="AccidentReport" ClickMode="Press"/>
-            <Button x:Name="btn3" Content="Routes"
-                    ClickMode="Press"/>
-            <Button x:Name="btn4" Content="Uitloggen"
-                    Click="Logout"/>
-            <Button x:Name="btn6" Content="Aanpassen user"
-                    Click="Edit"/>
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Panel.ZIndex="1">
-            <Image Source="/Images/roeienpng.png" Width="300" />
+                    Click="OpenAdminPanel" ClickMode="Press"
+                    Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn1" Content="Aanmaken"
+                    Click="OpenCreateUserPanel" ClickMode="Press"
+                    Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn2" Content="Aanpassen"
+                    Click="OpenEditUserPanel" ClickMode="Press"
+                    Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn3" Content="Reseveren"
+                    ClickMode="Press" Click="OpenReservePanel"
+                    Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn4" Content="Schademelden"
+                    Click="AccidentReport" ClickMode="Press"
+                    Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn5" Content="Uitloggen"
+                    Click="Logout"
+                    Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
     </Grid>
+    </Border>
 </Window>

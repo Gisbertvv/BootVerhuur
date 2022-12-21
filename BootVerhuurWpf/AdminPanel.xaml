@@ -10,39 +10,34 @@
         mc:Ignorable="d"
         Title="Admin panel" 
         WindowState="Maximized">
-    <Grid x:Name="gridje" Width="auto" Height="auto">
-        <Grid.Background>
-            <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/test1.png"/>
-        </Grid.Background>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="8*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
-            <Button x:Name="btn0" Content="Admin Panel"
-                    Click="Open_AdminPanel" ClickMode="Press"/>
-            <Button x:Name="btn5" Content="Aanmaken"
-                    Click="Open_Click" ClickMode="Press"/>
-            <Button x:Name="btn1" Content="Reseveren"
-                    ClickMode="Press"/>
-            <Button x:Name="btn2" Content="Schademelden"
-                    Click="AccidentReport" ClickMode="Press"/>
-            <Button x:Name="btn3" Content="Routes"
-                    ClickMode="Press"/>
+    <Border Style="{DynamicResource Bordervisual}">
+        <Grid Style="{DynamicResource GridFocusVisual}" Width="auto" Height="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="1" Style="{DynamicResource LogoVisual}"/>
+            <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
+            <Button x:Name="btn0" Content="Aanmaken"
+                    Click="OpenCreateUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn1" Content="Aanpassen"
+                    Click="OpenEditUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn3" Content="Terug"
+                    Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn4" Content="Uitloggen"
-                    Click="Logout"/>
+                    Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
         
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Panel.ZIndex="1">
-            <Label>Applicatie kleur instellingen</Label>
-            <Label Content="Primaire kleur"/>
-            <syncfusion:ColorPicker Name="PrimaryColor" Brush="Blue"/>
-            <Label Content="Secundaire kleur"/>
-            <syncfusion:ColorPicker Name="SecondaryColor" Brush="Green"/>
-            <Label Content="Achtergrond kleur"/>
-            <syncfusion:ColorPicker Name="BackgroundColor" Brush="LightBlue"/>
-            <Button x:Name="btn" Content="Kleuren opslaan" HorizontalAlignment="Right" Margin="10,10" Click="AdminPanelInfo"/>
+                <Label Style="{DynamicResource LabelVisual}">Applicatie kleur instellingen</Label>
+                <Label Content="Primaire kleur" Style="{DynamicResource LabelVisual}"/>
+                <syncfusion:ColorPicker Name="PrimaryColor" Brush="#FF61A18E" FontFamily="Microsoft Sans Serif" FontSize="18" Foreground="Black" Background="White" BorderThickness="0" FontWeight="Bold" FontStretch="Normal"/>
+                <Label Content="Secundaire kleur" Style="{DynamicResource LabelVisual}"/>
+                <syncfusion:ColorPicker Name="SecondaryColor" Brush="#FF5495BB " FontFamily="Microsoft Sans Serif" FontSize="18" Foreground="Black" Background="White" BorderThickness="0" FontWeight="Bold" FontStretch="Normal"/>
+                <Label Content="Achtergrond kleur" Style="{DynamicResource LabelVisual}"/>
+                <syncfusion:ColorPicker Name="BackgroundColor" Brush="LightBlue" FontFamily="Microsoft Sans Serif" FontSize="18" Foreground="Black" Background="White" BorderThickness="0" FontWeight="Bold" FontStretch="Normal"/>
+                <Button x:Name="btn" Content="Kleuren opslaan" HorizontalAlignment="Right" Margin="10,10" Click="AdminPanelInfo" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
-        <!--<Image Source="/Images/roeienpng.png" Width="300" />-->
     </Grid>
+    </Border>
 </Window>

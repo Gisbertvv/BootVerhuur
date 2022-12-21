@@ -1,17 +1,21 @@
 ﻿using System;
-using System.Windows;
-using System.Data.SqlClient;
+using System.Collections.Generic;
 using System.Data;
-using System.Windows.Media;
-using Syncfusion.Pdf.Parsing;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using BootVerhuur;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using Syncfusion.Windows.Shared;
+using Windows.Networking;
 
 namespace BootVerhuurWpf
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
-    public partial class Login : Window
+    public class Login: Database
     {
+
         public static string id;
         public static string firstName;
         public static string lastName;
@@ -20,39 +24,24 @@ namespace BootVerhuurWpf
         public static string boatingLevel;
         public static string role;
 
-        public Login()
+        public bool getLogin(string username, string password)
         {
-            AdminPanel panel = new AdminPanel();
-            InitializeComponent();
-    
-            Color color = (Color)ColorConverter.ConvertFromString(panel.GetColors()[2]);
-            SolidColorBrush solidColorBrush = new SolidColorBrush(color);
-            gridje.Background = solidColorBrush;
-        }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            //Connect to database
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "127.0.0.1";
-            builder.UserID = "sa";
-            builder.Password = "Havermout1325";
-            builder.InitialCatalog = "BootVerhuur";
-            SqlConnection connection = new SqlConnection(builder.ConnectionString);
-
+            bool s = false;
             try
             {
-                // Check if connection is closed
-                if (connection.State == System.Data.ConnectionState.Closed)
+             
+                using (var connection = GetConnection())
                 {
                     connection.Open();
                     String query = "SELECT * FROM member WHERE username=@username AND password=@password";
+
                     SqlCommand sqlCmd = new SqlCommand(query, connection);
+                        
 
                     //Check if username and password are correct
                     sqlCmd.CommandType = System.Data.CommandType.Text;
-                    sqlCmd.Parameters.AddWithValue("@username", txtUsername.Text);
-                    sqlCmd.Parameters.AddWithValue("@password", txtPassword.Password);
+                    sqlCmd.Parameters.AddWithValue("@username", username);
+                    sqlCmd.Parameters.AddWithValue("@password", password);
 
                     //DataTable dataTable = new DataTable();
                     DataTable userTable = new DataTable();
@@ -71,14 +60,8 @@ namespace BootVerhuurWpf
 
                         //id = dataTable.Columns.Add("id").ColumnName;
                         //id = dataTable.Columns.Contains();
-
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Usename of password not correct");
+                        connection.Close();
+                        s = true;
                     }
                 }
             }
@@ -86,10 +69,8 @@ namespace BootVerhuurWpf
             {
                 Console.WriteLine(ex.ToString());
             }
-            finally
-            {
-                connection.Close();
-            }
+
+            return s;
         }
 /*        protected override void OnClosed(EventArgs e)
         {
