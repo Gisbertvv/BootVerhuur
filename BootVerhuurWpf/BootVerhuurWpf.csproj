@@ -9,17 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
-    <None Remove="Images\backgroundBootVerhuur.png" />
     <None Remove="Images\Background\background.png" />
     <None Remove="Images\Logo\logo.png" />
-    <None Remove="Images\roeienpng.png" />
-    <None Remove="Images\test.png" />
-    <None Remove="Images\test1.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Images\rowing.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,12 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\414cfec9-2bf7-4ac4-a800-d99f67985838.png" />
-    <Resource Include="Images\backgroundBootVerhuur.png" />
     <Resource Include="Images\Background\background.png" />
     <Resource Include="Images\Logo\logo.png" />
-    <Resource Include="Images\roeienpng.png" />
-    <Resource Include="Images\test.png" />
-    <Resource Include="Images\test1.png" />
   </ItemGroup>
 </Project>
