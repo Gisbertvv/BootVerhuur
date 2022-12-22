@@ -17,6 +17,7 @@ using Syncfusion.DocIO.DLS;
 using Syncfusion.XPS;
 using System.Reflection;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using Syncfusion.XlsIO.Parser.Biff_Records;
 
 namespace BootVerhuurWpf
 {
@@ -25,18 +26,20 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class BookBoats : Window
     {
+        public string status;
         public int aantalp;
         public string bootniveau;
         public bool stir;
         int Id;
         int reservationCount = 0;
         int reservationId;
-        string status;
+        
         string reservationendtime;
         string date1;
         string date2;
         string selecteddate;
         static int memberId = Int32.Parse(Login.id);
+        Bookboat bookboat = new Bookboat();
 
         List<string> begintimes = new List<string>();
         List<string> endtimes = new List<string>();
@@ -48,9 +51,13 @@ namespace BootVerhuurWpf
             Id = id;
             InitializeComponent();
             AdjustCalender();
-            Checkeverything(Id);
+            bookboat.Checkeverything(Id);
 
-        }
+          status = bookboat.status;
+          aantalp = bookboat.aantalp;
+          bootniveau = bookboat.bootniveau;
+          stir = bookboat.stir;
+    }
        
         /// <summary>
         /// if role is Lid only see two days ahead for reservation and no reservation for the weekend
@@ -198,7 +205,7 @@ namespace BootVerhuurWpf
         /// </summary>
         /// <param name="reservationdate"></param>
         /// <param name="reservationdate2"></param>
-        public void GetMemberIdCountReservations(string reservationdate, string reservationdate2)
+/*        public void GetMemberIdCountReservations(string reservationdate, string reservationdate2)
         {
             try
             {
@@ -228,13 +235,13 @@ namespace BootVerhuurWpf
             {
                 Console.WriteLine(e.ToString());
             }
-        }
+        }*/
         
         public void InsertReservation(string reservationdate, string reservationtime)
         {
             try
             {
-                    GetMemberIdCountReservations(date1, date2);
+                    bookboat.GetMemberIdCountReservations(date1, date2);
                 
                 if (reservationCount == 2)
                 {
@@ -242,7 +249,8 @@ namespace BootVerhuurWpf
                 }
                 else
                 {            
-                        GetReservationID();
+                        
+                    int i =bookboat.GetReservationID();
                         Getendtime(reservationtime);
                         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                         builder.DataSource = "127.0.0.1";
@@ -251,13 +259,13 @@ namespace BootVerhuurWpf
                         builder.InitialCatalog = "Bootverhuur";
                         using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                         {
-                            String sql = $"insert into reservation values ({reservationId}, {Id},'{reservationdate}' , '{reservationtime}', '{reservationendtime}', GetDate(),{memberId})";
+                            String sql = $"insert into reservation values ({i}, {Id},'{reservationdate}' , '{reservationtime}', '{reservationendtime}', GetDate(),{memberId})";
                             using (SqlCommand command = new SqlCommand(sql, connection))
                             {
                                 connection.Open();
                                 using (SqlDataReader reader = command.ExecuteReader())
                                 {
-                                    Getreservationtimes(Id,reservationdate);                              
+                                    Getreservationtimes(Id,reservationdate);
                                     MessageBox.Show("Reservering is aangemaakt", "SUCCES");
                                     
                                 }
@@ -275,7 +283,7 @@ namespace BootVerhuurWpf
         /// <summary>
         /// gets the next id to insert the reservation
         /// </summary>
-        public void GetReservationID()
+/*        public void GetReservationID()
         {
             try
             {
@@ -307,9 +315,9 @@ namespace BootVerhuurWpf
                 Console.WriteLine(e.ToString());
             }
             Console.ReadLine();
-        }
+        }*/
 
-        public void Checkeverything(int id)
+/*        public void Checkeverything(int id)
         {
             try
             {
@@ -343,7 +351,7 @@ namespace BootVerhuurWpf
                 Console.WriteLine(e.ToString());
             }
             Console.ReadLine();
-        }
+        }*/
 
         private void backclick(object sender, RoutedEventArgs e)
         {
@@ -377,7 +385,7 @@ namespace BootVerhuurWpf
                         {
                             while (reader.Read())
                             {
-  
+
                                 begintimes.Add(reader.GetString(3));
                                 endtimes.Add(reader.GetString(4));
                             }
