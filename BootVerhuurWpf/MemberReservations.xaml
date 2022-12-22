@@ -33,7 +33,7 @@
                     Click="Logout"/>
         </StackPanel>
         <StackPanel Grid.Column="2">
-            <DataGrid Name="Reservationsinfo" Height="220" AutoGenerateColumns="True" Margin="10"  IsReadOnly="True" SelectionUnit="FullRow"/>
+            <DataGrid Name="Reservationsinfo" Height="380" AutoGenerateColumns="True" Margin="20"  IsReadOnly="True" SelectionUnit="FullRow" Width="440"/>
         </StackPanel>
     </Grid>
 </Window>

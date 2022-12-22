@@ -35,11 +35,11 @@ namespace BootVerhuurWpf
             InitializeComponent();
             fillDatagrid();
         }
-
+        /// <summary>
+        /// fills the datagrid with all the reservations the member has 
+        /// </summary>
         private void fillDatagrid()
         {
-
-
             List<Reservation> reservations = new List<Reservation>();
             GetCountReservations();
             GetReservationId();
@@ -55,7 +55,9 @@ namespace BootVerhuurWpf
             Reservationsinfo.ItemsSource = reservations;
         }
 
-
+        /// <summary>
+        /// Gets how many reservations there are
+        /// </summary>
         public void GetCountReservations()
         {
             try
@@ -86,7 +88,9 @@ namespace BootVerhuurWpf
                 Console.WriteLine(e.ToString());
             }
         }
-
+        /// <summary>
+        /// gets all the ids from all the reservations and puts them in a list
+        /// </summary>
         public void GetReservationId()
         {
             try
@@ -117,6 +121,11 @@ namespace BootVerhuurWpf
                 Console.WriteLine(e.ToString());
             }
         }
+
+        /// <summary>
+        /// gets all the information from a specific reservationid
+        /// </summary>
+        /// <param name="reservationid"></param>
         public void GetReservationInfo(int reservationid)
         {
             try

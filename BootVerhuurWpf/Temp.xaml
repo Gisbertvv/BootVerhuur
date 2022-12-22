@@ -18,6 +18,11 @@
                     Margin="10, 5" Width="130"
                     HorizontalAlignment="Center"
                     Foreground="Green"/>
+            <Button x:Name="btn" Content="mijn reserveringen"
+                    Margin="10, 5" Width="130"
+                    HorizontalAlignment="Center"
+                    Foreground="Green"
+                    Click="Member_reservations"/>
             <Button x:Name="btn2" Content="Schademelden"
 
                     Width="130" 

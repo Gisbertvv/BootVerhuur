@@ -202,5 +202,12 @@ namespace BootVerhuurWpf
             bk.Show();
             Close();
         }
+
+        private void Member_reservations(object sender, RoutedEventArgs e)
+        {
+            MemberReservations memberreserveration = new MemberReservations();  
+            memberreserveration.Show();
+            Close();
+        }
     }
 }
