@@ -26,7 +26,7 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class Edit_member : Window
     {
-        DataTable dt = new DataTable("member");
+        public static DataTable dt = new DataTable("member");
 
         public Edit_member()
         {
@@ -38,41 +38,8 @@ namespace BootVerhuurWpf
 
         public void showTable()
         {
-            DataTable dt = new DataTable("member");
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "127.0.0.1";
-            builder.UserID = "sa";
-            builder.Password = "Havermout1325";
-            builder.InitialCatalog = "BootVerhuur";
-
-            SqlConnection connection = new SqlConnection(builder.ConnectionString);
-            try
-            {
-                connection.Open();
-                String query =
-                    "SELECT id,first_name,last_name,phone_number,email,boating_level,role,username,password FROM member";
-                SqlCommand sqlCmd = new SqlCommand(query, connection);
-
-                sqlCmd.ExecuteNonQuery();
-
-                SqlDataAdapter adapter = new SqlDataAdapter(sqlCmd);
-
-
-
-                adapter.Fill(dt);
-
-                datagrid1.ItemsSource = dt.DefaultView;
-
-                adapter.Update(dt);
-
-
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                // Expres leeg gelaten omdat hij anders een "fout"melding geeft als je de tabel opnieuwd laadt voor de eerste keer
-                /*MessageBox.Show("ex.Message");*/
-            }
+            EditMember updateMemberTable = new EditMember();
+            updateMemberTable.UpdateTable(datagrid1);
         }
 
         private void reloadBTN_Click(object sender, RoutedEventArgs e)
@@ -98,35 +65,8 @@ namespace BootVerhuurWpf
         // Code om de database te updaten met de data uit de textboxen
         private void updateBTN_Click(object sender, RoutedEventArgs e)
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "127.0.0.1";
-            builder.UserID = "sa";
-            builder.Password = "Havermout1325";
-            builder.InitialCatalog = "BootVerhuur";
-
-            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-            {
-                String updateQuery = "UPDATE member SET first_name='" + this.first_nameTXTBX.Text + "',last_name='" +
-                                     this.last_nameTXTBX.Text + "',email='" + this.emailTXTBX.Text +
-                                     "',phone_number='" + this.phoneTXTBX.Text + "',boating_level='" +
-                                     this.boating_levelTXTBX.Text + "',username='" + this.usernameTXTBX.Text +
-                                     "',password='" + this.passwordTXTBX.Text + "' WHERE id = '"+this.IDTXTBOX.Text+"'";
-
-                using (SqlCommand command = new SqlCommand(updateQuery, connection))
-                {
-                    connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7} {8}", reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8));
-                        }
-                    }
-                }
-
-            }
-
-            MessageBox.Show("De gebruiker is aangepast!");
+            EditMember edit = new EditMember();
+            edit.EditUser(first_nameTXTBX.Text, last_nameTXTBX.Text, emailTXTBX.Text, phoneTXTBX.Text, boating_levelTXTBX.Text, usernameTXTBX.Text, passwordTXTBX.Text, IDTXTBOX.Text);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -136,30 +76,9 @@ namespace BootVerhuurWpf
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "sa";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-
-                SqlConnection connection = new SqlConnection(builder.ConnectionString);
-                try
-                {
-                    connection.Open();
-                    String query = "DELETE FROM member WHERE id = '" + this.IDTXTBOX.Text + "'";
-                    SqlCommand sqlCmd = new SqlCommand(query, connection);
-
-                    sqlCmd.ExecuteNonQuery();
-
-                    connection.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("howdydoody");
-                }
+                EditMember delete = new EditMember();
+                delete.DeleteUser(IDTXTBOX.Text);
             }
-
-
         }
     }
 }

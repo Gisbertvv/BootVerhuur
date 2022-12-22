@@ -5,14 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-        Title="Edit_member" Height="450" Width="800">
-    <Grid>
+        WindowState="Maximized"
+        Title="Edit_member">
+    <Border Style="{DynamicResource Bordervisual}">
+        <Grid Style="{DynamicResource GridFocusVisual}">
         <DataGrid 
             x:Name="datagrid1" 
             d:ItemsSource="{d:SampleData ItemCount=5}" 
             Margin="0,265,0,0" 
             IsReadOnly="False" SelectionChanged="datagrid1_SelectionChanged"
-            />
+        />
+        <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
         <Label x:Name="IDLBL" Content="ID" HorizontalAlignment="Left" Margin="60,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.926,0.163" Height="24"/>
         <Label x:Name="first_nameLBL" Content="Voornaam" HorizontalAlignment="Left" Margin="60,34,0,0" VerticalAlignment="Top"/>
         <Label x:Name="last_nameLBL" Content="Achternaam" HorizontalAlignment="Left" Margin="60,62,0,0" VerticalAlignment="Top"/>
@@ -34,4 +37,5 @@
         <Button Content="Remove" HorizontalAlignment="Left" Margin="169,229,0,0" VerticalAlignment="Top" Width="60" Height="26" Background="Red" Click="Button_Click"/>
 
     </Grid>
+    </Border>
 </Window>

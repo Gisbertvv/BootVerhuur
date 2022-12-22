@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using BootVerhuur;
 
 namespace BootVerhuurWpf
 {
     internal class EditMember :Database
     {
+
+
         public void EditUser(string firstname, string lastname, string email, string phoneNumber, string level, string username, string password, string id)
         {
             try
@@ -60,6 +64,38 @@ namespace BootVerhuurWpf
             catch (Exception ex)
             {
                 MessageBox.Show("howdydoody");
+            }
+        }
+
+        public void UpdateTable(DataGrid datagrid1)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+                    String query =
+                        "SELECT id,first_name,last_name,phone_number,email,boating_level,role,username,password FROM member";
+                    SqlCommand sqlCmd = new SqlCommand(query, connection);
+
+                    sqlCmd.ExecuteNonQuery();
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(sqlCmd);
+
+                    connection.Close();
+
+                    adapter.Fill(Edit_member.dt);
+
+                    datagrid1.ItemsSource = Edit_member.dt.DefaultView;
+
+                    adapter.Update(Edit_member.dt);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                // Expres leeg gelaten omdat hij anders een "fout"melding geeft als je de tabel opnieuwd laadt voor de eerste keer
+                /*MessageBox.Show("ex.Message");*/
             }
         }
     }
