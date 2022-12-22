@@ -401,6 +401,7 @@ namespace BootVerhuurWpf
             int indexb;
             int ee = 9;
             int bb = 5;
+            int mm = 4;
             SetTimeBox();
           while (begintimes.Count > 0)
             {
@@ -417,7 +418,7 @@ namespace BootVerhuurWpf
                     else
                     {
                         indexb = Alltimes.IndexOf(begintimes[0]);
-                        indexb -= 4;
+                        indexb -= mm;
 
                         Alltimes.RemoveRange(indexb, ee);
                         begintimes.RemoveAt(0);
@@ -427,7 +428,7 @@ namespace BootVerhuurWpf
 
                 catch (ArgumentOutOfRangeException ae)
                 {
-                    break;
+                    mm--;
                 }
                 catch (ArgumentException e)
                 {
