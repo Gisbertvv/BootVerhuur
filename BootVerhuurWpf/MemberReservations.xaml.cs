@@ -30,8 +30,9 @@ namespace BootVerhuurWpf
         DateTime createdAt;
         int reservationscount;
         string status;
-        List<int> reservationids = new List<int>();
-        List<int> reservationids2 = new List<int>();
+        List<int> reservationids;
+        List<int> reservationids2;
+        MemberReservationsSql MemberReservationsSql = new MemberReservationsSql();
 
         public MemberReservations()
         {
@@ -45,186 +46,26 @@ namespace BootVerhuurWpf
         {
             
             List<Reservation> reservations = new List<Reservation>();
-            GetCountReservations();
-            GetReservationId();
+            MemberReservationsSql.GetCountReservations();
+            reservationscount = MemberReservationsSql.reservationscount;
+            MemberReservationsSql.GetReservationId();
+            reservationids = MemberReservationsSql.reservationids;
 
             while (reservations.Count < reservationscount)
             {
                 foreach (int id in reservationids)
                 {
-                    GetReservationInfo(id);                
+                    MemberReservationsSql.GetReservationInfo(id);
+                     boatId = MemberReservationsSql.boatId;
+                     reservationDate =MemberReservationsSql.reservationDate;
+                     reservationFrom = MemberReservationsSql.reservationFrom ;
+                     reservationUntil = MemberReservationsSql.reservationUntil;
+                     createdAt = MemberReservationsSql.createdAt;
+                     status = MemberReservationsSql.status;
                     reservations.Add(new Reservation() { ReservationID=id,BoatId = boatId, ReservationDate = reservationDate, ReservationFrom = reservationFrom, ReservationUntil = reservationUntil, CreatedAt = createdAt, Status = status });                  
                 }
             }
             Reservationsinfo.ItemsSource = reservations;
-        }
-
-        /// <summary>
-        /// Gets how many reservations there are
-        /// </summary>
-        public void GetCountReservations()
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    String sql = $"Select Count (*) from reservation where member_id = {memberId}";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                reservationscount = reader.GetInt32(0);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-        }
-        /// <summary>
-        /// gets all the ids from all the reservations and puts them in a list
-        /// </summary>
-        public void GetReservationId()
-        {
-            reservationids.Clear(); 
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    String sql = $"Select * from reservation where member_id = {memberId}";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                reservationids.Add(reader.GetInt32(0));
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-        }
-
-        /// <summary>
-        /// gets all the information from a specific reservationid
-        /// </summary>
-        /// <param name="reservationid"></param>
-        public void GetReservationInfo(int reservationid)
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    String sql = $"Select * from reservation where reservation_id = {reservationid}";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                 boatId = reader.GetInt32(1);
-                                 reservationDate = reader.GetString(2);
-                                 reservationFrom = reader.GetString(3);
-                                 reservationUntil = reader.GetString(4);
-                                 createdAt = reader.GetDateTime(5);
-                                status = reader.GetString(7);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-        }
-
-        public void CancelReservation(int reservationid)
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    String sql = $"update reservation set status = 'Geanulleerd' where reservation_id = {reservationid}";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-        }
-
-        public void GetReservationIds()
-        {
-            reservationids2.Clear();
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    String sql = $"Select * from reservation where member_id = {memberId} And status = 'Actief'";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                reservationids2.Add(reader.GetInt32(0));
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
         }
 
         private void Open_AdminPanel(object sender, RoutedEventArgs e)
@@ -261,9 +102,18 @@ namespace BootVerhuurWpf
         private void Cancel_reservation(object sender, RoutedEventArgs e)
         {
             int i = Reservationsinfo.SelectedIndex;
-            GetReservationIds();
+            MemberReservationsSql.GetReservationIds();
+            reservationids2 = MemberReservationsSql.reservationids2;
+            if(reservationids2.Count == 1)
+            {
+                i = 0;
+            }
+            else
+            {
+                i = 1;
+            }
             int id = reservationids2[i];
-            CancelReservation(id);
+            MemberReservationsSql.CancelReservation(id);
             fillDatagrid();
         }
     }

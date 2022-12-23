@@ -234,6 +234,7 @@ namespace BootVerhuurWpf
                     }
                     else
                     {
+
                         indexb = Alltimes.IndexOf(begintimes[0]);
                         indexb -= mm;
 

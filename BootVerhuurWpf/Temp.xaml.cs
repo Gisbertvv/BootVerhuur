@@ -34,167 +34,38 @@ namespace BootVerhuurWpf
         string status;
         int countboats;
         int id;
+        TempSql tempSql = new TempSql();
         public Temp()
         {
             InitializeComponent();
-            showboats();
+            showboats();         
         }
 
         private void showboats()
         {
             List<Boat> boats = new List<Boat>();
-            GetRightId();
-            GetCountboats();
+            tempSql.GetRightId();
+            id = tempSql.id;
+            countboats = tempSql.GetCountboats();
             while (boats.Count < countboats)
             {
-                GetBoats(id);
+                tempSql.GetBoatInfo(id);
+                aantalp = tempSql.aantalp;
+                bootniveau = tempSql.bootniveau;
+                stir = tempSql.stir;
+                status = tempSql.status;
                 boats.Add(new Boat(id, aantalp, stir, bootniveau, status));
                 id++;
             }
             Boats.ItemsSource = boats;
         }
-        /// <summary>
-        /// Gets the total amout of boat that there are for boating level of the user
-        /// </summary>
-        public void GetCountboats()
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-
-
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    string sql = string.Empty;
-                    if (Login.boatingLevel.Equals("C"))
-                    {
-                        sql = $"SELECT COUNT(*) FROM boat where Not level = 'D'";
-                    }
-                    else if (Login.boatingLevel.Equals("D"))
-                    {
-                        sql = $"SELECT COUNT(*) FROM boat";
-                    }
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                countboats = reader.GetInt32(0);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            Console.ReadLine();
-        }
-
-        public void GetBoats(int id)
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-               
-
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    string sql = string.Empty;
-                    if (Login.boatingLevel.Equals("C"))
-                    {
-                         sql = $"SELECT * FROM boat where boat_id = {id} AND Not level = 'D'";
-                    }
-                    else if (Login.boatingLevel.Equals("D"))
-                        {
-                        sql = $"SELECT * FROM boat where boat_id = {id}";
-                    }
-                    
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                aantalp = reader.GetInt32(1);
-                                bootniveau = reader.GetString(2);
-                                stir = reader.GetBoolean(3);
-                                status = reader.GetString(4);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            Console.ReadLine();
-        }
-        /// <summary>
-        /// Gets the id for when the level is C. 
-        /// </summary>
-        public void GetRightId()
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-
-
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    string sql = string.Empty;
-                    if (Login.boatingLevel.Equals("C"))
-                    {
-                        sql = $"SELECT TOP 1 * FROM boat where NOT level = 'D'";
-                    }
-                    else if (Login.boatingLevel.Equals("D"))
-                    {
-                        sql = $"SELECT TOP 1 * FROM boat";
-                    }
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                 id = reader.GetInt32(0);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            Console.ReadLine();
-        }
 
         private void selectedboat(object sender, MouseButtonEventArgs e)
         {
            
-            GetRightId();
-             int i = Boats.SelectedIndex;
+            tempSql.GetRightId();
+            id = tempSql.id;
+            int i = Boats.SelectedIndex;
 
             i += id;
 

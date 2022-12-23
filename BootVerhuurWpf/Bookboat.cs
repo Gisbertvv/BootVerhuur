@@ -125,7 +125,7 @@ namespace BootVerhuurWpf
                 using (var connection = GetConnection())
                 {
                     connection.Open();
-                    String query = $"SELECT * FROM boat where boat_id = {id}";
+                    String query = $"SELECT * FROM boat where boat_id = {Id}";
 
                     SqlCommand sqlCmd = new SqlCommand(query, connection);
 
