@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Windows.ApplicationModel.Activation;
 
 namespace BootVerhuurWpf
 {
@@ -28,7 +29,9 @@ namespace BootVerhuurWpf
         string reservationUntil;
         DateTime createdAt;
         int reservationscount;
+        string status;
         List<int> reservationids = new List<int>();
+        List<int> reservationids2 = new List<int>();
 
         public MemberReservations()
         {
@@ -40,6 +43,7 @@ namespace BootVerhuurWpf
         /// </summary>
         private void fillDatagrid()
         {
+            
             List<Reservation> reservations = new List<Reservation>();
             GetCountReservations();
             GetReservationId();
@@ -49,7 +53,7 @@ namespace BootVerhuurWpf
                 foreach (int id in reservationids)
                 {
                     GetReservationInfo(id);                
-                    reservations.Add(new Reservation() { BoatId = boatId, ReservationDate = reservationDate, ReservationFrom = reservationFrom, ReservationUntil = reservationUntil, CreatedAt = createdAt });                  
+                    reservations.Add(new Reservation() { ReservationID=id,BoatId = boatId, ReservationDate = reservationDate, ReservationFrom = reservationFrom, ReservationUntil = reservationUntil, CreatedAt = createdAt, Status = status });                  
                 }
             }
             Reservationsinfo.ItemsSource = reservations;
@@ -93,6 +97,7 @@ namespace BootVerhuurWpf
         /// </summary>
         public void GetReservationId()
         {
+            reservationids.Clear(); 
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -150,6 +155,67 @@ namespace BootVerhuurWpf
                                  reservationFrom = reader.GetString(3);
                                  reservationUntil = reader.GetString(4);
                                  createdAt = reader.GetDateTime(5);
+                                status = reader.GetString(7);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        public void CancelReservation(int reservationid)
+        {
+            try
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "127.0.0.1";
+                builder.UserID = "SA";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "Bootverhuur";
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    String sql = $"update reservation set status = 'Geanulleerd' where reservation_id = {reservationid}";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+
+                        }
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        public void GetReservationIds()
+        {
+            reservationids2.Clear();
+            try
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "127.0.0.1";
+                builder.UserID = "SA";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "Bootverhuur";
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    String sql = $"Select * from reservation where member_id = {memberId} And status = 'Actief'";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                reservationids2.Add(reader.GetInt32(0));
                             }
                         }
                     }
@@ -190,6 +256,15 @@ namespace BootVerhuurWpf
         private void Logout(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Cancel_reservation(object sender, RoutedEventArgs e)
+        {
+            int i = Reservationsinfo.SelectedIndex;
+            GetReservationIds();
+            int id = reservationids2[i];
+            CancelReservation(id);
+            fillDatagrid();
         }
     }
 }

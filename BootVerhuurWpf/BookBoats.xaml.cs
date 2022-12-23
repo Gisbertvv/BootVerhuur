@@ -31,34 +31,34 @@ namespace BootVerhuurWpf
         public string bootniveau;
         public bool stir;
         int Id;
-        int reservationCount = 0;
-        int reservationId;
         
         string reservationendtime;
         string date1;
         string date2;
         string selecteddate;
         static int memberId = Int32.Parse(Login.id);
-        Bookboat bookboat = new Bookboat();
+        
 
         List<string> begintimes = new List<string>();
         List<string> endtimes = new List<string>();
         List<string> Alltimes = new List<string>();
         List<string> testlist = new List<string>();
+        Bookboat bookboat;
 
         public BookBoats(int id)
         {
             Id = id;
             InitializeComponent();
             AdjustCalender();
+            bookboat = new Bookboat(date1, date2);
             bookboat.Checkeverything(Id);
 
           status = bookboat.status;
           aantalp = bookboat.aantalp;
           bootniveau = bookboat.bootniveau;
           stir = bookboat.stir;
-    }
-       
+
+        }     
         /// <summary>
         /// if role is Lid only see two days ahead for reservation and no reservation for the weekend
         /// </summary>
@@ -119,7 +119,6 @@ namespace BootVerhuurWpf
             }
         }
 
- 
 
         private void Book(object sender, RoutedEventArgs e)
         {
@@ -129,7 +128,14 @@ namespace BootVerhuurWpf
             }
             else
             {
-                InsertReservation(selecteddate, Gekozentijd.Text);
+                Getendtime(Gekozentijd.Text);
+                if (bookboat.InsertReservation(selecteddate, Gekozentijd.Text, reservationendtime))
+                {
+                    //bookboat.InsertReservation(selecteddate, Gekozentijd.Text, reservationendtime);
+                    begintimes = bookboat.begintimes;
+                    endtimes = bookboat.endtimes;
+                    AdjustTimeBox();
+                }
             }                         
         }
 
@@ -159,10 +165,6 @@ namespace BootVerhuurWpf
             label.Content = $"Niveau : {bootniveau}";
         }
 
-        private void AvailibleFrom(object sender, RoutedEventArgs e)
-        {
-            //get date from database
-        }
 
         /// <summary>
         /// calculates the endtime from begintimes
@@ -200,205 +202,12 @@ namespace BootVerhuurWpf
 
             reservationendtime = sb.ToString();
         }
-        /// <summary>
-        /// check how many reservations a member has on the availible dates
-        /// </summary>
-        /// <param name="reservationdate"></param>
-        /// <param name="reservationdate2"></param>
-/*        public void GetMemberIdCountReservations(string reservationdate, string reservationdate2)
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    String sql = $"Select count(*) from reservation where member_id = {memberId} and (reservationDate = '{reservationdate}' or reservationDate = '{reservationdate2}')";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                reservationCount = reader.GetInt32(0);
-
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-        }*/
-        
-        public void InsertReservation(string reservationdate, string reservationtime)
-        {
-            try
-            {
-                    bookboat.GetMemberIdCountReservations(date1, date2);
-                
-                if (reservationCount == 2)
-                {
-                    MessageBox.Show("Je kunt maximaal 2 reserveringen hebben");
-                }
-                else
-                {            
-                        
-                    int i =bookboat.GetReservationID();
-                        Getendtime(reservationtime);
-                        SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                        builder.DataSource = "127.0.0.1";
-                        builder.UserID = "SA";
-                        builder.Password = "Havermout1325";
-                        builder.InitialCatalog = "Bootverhuur";
-                        using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                        {
-                            String sql = $"insert into reservation values ({i}, {Id},'{reservationdate}' , '{reservationtime}', '{reservationendtime}', GetDate(),{memberId})";
-                            using (SqlCommand command = new SqlCommand(sql, connection))
-                            {
-                                connection.Open();
-                                using (SqlDataReader reader = command.ExecuteReader())
-                                {
-                                    Getreservationtimes(Id,reservationdate);
-                                    MessageBox.Show("Reservering is aangemaakt", "SUCCES");
-                                    
-                                }
-                            }
-                        }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
-            
-        }
-        /// <summary>
-        /// gets the next id to insert the reservation
-        /// </summary>
-/*        public void GetReservationID()
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    String sql = $"select count (reservation_id) from reservation";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                reservationId = reader.GetInt32(0);
-                            }
-                        }
-                    }
-                }
-                reservationId += 1;
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            Console.ReadLine();
-        }*/
-
-/*        public void Checkeverything(int id)
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    String sql = $"SELECT * FROM boat where boat_id = {id}";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                aantalp = reader.GetInt32(1);
-                                bootniveau = reader.GetString(2);
-                                stir = reader.GetBoolean(3);
-                                status = reader.GetString(4);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            Console.ReadLine();
-        }*/
 
         private void backclick(object sender, RoutedEventArgs e)
         {
             Temp tp = new Temp();
             tp.Show();
             Close();
-        }
-
-        /// <summary>
-        /// puts all the begin and end reservationtimes for a specific boatid and date in a list
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="reservationdate"></param>
-        private void Getreservationtimes(int id, string reservationdate)
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    String sql = $"SELECT * FROM reservation where boat_id = {id} AND reservationDate = '{reservationdate}' ";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-
-                                begintimes.Add(reader.GetString(3));
-                                endtimes.Add(reader.GetString(4));
-                            }
-                        }
-                    }
-                }
-                AdjustTimeBox();
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            Console.ReadLine();
         }
 
         /// <summary>
@@ -433,7 +242,7 @@ namespace BootVerhuurWpf
                         endtimes.RemoveAt(0);
                     }
                 }
-
+                //if index out of range, index -1 until it is in range again or 0;
                 catch (ArgumentOutOfRangeException ae)
                 {
                     mm--;
@@ -545,7 +354,10 @@ namespace BootVerhuurWpf
         private void SelectionDatechanged(object sender, SelectionChangedEventArgs e)
         {
             selecteddate = DP.SelectedDate.Value.ToShortDateString();
-            Getreservationtimes(Id, DP.SelectedDate.Value.ToShortDateString());
+            bookboat.Getreservationtimes(Id, DP.SelectedDate.Value.ToShortDateString());
+            begintimes = bookboat.begintimes;
+            endtimes = bookboat.endtimes;
+            AdjustTimeBox();
         }
 
         private void AccidentReport(object sender, RoutedEventArgs e)
@@ -555,12 +367,16 @@ namespace BootVerhuurWpf
 
         private void Open_Click(object sender, RoutedEventArgs e)
         {
-
+            Create create = new Create();
+            create.Show();
+            Close();
         }
 
         private void Open_AdminPanel(object sender, RoutedEventArgs e)
         {
-
+            AdminPanel adminpanel = new AdminPanel();
+            adminpanel.Show();
+            Close();
         }
         private void Logout(object sender, RoutedEventArgs e)
         {

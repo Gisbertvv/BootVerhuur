@@ -39,14 +39,11 @@
             <Label Content="Aantal personen : " Loaded="AantalPersonen"/>
             <Label Content="Stuur : " Loaded="Stuur"/>
             <Label Content="Niveau : " Loaded="BootNiveau"/>
-            <Label Content="Te reserveren vanaf : " Loaded="AvailibleFrom"/>
             <DatePicker x:Name="DP" AllowDrop="True" SelectedDateFormat="Short" Margin="10,5,10,10" SelectedDateChanged="SelectionDatechanged" />
             <Label Content="Selecteer een tijd" />
             <ComboBox Name="Gekozentijd" Margin="10,0,10,10">
 
             </ComboBox>
-
-
 
             <Button Content="Bevestigen" Click="Book" HorizontalAlignment="Right" Margin ="0,10,10,0"/>
 

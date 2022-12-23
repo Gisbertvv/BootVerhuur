@@ -14,5 +14,9 @@ namespace BootVerhuurWpf
         public string ReservationUntil { get; set; }
         public DateTime CreatedAt { get; set; }
 
+        public string Status { get; set; }
+
+        public int ReservationID { get; set; }
+
     }
 }

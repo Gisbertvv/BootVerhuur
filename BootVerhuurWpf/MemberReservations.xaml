@@ -33,7 +33,8 @@
                     Click="Logout"/>
         </StackPanel>
         <StackPanel Grid.Column="2">
-            <DataGrid Name="Reservationsinfo" Height="380" AutoGenerateColumns="True" Margin="20"  IsReadOnly="True" SelectionUnit="FullRow" Width="440"/>
+            <DataGrid Name="Reservationsinfo" Height="250" AutoGenerateColumns="True" Margin="20"  IsReadOnly="True" SelectionUnit="FullRow" Width="Auto" CanUserSortColumns="False"/>
+            <Button x:Name="Cancel" Content="Anulleer reservering" Click="Cancel_reservation" HorizontalAlignment="Center" />
         </StackPanel>
     </Grid>
 </Window>
