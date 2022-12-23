@@ -45,7 +45,9 @@ namespace BootVerhuurWpf
 
         private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
-
+            Edit_member edit = new Edit_member();
+            edit.Show();
+            Close();
         }
 
         private void Logout(object sender, RoutedEventArgs e)

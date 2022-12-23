@@ -47,8 +47,6 @@ namespace BootVerhuurWpf
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
-
-
         private void AdminPanelInfo(object sender, RoutedEventArgs e)
         {
 
@@ -84,10 +82,11 @@ namespace BootVerhuurWpf
 
         private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
-
+            Edit_member edit = new Edit_member();
+            edit.Show();
+            Close();
         }
 
-  
         private void Logout(object sender, RoutedEventArgs e)
         {
             LoginWindow window = new LoginWindow();
@@ -112,9 +111,6 @@ namespace BootVerhuurWpf
             if (dialogResult == System.Windows.Forms.DialogResult.OK)
             {
                 System.Drawing.Image img = System.Drawing.Image.FromFile(openFile.FileName);
-
-
-
 
                 // assign safe name for saving
                 string imgSafeName = fileName + ".png";

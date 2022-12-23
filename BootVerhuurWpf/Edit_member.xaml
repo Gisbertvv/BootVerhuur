@@ -6,36 +6,61 @@
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Title="Edit_member">
+        Title="Edit member">
     <Border Style="{DynamicResource Bordervisual}">
         <Grid Style="{DynamicResource GridFocusVisual}">
-        <DataGrid 
-            x:Name="datagrid1" 
-            d:ItemsSource="{d:SampleData ItemCount=5}" 
-            Margin="0,265,0,0" 
-            IsReadOnly="False" SelectionChanged="datagrid1_SelectionChanged"
-        />
-        <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
-        <Label x:Name="IDLBL" Content="ID" HorizontalAlignment="Left" Margin="60,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.926,0.163" Height="24"/>
-        <Label x:Name="first_nameLBL" Content="Voornaam" HorizontalAlignment="Left" Margin="60,34,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="last_nameLBL" Content="Achternaam" HorizontalAlignment="Left" Margin="60,62,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="emailLBL" Content="Email" HorizontalAlignment="Left" Margin="60,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.576,0.448"/>
-        <Label x:Name="phone_numberLBL" Content="Telefoonnummer" HorizontalAlignment="Left" Margin="60,89,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="boating_levelLBL" Content="Niveau" HorizontalAlignment="Left" Margin="60,143,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="usernameLBL" Content="Gebruikersnaam" HorizontalAlignment="Left" Margin="60,170,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="passwordLBL" Content="Wachtwoord" HorizontalAlignment="Left" Margin="60,197,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="first_nameTXTBX" HorizontalAlignment="Left" Margin="169,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Height="22"/>
-        <TextBox x:Name="last_nameTXTBX" HorizontalAlignment="Left" Margin="169,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Height="22"/>
-        <TextBox x:Name="emailTXTBX" HorizontalAlignment="Left" Margin="169,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Height="22"/>
-        <TextBox x:Name="phoneTXTBX" HorizontalAlignment="Left" Margin="169,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Height="22"/>
-        <TextBox x:Name="boating_levelTXTBX" HorizontalAlignment="Left" Margin="169,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Height="22"/>
-        <TextBox x:Name="usernameTXTBX" HorizontalAlignment="Left" Margin="169,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Height="22"/>
-        <TextBox x:Name="passwordTXTBX" HorizontalAlignment="Left" Margin="169,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" Height="22"/>
-        <TextBox x:Name="IDTXTBOX" HorizontalAlignment="Left" Margin="169,9,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" IsReadOnly="True" Height="22"/>
-        <Button x:Name="updateBTN" Content="Update" HorizontalAlignment="Left" Margin="244,229,0,0" VerticalAlignment="Top" Width="60" Click="updateBTN_Click" Height="26" Background="#FF32BE00"/>
-        <Button x:Name="reloadBTN" Content="Update Table" HorizontalAlignment="Left" Height="31" Margin="654,229,0,0" VerticalAlignment="Top" Width="126" Click="reloadBTN_Click" Background="#FFA0A0A0" BorderBrush="Black" FontWeight="Bold"/>
-        <Button Content="Remove" HorizontalAlignment="Left" Margin="169,229,0,0" VerticalAlignment="Top" Width="60" Height="26" Background="Red" Click="Button_Click"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
+                <Button x:Name="btn0" Content="Admin Panel"
+                        Click="OpenAdminPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn1" Content="Aanmaken"
+                        Click="OpenCreateUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn3" Content="Terug"
+                        Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn4" Content="Uitloggen"
+                        Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
+            </StackPanel>
+            <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="30 ,0, 30, 0">
+                <DataGrid 
+                x:Name="datagrid1" Style="{DynamicResource datagridVisual}"
+                d:ItemsSource="{d:SampleData ItemCount=5}"
+                IsReadOnly="False" SelectionChanged="datagrid1_SelectionChanged"/>
+                <Button x:Name="reloadBTN" Content="Update Table" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}" Click="reloadBTN_Click" Background="#FFA0A0A0"/>
+            </StackPanel>
 
-    </Grid>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="30 ,0, 30, 0">
+                <Label x:Name="IDLBL" Content="ID" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="IDTXTBOX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="first_nameLBL" Content="Voornaam" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="first_nameTXTBX" Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="last_nameLBL" Content="Achternaam" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="last_nameTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="emailLBL" Content="Email" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="emailTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="phone_numberLBL" Content="Telefoonnummer" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="phoneTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="boating_levelLBL" Content="Niveau" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="boating_levelTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="usernameLBL" Content="Gebruikersnaam" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="usernameTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="passwordLBL" Content="Wachtwoord" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="passwordTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Button x:Name="updateBTN" Content="Update" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}" Click="updateBTN_Click" Background="#FF32BE00"/>
+                <Button Content="Remove" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}"  Background="Red" Click="Button_Click"/>
+            </StackPanel>
+        </Grid>
     </Border>
 </Window>

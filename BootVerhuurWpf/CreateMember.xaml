@@ -18,7 +18,7 @@
             <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
             <Button x:Name="btn0" Content="Admin Panel"
                     Click="OpenAdminPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
-            <Button x:Name="btn1" Content="Aanpassen"
+            <Button x:Name="btn1" Content="Aanmaken"
                     Click="OpenEditUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn3" Content="Terug"
                     Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
@@ -26,7 +26,7 @@
                     Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Margin="10,10,10,10">
+        <StackPanel Grid.Column="1" Margin="10,10,10,10" VerticalAlignment="Center">
 
                 <Label Content="_Rol"  Style="{DynamicResource LabelVisual}"/>
                 <ComboBox x:Name = "Rol" Style="{DynamicResource ComboBoxVisual}">
@@ -45,7 +45,7 @@
 
         </StackPanel>
 
-        <StackPanel  Grid.Column="2" Margin="10,10,10,10">
+        <StackPanel  Grid.Column="2" Margin="10,10,10,10" VerticalAlignment="Center">
 
                 <Label Content="_Niveau:"  Style="{DynamicResource LabelVisual}"/>
 
@@ -64,9 +64,9 @@
                 <TextBox Name="txtEmail"  Style="{DynamicResource TextboxVisual}"/>
                 <Label Content="_Wachtwoord:"   Style="{DynamicResource LabelVisual}"/>
                 <PasswordBox Name="txtWachtwoord"  Style="{DynamicResource PasswordBoxVisual}"/>
-
-                <Button x:Name="btnBevestigen" Click="ButtonAddUser_Click" HorizontalAlignment="Right"  Style="{DynamicResource ButtonFocusVisual}">Aanmaken</Button>
         </StackPanel>
+            <Button Grid.Column="2" x:Name="btnBevestigen" Click="ButtonAddUser_Click" VerticalAlignment="Bottom" Margin="0, 0, 10, 240" HorizontalAlignment="Right"  Style="{DynamicResource ButtonFocusVisual}">Aanmaken</Button>
+
         </Grid>
     </Border>
 </Window>

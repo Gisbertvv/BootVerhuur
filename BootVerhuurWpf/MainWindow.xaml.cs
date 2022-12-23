@@ -62,7 +62,6 @@ namespace BootVerhuurWpf
             
         }
 
-
         private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
         {
             Create popup = new Create();
@@ -75,6 +74,7 @@ namespace BootVerhuurWpf
             Edit_member edit = new Edit_member();
 
             edit.Show();
+            Close();
         }
 
         private void OpenReservePanel(object sender, RoutedEventArgs e)
@@ -84,12 +84,7 @@ namespace BootVerhuurWpf
             tp.Show();
             
         }
-/*        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
 
-            Application.Current.Shutdown();
-        }*/
 
         private void Edit(object sender, RoutedEventArgs e)
         {

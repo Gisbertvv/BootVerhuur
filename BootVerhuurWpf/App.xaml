@@ -24,6 +24,13 @@
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="Opacity" Value="0.4" />
         </Style>
+        <Style x:Key="datagridVisual" TargetType="{x:Type DataGrid}">
+            <Setter Property="FontFamily" Value="Microsoft Sans Serif" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
 
 
         <Style x:Key="LabelVisual" TargetType="{x:Type Label}">

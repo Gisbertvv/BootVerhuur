@@ -38,17 +38,13 @@ namespace BootVerhuurWpf
             createMember.Show();
             this.Close();
         }
-        /*
-public string ResponseText
-{
-  get { return ResponseTextBox.Text; }
-  set { ResponseTextBox.Text = value; }
-}
 
-private void OKButton_Click(object sender, System.Windows.RoutedEventArgs e)
-{
-  DialogResult = true;
-}*/
+        protected override void OnClosed(EventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
+        }
     }
     }
 

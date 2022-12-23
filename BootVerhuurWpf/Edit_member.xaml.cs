@@ -88,5 +88,34 @@ namespace BootVerhuurWpf
 
             Application.Current.Shutdown();
         }
+
+        private void OpenAdminPanel(object sender, RoutedEventArgs e)
+        {
+            AdminPanel window = new AdminPanel();
+
+            window.Show();
+            Close();
+        }
+
+        private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
+        {
+            Create popup = new Create();
+            popup.ShowDialog();
+            Close();
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            LoginWindow window = new LoginWindow();
+            window.Show();
+            Close();
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
+        }
     }
 }

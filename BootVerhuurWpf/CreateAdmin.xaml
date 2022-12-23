@@ -25,7 +25,7 @@
                     Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
                 <Label Content="Gebruikersnaam" Style="{DynamicResource LabelVisual}"/>
                 <TextBox Name="txtGebruikersnaam" Style="{DynamicResource TextboxVisual}"/>
                 <Label Content="Wachtwoord" Style="{DynamicResource LabelVisual}"/>
