@@ -23,7 +23,7 @@ namespace BootVerhuurWpf
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
-            bool s = login.getLogin(txtUsername.Text, txtPassword.Password);
+            bool s = login.getLogin(txtUsernameOrEmail.Text, txtPassword.Password);
 
 
             if (s) { 
@@ -32,7 +32,7 @@ namespace BootVerhuurWpf
                 Close();
             }else if (!s)
             {
-                MessageBox.Show("Usename of password not correct");
+                MessageBox.Show("Username/email of password not correct");
             }
         }
        

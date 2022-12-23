@@ -24,7 +24,7 @@ namespace BootVerhuurWpf
         public static string boatingLevel;
         public static string role;
 
-        public bool getLogin(string username, string password)
+        public bool getLogin(string usernameOrEmail, string password)
         {
             bool s = false;
             try
@@ -33,14 +33,14 @@ namespace BootVerhuurWpf
                 using (var connection = GetConnection())
                 {
                     connection.Open();
-                    String query = "SELECT * FROM member WHERE username=@username AND password=@password";
+                    String query = "SELECT * FROM member WHERE username=@usernameOrEmail OR email=@usernameOrEmail AND password=@password ";
 
                     SqlCommand sqlCmd = new SqlCommand(query, connection);
                         
 
                     //Check if username and password are correct
                     sqlCmd.CommandType = System.Data.CommandType.Text;
-                    sqlCmd.Parameters.AddWithValue("@username", username);
+                    sqlCmd.Parameters.AddWithValue("@usernameOrEmail", usernameOrEmail);
                     sqlCmd.Parameters.AddWithValue("@password", password);
 
                     //DataTable dataTable = new DataTable();

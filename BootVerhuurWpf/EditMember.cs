@@ -73,6 +73,7 @@ namespace BootVerhuurWpf
             {
                 using (var connection = GetConnection())
                 {
+                     DataTable dt = new DataTable("member");
                     connection.Open();
                     String query =
                         "SELECT id,first_name,last_name,phone_number,email,boating_level,role,username,password FROM member";
@@ -82,13 +83,17 @@ namespace BootVerhuurWpf
 
                     SqlDataAdapter adapter = new SqlDataAdapter(sqlCmd);
 
+
+
+                    adapter.Fill(dt);
+
+                    datagrid1.ItemsSource = dt.DefaultView;
+
+                    adapter.Update(dt);
+
+
                     connection.Close();
 
-                    adapter.Fill(Edit_member.dt);
-
-                    datagrid1.ItemsSource = Edit_member.dt.DefaultView;
-
-                    adapter.Update(Edit_member.dt);
 
                 }
             }

@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
 namespace BootVerhuurWpf
@@ -26,25 +27,24 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class Edit_member : Window
     {
-        public static DataTable dt = new DataTable("member");
-
+        
+        EditMember updateMemberTable = new EditMember();
         public Edit_member()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            showTable();
+            updateMemberTable.UpdateTable(datagrid1);
 
         }
 
         public void showTable()
         {
-            EditMember updateMemberTable = new EditMember();
             updateMemberTable.UpdateTable(datagrid1);
         }
 
         private void reloadBTN_Click(object sender, RoutedEventArgs e)
         {
-            showTable();
+            updateMemberTable.UpdateTable(datagrid1);
         }
 
         // Code om database gegevens te weergeven in de textboxen
@@ -60,6 +60,8 @@ namespace BootVerhuurWpf
             boating_levelTXTBX.Text = (datagrid1.SelectedCells[5].Column.GetCellContent(data) as TextBlock).Text;
             usernameTXTBX.Text = (datagrid1.SelectedCells[7].Column.GetCellContent(data) as TextBlock).Text;
             passwordTXTBX.Text = (datagrid1.SelectedCells[8].Column.GetCellContent(data) as TextBlock).Text;
+
+            /*datagrid1.Columns[0].Visibility = Visibility.Hidden;*/
         }
 
         // Code om de database te updaten met de data uit de textboxen
@@ -79,6 +81,12 @@ namespace BootVerhuurWpf
                 EditMember delete = new EditMember();
                 delete.DeleteUser(IDTXTBOX.Text);
             }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+
+            Application.Current.Shutdown();
         }
     }
 }
