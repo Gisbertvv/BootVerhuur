@@ -18,6 +18,8 @@ using Syncfusion.XPS;
 using System.Reflection;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Syncfusion.XlsIO.Parser.Biff_Records;
+using System.Dynamic;
+using System.ComponentModel;
 
 namespace BootVerhuurWpf
 {
@@ -31,18 +33,19 @@ namespace BootVerhuurWpf
         public string bootniveau;
         public bool stir;
         int Id;
-        
+
         string reservationendtime;
         string date1;
         string date2;
         string selecteddate;
         static int memberId = Int32.Parse(Login.id);
-        
+
 
         List<string> begintimes = new List<string>();
         List<string> endtimes = new List<string>();
         List<string> Alltimes = new List<string>();
         List<string> testlist = new List<string>();
+        List<string> newlist = new List<string>();
         Bookboat bookboat;
 
         public BookBoats(int id)
@@ -53,17 +56,17 @@ namespace BootVerhuurWpf
             bookboat = new Bookboat(date1, date2);
             bookboat.Checkeverything(Id);
 
-          status = bookboat.status;
-          aantalp = bookboat.aantalp;
-          bootniveau = bookboat.bootniveau;
-          stir = bookboat.stir;
+            status = bookboat.status;
+            aantalp = bookboat.aantalp;
+            bootniveau = bookboat.bootniveau;
+            stir = bookboat.stir;
 
-        }     
+        }
         /// <summary>
         /// if role is Lid only see two days ahead for reservation and no reservation for the weekend
         /// </summary>
         private void AdjustCalender()
-        {            
+        {
             DP.DisplayDateStart = DateTime.Now;
             DateTime plusone = DateTime.Now.AddDays(1);
             DateTime plustwo = DateTime.Now.AddDays(2);
@@ -136,7 +139,7 @@ namespace BootVerhuurWpf
                     endtimes = bookboat.endtimes;
                     AdjustTimeBox();
                 }
-            }                         
+            }
         }
 
         private void Status(object sender, RoutedEventArgs e)
@@ -220,46 +223,43 @@ namespace BootVerhuurWpf
             int bb = 5;
             int mm = 4;
             SetTimeBox();
-          while (begintimes.Count > 0)
+
+            while (begintimes.Count > 0)
             {
                 try
                 {
 
-                    if (begintimes[0].Contains(Alltimes[0]))
-                    {
-                        indexb = 0;
-                        Alltimes.RemoveRange(indexb, bb);
-                        begintimes.RemoveAt(0);
-                        endtimes.RemoveAt(0);
-                    }
-                    else
-                    {
 
-                        indexb = Alltimes.IndexOf(begintimes[0]);
-                        indexb -= mm;
+                    int indexofbegintimes = Alltimes.IndexOf(begintimes[0]);
+                    int beginindex = indexofbegintimes - mm;
+                    int endindex = indexofbegintimes + bb;
 
-                        Alltimes.RemoveRange(indexb, ee);
-                        begintimes.RemoveAt(0);
-                        endtimes.RemoveAt(0);
+                    while (beginindex != endindex)
+                    {
+                        if (!testlist.Contains(Alltimes[beginindex]))
+                        {
+                            testlist.Add(Alltimes[beginindex]);
+                            beginindex++;
+                        }
+                        else
+                        {
+                            beginindex++;
+                        }
                     }
+
+                    begintimes.RemoveAt(0);
+                    endtimes.RemoveAt(0);
                 }
-                //if index out of range, index -1 until it is in range again or 0;
-                catch (ArgumentOutOfRangeException ae)
+
+
+                catch (Exception ex)
                 {
                     mm--;
                 }
-                catch (ArgumentException e)
-                {
-                    if (begintimes[0].Contains(Alltimes[0]))
-                    {
-                        bb--;
-                    }
-                    else
-                    {
-                        ee--;
-                    }
-                }          
+
             }
+
+            Alltimes = Alltimes.Except(testlist).ToList();
             Gekozentijd.Items.Clear();
 
             foreach (string s in Alltimes)
@@ -295,14 +295,22 @@ namespace BootVerhuurWpf
         /// </summary>
         private void Minimum()
         {
-            if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
-            {               
-            }
-            else if(selecteddate.Equals(date1))
+            try
             {
-                int index = Alltimes.IndexOf(RoundMinutes(DateTime.Now));
-                Alltimes.RemoveRange(0, index);
+                if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
+                {
+                }
+                else if (selecteddate.Equals(date1))
+                {
+                    int index = Alltimes.IndexOf(RoundMinutes(DateTime.Now));
+                    Alltimes.RemoveRange(0, index);
+                }
             }
+            catch(ArgumentOutOfRangeException ae) 
+            { 
+                Alltimes.Clear();
+            }
+
         }
         /// <summary>
         /// fills the combobox with times with half hour between
@@ -311,6 +319,7 @@ namespace BootVerhuurWpf
                 {
             Gekozentijd.Items.Clear();
             Alltimes.Clear();
+            testlist.Clear();
            
             int hours = 6;
             int minutes = 0;
@@ -320,26 +329,22 @@ namespace BootVerhuurWpf
                 if(hours.ToString().Length == 1 && minutes.ToString().Length == 1)
                 {
                     Alltimes.Add($"0{hours}:{minutes}0");
-                    testlist.Add($"0{hours}:{minutes}0");
                     minutes+= 30;
                 }
                 else if (hours.ToString().Length == 1 && minutes.ToString().Length ==2)
                 {
                     Alltimes.Add($"0{hours}:{minutes}");
-                    testlist.Add($"0{hours}:{minutes}");
                     hours += 1;
                     minutes= 0;
                 }
                 else if(hours.ToString().Length == 2&&minutes.ToString().Equals("0"))
                 {
                     Alltimes.Add($"{hours}:{minutes}0");
-                    testlist.Add($"{hours}:{minutes}0");
                     minutes = 30;                   
                 }
                 else if (hours.ToString().Length == 2 && minutes.ToString().Equals("30"))
                 {
                     Alltimes.Add($"{hours}:{minutes}");
-                    testlist.Add($"{hours}:{minutes}");
                     minutes = 0;
                     hours += 1;
                 }

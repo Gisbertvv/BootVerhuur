@@ -163,6 +163,37 @@ namespace BootVerhuurWpf
                 Console.WriteLine(e.ToString());
             }
         }
+        public void GetActiveReservationId()
+        {
+            reservationids.Clear();
+            try
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "127.0.0.1";
+                builder.UserID = "SA";
+                builder.Password = "Havermout1325";
+                builder.InitialCatalog = "Bootverhuur";
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    String sql = $"Select * from reservation where member_id = {memberId} and status = 'Actief'";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                reservationids.Add(reader.GetInt32(0));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
         /// <summary>
         /// Gets how many reservations there are
         /// </summary>
@@ -179,6 +210,36 @@ namespace BootVerhuurWpf
                     String query = $"Select * from reservation where member_id = {memberId}";
 
 
+
+                    SqlCommand sqlCmd = new SqlCommand(query, connection);
+
+                    sqlCmd.CommandType = System.Data.CommandType.Text;
+
+                    DataTable boat = new DataTable();
+
+                    boat.Load(sqlCmd.ExecuteReader());
+
+                    reservationscount = boat.Rows.Count;
+
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        public void GetCountActiveReservations()
+        {
+            OpenConnnection();
+            try
+            {
+
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    String query = $"Select * from reservation where member_id = {memberId} and status = 'Actief'";
 
                     SqlCommand sqlCmd = new SqlCommand(query, connection);
 

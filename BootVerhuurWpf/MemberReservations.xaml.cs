@@ -38,6 +38,7 @@ namespace BootVerhuurWpf
         {
             InitializeComponent();
             fillDatagrid();
+            fillDatagrid2();
         }
         /// <summary>
         /// fills the datagrid with all the reservations the member has 
@@ -66,6 +67,32 @@ namespace BootVerhuurWpf
                 }
             }
             Reservationsinfo.ItemsSource = reservations;
+        }
+
+        private void fillDatagrid2()
+        {
+
+            List<Reservation> reservations = new List<Reservation>();
+            MemberReservationsSql.GetCountActiveReservations();
+            reservationscount = MemberReservationsSql.reservationscount;
+            MemberReservationsSql.GetActiveReservationId();
+            reservationids = MemberReservationsSql.reservationids;
+
+            while (reservations.Count < reservationscount)
+            {
+                foreach (int id in reservationids)
+                {
+                    MemberReservationsSql.GetReservationInfo(id);
+                    boatId = MemberReservationsSql.boatId;
+                    reservationDate = MemberReservationsSql.reservationDate;
+                    reservationFrom = MemberReservationsSql.reservationFrom;
+                    reservationUntil = MemberReservationsSql.reservationUntil;
+                    createdAt = MemberReservationsSql.createdAt;
+                    status = MemberReservationsSql.status;
+                    reservations.Add(new Reservation() { ReservationID = id, BoatId = boatId, ReservationDate = reservationDate, ReservationFrom = reservationFrom, ReservationUntil = reservationUntil, CreatedAt = createdAt, Status = status });
+                }
+            }
+            Activeresrevationinfo.ItemsSource = reservations;
         }
 
         private void Open_AdminPanel(object sender, RoutedEventArgs e)
@@ -101,20 +128,13 @@ namespace BootVerhuurWpf
 
         private void Cancel_reservation(object sender, RoutedEventArgs e)
         {
-            int i = Reservationsinfo.SelectedIndex;
+            int i = Activeresrevationinfo.SelectedIndex;
             MemberReservationsSql.GetReservationIds();
             reservationids2 = MemberReservationsSql.reservationids2;
-            if(reservationids2.Count == 1)
-            {
-                i = 0;
-            }
-            else
-            {
-                i = 1;
-            }
             int id = reservationids2[i];
             MemberReservationsSql.CancelReservation(id);
             fillDatagrid();
+            fillDatagrid2();
         }
     }
 }
