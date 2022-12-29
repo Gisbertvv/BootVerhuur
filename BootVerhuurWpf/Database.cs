@@ -18,6 +18,8 @@ namespace BootVerhuur
 
         public Database()
         {
+            ///Information for database connection
+
             _builder.DataSource = "127.0.0.1";
             _builder.UserID = "sa";
             _builder.Password = "Havermout1325";

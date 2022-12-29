@@ -37,6 +37,9 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class AdminPanel : Window
     {
+        /// <summary>
+        ///  Paths should be changed on the installed system
+        /// </summary>
         string pathLogo = @"C:/Users/gisbe/source/repos/BootVerhuur/BootVerhuurWpf/Images/Logo/";
         string pathBackground = @"C:/Users/gisbe/source/repos//BootVerhuur/BootVerhuurWpf/Images/Background/";
         string pathPDF = @"C:/Users/gisbe/source/repos/BootVerhuur/BootVerhuurWpf/PDF/";
@@ -49,17 +52,25 @@ namespace BootVerhuurWpf
 
         private void AdminPanelInfo(object sender, RoutedEventArgs e)
         {
+            /// <summary>
+            ///  Sends information of the colors to the handler
+            /// </summary>
 
             if (PrimaryColor != null && SecondaryColor != null && BackgroundColor != null)
             {
-                SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString(),
-                    BackgroundColor.Color.ToString());
+                SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString(), BackgroundColor.Color.ToString());
             }
 
+            /// <summary>
+            /// Shows if background colors are edited
+            /// </summary>
             MessageBoxResult dresult =
                 MessageBox.Show("Om de wijzigingen toe te passen moet de applicatie opnieuw opgestart worden", "Alert", MessageBoxButton.YesNo);
             if (dresult == MessageBoxResult.Yes)
             {
+                /// <summary>
+                ///  Closes the system
+                /// </summary>
                 System.Windows.Application.Current.Shutdown();
             }
         }
@@ -103,6 +114,9 @@ namespace BootVerhuurWpf
 
         private void OpenExplorer(string path, string fileName)
         {
+            /// <summary>
+            ///  Restricst file type to png 
+            /// </summary>
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "Images only. | *.png;";
 
@@ -154,6 +168,9 @@ namespace BootVerhuurWpf
         private void OpenExplorerPDF(string path, string fileName)
         {
             OpenFileDialog openFile = new OpenFileDialog();
+            /// <summary>
+            ///  Restricst file type to pdf 
+            /// </summary>
             openFile.Filter = "PDF only. | *.PDF;";
 
             DialogResult dialogResult = openFile.ShowDialog();

@@ -17,7 +17,7 @@ namespace BootVerhuurWpf
             /// <summary>
             ///  Returns a the primary color, secondary color, background color from the database
             /// </summary>
-            /// <returns>string array with colors </returns>
+            /// <returns>string array with colors (primary, secondary, background) </returns>
             string[] color = null;
             try
             {
@@ -49,10 +49,8 @@ namespace BootVerhuurWpf
         public static void SetPrimaryColor(string PrimaryColor)
         {
             /// <summary>
-            ///  Returns a the primary color, secondary color, background color from the database
+            ///  Sets the the primary color to the database
             /// </summary>
-            /// <param name="num"></param>
-            /// <returns>string array with colors </returns>
             try
             {
                 using (var connection = GetConnection())
@@ -75,8 +73,11 @@ namespace BootVerhuurWpf
 
         public static void SetSecondaryColor(string SecondaryColor)
     {
-        try
-        {
+        /// <summary>
+        ///  Sets the the secondary color to the database
+        /// </summary>
+            try
+            {
             using (var connection = GetConnection())
             {
                 //SQL query
@@ -97,11 +98,13 @@ namespace BootVerhuurWpf
 
     public static void SetBackgroundColor(string BackgroundColor)
     {
-
-        try
-        {
-            using (var connection = GetConnection())
+        /// <summary>
+        ///  Sets the the background color to the database
+        /// </summary>
+            try
             {
+                using (var connection = GetConnection()) 
+                {
                     //SQL query
                 String sql = $"UPDATE appSettings SET background_color ='{BackgroundColor}'";
 
@@ -111,12 +114,12 @@ namespace BootVerhuurWpf
                     command.ExecuteNonQuery();
                     connection.Close();
                 }
+                }
             }
-        }
-        catch (SqlException e)
-        {
+            catch (SqlException e) 
+            {
             MessageBox.Show(e.ToString());
-        }
+            }
     }
     }
 }
