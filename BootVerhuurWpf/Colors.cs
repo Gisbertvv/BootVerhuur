@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using BoldReports.Windows.Data;
-using BootVerhuur;
+//using BootVerhuur;
 
 namespace BootVerhuurWpf
 {

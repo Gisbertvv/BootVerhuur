@@ -38,7 +38,7 @@ namespace BootVerhuurWpf
         public Temp()
         {
             InitializeComponent();
-            showboats();         
+            showboats();
         }
 
         private void showboats()
@@ -62,7 +62,7 @@ namespace BootVerhuurWpf
 
         private void selectedboat(object sender, MouseButtonEventArgs e)
         {
-           
+
             tempSql.GetRightId();
             id = tempSql.id;
             int i = Boats.SelectedIndex;
@@ -76,26 +76,28 @@ namespace BootVerhuurWpf
 
         private void Member_reservations(object sender, RoutedEventArgs e)
         {
-            MemberReservations memberreserveration = new MemberReservations();  
+            MemberReservations memberreserveration = new MemberReservations();
             memberreserveration.Show();
-        private void AccidentReport(object sender, RoutedEventArgs e)
-        {
-            PDFWindow window = new PDFWindow();
-            window.Show();
         }
+            private void AccidentReport(object sender, RoutedEventArgs e)
+            {
+                PDFWindow window = new PDFWindow();
+                window.Show();
+            }
 
-        private void Logout(object sender, RoutedEventArgs e)
-        {
-            LoginWindow window = new LoginWindow();
-            window.Show();
-            Close();
-        }
+            private void Logout(object sender, RoutedEventArgs e)
+            {
+                LoginWindow window = new LoginWindow();
+                window.Show();
+                Close();
+            }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            Close();
+            private void Back_Click(object sender, RoutedEventArgs e)
+            {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                Close();
+            }
         }
     }
-}
+

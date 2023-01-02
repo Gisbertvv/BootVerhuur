@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using BootVerhuur;
+//using BootVerhuur;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using Syncfusion.Windows.Shared;
 using Windows.Networking;

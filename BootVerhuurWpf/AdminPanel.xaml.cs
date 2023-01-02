@@ -18,7 +18,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BootVerhuur;
 using Xceed.Wpf.Toolkit;
 using MessageBox = System.Windows.MessageBox;
 using WindowStartupLocation = System.Windows.WindowStartupLocation;

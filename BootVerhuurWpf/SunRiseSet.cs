@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZonsopgangZonsondergang
+namespace BootVerhuurWpf
 {
-    internal class Zon
+    public class Zon
     {
         private double longitude = 5.489710; // Lengtegraad in decimale graden, <0 voor OL, >0 voor WL
         double latitude = 52.225370; // Breedtegraad in decimale graden, >0 voor NB, <0 voor ZB
@@ -26,8 +26,8 @@ namespace ZonsopgangZonsondergang
         
         int offset = difference.Hours;
 
-        public string sun_set;
-        public string sun_rise;
+        public static string sun_set;
+        public static string sun_rise;
 
 
 

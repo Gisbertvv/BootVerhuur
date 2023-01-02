@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Identity.Client;
+using Syncfusion.Windows.Controls.Grid;
+using Syncfusion.XlsIO.Implementation.XmlSerialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,7 @@ namespace BootVerhuurWpf
         string date1;
         string date2;
         string selecteddate;
+        
 
 
         List<string> begintimes = new List<string>();
@@ -30,6 +34,15 @@ namespace BootVerhuurWpf
         List<string> Alltimes = new List<string>();
         List<string> Reservedtimes = new List<string>();
         Bookboat bookboat;
+        Zon sunRiseSet;
+        string sunrise = Zon.sun_rise;
+        string sunset = Zon.sun_set;
+        int beginhour = 0;
+        int beginminutes = 0;
+        int endhour = 0;
+        int endminutes = 0;
+
+
 
         public BookBoats(int id)
         {
@@ -43,8 +56,50 @@ namespace BootVerhuurWpf
             aantalp = bookboat.aantalp;
             bootniveau = bookboat.bootniveau;
             stir = bookboat.stir;
-
+            sunRiseSet = new Zon();
+            sunrise = Zon.sun_rise;
+            sunset = Zon.sun_set;
+            GetBeginAndEndTimes(sunrise, sunset);
         }
+
+        private void GetBeginAndEndTimes(string sunrise, string sunset)
+        {
+            string[] words = (sunrise.Split(':'));
+            string[] words2 = (sunset.Split(':'));
+            beginhour= int.Parse(words[0]);
+            beginminutes= int.Parse(words[1]);
+
+            endhour= int.Parse(words2[0]);
+            endhour -=2;
+            endminutes= int.Parse(words2[1]);
+
+            while (endminutes != 30)
+            {
+                if (endminutes == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    endminutes--;
+                }
+            }
+
+            while (beginminutes != 30)
+            {
+                if (beginminutes == 60)
+                {
+                    beginhour += 1;
+                    beginminutes = 0;
+                    break;
+                }
+                else
+                {
+                    beginminutes++;
+                }
+            }
+        }
+    
         /// <summary>
         /// if role is Lid only see two days ahead for reservation and no reservation for the weekend
         /// </summary>
@@ -285,45 +340,42 @@ namespace BootVerhuurWpf
         /// <summary>
         /// fills the combobox with times with half hour between
         /// </summary>
-                private void SetTimeBox()
-                {
+        private void SetTimeBox()
+        {
             Gekozentijd.Items.Clear();
             Alltimes.Clear();
             Reservedtimes.Clear();
-           //begintime
-            int hours = 6;
-            int minutes = 0;
             // is the endtime need to take 2 hours because cant row when dark.
-            while (hours != 16)
+            while (!$"{beginhour}:{beginminutes}".Equals($"{endhour}:{endminutes}"))
             {
-                if(hours.ToString().Length == 1 && minutes.ToString().Length == 1)
+                if (beginhour.ToString().Length == 1 && beginminutes.ToString().Length == 1)
                 {
-                    Alltimes.Add($"0{hours}:{minutes}0");
-                    minutes+= 30;
+                    Alltimes.Add($"0{beginhour}:{beginminutes}0");
+                    beginminutes += 30;
                 }
-                else if (hours.ToString().Length == 1 && minutes.ToString().Length ==2)
+                else if (beginhour.ToString().Length == 1 && beginminutes.ToString().Length == 2)
                 {
-                    Alltimes.Add($"0{hours}:{minutes}");
-                    hours += 1;
-                    minutes= 0;
+                    Alltimes.Add($"0{beginhour}:{beginminutes}");
+                    beginhour += 1;
+                    beginminutes = 0;
                 }
-                else if(hours.ToString().Length == 2&&minutes.ToString().Equals("0"))
+                else if (beginhour.ToString().Length == 2 && beginminutes.ToString().Equals("0"))
                 {
-                    Alltimes.Add($"{hours}:{minutes}0");
-                    minutes = 30;                   
+                    Alltimes.Add($"{beginhour}:{beginminutes}0");
+                    beginminutes = 30;
                 }
-                else if (hours.ToString().Length == 2 && minutes.ToString().Equals("30"))
+                else if (beginhour.ToString().Length == 2 && beginminutes.ToString().Equals("30"))
                 {
-                    Alltimes.Add($"{hours}:{minutes}");
-                    minutes = 0;
-                    hours += 1;
+                    Alltimes.Add($"{beginhour}:{beginminutes}");
+                    beginminutes = 0;
+                    beginhour += 1;
                 }
-               
+
             }
             Minimum();
-            foreach(string s in Alltimes)
+            foreach (string s in Alltimes)
             {
-                Gekozentijd.Items.Add(s);   
+                Gekozentijd.Items.Add(s);
             }
         }
 

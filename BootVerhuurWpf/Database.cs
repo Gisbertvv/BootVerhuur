@@ -7,10 +7,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 
-
-
-
-namespace BootVerhuur
+namespace BootVerhuurWpf
 {
     public class Database
     {

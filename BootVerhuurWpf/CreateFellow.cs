@@ -7,7 +7,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using BootVerhuur;
+//using BootVerhuur;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Drawing;
 
