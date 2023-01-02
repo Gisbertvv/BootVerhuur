@@ -2,24 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
-using System.Security.Cryptography.X509Certificates;
-using Syncfusion.DocIO.DLS;
-using Syncfusion.XPS;
-using System.Reflection;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using Syncfusion.XlsIO.Parser.Biff_Records;
-using System.Dynamic;
-using System.ComponentModel;
+
 
 namespace BootVerhuurWpf
 {
@@ -38,14 +23,12 @@ namespace BootVerhuurWpf
         string date1;
         string date2;
         string selecteddate;
-        static int memberId = Int32.Parse(Login.id);
 
 
         List<string> begintimes = new List<string>();
         List<string> endtimes = new List<string>();
         List<string> Alltimes = new List<string>();
-        List<string> testlist = new List<string>();
-        List<string> newlist = new List<string>();
+        List<string> Reservedtimes = new List<string>();
         Bookboat bookboat;
 
         public BookBoats(int id)
@@ -134,7 +117,6 @@ namespace BootVerhuurWpf
                 Getendtime(Gekozentijd.Text);
                 if (bookboat.InsertReservation(selecteddate, Gekozentijd.Text, reservationendtime))
                 {
-                    //bookboat.InsertReservation(selecteddate, Gekozentijd.Text, reservationendtime);
                     begintimes = bookboat.begintimes;
                     endtimes = bookboat.endtimes;
                     AdjustTimeBox();
@@ -146,12 +128,9 @@ namespace BootVerhuurWpf
         {
             var label = sender as Label;
             label.Content = $"Status : {status} ";
-
         }
-
         private void AantalPersonen(object sender, RoutedEventArgs e)
         {
-
             var label = sender as Label;
             label.Content = $"Aantal Personen : {aantalp}";
         }
@@ -167,7 +146,6 @@ namespace BootVerhuurWpf
             var label = sender as Label;
             label.Content = $"Niveau : {bootniveau}";
         }
-
 
         /// <summary>
         /// calculates the endtime from begintimes
@@ -228,17 +206,15 @@ namespace BootVerhuurWpf
             {
                 try
                 {
-
-
                     int indexofbegintimes = Alltimes.IndexOf(begintimes[0]);
                     int beginindex = indexofbegintimes - mm;
                     int endindex = indexofbegintimes + bb;
 
                     while (beginindex != endindex)
                     {
-                        if (!testlist.Contains(Alltimes[beginindex]))
+                        if (!Reservedtimes.Contains(Alltimes[beginindex]))
                         {
-                            testlist.Add(Alltimes[beginindex]);
+                            Reservedtimes.Add(Alltimes[beginindex]);
                             beginindex++;
                         }
                         else
@@ -251,7 +227,6 @@ namespace BootVerhuurWpf
                     endtimes.RemoveAt(0);
                 }
 
-
                 catch (Exception ex)
                 {
                     mm--;
@@ -259,7 +234,7 @@ namespace BootVerhuurWpf
 
             }
 
-            Alltimes = Alltimes.Except(testlist).ToList();
+            Alltimes = Alltimes.Except(Reservedtimes).ToList();
             Gekozentijd.Items.Clear();
 
             foreach (string s in Alltimes)
@@ -277,11 +252,6 @@ namespace BootVerhuurWpf
         {
             DateTime Output;
             int Minute;
-           
-
-/*            if ((Input.Minute <= 15) || ((Input.Minute > 30) && (Input.Minute <= 45)))
-                Minute = -1;
-            else*/
                 Minute = +1;
 
             while ((Input.Minute != 0) && (Input.Minute != 30))
@@ -319,7 +289,7 @@ namespace BootVerhuurWpf
                 {
             Gekozentijd.Items.Clear();
             Alltimes.Clear();
-            testlist.Clear();
+            Reservedtimes.Clear();
            
             int hours = 6;
             int minutes = 0;

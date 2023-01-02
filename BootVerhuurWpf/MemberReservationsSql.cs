@@ -2,20 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using Syncfusion.Windows.Shared;
-using Windows.Networking;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Syncfusion.Windows.Controls.Cells;
-using System.Reflection.PortableExecutable;
-using BoldReports.RDL.DOM;
-using System.Collections;
-using System.Data.SqlTypes;
+
 
 namespace BootVerhuurWpf
 {
@@ -32,9 +19,42 @@ namespace BootVerhuurWpf
         public DateTime createdAt { get; set; }
         public string status { get; set; }
         public int memberId = Int32.Parse(Login.id);
+        /// <summary>
+        /// Changes the status of the active reservation that have passed their reservation date.
+        /// </summary>
+        /// <param name="Date1"></param>
+        /// <param name="Date2"></param>
+        public void ChangeStatus(string Date1, string Date2)
+        {
+            OpenConnnection();
+            try
+            {
+
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+
+                    String query = $"Update reservation set status = 'Verlopen' where not status = 'Geanulleerd' and (Not reservationDate = '{Date1}' or Not reservationDate = '{Date2}') ";
+
+                    SqlCommand sqlCmd = new SqlCommand(query, connection);
+
+                    sqlCmd.CommandType = System.Data.CommandType.Text;
+
+                    DataTable boat = new DataTable();
+
+                    boat.Load(sqlCmd.ExecuteReader());
 
 
-
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+        /// <summary>
+        /// fills and returns a list with the active reservation ids
+        /// </summary>
         public void GetReservationIds()
         {
             reservationids2.Clear();
@@ -263,46 +283,3 @@ namespace BootVerhuurWpf
     }
 }
 
-        /*
-        public int GetCountboats()
-        {
-            OpenConnnection();
-            try
-            {
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-
-                    string query = string.Empty;
-                    if (Login.boatingLevel.Equals("C"))
-                    {
-                        query = $"SELECT * FROM boat where Not level = 'D'";
-                    }
-                    else if (Login.boatingLevel.Equals("D"))
-                    {
-                        query = $"SELECT * FROM boat";
-                    }
-
-                    SqlCommand sqlCmd = new SqlCommand(query, connection);
-
-                    sqlCmd.CommandType = System.Data.CommandType.Text;
-
-                    DataTable boat = new DataTable();
-
-                    boat.Load(sqlCmd.ExecuteReader());
-
-                    return boat.Rows.Count;
-
-
-                }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.ToString());
-                return 0;
-
-            }
-        }
-    }
-}
-        */

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Windows.ApplicationModel.Activation;
+using Syncfusion.Windows.Shared;
 
 namespace BootVerhuurWpf
 {
@@ -22,7 +23,6 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class MemberReservations : System.Windows.Window
     {
-        int memberId = Int32.Parse(Login.id);
         int boatId;
         string reservationDate;
         string reservationFrom;
@@ -30,6 +30,8 @@ namespace BootVerhuurWpf
         DateTime createdAt;
         int reservationscount;
         string status;
+        string date1;
+        string date2;
         List<int> reservationids;
         List<int> reservationids2;
         MemberReservationsSql MemberReservationsSql = new MemberReservationsSql();
@@ -37,8 +39,51 @@ namespace BootVerhuurWpf
         public MemberReservations()
         {
             InitializeComponent();
+            GetReservationDates();
+            MemberReservationsSql.ChangeStatus(date1,date2);
             fillDatagrid();
             fillDatagrid2();
+        }
+        private void GetReservationDates()
+        {
+            DateTime plusone = DateTime.Now.AddDays(1);
+            DateTime plustwo = DateTime.Now.AddDays(2);
+
+            if (plusone.DayOfWeek == DayOfWeek.Saturday)
+            {
+                date1 = DateTime.Now.AddDays(3).ToShortDateString();
+                date2 = DateTime.Now.AddDays(4).ToShortDateString();
+            }
+            else if (plustwo.DayOfWeek == DayOfWeek.Saturday)
+            {
+                date1 = DateTime.Now.AddDays(1).ToShortDateString();
+                date2 = DateTime.Now.AddDays(4).ToShortDateString();
+            }
+            else if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
+            {
+                date1 = DateTime.Now.AddDays(2).ToShortDateString();
+                date2 = DateTime.Now.AddDays(3).ToShortDateString();
+            }
+            else if (plustwo.DayOfWeek == DayOfWeek.Sunday)
+            {
+                date1 = DateTime.Now.AddDays(3).ToShortDateString();
+                date2 = DateTime.Now.AddDays(4).ToShortDateString();
+            }
+            else if (plusone.DayOfWeek == DayOfWeek.Sunday)
+            {
+                date1 = DateTime.Now.AddDays(2).ToShortDateString();
+                date2 = DateTime.Now.AddDays(3).ToShortDateString();
+            }
+            else if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+            {
+                date1 = DateTime.Now.AddDays(1).ToShortDateString();
+                date2 = DateTime.Now.AddDays(2).ToShortDateString();
+            }
+            else
+            {
+                date1 = DateTime.Now.AddDays(1).ToShortDateString();
+                date2 = DateTime.Now.AddDays(2).ToShortDateString();
+            }
         }
         /// <summary>
         /// fills the datagrid with all the reservations the member has 
@@ -68,7 +113,9 @@ namespace BootVerhuurWpf
             }
             Reservationsinfo.ItemsSource = reservations;
         }
-
+        /// <summary>
+        /// fills the datagrid with all the active reservations the member has
+        /// </summary>
         private void fillDatagrid2()
         {
 
