@@ -290,11 +290,11 @@ namespace BootVerhuurWpf
             Gekozentijd.Items.Clear();
             Alltimes.Clear();
             Reservedtimes.Clear();
-           
+           //begintime
             int hours = 6;
             int minutes = 0;
             // is the endtime need to take 2 hours because cant row when dark.
-            while (hours != 18)
+            while (hours != 16)
             {
                 if(hours.ToString().Length == 1 && minutes.ToString().Length == 1)
                 {
