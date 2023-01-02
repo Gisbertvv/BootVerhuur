@@ -1,4 +1,5 @@
-﻿using System;
+﻿//using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Configuration;
@@ -6,7 +7,10 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 
-namespace BootVerhuurWpf
+
+
+
+namespace BootVerhuur
 {
     public class Database
     {
@@ -14,12 +18,13 @@ namespace BootVerhuurWpf
 
         public Database()
         {
+            ///Information for database connection
+
             _builder.DataSource = "127.0.0.1";
             _builder.UserID = "sa";
             _builder.Password = "Havermout1325";
             _builder.InitialCatalog = "BootVerhuur";
         }
-
 
         protected static SqlConnection GetConnection()
         {
@@ -46,15 +51,6 @@ namespace BootVerhuurWpf
                     Console.WriteLine("Specified file does not " +
                                       "exist in the current directory.");
                 }
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-                SqlConnection connection = new(builder.ConnectionString);
-
-                connection.Open();
-
             }
             catch (SqlException e)
             {

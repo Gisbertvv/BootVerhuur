@@ -7,55 +7,49 @@
         mc:Ignorable="d"
         Title="Aanmaken gebruiker"
         WindowState="Maximized">
-    <Grid VerticalAlignment="Center">
-        <Grid.Background>
-            <ImageBrush AlignmentY="Bottom" AlignmentX="Right" Stretch="Fill" ImageSource="/Images/test1.png"/>
-        </Grid.Background>
+    <Border Style="{DynamicResource Bordervisual}">
+        <Grid Style="{DynamicResource GridFocusVisual}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-
-        <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
+            <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
+            <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
             <Button x:Name="btn0" Content="Admin Panel"
-                    Click="Open_AdminPanel" ClickMode="Press"/>
-            <Button x:Name="btn5" Content="Aanmaken"
-                    Click="Open_Click" ClickMode="Press"/>
-            <Button x:Name="btn1" Content="Reseveren"
-                    ClickMode="Press"/>
-            <Button x:Name="btn2" Content="Schademelden"
-                    Click="AccidentReport" ClickMode="Press"/>
-            <Button x:Name="btn3" Content="Routes"
-                    ClickMode="Press"/>
+                    Click="OpenAdminPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn1" Content="Aanmaken"
+                    Click="OpenEditUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn3" Content="Terug"
+                    Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn4" Content="Uitloggen"
-                    Click="Logout"/>
+                    Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Margin="10,10,10,10">
+        <StackPanel Grid.Column="1" Margin="10,10,10,10" VerticalAlignment="Center">
 
-            <Label Content="_Rol"/>
-            <ComboBox x:Name = "Rol">
-                <ComboBoxItem Content = "Lid" />
-                <ComboBoxItem Content = "Materiaalcommissaris" />
-                <ComboBoxItem Content = "Wedstrijdcommíssaris" />
+                <Label Content="_Rol"  Style="{DynamicResource LabelVisual}"/>
+                <ComboBox x:Name = "Rol" Style="{DynamicResource ComboBoxVisual}">
+                    <ComboBoxItem Content = "Lid"/>
+                    <ComboBoxItem Content = "Materiaalcommissaris"/>
+                    <ComboBoxItem Content = "Wedstrijdcommíssaris"/>
             </ComboBox>
 
-            <Label Content="_Voornaam:"  />
-            <TextBox Name="txtVoornaam" />
+                <Label Content="_Voornaam:"  Style="{DynamicResource LabelVisual}" />
+            <TextBox Name="txtVoornaam"  Style="{DynamicResource TextboxVisual}"/>
 
-            <Label Content="_Telefoonnummer"/>
-            <TextBox Name="_txtTelefoonnummer"/>
-            <Label Content="_Gebruikersnaam"/>
-            <TextBox Name="txtGebruikersnaam"/>
+                <Label Content="_Telefoonnummer"  Style="{DynamicResource LabelVisual}"/>
+                <TextBox Name="_txtTelefoonnummer"  Style="{DynamicResource TextboxVisual}"/>
+                <Label Content="_Gebruikersnaam"  Style="{DynamicResource LabelVisual}"/>
+                <TextBox Name="txtGebruikersnaam"  Style="{DynamicResource TextboxVisual}"/>
 
         </StackPanel>
 
-        <StackPanel  Grid.Column="2" Margin="10,10,10,10">
+        <StackPanel  Grid.Column="2" Margin="10,10,10,10" VerticalAlignment="Center">
 
-            <Label Content="_Niveau:"/>
+                <Label Content="_Niveau:"  Style="{DynamicResource LabelVisual}"/>
 
-            <ComboBox x:Name = "Niveau">
+                <ComboBox x:Name = "Niveau" Style="{DynamicResource ComboBoxVisual}">
                 <ComboBoxItem Content = "A" />
                 <ComboBoxItem Content = "B" />
                 <ComboBoxItem Content = "C" />
@@ -63,15 +57,16 @@
 
             </ComboBox>
 
-            <Label Content="_Achternaam:"  />
-            <TextBox Name="txtAchternaam" />
+                <Label Content="_Achternaam:"   Style="{DynamicResource LabelVisual}" />
+                <TextBox Name="txtAchternaam"  Style="{DynamicResource TextboxVisual}"/>
 
-            <Label Content="_Email:" />
-            <TextBox Name="txtEmail" />
-            <Label Content="_Wachtwoord:"  />
-            <PasswordBox Name="txtWachtwoord" />
-
-            <Button x:Name="btnBevestigen" Margin="0,5,0,0" Click="ButtonAddUser_Click" Width="147" HorizontalAlignment="Right">Aanmaken</Button>
+                <Label Content="_Email:" Style="{DynamicResource LabelVisual}" />
+                <TextBox Name="txtEmail"  Style="{DynamicResource TextboxVisual}"/>
+                <Label Content="_Wachtwoord:"   Style="{DynamicResource LabelVisual}"/>
+                <PasswordBox Name="txtWachtwoord"  Style="{DynamicResource PasswordBoxVisual}"/>
         </StackPanel>
-    </Grid>
+            <Button Grid.Column="2" x:Name="btnBevestigen" Click="ButtonAddUser_Click" VerticalAlignment="Bottom" Margin="0, 0, 10, 240" HorizontalAlignment="Right"  Style="{DynamicResource ButtonFocusVisual}">Aanmaken</Button>
+
+        </Grid>
+    </Border>
 </Window>

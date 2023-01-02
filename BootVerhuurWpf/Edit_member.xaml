@@ -1,0 +1,66 @@
+﻿<Window x:Class="BootVerhuurWpf.Edit_member"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BootVerhuurWpf"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        Title="Edit member">
+    <Border Style="{DynamicResource Bordervisual}">
+        <Grid Style="{DynamicResource GridFocusVisual}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
+                <Button x:Name="btn0" Content="Admin Panel"
+                        Click="OpenAdminPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn1" Content="Aanmaken"
+                        Click="OpenCreateUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn3" Content="Terug"
+                        Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn4" Content="Uitloggen"
+                        Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
+            </StackPanel>
+            <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="30 ,0, 30, 0">
+                <DataGrid 
+                x:Name="datagrid1" Style="{DynamicResource datagridVisual}"
+                d:ItemsSource="{d:SampleData ItemCount=5}"
+                IsReadOnly="False" SelectionChanged="datagrid1_SelectionChanged"/>
+                <Button x:Name="reloadBTN" Content="Update Table" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}" Click="reloadBTN_Click" Background="#FFA0A0A0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="30 ,0, 30, 0">
+                <Label x:Name="IDLBL" Content="ID" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="IDTXTBOX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="first_nameLBL" Content="Voornaam" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="first_nameTXTBX" Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="last_nameLBL" Content="Achternaam" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="last_nameTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="emailLBL" Content="Email" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="emailTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="phone_numberLBL" Content="Telefoonnummer" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="phoneTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="boating_levelLBL" Content="Niveau" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="boating_levelTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="usernameLBL" Content="Gebruikersnaam" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="usernameTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Label x:Name="passwordLBL" Content="Wachtwoord" Style="{DynamicResource LabelVisual}"/>
+                <TextBox x:Name="passwordTXTBX"  Style="{DynamicResource TextboxVisual}"/>
+
+                <Button x:Name="updateBTN" Content="Update" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}" Click="updateBTN_Click" Background="#FF32BE00"/>
+                <Button Content="Remove" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}"  Background="Red" Click="Button_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

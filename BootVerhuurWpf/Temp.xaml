@@ -5,46 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-          Title="Temp" Height="450" Width="800">
-    <Grid HorizontalAlignment="Left" Width="800" Height="434" VerticalAlignment="Center">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="*"/>
+          Title="Temp" WindowState="Maximized">
+    <Border Style="{DynamicResource Bordervisual}">
+        <Grid Style="{DynamicResource GridFocusVisual}">
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
 
-        </Grid.ColumnDefinitions>
+            <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
 
-        <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Width="150" Height="414" VerticalAlignment="Center">
-            <Button x:Name="btn1" Content="Reseveren"
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"
-                    Foreground="Green"/>
-            <Button x:Name="btn" Content="mijn reserveringen"
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"
-                    Foreground="Green"
-                    Click="Member_reservations"/>
             <Button x:Name="btn2" Content="Schademelden"
-
-                    Width="130" 
-                    Margin="10,5"
-                    Foreground="Blue"/>
-
-            <Button x:Name="btn3" Content="Routes"
-
-                    Margin="10, 5" Width="130"
-                    HorizontalAlignment="Center"/>
-
-            <Button x:Name="btn4" Content="Uitloggen"
-
-                    Margin="10,5" Width="130"
-                    HorizontalAlignment="Center"/>
-
-
-
+                    Click="AccidentReport" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn4" Content="Terug"
+                    Click="Back_Click" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+            <Button x:Name="btn5" Content="Uitloggen"
+                    Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
         <StackPanel Grid.Column="2">
 
             <DataGrid Name="Boats" Height="416" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="selectedboat"  IsReadOnly="True" SelectionUnit="FullRow"/>
         </StackPanel>
     </Grid>
+    </Border>
 </Window>

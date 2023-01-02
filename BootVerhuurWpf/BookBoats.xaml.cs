@@ -338,17 +338,18 @@ namespace BootVerhuurWpf
 
         private void AccidentReport(object sender, RoutedEventArgs e)
         {
-
+            PDFWindow window = new PDFWindow();
+            window.Show();
         }
 
-        private void Open_Click(object sender, RoutedEventArgs e)
+        private void OpenReservePanel(object sender, RoutedEventArgs e)
         {
             Create create = new Create();
             create.Show();
             Close();
         }
 
-        private void Open_AdminPanel(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             AdminPanel adminpanel = new AdminPanel();
             adminpanel.Show();

@@ -13,13 +13,22 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BootVerhuur;
 using Xceed.Wpf.Toolkit;
 using MessageBox = System.Windows.MessageBox;
 using WindowStartupLocation = System.Windows.WindowStartupLocation;
+using Syncfusion.CompoundFile.DocIO.Net;
+using Windows.System.Profile;
+using System.IO;
+using System.IO.Packaging;
+using Microsoft.Identity.Client;
+using System.Drawing;
+using System.Resources;
 
 namespace BootVerhuurWpf
 {
@@ -28,12 +37,72 @@ namespace BootVerhuurWpf
     /// </summary>
     public partial class AdminPanel : Window
     {
-        private static SqlConnection _builder;
-        
+        /// <summary>
+        ///  Paths should be changed on the installed system
+        /// </summary>
+        string pathLogo = @"C:/Users/gisbe/source/repos/BootVerhuur/BootVerhuurWpf/Images/Logo/";
+        string pathBackground = @"C:/Users/gisbe/source/repos//BootVerhuur/BootVerhuurWpf/Images/Background/";
+        string pathPDF = @"C:/Users/gisbe/source/repos/BootVerhuur/BootVerhuurWpf/PDF/";
+
         public AdminPanel()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
+
+        private void AdminPanelInfo(object sender, RoutedEventArgs e)
+        {
+            /// <summary>
+            ///  Sends information of the colors to the handler
+            /// </summary>
+
+            if (PrimaryColor != null && SecondaryColor != null && BackgroundColor != null)
+            {
+                SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString(), BackgroundColor.Color.ToString());
+            }
+
+            /// <summary>
+            /// Shows if background colors are edited
+            /// </summary>
+            MessageBoxResult dresult =
+                MessageBox.Show("Om de wijzigingen toe te passen moet de applicatie opnieuw opgestart worden", "Alert", MessageBoxButton.YesNo);
+            if (dresult == MessageBoxResult.Yes)
+            {
+                /// <summary>
+                ///  Closes the system
+                /// </summary>
+                System.Windows.Application.Current.Shutdown();
+            }
+        }
+
+        public static void SetThemeColors(string PrimaryColor, string SecondaryColor, string BackgroundColor)
+        {
+            Colors.SetPrimaryColor(PrimaryColor);
+            Colors.SetSecondaryColor(SecondaryColor);
+            Colors.SetBackgroundColor(BackgroundColor);
+        }
+
+    
+
+        private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
+        {
+            Create popup = new Create();
+            popup.ShowDialog();
+            Close();
+        }
+
+        private void OpenEditUserPanel(object sender, RoutedEventArgs e)
+        {
+            Edit_member edit = new Edit_member();
+            edit.Show();
+            Close();
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            LoginWindow window = new LoginWindow();
+            window.Show();
+            Close();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -43,168 +112,123 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private void Logout(object sender, RoutedEventArgs e)
+        private void OpenExplorer(string path, string fileName)
         {
-            Close();
-        }
+            /// <summary>
+            ///  Restricst file type to png 
+            /// </summary>
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Images only. | *.png;";
 
-        private void AdminPanelInfo(object sender, RoutedEventArgs e)
-        {
-            
-            if (PrimaryColor != null && SecondaryColor != null && BackgroundColor != null)
-            {
-                SetThemeColors(PrimaryColor.Color.ToString(), SecondaryColor.Color.ToString(), BackgroundColor.Color.ToString());
-            }
-        }
-        public static void SetThemeColors(string PrimaryColor, string SecondaryColor, string BackgroundColor)
-        {
-            SetPrimaryColor(PrimaryColor);
-            SetSecondaryColor(SecondaryColor);
-            SetBackgroundColor(BackgroundColor);
-        }
+            DialogResult dialogResult = openFile.ShowDialog();
 
-        private static void SetPrimaryColor(string PrimaryColor)
-        {
-            try
+            if (dialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-                SqlConnection connection = new SqlConnection(builder.ConnectionString);
-                using (connection)
+                System.Drawing.Image img = System.Drawing.Image.FromFile(openFile.FileName);
+
+                // assign safe name for saving
+                string imgSafeName = fileName + ".png";
+
+                // give generic banner name so only one file exists at a time
+                string[] nameArray = imgSafeName.Split('.');
+                string imgTempName = nameArray[0];
+                string extension = nameArray[1];
+                imgTempName = fileName;
+
+                string pngString = imgTempName + ".png";
+
+                // get debug folder path
+                string appPath = path;
+
+                // check if file path exits
+                if (!System.IO.Directory.Exists(appPath))
                 {
-                    //SQL query
-                    String sql = $"UPDATE appSettings SET primary_color='{PrimaryColor}'";
+                    System.IO.Directory.CreateDirectory(appPath);
+                }
 
+                // if file exists, delete existing banner ad
+                if (File.Exists(appPath + imgSafeName))
+                {
+                    File.Delete(appPath + imgSafeName);
+                }
 
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
+                // save new banner ad
+                File.Copy(openFile.FileName, appPath + imgSafeName);
+
+                // If the file was not a png, reopen file and save it as a png
+                if (!extension.Equals("png"))
+                {
+                    // resave as png
+                    System.Drawing.Image bannerImg = System.Drawing.Image.FromFile(appPath + imgSafeName);
+                    bannerImg.Save(appPath + pngString, System.Drawing.Imaging.ImageFormat.Png);
                 }
             }
-            catch (SqlException e)
-            {
-                System.Windows.MessageBox.Show(e.ToString());
-            }
         }
 
-        private static void SetSecondaryColor(string SecondaryColor)
+        private void OpenExplorerPDF(string path, string fileName)
         {
-            try
+            OpenFileDialog openFile = new OpenFileDialog();
+            /// <summary>
+            ///  Restricst file type to pdf 
+            /// </summary>
+            openFile.Filter = "PDF only. | *.PDF;";
+
+            DialogResult dialogResult = openFile.ShowDialog();
+
+            if (dialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-                SqlConnection connection = new SqlConnection(builder.ConnectionString);
-                using (connection)
+                string filePath = openFile.FileName;
+                //MessageBox.Show(filePath);
+
+
+
+                // assign safe name for saving
+                string imgSafeName = fileName + ".pdf";
+
+                // give generic banner name so only one file exists at a time
+                string[] nameArray = imgSafeName.Split('.');
+                string imgTempName = nameArray[0];
+                string extension = nameArray[1];
+                imgTempName = fileName;
+
+                string pngString = imgTempName + ".pdf";
+
+                // get debug folder path
+                string appPath = path;
+
+                // check if file path exits
+                if (!System.IO.Directory.Exists(appPath))
                 {
-                    //SQL query
-                    String sql = $"UPDATE appSettings SET secondary_color ='{SecondaryColor}'";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
+                    System.IO.Directory.CreateDirectory(appPath);
                 }
-            }
-            catch (SqlException e)
-            {
-              MessageBox.Show(e.ToString());
-            }
-        }
 
-        private static void SetBackgroundColor(string BackgroundColor)
-        {
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-                SqlConnection connection = new SqlConnection(builder.ConnectionString);
-                using (connection)
+                // if file exists, delete existing banner ad
+                if (File.Exists(appPath + imgSafeName))
                 {
-                    //SQL query
-                    String sql = $"UPDATE appSettings SET background_color ='{BackgroundColor}'";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
+                    File.Delete(appPath + imgSafeName);
                 }
-            }
-            catch (SqlException e)
-            {
-                System.Windows.MessageBox.Show(e.ToString());
+
+                // save new banner ad
+                File.Copy(openFile.FileName, appPath + imgSafeName);
             }
         }
 
-        public string[] GetColors()
+        private void UploadLogo(object sender, RoutedEventArgs e)
         {
-            string[] color = null;
-
-            try
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "BootVerhuur";
-
-                string color1;
-                SqlConnection connection = new SqlConnection(builder.ConnectionString);
-                using (connection)
-                {
-                    //SQL quary
-                    String sql = "SELECT primary_color, secondary_color, background_color FROM appSettings";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                 color = new string[] { reader.GetString(0), reader.GetString(1), reader.GetString(2)};
-                            }
-                        }
-                        connection.Close();
-                    }
-                }
-            }
-
-            catch (SqlException e)
-            {
-               MessageBox.Show(e.ToString());
-            }
-            return color;
+            // Path and name of file are here
+            OpenExplorer(pathLogo, "logo");
         }
 
-        private void Open_AdminPanel(object sender, RoutedEventArgs e)
+        private void UploadBackground(object sender, RoutedEventArgs e)
         {
-
+            // Path and name of file are here
+            OpenExplorer(pathBackground, "background");
         }
 
-        private void Open_Click(object sender, RoutedEventArgs e)
+        private void UploadPdf(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void AccidentReport(object sender, RoutedEventArgs e)
-        {
-
+            // Path and name of file are here
+            OpenExplorerPDF(pathPDF, "pdf");
         }
     }
 }
