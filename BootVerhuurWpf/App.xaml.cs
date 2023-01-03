@@ -22,7 +22,7 @@ namespace BootVerhuurWpf
             Database database= new Database();
             //Automatic database connection
             
-            database.OpenConnnection();
+            //database.OpenConnnection();
             Colors panel = new Colors();
 
             //converters color from string to solidcolorbrush

@@ -32,10 +32,8 @@ namespace BootVerhuurWpf
         {
             try
             {
-                OpenConnnection();
                 using (var connection = GetConnection())
                 {
-                    connection.Open();
 
                     string query = string.Empty;
                     if (Login.boatingLevel.Equals("C"))
@@ -46,95 +44,97 @@ namespace BootVerhuurWpf
                     {
                         query = $"SELECT TOP 1 * FROM boat";
                     }
-                    SqlCommand sqlCmd = new SqlCommand(query, connection);
-
-                    sqlCmd.CommandType = System.Data.CommandType.Text;
-
-                    DataTable boat = new DataTable();
-                    boat.Load(sqlCmd.ExecuteReader());
-
-                    id = (int)boat.Rows[0]["boat_id"];
-                                                                                     
+                    connection.Open();
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                id = reader.GetInt32(0);
+                            }
+                        }
+                    }
                 }
             }
             catch (SqlException e)
             {
-                Console.WriteLine(e.ToString());
+                MessageBox.Show(e.ToString());
             }
-            Console.ReadLine();
         }
+        /// <summary>
+        /// Gets all the information of specific boat and puts them into variables
+        /// </summary>
+        /// <param name="id"></param>
         public void GetBoatInfo(int id)
         {
-            OpenConnnection();
             try
             {
                 using (var connection = GetConnection())
                 {
+
+                    string query = $"SELECT * FROM boat where boat_id = {id}";
                     connection.Open();
-                      string  query = $"SELECT * FROM boat where boat_id = {id}";
-                    
-
-                    SqlCommand sqlCmd = new SqlCommand(query, connection);
-
-                    sqlCmd.CommandType = System.Data.CommandType.Text;
-
-                    DataTable boat = new DataTable();
-                    boat.Load(sqlCmd.ExecuteReader());
-
-                    bootniveau = boat.Rows[0]["level"].ToString();
-                    status = boat.Rows[0]["availability"].ToString();
-                    stir = (bool)boat.Rows[0]["stir"];
-                    aantalp = (int)boat.Rows[0]["capacity"];
-
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                bootniveau = reader.GetString(2);
+                                status = reader.GetString(4);
+                                stir = reader.GetBoolean(3);
+                                aantalp = reader.GetInt32(1);
+                            }
+                        }
+                    }
                 }
             }
             catch (SqlException e)
             {
-                Console.WriteLine(e.ToString());
+                MessageBox.Show(e.ToString());
             }
-            Console.ReadLine();
         }
         /// <summary>
         /// Gets the total amout of boats that there are for the boating_level of the user
         /// </summary>
         public int GetCountboats()
         {
-            OpenConnnection();
+            int count = 0;  
             try
             {
                 using (var connection = GetConnection())
                 {
-                    connection.Open();
 
                     string query = string.Empty;
                     if (Login.boatingLevel.Equals("C"))
                     {
-                        query = $"SELECT * FROM boat where Not level = 'D'";
+                        query = $"SELECT Count(*) FROM boat where Not level = 'D'";
                     }
                     else if (Login.boatingLevel.Equals("D"))
                     {
-                        query = $"SELECT * FROM boat";
+                        query = $"SELECT Count(*) FROM boat";
                     }
-
-                    SqlCommand sqlCmd = new SqlCommand(query, connection);
-
-                    sqlCmd.CommandType = System.Data.CommandType.Text;
-
-                    DataTable boat = new DataTable();
-
-                    boat.Load(sqlCmd.ExecuteReader());
-
-                    return boat.Rows.Count;
-
-
+                    connection.Open();
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                count = reader.GetInt32(0);
+                               
+                            }
+                        }
+                    }
+                    return count;
                 }
             }
             catch (SqlException e)
             {
-                Console.WriteLine(e.ToString());
-                return 0;
-
-            }
+                MessageBox.Show(e.ToString());
+                return -1;  
+            }          
         }
     }
 }

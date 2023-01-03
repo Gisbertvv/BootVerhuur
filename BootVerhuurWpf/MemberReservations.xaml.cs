@@ -44,6 +44,10 @@ namespace BootVerhuurWpf
             fillDatagrid();
             fillDatagrid2();
         }
+
+        /// <summary>
+        /// Gets the availeble reservationdates
+        /// </summary>
         private void GetReservationDates()
         {
             DateTime plusone = DateTime.Now.AddDays(1);
@@ -172,7 +176,11 @@ namespace BootVerhuurWpf
         {
             Close();
         }
-
+        /// <summary>
+        /// When button is pressed status of reservation is changed to 'Geanulleerd'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cancel_reservation(object sender, RoutedEventArgs e)
         {
             int i = Activeresrevationinfo.SelectedIndex;

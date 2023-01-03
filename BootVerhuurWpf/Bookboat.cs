@@ -32,25 +32,19 @@ namespace BootVerhuurWpf
         /// </summary>
         public void Getreservationtimes(int id, string reservationdate)
         {
+
             try
             {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "127.0.0.1";
-                builder.UserID = "SA";
-                builder.Password = "Havermout1325";
-                builder.InitialCatalog = "Bootverhuur";
-
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                using (var connection = GetConnection())
                 {
                     String sql = $"SELECT * FROM reservation where boat_id = {id} AND reservationDate = '{reservationdate}' AND status = 'Actief' ";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    connection.Open();
+                    using (var command = new SqlCommand(sql, connection))
                     {
-                        connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-
                                 begintimes.Add(reader.GetString(3));
                                 endtimes.Add(reader.GetString(4));
                             }
@@ -60,10 +54,17 @@ namespace BootVerhuurWpf
             }
             catch (SqlException e)
             {
-                Console.WriteLine(e.ToString());
+                MessageBox.Show(e.ToString());
             }
-            Console.ReadLine();
         }
+
+        /// <summary>
+        /// Inserts a reservation into the database 
+        /// </summary>
+        /// <param name="reservationdate"></param>
+        /// <param name="reservationtime"></param>
+        /// <param name="endtime"></param>
+        /// <returns></returns>
         public bool InsertReservation(string reservationdate, string reservationtime, string endtime)
         {
             try
@@ -79,66 +80,61 @@ namespace BootVerhuurWpf
 
                     using (var connection = GetConnection())
                     {
-                        connection.Open();
 
                         String query = $"insert into reservation values ({i}, {Id},'{reservationdate}' , '{reservationtime}', '{endtime}', GetDate(),{memberId},'Actief')";
-
-                        SqlCommand sqlCmd = new SqlCommand(query, connection);
-
-                        sqlCmd.CommandType = System.Data.CommandType.Text;
-
-                        DataTable boat = new DataTable();
-
-                        boat.Load(sqlCmd.ExecuteReader());
-
-                        Getreservationtimes(Id, reservationdate);
-                        
-                        MessageBox.Show("Reservering is aangemaakt", "SUCCES");
-                        return true;
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                            connection.Close();
+                        }
 
                     }
+                    Getreservationtimes(Id, reservationdate);
+
+                    MessageBox.Show("Reservering is aangemaakt", "SUCCES");
+                    return true;
                 }
             }
-
             catch (SqlException e)
             {
-                Console.WriteLine(e.ToString());
+                MessageBox.Show(e.ToString());
                 return false;
             }
         }
 
-
+        /// <summary>
+        /// Puts all the information from the database in variables give a specific boat_id
+        /// </summary>
+        /// <param name="id"></param>
         public void Checkeverything(int id)
         {
             Id = id;
-            OpenConnnection();
             try
             {
                 using (var connection = GetConnection())
                 {
-                    connection.Open();
                     String query = $"SELECT * FROM boat where boat_id = {Id}";
+                    connection.Open();
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                bootniveau = reader.GetString(2);
+                                status = reader.GetString(4);
+                                stir = reader.GetBoolean(3);
+                                aantalp = reader.GetInt32(1);
 
-                    SqlCommand sqlCmd = new SqlCommand(query, connection);
-
-                    sqlCmd.CommandType = System.Data.CommandType.Text;
-
-                    DataTable boat = new DataTable();
-
-                    boat.Load(sqlCmd.ExecuteReader());
-
-
-                    bootniveau = boat.Rows[0]["level"].ToString();
-                    status = boat.Rows[0]["availability"].ToString();
-                    stir = (bool)boat.Rows[0]["stir"];
-                    aantalp = (int)boat.Rows[0]["capacity"];
-
-                    connection.Close();
+                            }
+                        }
+                    }
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException e)
             {
-                Console.WriteLine(ex.ToString());
+                MessageBox.Show(e.ToString());
             }
         }
 
@@ -147,29 +143,31 @@ namespace BootVerhuurWpf
         /// </summary>
         public int GetReservationID()
         {
-            OpenConnnection();
+            int count =0;
             try
             {
                 using (var connection = GetConnection())
                 {
+                    String query = $"select count(*) from reservation";
                     connection.Open();
-                    String query = $"select * from reservation";
-
-                    SqlCommand sqlCmd = new SqlCommand(query, connection);
-
-                    sqlCmd.CommandType = System.Data.CommandType.Text;
-
-                    DataTable reservations = new DataTable();
-
-                    reservations.Load(sqlCmd.ExecuteReader());
-
-                    return reservations.Rows.Count + 1;
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                count = reader.GetInt32(0);
+                                
+                            }
+                        }
+                    }
+                    return count +1;
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException e)
             {
-                Console.WriteLine(ex.ToString());
-                return 0;
+                MessageBox.Show(e.ToString());
+                return-1;
             }
         }
 
@@ -178,35 +176,33 @@ namespace BootVerhuurWpf
         /// </summary>
         public int GetMemberIdCountReservations(string reservationdate, string reservationdate2)
         {
-            OpenConnnection();
+            int count = 0;
             try
             {
                 using (var connection = GetConnection())
                 {
+                    String query = $"Select count(*) from reservation where member_id = {memberId} and (reservationDate = '{reservationdate}' or reservationDate = '{reservationdate2}') And status = 'Actief'";
                     connection.Open();
-                    String query = $"Select * from reservation where member_id = {memberId} and (reservationDate = '{reservationdate}' or reservationDate = '{reservationdate2}') And status = 'Actief'";
-
-                    SqlCommand sqlCmd = new SqlCommand(query, connection);
-
-                    
-                    sqlCmd.CommandType = System.Data.CommandType.Text;
-
-                    DataTable reservations = new DataTable();
-
-                    reservations.Load(sqlCmd.ExecuteReader());
-
-                    return reservations.Rows.Count;
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                count = reader.GetInt32(0);
+                                
+                            }
+                        }
+                    }
                 }
+                return count;
             }
-            catch (SqlException ex)
+            catch (SqlException e)
             {
-                Console.WriteLine(ex.ToString());
-                return 0;
+                MessageBox.Show(e.ToString());
+                return -1;
             }
         }
-
-
-
     }
     }
 

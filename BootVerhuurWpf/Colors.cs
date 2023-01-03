@@ -85,7 +85,7 @@ namespace BootVerhuurWpf
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    command.ExecuteReader();
                     connection.Close();
                 }
             }

@@ -42,8 +42,6 @@ namespace BootVerhuurWpf
         int endhour = 0;
         int endminutes = 0;
 
-
-
         public BookBoats(int id)
         {
             Id = id;
@@ -61,7 +59,11 @@ namespace BootVerhuurWpf
             sunset = Zon.sun_set;
             GetBeginAndEndTimes(sunrise, sunset);
         }
-
+        /// <summary>
+        /// puts the begin and endtimes from sunrise and sunset into integers
+        /// </summary>
+        /// <param name="sunrise"></param>
+        /// <param name="sunset"></param>
         private void GetBeginAndEndTimes(string sunrise, string sunset)
         {
             string[] words = (sunrise.Split(':'));
@@ -69,10 +71,11 @@ namespace BootVerhuurWpf
             beginhour= int.Parse(words[0]);
             beginminutes= int.Parse(words[1]);
 
-            endhour= int.Parse(words2[0]);
+            endhour= int.Parse(words2[0]);          
             endhour -=2;
             endminutes= int.Parse(words2[1]);
 
+            //round down to the closest halfhour or hour
             while (endminutes != 30)
             {
                 if (endminutes == 0)
@@ -84,7 +87,7 @@ namespace BootVerhuurWpf
                     endminutes--;
                 }
             }
-
+            //round up to the closest halfhour or hour.
             while (beginminutes != 30)
             {
                 if (beginminutes == 60)
@@ -101,7 +104,7 @@ namespace BootVerhuurWpf
         }
     
         /// <summary>
-        /// if role is Lid only see two days ahead for reservation and no reservation for the weekend
+        /// Adjust the Calender to display two days ahead. 
         /// </summary>
         private void AdjustCalender()
         {
@@ -160,7 +163,11 @@ namespace BootVerhuurWpf
             }
         }
 
-
+        /// <summary>
+        /// When button is pressed inserts reservation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Book(object sender, RoutedEventArgs e)
         {
             if (DP.SelectedDate == null || string.IsNullOrEmpty(Gekozentijd.Text))
@@ -178,24 +185,41 @@ namespace BootVerhuurWpf
                 }
             }
         }
-
+        /// <summary>
+        /// Sets the label to the status of the boat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Status(object sender, RoutedEventArgs e)
         {
             var label = sender as Label;
             label.Content = $"Status : {status} ";
         }
+        /// <summary>
+        /// Sets the label to the capacity of the boat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AantalPersonen(object sender, RoutedEventArgs e)
         {
             var label = sender as Label;
             label.Content = $"Aantal Personen : {aantalp}";
         }
-
+        /// <summary>
+        /// Sets the label to the stir boolean of the boat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Stuur(object sender, RoutedEventArgs e)
         {
             var label = sender as Label;
             label.Content = $"Stuur : {stir}";
         }
-
+        /// <summary>
+        /// Sets the label to the level of the boat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BootNiveau(object sender, RoutedEventArgs e)
         {
             var label = sender as Label;
@@ -203,7 +227,7 @@ namespace BootVerhuurWpf
         }
 
         /// <summary>
-        /// calculates the endtime from begintimes
+        /// calculates the endtime from begintime
         /// </summary>
         /// <param name="rs"></param>
         public void Getendtime(string rs)
@@ -342,33 +366,35 @@ namespace BootVerhuurWpf
         /// </summary>
         private void SetTimeBox()
         {
+            int tempbeginhour = beginhour;
+            int tempbeginminutes = beginminutes;
             Gekozentijd.Items.Clear();
             Alltimes.Clear();
             Reservedtimes.Clear();
             // is the endtime need to take 2 hours because cant row when dark.
-            while (!$"{beginhour}:{beginminutes}".Equals($"{endhour}:{endminutes}"))
+            while (!$"{tempbeginhour}:{tempbeginminutes}".Equals($"{endhour}:{endminutes}"))
             {
-                if (beginhour.ToString().Length == 1 && beginminutes.ToString().Length == 1)
+                if (tempbeginhour.ToString().Length == 1 && tempbeginminutes.ToString().Length == 1)
                 {
-                    Alltimes.Add($"0{beginhour}:{beginminutes}0");
-                    beginminutes += 30;
+                    Alltimes.Add($"0{tempbeginhour}:{tempbeginminutes}0");
+                    tempbeginminutes += 30;
                 }
-                else if (beginhour.ToString().Length == 1 && beginminutes.ToString().Length == 2)
+                else if (tempbeginhour.ToString().Length == 1 && tempbeginminutes.ToString().Length == 2)
                 {
-                    Alltimes.Add($"0{beginhour}:{beginminutes}");
-                    beginhour += 1;
-                    beginminutes = 0;
+                    Alltimes.Add($"0{tempbeginhour}:{tempbeginminutes}");
+                    tempbeginhour += 1;
+                    tempbeginminutes = 0;
                 }
-                else if (beginhour.ToString().Length == 2 && beginminutes.ToString().Equals("0"))
+                else if (tempbeginhour.ToString().Length == 2 && tempbeginminutes.ToString().Equals("0"))
                 {
-                    Alltimes.Add($"{beginhour}:{beginminutes}0");
-                    beginminutes = 30;
+                    Alltimes.Add($"{tempbeginhour}:{tempbeginminutes}0");
+                    tempbeginminutes = 30;
                 }
-                else if (beginhour.ToString().Length == 2 && beginminutes.ToString().Equals("30"))
+                else if (tempbeginhour.ToString().Length == 2 && tempbeginminutes.ToString().Equals("30"))
                 {
-                    Alltimes.Add($"{beginhour}:{beginminutes}");
-                    beginminutes = 0;
-                    beginhour += 1;
+                    Alltimes.Add($"{tempbeginhour}:{tempbeginminutes}");
+                    tempbeginminutes = 0;
+                    tempbeginhour += 1;
                 }
 
             }
@@ -378,7 +404,11 @@ namespace BootVerhuurWpf
                 Gekozentijd.Items.Add(s);
             }
         }
-
+        /// <summary>
+        /// When different date is selected reserved times are deleted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectionDatechanged(object sender, SelectionChangedEventArgs e)
         {
             selecteddate = DP.SelectedDate.Value.ToShortDateString();

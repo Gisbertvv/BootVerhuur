@@ -40,7 +40,9 @@ namespace BootVerhuurWpf
             InitializeComponent();
             showboats();
         }
-
+        /// <summary>
+        /// Fills the datagrid with all the boats for the level of the member
+        /// </summary>
         private void showboats()
         {
             List<Boat> boats = new List<Boat>();
@@ -59,7 +61,11 @@ namespace BootVerhuurWpf
             }
             Boats.ItemsSource = boats;
         }
-
+        /// <summary>
+        /// When boat is selected opens new window. With the information of the boat_id
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void selectedboat(object sender, MouseButtonEventArgs e)
         {
 

@@ -19,9 +19,9 @@
                     Click="AccidentReport" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn2" Content="Terug"
                     Click="Back_Click" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
-            <Button x:Name="btn5" Content="Uitloggen"
+                <Button x:Name="btn5" Content="Uitloggen"
                     Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
-        </StackPanel>
+            </StackPanel>
 
 
         <StackPanel Grid.Column="2" Name="stackpanel2" Margin ="10" >
