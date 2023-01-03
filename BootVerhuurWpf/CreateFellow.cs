@@ -34,6 +34,7 @@ namespace BootVerhuurWpf
             return valid;
         }
 
+        // Check to see if password contains a digit
         private static bool ContainsDigit(string wachtwoord)
         {
             foreach (char l in wachtwoord)
@@ -51,6 +52,7 @@ namespace BootVerhuurWpf
             return digits;
         }
 
+        // Check to see if a password contains a special character
         private static bool ContainsSpecial(string wachtwoord)
         {
             string regexItem = @"\|!#$%&/+-()=?»«@£§€{}.-;'<>_,";
@@ -68,6 +70,8 @@ namespace BootVerhuurWpf
             }
             return special;
         }
+
+        // Check to see if the fields or not empty
         public static bool EmptyFieldMessageAdmin(string Gebruikersnaam, string Email)
         {
 
@@ -77,6 +81,8 @@ namespace BootVerhuurWpf
             }
             return false;
         }
+
+        // Check to see if any fields have been left empty
         public static bool EmptyFieldMessage(string Voornaam, string Achternaam, string Gebruikersnaam, string Email, string Telefoonnummer, string Rol, string Niveau)
         {
 
@@ -89,6 +95,7 @@ namespace BootVerhuurWpf
             return false;
         }
 
+        // Check to see if the email address is valid
         private static bool ValidEmailMessage(string Email)
         {
             if (!IsEmailValid(Email) || (!Email.EndsWith(".nl") && !Email.EndsWith(".com")))
@@ -99,6 +106,7 @@ namespace BootVerhuurWpf
             return false;
         }
 
+        // Check to see if the password is valid
         private static bool ValidPasswordMessage(string Password)
         {
             if (!digits || !special || Password.Length <= 7)
@@ -113,6 +121,8 @@ namespace BootVerhuurWpf
             new Member(Voornaam, Achternaam, Gebruikersnaam, Password, Email, Telefoonnummer, Rol, Niveau);
         }
 
+
+        // Creates a new member in the 'member' table while being subjected to several validity checks.
         public static void CreateMember(string Voornaam, string Achternaam, string Gebruikersnaam, string Password, string Email, string Telefoonnummer, string Rol, string Niveau)
         {
       
@@ -161,6 +171,7 @@ namespace BootVerhuurWpf
             }
         }
 
+        // Create a new admin instance in the 'member' table
         public static void CreateAdmin(string Gebruikersnaam, string Password, string Email)
         {
 
