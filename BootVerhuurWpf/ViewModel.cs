@@ -32,7 +32,7 @@ namespace BootVerhuurWpf
             //docStream = new FileStream(@"C:\Users\Damian\Downloads\schadeformulier-rv-naarden.pdf",FileMode.OpenOrCreate);
             //docStream = new FileStream(@"C:\Users\gisbe\Downloads\schadeformulier-rv-naarden.pdf", FileMode.OpenOrCreate);
 
-            //het filepad van de file van de docstream die gebind is aan in de xaml
+            //this is the filepath that is used to open the chosen damage form pdf
             docStream = new FileStream(@"C:\Users\gisbe\source\repos\BootVerhuur\BootVerhuurWpf\PDF\pdf.pdf", FileMode.OpenOrCreate);
 
 
