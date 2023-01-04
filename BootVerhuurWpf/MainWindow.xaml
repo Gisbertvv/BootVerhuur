@@ -27,10 +27,13 @@
             <Button x:Name="btn3" Content="Reseveren"
                     ClickMode="Press" Click="OpenReservePanel"
                     Style="{DynamicResource ButtonFocusVisual}"/>
-            <Button x:Name="btn4" Content="Schademelden"
+                <Button x:Name="btn4" Content="Mijn reserveringen"
+                    ClickMode="Press" Click="ShowMemberReservations"
+                    Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn5" Content="Schademelden"
                     Click="AccidentReport" ClickMode="Press"
                     Style="{DynamicResource ButtonFocusVisual}"/>
-            <Button x:Name="btn5" Content="Uitloggen"
+            <Button x:Name="btn6" Content="Uitloggen"
                     Click="Logout"
                     Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>

@@ -426,8 +426,8 @@ namespace BootVerhuurWpf
 
         private void OpenReservePanel(object sender, RoutedEventArgs e)
         {
-            Create create = new Create();
-            create.Show();
+            Temp temp = new Temp();
+            temp.Show();
             Close();
         }
 
@@ -446,6 +446,13 @@ namespace BootVerhuurWpf
         {
             Temp tp = new Temp();
             tp.Show();
+            Close();
+        }
+
+        private void Open_MemberReservations(object sender, RoutedEventArgs e)
+        {
+            MemberReservations memberReservations= new MemberReservations();    
+            memberReservations.Show();
             Close();
         }
     }

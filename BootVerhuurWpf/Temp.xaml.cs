@@ -84,6 +84,7 @@ namespace BootVerhuurWpf
         {
             MemberReservations memberreserveration = new MemberReservations();
             memberreserveration.Show();
+            Close();
         }
             private void AccidentReport(object sender, RoutedEventArgs e)
             {

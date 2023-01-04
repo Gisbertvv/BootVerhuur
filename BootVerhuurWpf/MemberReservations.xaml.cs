@@ -184,12 +184,19 @@ namespace BootVerhuurWpf
         private void Cancel_reservation(object sender, RoutedEventArgs e)
         {
             int i = Activeresrevationinfo.SelectedIndex;
-            MemberReservationsSql.GetReservationIds();
-            reservationids2 = MemberReservationsSql.reservationids2;
-            int id = reservationids2[i];
-            MemberReservationsSql.CancelReservation(id);
-            fillDatagrid();
-            fillDatagrid2();
+            if (i == -1)
+            {
+                MessageBox.Show("Selecteer een reservering om te anulleren");
+            }
+            else
+            {
+                MemberReservationsSql.GetReservationIds();
+                reservationids2 = MemberReservationsSql.reservationids2;
+                int id = reservationids2[i];
+                MemberReservationsSql.CancelReservation(id);
+                fillDatagrid();
+                fillDatagrid2();
+            }
         }
     }
 }

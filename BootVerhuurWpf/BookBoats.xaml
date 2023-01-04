@@ -17,8 +17,10 @@
             <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
             <Button x:Name="btn4" Content="Schademelden"
                     Click="AccidentReport" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
-            <Button x:Name="btn2" Content="Terug"
-                    Click="Back_Click" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn2" Content="Reserveren"
+                    Click="OpenReservePanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn3" Content="Mijn reserveringen"
+                    Click="Open_MemberReservations" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
                 <Button x:Name="btn5" Content="Uitloggen"
                     Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
             </StackPanel>
