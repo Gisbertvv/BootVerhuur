@@ -276,9 +276,8 @@ namespace BootVerhuurWpf
         private void AdjustTimeBox()
         {
             int indexb;
-            int ee = 9;
-            int bb = 5;
-            int mm = 4;
+            int bb = 10;
+            int mm = 8;
             SetTimeBox();
 
             while (begintimes.Count > 0)
@@ -374,29 +373,56 @@ namespace BootVerhuurWpf
             // is the endtime need to take 2 hours because cant row when dark.
             while (!$"{tempbeginhour}:{tempbeginminutes}".Equals($"{endhour}:{endminutes}"))
             {
-                if (tempbeginhour.ToString().Length == 1 && tempbeginminutes.ToString().Length == 1)
+                if (tempbeginhour.ToString().Length == 1)
                 {
-                    Alltimes.Add($"0{tempbeginhour}:{tempbeginminutes}0");
-                    tempbeginminutes += 30;
+                    if (tempbeginminutes.ToString().Equals("0"))
+                    {
+                        Alltimes.Add($"0{tempbeginhour}:{tempbeginminutes}0");
+                        tempbeginminutes += 15;
+                    }
+                    else if (tempbeginminutes.ToString().Equals("15"))
+                    {
+                        Alltimes.Add($"0{tempbeginhour}:{tempbeginminutes}");
+                        tempbeginminutes += 15;
+                    }
+                    else if (tempbeginminutes.ToString().Equals("30"))
+                    {
+                        Alltimes.Add($"0{tempbeginhour}:{tempbeginminutes}");
+                        tempbeginminutes += 15;
+                    }
+                    else if (tempbeginminutes.ToString().Equals("45"))
+                    {
+                        Alltimes.Add($"0{tempbeginhour}:{tempbeginminutes}");
+                        tempbeginhour += 1;
+                        tempbeginminutes = 0;
+                    }
                 }
-                else if (tempbeginhour.ToString().Length == 1 && tempbeginminutes.ToString().Length == 2)
+                else if (tempbeginhour.ToString().Length == 2)
                 {
-                    Alltimes.Add($"0{tempbeginhour}:{tempbeginminutes}");
-                    tempbeginhour += 1;
-                    tempbeginminutes = 0;
-                }
-                else if (tempbeginhour.ToString().Length == 2 && tempbeginminutes.ToString().Equals("0"))
-                {
-                    Alltimes.Add($"{tempbeginhour}:{tempbeginminutes}0");
-                    tempbeginminutes = 30;
-                }
-                else if (tempbeginhour.ToString().Length == 2 && tempbeginminutes.ToString().Equals("30"))
-                {
-                    Alltimes.Add($"{tempbeginhour}:{tempbeginminutes}");
-                    tempbeginminutes = 0;
-                    tempbeginhour += 1;
-                }
+                    if (tempbeginminutes.ToString().Equals("0"))
+                    {
+                        Alltimes.Add($"{tempbeginhour}:{tempbeginminutes}0");
+                        tempbeginminutes = 15;
+                    }
+                    else if (tempbeginhour.ToString().Length == 2 && tempbeginminutes.ToString().Equals("15"))
+                    {
+                        Alltimes.Add($"{tempbeginhour}:{tempbeginminutes}");
+                        tempbeginminutes += 15;
 
+                    }
+                    else if (tempbeginhour.ToString().Length == 2 && tempbeginminutes.ToString().Equals("30"))
+                    {
+                        Alltimes.Add($"{tempbeginhour}:{tempbeginminutes}");
+                        tempbeginminutes += 15;
+                    }
+                    else if (tempbeginhour.ToString().Length == 2 && tempbeginminutes.ToString().Equals("45"))
+                    {
+                        Alltimes.Add($"{tempbeginhour}:{tempbeginminutes}");
+                        tempbeginminutes = 0;
+                        tempbeginhour += 1;
+                    }
+
+                }
             }
             Minimum();
             foreach (string s in Alltimes)
