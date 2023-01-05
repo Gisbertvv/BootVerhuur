@@ -26,8 +26,6 @@ namespace BootVerhuurWpf
         string date1;
         string date2;
         string selecteddate;
-        
-
 
         List<string> begintimes = new List<string>();
         List<string> endtimes = new List<string>();
@@ -164,7 +162,7 @@ namespace BootVerhuurWpf
         }
 
         /// <summary>
-        /// When button is pressed inserts reservation
+        /// When button is pressed inserts reservation into the database
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -275,18 +273,21 @@ namespace BootVerhuurWpf
         /// </summary>
         private void AdjustTimeBox()
         {
-            int indexb;
+            /*            int indexb;
+                        int bb = 10;
+                        int mm = 8;*/
             int bb = 10;
             int mm = 8;
             SetTimeBox();
 
             while (begintimes.Count > 0)
             {
+
                 try
                 {
-                    int indexofbegintimes = Alltimes.IndexOf(begintimes[0]);
-                    int beginindex = indexofbegintimes - mm;
-                    int endindex = indexofbegintimes + bb;
+                     int indexofbegintimes = Alltimes.IndexOf(begintimes[0]);
+                     int beginindex = indexofbegintimes - mm;
+                     int endindex = indexofbegintimes + bb;
 
                     while (beginindex != endindex)
                     {
@@ -303,13 +304,26 @@ namespace BootVerhuurWpf
 
                     begintimes.RemoveAt(0);
                     endtimes.RemoveAt(0);
+                     bb = 10;
+                     mm = 8;
                 }
 
                 catch (Exception ex)
                 {
-                    mm--;
+                    if (Alltimes.IndexOf(begintimes[0]) == 0)
+                    {
+                        mm =0;
+                    }
+                    else if ((Alltimes.IndexOf(begintimes[0])-mm) < 0)
+                    {
+                        mm--;
+                    }
+                    else
+                    {
+                        begintimes.RemoveAt(0);
+                        endtimes.RemoveAt(0);
+                    }
                 }
-
             }
 
             Alltimes = Alltimes.Except(Reservedtimes).ToList();
@@ -322,24 +336,23 @@ namespace BootVerhuurWpf
         }
 
         /// <summary>
-        /// rounds the time up to the closest half hour or hour
+        /// rounds the time up to the closest 15, 30,45 minutes or hour 
         /// </summary>
         /// <param name="Input"></param>
         /// <returns></returns>
         string RoundMinutes(DateTime Input)
         {
-            DateTime Output;
             int Minute;
                 Minute = +1;
 
-            while ((Input.Minute != 0) && (Input.Minute != 30))
+            while ((Input.Minute != 0) && (Input.Minute != 15) && (Input.Minute != 30) && (Input.Minute != 45))
                 Input = Input.AddMinutes(Minute);
 
             return Input.ToShortTimeString();
         }
 
         /// <summary>
-        /// Deletes all the times that fall in the 24 hours constraint
+        /// Deletes all the times that fall in the 24 hours constraint if the date is tommorow
         /// </summary>
         private void Minimum()
         {
@@ -361,7 +374,7 @@ namespace BootVerhuurWpf
 
         }
         /// <summary>
-        /// fills the combobox with times with half hour between
+        /// fills the combobox with times with 15 minutes between
         /// </summary>
         private void SetTimeBox()
         {
@@ -448,6 +461,7 @@ namespace BootVerhuurWpf
         {
             PDFWindow window = new PDFWindow();
             window.Show();
+            Close();
         }
 
         private void OpenReservePanel(object sender, RoutedEventArgs e)
