@@ -24,6 +24,7 @@ namespace BootVerhuurWpf
         public static string boatingLevel;
         public static string role;
 
+        // Login check where password + username match OR password + email match
         public bool getLogin(string usernameOrEmail, string password)
         {
             bool s = false;
