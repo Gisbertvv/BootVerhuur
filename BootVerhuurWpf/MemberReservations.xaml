@@ -27,7 +27,7 @@
                 <DataGrid Name="Reservationsinfo" Height="133" AutoGenerateColumns="True" Margin="20"  IsReadOnly="True" SelectionUnit="FullRow" Width="Auto" CanUserSortColumns="True"/>
                 <Label Content="Actieve reserveringen"/>
                 <DataGrid Name="Activeresrevationinfo" Height="131" AutoGenerateColumns="True"  IsReadOnly="True" SelectionUnit="FullRow" CanUserSortColumns="False" Margin="20"/>
-                <Button x:Name="Cancel" Content="Anulleer reservering" Click="Cancel_reservation" HorizontalAlignment="Center" />
+                <Button x:Name="Cancel" Content="Annuleer reservering" Click="Cancel_reservation" Style="{DynamicResource ButtonFocusVisual}" HorizontalAlignment="Center" />
             </StackPanel>
             
         </Grid>
