@@ -15,15 +15,10 @@
             <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
 
             <StackPanel x:Name="Layout" VerticalAlignment="Center">
-
-                <Button x:Name="Open_Adminpanel" Content="Admin Panel"
-                    Click="Open_AdminPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
-                <Button x:Name="Open_Create" Content="Aanmaken"
-                    Click="Open_Click" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
-                <Button x:Name="Open_Reserve" Content="Reseveren"
-                    ClickMode="Press"  Click="reserve" Style="{DynamicResource ButtonFocusVisual}"/>
                 <Button x:Name="Open_AccidentReport" Content="Schademelden"
                     Click="AccidentReport" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn3" Content="Terug"
+                        Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
                 <Button x:Name="Exit" Content="Uitloggen"
                     Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
             </StackPanel>
@@ -34,6 +29,7 @@
                 <DataGrid Name="Activeresrevationinfo" Height="131" AutoGenerateColumns="True"  IsReadOnly="True" SelectionUnit="FullRow" CanUserSortColumns="False" Margin="20"/>
                 <Button x:Name="Cancel" Content="Anulleer reservering" Click="Cancel_reservation" HorizontalAlignment="Center" />
             </StackPanel>
+            
         </Grid>
     </Border>
 </Window>

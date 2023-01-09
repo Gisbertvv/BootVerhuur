@@ -83,11 +83,11 @@ namespace BootVerhuurWpf
             }
         }
 
-        protected override void OnClosed(EventArgs e)
+/*        protected override void OnClosed(EventArgs e)
         {
 
             Application.Current.Shutdown();
-        }
+        }*/
 
         private void OpenAdminPanel(object sender, RoutedEventArgs e)
         {

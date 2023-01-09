@@ -198,5 +198,12 @@ namespace BootVerhuurWpf
                 fillDatagrid2();
             }
         }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
+        }
     }
 }

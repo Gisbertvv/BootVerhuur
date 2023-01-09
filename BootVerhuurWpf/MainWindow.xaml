@@ -24,7 +24,7 @@
             <Button x:Name="btn2" Content="Aanpassen"
                     Click="OpenEditUserPanel" ClickMode="Press"
                     Style="{DynamicResource ButtonFocusVisual}"/>
-            <Button x:Name="btn3" Content="Reseveren"
+            <Button x:Name="btn3" Content="Reserveren"
                     ClickMode="Press" Click="OpenReservePanel"
                     Style="{DynamicResource ButtonFocusVisual}"/>
                 <Button x:Name="btn4" Content="Mijn reserveringen"
