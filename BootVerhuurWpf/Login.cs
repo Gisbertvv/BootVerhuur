@@ -34,7 +34,7 @@ namespace BootVerhuurWpf
                 using (var connection = GetConnection())
                 {
                     connection.Open();
-                    String query = "SELECT * FROM member WHERE username=@usernameOrEmail OR email=@usernameOrEmail AND password=@password ";
+                    String query = "SELECT * FROM member WHERE email=@usernameOrEmail AND password=@password OR username=@usernameOrEmail AND password=@password ";
 
                     SqlCommand sqlCmd = new SqlCommand(query, connection);
                         
