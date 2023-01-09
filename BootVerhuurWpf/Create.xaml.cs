@@ -41,6 +41,8 @@ namespace BootVerhuurWpf
 
         protected override void OnClosed(EventArgs e)
         {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
             Close();
         }
     }
