@@ -35,6 +35,11 @@ namespace BootVerhuurWpf
                 MessageBox.Show("Username/email of password not correct");
             }
         }
-       
+
+        protected override void OnClosed(EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
     }
 }
