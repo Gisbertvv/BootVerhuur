@@ -5,19 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         mc:Ignorable="d"
-        Title="Create" Height="250" Width="450">
+        Title="Create" WindowState="Maximized">
 
 
     <Border Style="{DynamicResource Bordervisual}">
         <Grid Style="{DynamicResource GridFocusVisual}">
             <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-        </Grid.ColumnDefinitions>
-            <Image Grid.Column="1" Style="{DynamicResource LogoVisual}"/>
-            <Button Content="Admin" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" MaxWidth="100" Click="Button_Click" Style="{DynamicResource ButtonFocusVisual}"/>
-            <Button Content="Gebruiker" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="100" MaxWidth="100"  Click="Button_Click_1" Style="{DynamicResource ButtonFocusVisual}"/>
-            <Label Content="Wat voor gebruiker wilt u aanmaken?" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource LabelVisual}" Foreground="Black"/>
-
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="LayoutRoot" VerticalAlignment="Center">
+                <Button x:Name="btn0" Content="Admin Panel"
+                        Click="OpenAdminPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn1" Content="Aanpassen"
+                        Click="OpenEditUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn3" Content="Terug"
+                        Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button x:Name="btn4" Content="Uitloggen"
+                        Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
+            </StackPanel>
+            <Image Grid.Column="2" Style="{DynamicResource LogoVisual}"/>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <Label Content="Wat voor gebruiker wilt u aanmaken?" VerticalAlignment="Top" HorizontalAlignment="Center"  Style="{DynamicResource LabelVisual}" Foreground="Black"/>
+                <Button Content="Admin" VerticalAlignment="Bottom" HorizontalAlignment="Center" MaxWidth="150" Click="Button_Click" Style="{DynamicResource ButtonFocusVisual}"/>
+                <Button Content="Gebruiker" VerticalAlignment="Bottom" HorizontalAlignment="Center" MaxWidth="150" Click="Button_Click_1" Style="{DynamicResource ButtonFocusVisual}"/>
+            </StackPanel>
+       
         </Grid>
     </Border>
 </Window>

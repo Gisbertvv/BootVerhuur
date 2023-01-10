@@ -65,14 +65,13 @@ namespace BootVerhuurWpf
         private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
         {
             Create popup = new Create();
-            popup.ShowDialog();
+            popup.Show();
             Close();
         }
 
         private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
             Edit_member edit = new Edit_member();
-
             edit.Show();
             Close();
         }
@@ -85,13 +84,6 @@ namespace BootVerhuurWpf
             
         }
 
-
-        private void Edit(object sender, RoutedEventArgs e)
-        {
-            
-
-
-        }
         private void Logout(object sender, RoutedEventArgs e)
         {
             LoginWindow window = new LoginWindow();
