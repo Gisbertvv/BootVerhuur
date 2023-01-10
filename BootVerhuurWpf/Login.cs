@@ -10,6 +10,8 @@ using System.Windows;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using Syncfusion.Windows.Shared;
 using Windows.Networking;
+using BoldReports.Windows.Data;
+using System.Data.SqlTypes;
 
 namespace BootVerhuurWpf
 {
@@ -23,6 +25,7 @@ namespace BootVerhuurWpf
         public static string email;
         public static string boatingLevel;
         public static string role;
+        public string hashedPassword;
 
         // Login check where password + username match OR password + email match
         public bool getLogin(string usernameOrEmail, string password)
@@ -30,27 +33,40 @@ namespace BootVerhuurWpf
             bool s = false;
             try
             {
-             
+
                 using (var connection = GetConnection())
                 {
                     connection.Open();
-                    String query = "SELECT * FROM member WHERE email=@usernameOrEmail AND password=@password OR username=@usernameOrEmail AND password=@password ";
+                    //String query = "SELECT * FROM member WHERE email=@usernameOrEmail AND password=@password OR username=@usernameOrEmail AND password=@password ";
+                    String query = "SELECT * FROM member WHERE username=@usernameOrEmail AND password=@password ";
+                    //String query = "SELECT password FROM member WHERE username=@usernameOrEmail";
 
                     SqlCommand sqlCmd = new SqlCommand(query, connection);
-                        
+
 
                     //Check if username and password are correct
                     sqlCmd.CommandType = System.Data.CommandType.Text;
                     sqlCmd.Parameters.AddWithValue("@usernameOrEmail", usernameOrEmail);
-                    sqlCmd.Parameters.AddWithValue("@password", password);
+                    sqlCmd.Parameters.AddWithValue(hashedPassword, "@password");
 
-                    //DataTable dataTable = new DataTable();
+                    using (SqlDataReader reader = sqlCmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            usernameOrEmail = reader.GetString(0);
+                            hashedPassword = reader.GetString(1);
+                        }
+                    }
+
                     DataTable userTable = new DataTable();
 
                     userTable.Load(sqlCmd.ExecuteReader());
 
-                    if (userTable.Rows.Count == 1)
+                    // check the password
+                    if (BCrypt.Net.BCrypt.Verify(password, hashedPassword) && userTable.Rows.Count == 1)
                     {
+                        MessageBox.Show("The password is correct.");
+
                         id = userTable.Rows[0]["id"].ToString();
                         firstName = userTable.Rows[0]["first_name"].ToString();
                         lastName = userTable.Rows[0]["last_name"].ToString();
@@ -64,6 +80,13 @@ namespace BootVerhuurWpf
                         connection.Close();
                         s = true;
                     }
+
+                    else
+                    {
+                        MessageBox.Show("The password is incorrect.");
+                    }
+
+
                 }
             }
             catch (SqlException ex)

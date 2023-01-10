@@ -10,10 +10,11 @@ using System.Windows;
 //using BootVerhuur;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Drawing;
+using System.Security.Cryptography;
 
 namespace BootVerhuurWpf
 {
-    internal class CreateFellow:Database
+    internal class CreateFellow : Database
     {
         static bool digits = false;
         static bool special = false;
@@ -121,6 +122,12 @@ namespace BootVerhuurWpf
             new Member(Voornaam, Achternaam, Gebruikersnaam, Password, Email, Telefoonnummer, Rol, Niveau);
         }
 
+        //Hash password
+        private static void Hash(string wachtwoord)
+        {
+           
+        }
+
 
         // Creates a new member in the 'member' table while being subjected to several validity checks.
         public static void CreateMember(string Voornaam, string Achternaam, string Gebruikersnaam, string Password, string Email, string Telefoonnummer, string Rol, string Niveau)
@@ -132,6 +139,7 @@ namespace BootVerhuurWpf
             bool invalidEmail = ValidEmailMessage(Email);
             bool inValidPassword = ValidPasswordMessage(Password);
             ValidCreationMessage(Voornaam, Achternaam, Gebruikersnaam, Password, Email, Telefoonnummer, Rol, Niveau);
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(Password);
 
             if (emptyField)
             {
@@ -151,7 +159,7 @@ namespace BootVerhuurWpf
                 {
                     connection.Open();
                     String sql = "INSERT INTO member " + "(first_name, last_name, phone_number, email, boating_level, role, username, password)" + "VALUES ('" + Voornaam + "' , '" +
-                                 Achternaam + "', '" + Telefoonnummer + "', '" + Email + "', '" + Niveau + "', '" + Rol + "', '" + Gebruikersnaam + "', '" + Password + "')";
+                                 Achternaam + "', '" + Telefoonnummer + "', '" + Email + "', '" + Niveau + "', '" + Rol + "', '" + Gebruikersnaam + "', '" + hashedPassword + "')";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -180,6 +188,7 @@ namespace BootVerhuurWpf
             bool emptyFieldAdmin = EmptyFieldMessageAdmin(Gebruikersnaam, Email);
             bool invalidEmail = ValidEmailMessage(Email);
             bool inValidPassword = ValidPasswordMessage(Password);
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(Password);
 
             if (emptyFieldAdmin)
             {
@@ -202,7 +211,7 @@ namespace BootVerhuurWpf
                                  "VALUES ('" + null + "' , '" +
                                  null + "', '" + null + "', '" + Email + "', '" + null + "', '" + "Admin" +
                                  "', '" +
-                                 Gebruikersnaam + "', '" + Password + "')";
+                                 Gebruikersnaam + "', '" + hashedPassword + "')";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
