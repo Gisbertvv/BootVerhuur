@@ -28,7 +28,6 @@ namespace BootVerhuurWpf
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-  
 
             if (Login.role == "admin" || Login.role == "Admin")
             {
@@ -45,6 +44,12 @@ namespace BootVerhuurWpf
                 btn2.Visibility = Visibility.Hidden;
                 btn3.Visibility = Visibility.Visible;
                 btn4.Visibility = Visibility.Visible;
+            }
+
+            if (Login.boatingLevel == "A" || Login.boatingLevel == "a" || Login.boatingLevel == "B" || Login.boatingLevel == "b")
+            {
+                btn3.Visibility = Visibility.Hidden;
+                btn4.Visibility = Visibility.Hidden;
             }
         }
 
