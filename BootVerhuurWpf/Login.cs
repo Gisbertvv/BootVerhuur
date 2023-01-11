@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-//using BootVerhuur;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using Syncfusion.Windows.Shared;
-using Windows.Networking;
-using BoldReports.Windows.Data;
-using System.Data.SqlTypes;
-using Microsoft.IdentityModel.Tokens;
+
+
 
 namespace BootVerhuurWpf
 {
@@ -28,7 +18,7 @@ namespace BootVerhuurWpf
         public string hashedPassword;
 
         // Login check where password + username match OR password + email match
-        public bool getLogin(string usernameOrEmail, string password)
+        public bool GetLogin(string usernameOrEmail, string password)
         {
             bool s = false;
 

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BootVerhuurWpf
 {
-    public class Zon
+    public class Sun
     {
         private double longitude = 5.489710; // Lengtegraad in decimale graden, <0 voor OL, >0 voor WL
         double latitude = 52.225370; // Breedtegraad in decimale graden, >0 voor NB, <0 voor ZB
@@ -58,7 +55,7 @@ namespace BootVerhuurWpf
             return n;
         }
 
-        public double frac(double X)
+        public double Frac(double X)
         {
             X = X - Math.Floor(X);
             if (X < 0) X = X + 1.0;
@@ -68,7 +65,7 @@ namespace BootVerhuurWpf
         public string HoursMinutes(double time)
         {
             var _hrs = Math.Floor(time);
-            var _min = Math.Round(60.0 * frac(time));
+            var _min = Math.Round(60.0 * Frac(time));
             if (_min == 60)
             {
                 // Voorkom dat er 16:60 verschijnt ipv 17:00
@@ -85,7 +82,7 @@ namespace BootVerhuurWpf
             return str;
         }
 
-        public Zon()
+        public Sun()
         {
             if (year < 1900) year += 1900;
 

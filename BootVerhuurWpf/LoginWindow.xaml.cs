@@ -1,11 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Data.SqlClient;
-using System.Data;
-using System.Windows.Media;
-using Syncfusion.Pdf.Parsing;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Windows;
 
 namespace BootVerhuurWpf
 {
@@ -23,7 +16,7 @@ namespace BootVerhuurWpf
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
-            bool s = login.getLogin(txtUsernameOrEmail.Text, txtPassword.Password);
+            bool s = login.GetLogin(txtUsernameOrEmail.Text, txtPassword.Password);
 
 
             if (s) { 

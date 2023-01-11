@@ -1,16 +1,9 @@
-﻿using Syncfusion.Windows.Shared;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-//using BootVerhuur;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-using System.Drawing;
-using System.Security.Cryptography;
+
+
 
 namespace BootVerhuurWpf
 {

@@ -21,7 +21,7 @@
             <Button x:Name="btn1" Content="Aanmaken"
                     Click="OpenEditUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn3" Content="Terug"
-                    Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
+                    Click="BackClick" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn4" Content="Uitloggen"
                     Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>
@@ -65,7 +65,7 @@
                 <Label Content="_Wachtwoord:"   Style="{DynamicResource LabelVisual}"/>
                 <PasswordBox Name="txtWachtwoord"  Style="{DynamicResource PasswordBoxVisual}"/>
         </StackPanel>
-            <Button Grid.Column="2" x:Name="btnBevestigen" Click="ButtonAddUser_Click" VerticalAlignment="Bottom" Margin="0, 0, 10, 240" HorizontalAlignment="Right"  Style="{DynamicResource ButtonFocusVisual}">Aanmaken</Button>
+            <Button Grid.Column="2" x:Name="btnBevestigen" Click="ButtonAddUserClick" VerticalAlignment="Bottom" Margin="0, 0, 10, 240" HorizontalAlignment="Right"  Style="{DynamicResource ButtonFocusVisual}">Aanmaken</Button>
 
         </Grid>
     </Border>

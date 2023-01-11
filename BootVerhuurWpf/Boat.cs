@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BootVerhuurWpf
+﻿namespace BootVerhuurWpf
 {
     public class Boat
     {
         public int BoatID { get; set; }
-        public int AantalPersonen { get; set; } 
-        public string Niveau { get; set; }
+        public int NumberOfPeople { get; set; } 
+        public string Level { get; set; }
         public bool SteeringWheel { get; set; } 
         public string Status { get; set; }  
 
-        public Boat( int boatid, int aantalPersonen, bool steeringWheel, string nivau, string status)
+        public Boat( int boatID, int numberOfPeople, bool steeringWheel, string level, string status)
         {           
-            BoatID = boatid;
-            AantalPersonen = aantalPersonen;
+            BoatID = boatID;
+            NumberOfPeople = numberOfPeople;
             SteeringWheel = steeringWheel;
-            Niveau = nivau;
+            Level = level;
             Status = status;
         }
     }

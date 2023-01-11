@@ -1,8 +1,4 @@
-﻿//using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Configuration;
+﻿using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;

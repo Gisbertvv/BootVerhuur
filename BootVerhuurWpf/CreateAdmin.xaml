@@ -20,7 +20,7 @@
             <Button x:Name="btn1" Content="Aanpassen"
                     Click="OpenEditUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn3" Content="Terug"
-                    Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
+                    Click="BackClick" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn4" Content="Uitloggen"
                     Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
         </StackPanel>

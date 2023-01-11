@@ -1,33 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
 
 namespace BootVerhuurWpf
 {
     public class Member
     {
-        public static String? Voornaam { get; set; }
-        public static String? Achternaam { get; set; }
-        public static String? Gebruikersnaam { get; set; }
-        public static String? Wachtwoord { get; set; }
+        public static String? Name { get; set; }
+        public static String? Surname { get; set; }
+        public static String? Username { get; set; }
+        public static String? Password { get; set; }
         public static String? Email { get; set; }
-        public static String? Telefoonnummer { get; set; }
-        public static String? Rol { get; set; }
-        public static String? Niveau { get; set; }
+        public static String? PhoneNumber { get; set; }
+        public static String? Role { get; set; }
+        public static String? Level { get; set; }
 
-        public Member(string voornaam, string achternaam, string gebruikersnaam, string wachtwoord, string email, string telefoonnummer, string rol, string niveau)
+        public Member(string name, string surname, string username, string password, string email, string phoneNumber, string role, string level)
         {
-            Voornaam = voornaam;
-            Achternaam = achternaam;
-            Gebruikersnaam = gebruikersnaam;
-            Wachtwoord = wachtwoord;
+            Name = name;
+            Surname = surname;
+            Username = username;
+            Password = password;
             Email = email;
-            Telefoonnummer = telefoonnummer;
-            Rol = rol;
-            Niveau = niveau;
+            PhoneNumber = phoneNumber;
+            Role = role;
+            Level = level;
 
 /*            InsertUser(connection(), rol, niveau, voornaam, achternaam, telefoonnummer, email, gebruikersnaam, wachtwoord);      */      
         }

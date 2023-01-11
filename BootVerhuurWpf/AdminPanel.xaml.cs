@@ -1,33 +1,9 @@
-﻿using BoldReports.RDL.DOM;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Xceed.Wpf.Toolkit;
 using MessageBox = System.Windows.MessageBox;
 using WindowStartupLocation = System.Windows.WindowStartupLocation;
-using Syncfusion.CompoundFile.DocIO.Net;
-using Windows.System.Profile;
 using System.IO;
-using System.IO.Packaging;
-using Microsoft.Identity.Client;
-using System.Drawing;
-using System.Resources;
+
 
 namespace BootVerhuurWpf
 {
@@ -104,7 +80,7 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void BackClick(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

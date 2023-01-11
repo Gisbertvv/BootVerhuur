@@ -1,7 +1,4 @@
-﻿using Microsoft.Identity.Client;
-using Syncfusion.Windows.Controls.Grid;
-using Syncfusion.XlsIO.Implementation.XmlSerialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +14,10 @@ namespace BootVerhuurWpf
     public partial class BookBoats : Window
     {
         public string status;
-        public int aantalp;
-        public string bootniveau;
-        public bool stir;
-        int Id;
+        public int numberOfPeople;
+        public string boatingLevel;
+        public bool steeringWheel;
+        int id;
 
         string reservationendtime;
         string date1;
@@ -32,9 +29,9 @@ namespace BootVerhuurWpf
         List<string> Alltimes = new List<string>();
         List<string> Reservedtimes = new List<string>();
         Bookboat bookboat;
-        Zon sunRiseSet;
-        string sunrise = Zon.sun_rise;
-        string sunset = Zon.sun_set;
+        Sun sunRiseSet;
+        string sunrise = Sun.sun_rise;
+        string sunset = Sun.sun_set;
         int beginhour = 0;
         int beginminutes = 0;
         int endhour = 0;
@@ -42,19 +39,19 @@ namespace BootVerhuurWpf
 
         public BookBoats(int id)
         {
-            Id = id;
+            this.id = id;
             InitializeComponent();
             AdjustCalender();
             bookboat = new Bookboat(date1, date2);
-            bookboat.Checkeverything(Id);
+            bookboat.CheckEverything(this.id);
 
-            status = bookboat.status;
-            aantalp = bookboat.aantalp;
-            bootniveau = bookboat.bootniveau;
-            stir = bookboat.stir;
-            sunRiseSet = new Zon();
-            sunrise = Zon.sun_rise;
-            sunset = Zon.sun_set;
+            status = bookboat.Status;
+            numberOfPeople = bookboat.NumberOfPeople;
+            boatingLevel = bookboat.BoatLevel;
+            steeringWheel = bookboat.SteeringWheel;
+            sunRiseSet = new Sun();
+            sunrise = Sun.sun_rise;
+            sunset = Sun.sun_set;
             GetBeginAndEndTimes(sunrise, sunset);
         }
         /// <summary>
@@ -174,7 +171,7 @@ namespace BootVerhuurWpf
             }
             else
             {
-                Getendtime(Gekozentijd.Text);
+                GetEndTime(Gekozentijd.Text);
                 if (bookboat.InsertReservation(selecteddate, Gekozentijd.Text, reservationendtime))
                 {
                     begintimes = bookboat.begintimes;
@@ -198,37 +195,37 @@ namespace BootVerhuurWpf
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AantalPersonen(object sender, RoutedEventArgs e)
+        private void NumberOfPeople(object sender, RoutedEventArgs e)
         {
             var label = sender as Label;
-            label.Content = $"Aantal Personen : {aantalp}";
+            label.Content = $"Aantal Personen : {numberOfPeople}";
         }
         /// <summary>
         /// Sets the label to the stir boolean of the boat
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Stuur(object sender, RoutedEventArgs e)
+        private void SteeringWheel(object sender, RoutedEventArgs e)
         {
             var label = sender as Label;
-            label.Content = $"Stuur : {stir}";
+            label.Content = $"Stuur : {steeringWheel}";
         }
         /// <summary>
         /// Sets the label to the level of the boat
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BootNiveau(object sender, RoutedEventArgs e)
+        private void BoatLevel(object sender, RoutedEventArgs e)
         {
             var label = sender as Label;
-            label.Content = $"Niveau : {bootniveau}";
+            label.Content = $"Niveau : {boatingLevel}";
         }
 
         /// <summary>
         /// calculates the endtime from begintime
         /// </summary>
         /// <param name="rs"></param>
-        public void Getendtime(string rs)
+        public void GetEndTime(string rs)
         {
             //get all the ints from the string
             string str2 = string.Empty;
@@ -261,7 +258,7 @@ namespace BootVerhuurWpf
             reservationendtime = sb.ToString();
         }
 
-        private void backclick(object sender, RoutedEventArgs e)
+        private void BackClick(object sender, RoutedEventArgs e)
         {
             Temp tp = new Temp();
             tp.Show();
@@ -451,7 +448,7 @@ namespace BootVerhuurWpf
         private void SelectionDatechanged(object sender, SelectionChangedEventArgs e)
         {
             selecteddate = DP.SelectedDate.Value.ToShortDateString();
-            bookboat.Getreservationtimes(Id, DP.SelectedDate.Value.ToShortDateString());
+            bookboat.GetReservationTimes(id, DP.SelectedDate.Value.ToShortDateString());
             begintimes = bookboat.begintimes;
             endtimes = bookboat.endtimes;
             AdjustTimeBox();

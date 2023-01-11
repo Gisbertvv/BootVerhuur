@@ -1,7 +1,5 @@
 ﻿
-using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 
@@ -25,24 +23,24 @@ namespace BootVerhuurWpf
             database.OpenConnnection();
             Colors panel = new Colors();
 
-            //converters color from string to solidcolorbrush
+            //Converters color from string to solidcolorbrush
             Color color = (Color)ColorConverter.ConvertFromString(panel.GetColors()[0]);
             SolidColorBrush solidColorBrush = new SolidColorBrush(color);
 
-            //sets primary color
+            //Sets primary color
             Resources.Add("PrimairyColor", solidColorBrush);
 
-            //converters color from string to solidcolorbrush
+            //Converters color from string to solidcolorbrush
             Color colorSecundary = (Color)ColorConverter.ConvertFromString(panel.GetColors()[1]);
             SolidColorBrush solidColorBrushSecundary = new SolidColorBrush(colorSecundary);
 
-            //sets secondary color
+            //Sets secondary color
             Resources.Add("SecondaryColor", solidColorBrushSecundary);
 
-            //converters color from string to solidcolorbrush
+            //Converters color from string to solidcolorbrush
             Color colorBackground = (Color)ColorConverter.ConvertFromString(panel.GetColors()[2]);
             SolidColorBrush solidColorBrushBackground = new SolidColorBrush(colorBackground);
-            //sets background color
+            //Sets background color
             Resources.Add("BackgroundColor", solidColorBrushBackground);
 
         }

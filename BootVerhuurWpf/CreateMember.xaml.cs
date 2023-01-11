@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
+﻿using System.Windows;
+
 
 namespace BootVerhuurWpf
 {
@@ -28,12 +15,12 @@ namespace BootVerhuurWpf
         }
 
    
-        private void ButtonAddUser_Click(object sender, RoutedEventArgs e)
+        private void ButtonAddUserClick(object sender, RoutedEventArgs e)
         {
             CreateFellow.CreateMember(txtVoornaam.Text, txtAchternaam.Text, txtGebruikersnaam.Text, txtWachtwoord.Password, txtEmail.Text, _txtTelefoonnummer.Text, Rol.Text, Niveau.Text);
         }
 
-        private void Check_Admin(object sender, RoutedEventArgs e)
+        private void CheckAdmin(object sender, RoutedEventArgs e)
         {
             if (Rol.Text.Equals("Admin"))
             {
@@ -66,7 +53,7 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void BackClick(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

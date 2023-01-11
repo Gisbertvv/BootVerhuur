@@ -1,7 +1,5 @@
-﻿using Syncfusion.Windows.Shared;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
 
@@ -11,15 +9,15 @@ namespace BootVerhuurWpf
     {
 
         public int reservationscount;
-        public List<int> reservationids = new List<int>();
-        public List<int> reservationids2 = new List<int>();
-        public int boatId { get; set; }
-        public string reservationDate { get; set; }
-        public string reservationFrom { get; set; }
-        public string reservationUntil { get; set; }
-        public DateTime createdAt { get; set; }
-        public string status { get; set; }
-        public int memberId = Int32.Parse(Login.id);
+        public List<int> reservationIDS = new List<int>();
+        public List<int> reservationIDS2 = new List<int>();
+        public int BoatID { get; set; }
+        public string ReservationDate { get; set; }
+        public string ReservationFrom { get; set; }
+        public string ReservationUntil { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string Status { get; set; }
+        public int memberID = Int32.Parse(Login.id);
         /// <summary>
         /// Changes the status of the active reservation that have passed their reservation date.
         /// </summary>
@@ -53,13 +51,13 @@ namespace BootVerhuurWpf
         /// </summary>
         public void GetReservationIds()
         {
-            reservationids2.Clear();
+            reservationIDS2.Clear();
             try
             {
                 using (var connection = GetConnection())
                 {
 
-                    String sql = $"Select * from reservation where member_id = {memberId} And status = 'Actief'";
+                    String sql = $"Select * from reservation where member_id = {memberID} And status = 'Actief'";
                    connection.Open();
                     using (var command = new SqlCommand(sql, connection))
                     {
@@ -67,7 +65,7 @@ namespace BootVerhuurWpf
                         { 
                             while (reader.Read())
                             {
-                                reservationids2.Add(reader.GetInt32(0));
+                                reservationIDS2.Add(reader.GetInt32(0));
                             }
                         }
                     }
@@ -79,7 +77,7 @@ namespace BootVerhuurWpf
             }
         }
         /// <summary>
-        /// changes the stauts of the given reservation to 'Geanulleerd' in the database
+        /// changes the status of the given reservation to 'Geanulleerd' in the database
         /// </summary>
         /// <param name="reservationid"></param>
         public void CancelReservation(int reservationid)
@@ -123,12 +121,12 @@ namespace BootVerhuurWpf
                         {
                             while (reader.Read())
                             {
-                                boatId = reader.GetInt32(1);
-                                reservationDate = reader.GetString(2);
-                                reservationFrom = reader.GetString(3);
-                                reservationUntil = reader.GetString(4);
-                                createdAt = reader.GetDateTime(5);
-                                status = reader.GetString(7);
+                                BoatID = reader.GetInt32(1);
+                                ReservationDate = reader.GetString(2);
+                                ReservationFrom = reader.GetString(3);
+                                ReservationUntil = reader.GetString(4);
+                                CreatedAt = reader.GetDateTime(5);
+                                Status = reader.GetString(7);
                             }
                         }
                     }
@@ -144,13 +142,13 @@ namespace BootVerhuurWpf
         /// </summary>
         public void GetReservationId()
         {
-            reservationids.Clear();
+            reservationIDS.Clear();
             try
             {
                 using (var connection = GetConnection())
                 {
 
-                    String sql = $"Select * from reservation where member_id = {memberId}";
+                    String sql = $"Select * from reservation where member_id = {memberID}";
                     connection.Open();
                     using (var command = new SqlCommand(sql, connection))
                     {
@@ -158,7 +156,7 @@ namespace BootVerhuurWpf
                         {
                             while (reader.Read())
                             {
-                                reservationids.Add(reader.GetInt32(0));
+                                reservationIDS.Add(reader.GetInt32(0));
                             }
                         }
                     }
@@ -174,13 +172,13 @@ namespace BootVerhuurWpf
         /// </summary>
         public void GetActiveReservationId()
         {
-            reservationids.Clear();
+            reservationIDS.Clear();
             try
             {
                 using (var connection = GetConnection())
                 {
 
-                    String sql = $"Select * from reservation where member_id = {memberId} and status = 'Actief'";
+                    String sql = $"Select * from reservation where member_id = {memberID} and status = 'Actief'";
                     connection.Open();
                     using (var command = new SqlCommand(sql, connection))
                     {
@@ -188,7 +186,7 @@ namespace BootVerhuurWpf
                         {
                             while (reader.Read())
                             {
-                                reservationids.Add(reader.GetInt32(0));
+                                reservationIDS.Add(reader.GetInt32(0));
                             }
                         }
                     }
@@ -209,7 +207,7 @@ namespace BootVerhuurWpf
                 using (var connection = GetConnection())
                 {
 
-                    String query = $"Select Count(*) from reservation where member_id = {memberId}";
+                    String query = $"Select Count(*) from reservation where member_id = {memberID}";
                     connection.Open();
                     using (var command = new SqlCommand(query, connection))
                     {
@@ -238,7 +236,7 @@ namespace BootVerhuurWpf
                 using (var connection = GetConnection())
                 {
 
-                    String query = $"Select Count(*) from reservation where member_id = {memberId} and status = 'Actief'";
+                    String query = $"Select Count(*) from reservation where member_id = {memberID} and status = 'Actief'";
                     connection.Open();
                     using (var command = new SqlCommand(query, connection))
                     {

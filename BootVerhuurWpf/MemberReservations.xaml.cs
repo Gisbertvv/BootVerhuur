@@ -1,20 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Windows.ApplicationModel.Activation;
-using Syncfusion.Windows.Shared;
+
 
 namespace BootVerhuurWpf
 {
@@ -28,12 +15,12 @@ namespace BootVerhuurWpf
         string reservationFrom;
         string reservationUntil;
         DateTime createdAt;
-        int reservationscount;
+        int reservationsCount;
         string status;
         string date1;
         string date2;
-        List<int> reservationids;
-        List<int> reservationids2;
+        List<int> reservationIds;
+        List<int> reservationIds2;
         MemberReservationsSql MemberReservationsSql = new MemberReservationsSql();
 
         public MemberReservations()
@@ -41,8 +28,8 @@ namespace BootVerhuurWpf
             InitializeComponent();
             GetReservationDates();
             MemberReservationsSql.ChangeStatus(date1,date2);
-            fillDatagrid();
-            fillDatagrid2();
+            FillDatagrid();
+            FillDatagrid2();
         }
 
         /// <summary>
@@ -92,26 +79,26 @@ namespace BootVerhuurWpf
         /// <summary>
         /// fills the datagrid with all the reservations the member has 
         /// </summary>
-        private void fillDatagrid()
+        private void FillDatagrid()
         {
             
             List<Reservation> reservations = new List<Reservation>();
             MemberReservationsSql.GetCountReservations();
-            reservationscount = MemberReservationsSql.reservationscount;
+            reservationsCount = MemberReservationsSql.reservationscount;
             MemberReservationsSql.GetReservationId();
-            reservationids = MemberReservationsSql.reservationids;
+            reservationIds = MemberReservationsSql.reservationIDS;
 
-            while (reservations.Count < reservationscount)
+            while (reservations.Count < reservationsCount)
             {
-                foreach (int id in reservationids)
+                foreach (int id in reservationIds)
                 {
                     MemberReservationsSql.GetReservationInfo(id);
-                     boatId = MemberReservationsSql.boatId;
-                     reservationDate =MemberReservationsSql.reservationDate;
-                     reservationFrom = MemberReservationsSql.reservationFrom ;
-                     reservationUntil = MemberReservationsSql.reservationUntil;
-                     createdAt = MemberReservationsSql.createdAt;
-                     status = MemberReservationsSql.status;
+                     boatId = MemberReservationsSql.BoatID;
+                     reservationDate =MemberReservationsSql.ReservationDate;
+                     reservationFrom = MemberReservationsSql.ReservationFrom ;
+                     reservationUntil = MemberReservationsSql.ReservationUntil;
+                     createdAt = MemberReservationsSql.CreatedAt;
+                     status = MemberReservationsSql.Status;
                     reservations.Add(new Reservation() { ReservationID=id,BoatId = boatId, ReservationDate = reservationDate, ReservationFrom = reservationFrom, ReservationUntil = reservationUntil, CreatedAt = createdAt, Status = status });                  
                 }
             }
@@ -120,26 +107,26 @@ namespace BootVerhuurWpf
         /// <summary>
         /// fills the datagrid with all the active reservations the member has
         /// </summary>
-        private void fillDatagrid2()
+        private void FillDatagrid2()
         {
 
             List<Reservation> reservations = new List<Reservation>();
             MemberReservationsSql.GetCountActiveReservations();
-            reservationscount = MemberReservationsSql.reservationscount;
+            reservationsCount = MemberReservationsSql.reservationscount;
             MemberReservationsSql.GetActiveReservationId();
-            reservationids = MemberReservationsSql.reservationids;
+            reservationIds = MemberReservationsSql.reservationIDS;
 
-            while (reservations.Count < reservationscount)
+            while (reservations.Count < reservationsCount)
             {
-                foreach (int id in reservationids)
+                foreach (int id in reservationIds)
                 {
                     MemberReservationsSql.GetReservationInfo(id);
-                    boatId = MemberReservationsSql.boatId;
-                    reservationDate = MemberReservationsSql.reservationDate;
-                    reservationFrom = MemberReservationsSql.reservationFrom;
-                    reservationUntil = MemberReservationsSql.reservationUntil;
-                    createdAt = MemberReservationsSql.createdAt;
-                    status = MemberReservationsSql.status;
+                    boatId = MemberReservationsSql.BoatID;
+                    reservationDate = MemberReservationsSql.ReservationDate;
+                    reservationFrom = MemberReservationsSql.ReservationFrom;
+                    reservationUntil = MemberReservationsSql.ReservationUntil;
+                    createdAt = MemberReservationsSql.CreatedAt;
+                    status = MemberReservationsSql.Status;
                     reservations.Add(new Reservation() { ReservationID = id, BoatId = boatId, ReservationDate = reservationDate, ReservationFrom = reservationFrom, ReservationUntil = reservationUntil, CreatedAt = createdAt, Status = status });
                 }
             }
@@ -160,7 +147,7 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private void reserve(object sender, RoutedEventArgs e)
+        private void Reserve(object sender, RoutedEventArgs e)
         {
             Temp temp= new Temp();
             temp.Show();
@@ -191,11 +178,11 @@ namespace BootVerhuurWpf
             else
             {
                 MemberReservationsSql.GetReservationIds();
-                reservationids2 = MemberReservationsSql.reservationids2;
-                int id = reservationids2[i];
+                reservationIds2 = MemberReservationsSql.reservationIDS2;
+                int id = reservationIds2[i];
                 MemberReservationsSql.CancelReservation(id);
-                fillDatagrid();
-                fillDatagrid2();
+                FillDatagrid();
+                FillDatagrid2();
             }
         }
 

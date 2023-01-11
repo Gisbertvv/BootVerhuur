@@ -20,7 +20,7 @@
                 <Button x:Name="btn1" Content="Aanmaken"
                         Click="OpenCreateUserPanel" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
                 <Button x:Name="btn3" Content="Terug"
-                        Click="Back_Click" Style="{DynamicResource ButtonFocusVisual}"/>
+                        Click="BackClick" Style="{DynamicResource ButtonFocusVisual}"/>
                 <Button x:Name="btn4" Content="Uitloggen"
                         Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
             </StackPanel>
@@ -29,8 +29,8 @@
                 <DataGrid 
                 x:Name="datagrid1" Style="{DynamicResource datagridVisual}"
                 d:ItemsSource="{d:SampleData ItemCount=5}"
-                IsReadOnly="False" SelectionChanged="datagrid1_SelectionChanged"/>
-                <Button x:Name="reloadBTN" Content="Update Table" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}" Click="reloadBTN_Click" Background="#FFA0A0A0"/>
+                IsReadOnly="False" SelectionChanged="Datagrid1SelectionChanged"/>
+                <Button x:Name="reloadBTN" Content="Update Table" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}" Click="ReloadBTN_Click" Background="#FFA0A0A0"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="30 ,0, 30, 0">
@@ -58,8 +58,8 @@
                 <Label x:Name="passwordLBL" Content="Wachtwoord" Style="{DynamicResource LabelVisual}"/>
                 <TextBox x:Name="passwordTXTBX"  Style="{DynamicResource TextboxVisual}"/>
 
-                <Button x:Name="updateBTN" Content="Update" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}" Click="updateBTN_Click" Background="#FF32BE00"/>
-                <Button Content="Remove" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}"  Background="Red" Click="Button_Click"/>
+                <Button x:Name="updateBTN" Content="Update" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}" Click="UpdateBTNClick" Background="#FF32BE00"/>
+                <Button Content="Remove" HorizontalAlignment="Left" Style="{DynamicResource ButtonFocusVisual}"  Background="Red" Click="ButtonClick"/>
             </StackPanel>
         </Grid>
     </Border>

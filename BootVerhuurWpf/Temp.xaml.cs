@@ -1,23 +1,8 @@
 ﻿
-using Syncfusion.CompoundFile.DocIO.Native;
-using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
+
 
 
 namespace BootVerhuurWpf
@@ -28,35 +13,35 @@ namespace BootVerhuurWpf
     public partial class Temp : Window
     {
 
-        int aantalp;
-        string bootniveau;
-        bool stir;
+        int numberOfPeople;
+        string boatingLevel;
+        bool steeringWheel;
         string status;
-        int countboats;
+        int countBoats;
         int id;
         TempSql tempSql = new TempSql();
         public Temp()
         {
             InitializeComponent();
-            showboats();
+            ShowBoats();
         }
         /// <summary>
         /// Fills the datagrid with all the boats for the level of the member
         /// </summary>
-        private void showboats()
+        private void ShowBoats()
         {
             List<Boat> boats = new List<Boat>();
             tempSql.GetRightId();
-            id = tempSql.id;
-            countboats = tempSql.GetCountboats();
-            while (boats.Count < countboats)
+            id = tempSql.ID;
+            countBoats = tempSql.GetCountBoats();
+            while (boats.Count < countBoats)
             {
                 tempSql.GetBoatInfo(id);
-                aantalp = tempSql.aantalp;
-                bootniveau = tempSql.bootniveau;
-                stir = tempSql.stir;
-                status = tempSql.status;
-                boats.Add(new Boat(id, aantalp, stir, bootniveau, status));
+                numberOfPeople = tempSql.NumberOfPeople;
+                boatingLevel = tempSql.BoatingLevel;
+                steeringWheel = tempSql.SteeringWheel;
+                status = tempSql.Status;
+                boats.Add(new Boat(id, numberOfPeople, steeringWheel, boatingLevel, status));
                 id++;
             }
             Boats.ItemsSource = boats;
@@ -66,11 +51,11 @@ namespace BootVerhuurWpf
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void selectedboat(object sender, MouseButtonEventArgs e)
+        private void SelectedBoat(object sender, MouseButtonEventArgs e)
         {
 
             tempSql.GetRightId();
-            id = tempSql.id;
+            id = tempSql.ID;
             int i = Boats.SelectedIndex;
 
             i += id;
@@ -80,7 +65,7 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private void Member_reservations(object sender, RoutedEventArgs e)
+        private void MemberReservations(object sender, RoutedEventArgs e)
         {
             MemberReservations memberreserveration = new MemberReservations();
             memberreserveration.Show();
@@ -99,7 +84,7 @@ namespace BootVerhuurWpf
                 Close();
             }
 
-            private void Back_Click(object sender, RoutedEventArgs e)
+            private void BackClick(object sender, RoutedEventArgs e)
             {
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();

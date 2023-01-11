@@ -1,23 +1,5 @@
-﻿using Syncfusion.Windows.Shared;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Dynamic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
 namespace BootVerhuurWpf
@@ -37,18 +19,18 @@ namespace BootVerhuurWpf
 
         }
 
-        public void showTable()
+        public void ShowTable()
         {
             updateMemberTable.UpdateTable(datagrid1);
         }
 
-        private void reloadBTN_Click(object sender, RoutedEventArgs e)
+        private void ReloadBTN_Click(object sender, RoutedEventArgs e)
         {
             updateMemberTable.UpdateTable(datagrid1);
         }
 
         // Code om database gegevens te weergeven in de textboxen
-        private void datagrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Datagrid1SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var data = datagrid1.SelectedItem;
 
@@ -65,13 +47,13 @@ namespace BootVerhuurWpf
         }
 
         // Code om de database te updaten met de data uit de textboxen
-        private void updateBTN_Click(object sender, RoutedEventArgs e)
+        private void UpdateBTNClick(object sender, RoutedEventArgs e)
         {
             EditMember edit = new EditMember();
             edit.EditUser(first_nameTXTBX.Text, last_nameTXTBX.Text, emailTXTBX.Text, phoneTXTBX.Text, boating_levelTXTBX.Text, usernameTXTBX.Text, passwordTXTBX.Text, IDTXTBOX.Text);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonClick(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Weet u zeker dat u deze gebruiker permanent wilt verwijderen?",
                     "Confirmatie",
@@ -111,7 +93,7 @@ namespace BootVerhuurWpf
             Close();
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void BackClick(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

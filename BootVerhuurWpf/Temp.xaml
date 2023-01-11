@@ -19,15 +19,15 @@
             <Button x:Name="btn2" Content="Schademelden"
                     Click="AccidentReport" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn4" Content="Terug"
-                    Click="Back_Click" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                    Click="BackClick" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             <Button x:Name="btn5" Content="Uitloggen"
                     Click="Logout" Style="{DynamicResource ButtonFocusVisual}"/>
                 <Button x:Name="reservations" Content="Mijn reserveringen"
-                    Click="Member_reservations" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
+                    Click="MemberReservations" ClickMode="Press" Style="{DynamicResource ButtonFocusVisual}"/>
             </StackPanel>
         <StackPanel Grid.Column="2">
 
-            <DataGrid Name="Boats" Height="416" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="selectedboat"  IsReadOnly="True" SelectionUnit="FullRow"/>
+            <DataGrid Name="Boats" Height="416" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="SelectedBoat"  IsReadOnly="True" SelectionUnit="FullRow"/>
         </StackPanel>
     </Grid>
     </Border>

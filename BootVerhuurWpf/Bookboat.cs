@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
 
@@ -10,11 +9,11 @@ namespace BootVerhuurWpf
     public class Bookboat : Database
     {
         public int memberId = Int32.Parse(Login.id);
-        public int aantalp { get; set; }
-        public string bootniveau { get; set; }
-        public bool stir { get; set; }
-        public string status { get; set; }
-        public int Id { get; set; }
+        public int NumberOfPeople { get; set; }
+        public string BoatLevel { get; set; }
+        public bool SteeringWheel { get; set; }
+        public string Status { get; set; }
+        public int ID { get; set; }
         string Date1;
         string Date2;
 
@@ -28,9 +27,9 @@ namespace BootVerhuurWpf
         }
 
         /// <summary>
-        /// puts all the begin and end reservationtimes for a specific boatid and date in a list
+        /// Puts all the begin and end reservationtimes for a specific boatid and date in a list
         /// </summary>
-        public void Getreservationtimes(int id, string reservationdate)
+        public void GetReservationTimes(int id, string reservationdate)
         {
 
             try
@@ -81,7 +80,7 @@ namespace BootVerhuurWpf
                     using (var connection = GetConnection())
                     {
 
-                        String query = $"insert into reservation values ({i}, {Id},'{reservationdate}' , '{reservationtime}', '{endtime}', GetDate(),{memberId},'Actief')";
+                        String query = $"insert into reservation values ({i}, {ID},'{reservationdate}' , '{reservationtime}', '{endtime}', GetDate(),{memberId},'Actief')";
                         using (SqlCommand command = new SqlCommand(query, connection))
                         {
                             connection.Open();
@@ -90,7 +89,7 @@ namespace BootVerhuurWpf
                         }
 
                     }
-                    Getreservationtimes(Id, reservationdate);
+                    GetReservationTimes(ID, reservationdate);
 
                     MessageBox.Show("Reservering is aangemaakt", "SUCCES");
                     return true;
@@ -107,14 +106,14 @@ namespace BootVerhuurWpf
         /// Puts all the information from the database in variables give a specific boat_id
         /// </summary>
         /// <param name="id"></param>
-        public void Checkeverything(int id)
+        public void CheckEverything(int id)
         {
-            Id = id;
+            ID = id;
             try
             {
                 using (var connection = GetConnection())
                 {
-                    String query = $"SELECT * FROM boat where boat_id = {Id}";
+                    String query = $"SELECT * FROM boat where boat_id = {ID}";
                     connection.Open();
                     using (var command = new SqlCommand(query, connection))
                     {
@@ -122,10 +121,10 @@ namespace BootVerhuurWpf
                         {
                             while (reader.Read())
                             {
-                                bootniveau = reader.GetString(2);
-                                status = reader.GetString(4);
-                                stir = reader.GetBoolean(3);
-                                aantalp = reader.GetInt32(1);
+                                BoatLevel = reader.GetString(2);
+                                Status = reader.GetString(4);
+                                SteeringWheel = reader.GetBoolean(3);
+                                NumberOfPeople = reader.GetInt32(1);
 
                             }
                         }

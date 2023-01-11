@@ -28,9 +28,9 @@
 
         <StackPanel Grid.Column="2" Name="stackpanel2" Margin ="10" >
             <Label Content="Status : " Loaded="Status"/>
-            <Label Content="Aantal personen : " Loaded="AantalPersonen"/>
-            <Label Content="Stuur : " Loaded="Stuur"/>
-            <Label Content="Niveau : " Loaded="BootNiveau"/>
+            <Label Content="Aantal personen : " Loaded="NumberOfPeople"/>
+            <Label Content="Stuur : " Loaded="SteeringWheel"/>
+            <Label Content="Niveau : " Loaded="BoatLevel"/>
             <DatePicker x:Name="DP" AllowDrop="True" SelectedDateFormat="Short" Margin="10,5,10,10" SelectedDateChanged="SelectionDatechanged" />
             <Label Content="Selecteer een tijd" Style="{DynamicResource LabelVisual}"/>
             <ComboBox Name="Gekozentijd" Margin="10,0,10,10" Style="{DynamicResource ComboBoxVisual}">
