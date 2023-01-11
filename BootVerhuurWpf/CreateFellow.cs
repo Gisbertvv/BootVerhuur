@@ -122,13 +122,6 @@ namespace BootVerhuurWpf
             new Member(Voornaam, Achternaam, Gebruikersnaam, Password, Email, Telefoonnummer, Rol, Niveau);
         }
 
-        //Hash password
-        private static void Hash(string wachtwoord)
-        {
-           
-        }
-
-
         // Creates a new member in the 'member' table while being subjected to several validity checks.
         public static void CreateMember(string Voornaam, string Achternaam, string Gebruikersnaam, string Password, string Email, string Telefoonnummer, string Rol, string Niveau)
         {

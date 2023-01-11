@@ -12,12 +12,12 @@ using Syncfusion.Windows.Shared;
 using Windows.Networking;
 using BoldReports.Windows.Data;
 using System.Data.SqlTypes;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BootVerhuurWpf
 {
-    public class Login: Database
+    public class Login : Database
     {
-
         public static string id;
         public static string firstName;
         public static string lastName;
@@ -31,42 +31,43 @@ namespace BootVerhuurWpf
         public bool getLogin(string usernameOrEmail, string password)
         {
             bool s = false;
+
             try
             {
-
                 using (var connection = GetConnection())
                 {
                     connection.Open();
-                    //String query = "SELECT * FROM member WHERE email=@usernameOrEmail AND password=@password OR username=@usernameOrEmail AND password=@password ";
-                    String query = "SELECT * FROM member WHERE username=@usernameOrEmail AND password=@password ";
-                    //String query = "SELECT password FROM member WHERE username=@usernameOrEmail";
+                    String query = "SELECT password FROM member WHERE username=@usernameOrEmail OR email=@usernameOrEmail";
 
                     SqlCommand sqlCmd = new SqlCommand(query, connection);
 
-
-                    //Check if username and password are correct
+                    //Adds value to parameters
                     sqlCmd.CommandType = System.Data.CommandType.Text;
                     sqlCmd.Parameters.AddWithValue("@usernameOrEmail", usernameOrEmail);
-                    sqlCmd.Parameters.AddWithValue(hashedPassword, "@password");
+                    sqlCmd.Parameters.AddWithValue("@password", password);
 
                     using (SqlDataReader reader = sqlCmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            usernameOrEmail = reader.GetString(0);
-                            hashedPassword = reader.GetString(1);
+                            hashedPassword = reader.GetString(0);
                         }
                     }
 
-                    DataTable userTable = new DataTable();
-
-                    userTable.Load(sqlCmd.ExecuteReader());
-
-                    // check the password
-                    if (BCrypt.Net.BCrypt.Verify(password, hashedPassword) && userTable.Rows.Count == 1)
+                    // check if hashed password is not empty and if password matches hashed password
+                    if ((hashedPassword != null) && BCrypt.Net.BCrypt.Verify(password, hashedPassword))
                     {
-                        MessageBox.Show("The password is correct.");
+                        String query2 = "SELECT * FROM member WHERE email=@usernameOrEmail AND password=@password OR username=@usernameOrEmail AND password=@password ";
+                        SqlCommand sqlCmd2 = new SqlCommand(query2, connection);
 
+                        sqlCmd2.CommandType = System.Data.CommandType.Text;
+                        sqlCmd2.Parameters.AddWithValue("@usernameOrEmail", usernameOrEmail);
+                        sqlCmd2.Parameters.AddWithValue("@password", hashedPassword);
+
+                        DataTable userTable = new DataTable();
+                        userTable.Load(sqlCmd2.ExecuteReader());
+
+                        //Get current user data
                         id = userTable.Rows[0]["id"].ToString();
                         firstName = userTable.Rows[0]["first_name"].ToString();
                         lastName = userTable.Rows[0]["last_name"].ToString();
@@ -75,25 +76,19 @@ namespace BootVerhuurWpf
                         boatingLevel = userTable.Rows[0]["boating_level"].ToString();
                         role = userTable.Rows[0]["role"].ToString();
 
-                        //id = dataTable.Columns.Add("id").ColumnName;
-                        //id = dataTable.Columns.Contains();
                         connection.Close();
                         s = true;
                     }
-
                     else
                     {
-                        MessageBox.Show("The password is incorrect.");
+                        s = false;
                     }
-
-
                 }
             }
             catch (SqlException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
-
             return s;
         }
     }

@@ -32,7 +32,7 @@ namespace BootVerhuurWpf
                 Close();
             }else if (!s)
             {
-                MessageBox.Show("Username/email of password not correct");
+                MessageBox.Show("Gebruikersnaam/Email of wachtwoord is niet correct!");
             }
         }
 

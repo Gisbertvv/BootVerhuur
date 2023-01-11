@@ -13,19 +13,25 @@ namespace BootVerhuurWpf
 {
     internal class EditMember :Database
     {
-
+        private string HashPassword(string newPassword)
+        {
+            var newSalt = BCrypt.Net.BCrypt.GenerateSalt(12);
+            var newHashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword, newSalt);
+            return newHashedPassword;
+        }
 
         public void EditUser(string firstname, string lastname, string email, string phoneNumber, string level, string username, string password, string id)
         {
             try
             {
+
                 using (var connection = GetConnection())
                 {
                     String updateQuery = "UPDATE member SET first_name='" + firstname + "',last_name='" +
                                          lastname + "',email='" + email +
                                          "',phone_number='" + phoneNumber + "',boating_level='" +
                                          level + "',username='" + username +
-                                         "',password='" + password + "' WHERE id = '" + id + "'";
+                                         "',password='" + HashPassword(password) + "' WHERE id = '" + id + "'";
 
                     using (SqlCommand command = new SqlCommand(updateQuery, connection))
                     {
@@ -91,10 +97,7 @@ namespace BootVerhuurWpf
 
                     adapter.Update(dt);
 
-
                     connection.Close();
-
-
                 }
             }
             catch (Exception ex)
