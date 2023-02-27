@@ -5,9 +5,9 @@ namespace BootVerhuurWpf
     /// <summary>
     /// Interaction logic for CreateAdmin.xaml
     /// </summary>
-    public partial class CreateAdmin : Window
+    public partial class Admin : Window
     {
-        public CreateAdmin()
+        public Admin()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -16,12 +16,12 @@ namespace BootVerhuurWpf
 
         private void Create_Admin(object sender, RoutedEventArgs e)
         {
-            CreateFellow.CreateAdmin(txtGebruikersnaam.Text, txtWachtwoord.Password, txtEmail.Text);
+            UserController.CreateAdmin(txtGebruikersnaam.Text, txtWachtwoord.Password, txtEmail.Text);
         }
 
         private void OpenAdminPanel(object sender, RoutedEventArgs e)
         {
-            AdminPanel window = new AdminPanel();
+            Settings window = new Settings();
 
             window.Show();
             Close();
@@ -29,14 +29,14 @@ namespace BootVerhuurWpf
 
         private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
-            Edit_member edit = new Edit_member();
+            Edit edit = new Edit();
             edit.Show();
             Close();
         }
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            LoginWindow window = new LoginWindow();
+            Login window = new Login();
             window.Show();
             Close();
         }

@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas/xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:BootVerhuurWpf"
         xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="BootVerhuurWpf.AdminPanel"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="BootVerhuurWpf.Settings"
         mc:Ignorable="d"
         Title="Admin panel" 
         WindowState="Maximized">

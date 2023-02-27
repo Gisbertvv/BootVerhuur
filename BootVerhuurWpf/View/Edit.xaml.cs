@@ -7,11 +7,11 @@ namespace BootVerhuurWpf
     /// <summary>
     /// Interaction logic for Edit_member.xaml
     /// </summary>
-    public partial class Edit_member : Window
+    public partial class Edit : Window
     {
         
-        EditMember updateMemberTable = new EditMember();
-        public Edit_member()
+        UserController updateMemberTable = new UserController();
+        public Edit()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -49,7 +49,7 @@ namespace BootVerhuurWpf
         // Code om de database te updaten met de data uit de textboxen
         private void UpdateBTNClick(object sender, RoutedEventArgs e)
         {
-            EditMember edit = new EditMember();
+            UserController edit = new UserController();
             edit.EditUser(first_nameTXTBX.Text, last_nameTXTBX.Text, emailTXTBX.Text, phoneTXTBX.Text, boating_levelTXTBX.Text, usernameTXTBX.Text, passwordTXTBX.Text, IDTXTBOX.Text);
         }
 
@@ -60,7 +60,7 @@ namespace BootVerhuurWpf
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                EditMember delete = new EditMember();
+                UserController delete = new UserController();
                 delete.DeleteUser(IDTXTBOX.Text);
             }
         }
@@ -73,7 +73,7 @@ namespace BootVerhuurWpf
 
         private void OpenAdminPanel(object sender, RoutedEventArgs e)
         {
-            AdminPanel window = new AdminPanel();
+            Settings window = new Settings();
 
             window.Show();
             Close();
@@ -81,14 +81,14 @@ namespace BootVerhuurWpf
 
         private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
         {
-            Create popup = new Create();
+            Popup popup = new Popup();
             popup.ShowDialog();
             Close();
         }
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            LoginWindow window = new LoginWindow();
+            Login window = new Login();
             window.Show();
             Close();
         }

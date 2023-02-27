@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:BootVerhuurWpf"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             StartupUri="LoginWindow.xaml">
+             StartupUri="/View/Login.xaml">
     <Application.Resources>
         <Style x:Key="Bordervisual" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>

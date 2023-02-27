@@ -11,7 +11,7 @@ namespace BootVerhuurWpf
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            if (Login.role == "admin" || Login.role == "Admin")
+            if (LoginController.role == "admin" || LoginController.role == "Admin")
             {
                 btn0.Visibility = Visibility.Visible;
                 btn1.Visibility = Visibility.Visible;
@@ -28,7 +28,7 @@ namespace BootVerhuurWpf
                 btn4.Visibility = Visibility.Visible;
             }
 
-            if (Login.boatingLevel == "A" || Login.boatingLevel == "a" || Login.boatingLevel == "B" || Login.boatingLevel == "b")
+            if (LoginController.boatingLevel == "A" || LoginController.boatingLevel == "a" || LoginController.boatingLevel == "B" || LoginController.boatingLevel == "b")
             {
                 btn3.Visibility = Visibility.Hidden;
                 btn4.Visibility = Visibility.Hidden;
@@ -37,13 +37,13 @@ namespace BootVerhuurWpf
 
         private void AccidentReport(object sender, RoutedEventArgs e)
         {
-            PDFWindow window = new PDFWindow();
+            PDF window = new PDF();
             window.Show();
         }
 
         private void OpenAdminPanel(object sender, RoutedEventArgs e)
         {
-            AdminPanel window = new AdminPanel();
+            Settings window = new Settings();
             this.Close();
             window.Show();
             
@@ -51,21 +51,21 @@ namespace BootVerhuurWpf
 
         private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
         {
-            Create popup = new Create();
+            Popup popup = new Popup();
             popup.Show();
             Close();
         }
 
         private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
-            Edit_member edit = new Edit_member();
+            Edit edit = new Edit();
             edit.Show();
             Close();
         }
 
         private void OpenReservePanel(object sender, RoutedEventArgs e)
         {
-            Temp tp = new Temp();
+            List tp = new List();
             this.Close();
             tp.Show();
             
@@ -73,14 +73,14 @@ namespace BootVerhuurWpf
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            LoginWindow window = new LoginWindow();
+            Login window = new Login();
             window.Show();
             Close();
         }
 
         private void ShowMemberReservations(object sender, RoutedEventArgs e)
         {
-            MemberReservations memberReservations = new MemberReservations();
+            Reservations memberReservations = new Reservations();
             memberReservations.Show();
             Close();
         }

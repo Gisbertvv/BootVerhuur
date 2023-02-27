@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-
+using BootVerhuurWpf.Model;
 
 namespace BootVerhuurWpf
 {
     /// <summary>
     /// Interaction logic for BookBoat.xaml
     /// </summary>
-    public partial class BookBoats : Window
+    public partial class Booking : Window
     {
         public string status;
         public int numberOfPeople;
@@ -28,7 +28,7 @@ namespace BootVerhuurWpf
         List<string> endtimes = new List<string>();
         List<string> Alltimes = new List<string>();
         List<string> Reservedtimes = new List<string>();
-        Bookboat bookboat;
+        RentalController rentalboat;
         Sun sunRiseSet;
         string sunrise = Sun.sun_rise;
         string sunset = Sun.sun_set;
@@ -37,18 +37,18 @@ namespace BootVerhuurWpf
         int endhour = 0;
         int endminutes = 0;
 
-        public BookBoats(int id)
+        public Booking(int id)
         {
             this.id = id;
             InitializeComponent();
             AdjustCalender();
-            bookboat = new Bookboat(date1, date2);
-            bookboat.CheckEverything(this.id);
+            rentalboat = new RentalController(date1, date2);
+            rentalboat.CheckEverything(this.id);
 
-            status = bookboat.Status;
-            numberOfPeople = bookboat.NumberOfPeople;
-            boatingLevel = bookboat.BoatLevel;
-            steeringWheel = bookboat.SteeringWheel;
+            status = rentalboat.Status;
+            numberOfPeople = rentalboat.NumberOfPeople;
+            boatingLevel = rentalboat.BoatLevel;
+            steeringWheel = rentalboat.SteeringWheel;
             sunRiseSet = new Sun();
             sunrise = Sun.sun_rise;
             sunset = Sun.sun_set;
@@ -172,10 +172,10 @@ namespace BootVerhuurWpf
             else
             {
                 GetEndTime(Gekozentijd.Text);
-                if (bookboat.InsertReservation(selecteddate, Gekozentijd.Text, reservationendtime))
+                if (rentalboat.InsertReservation(selecteddate, Gekozentijd.Text, reservationendtime))
                 {
-                    begintimes = bookboat.begintimes;
-                    endtimes = bookboat.endtimes;
+                    begintimes = rentalboat.begintimes;
+                    endtimes = rentalboat.endtimes;
                     AdjustTimeBox();
                 }
             }
@@ -260,7 +260,7 @@ namespace BootVerhuurWpf
 
         private void BackClick(object sender, RoutedEventArgs e)
         {
-            Temp tp = new Temp();
+            List tp = new List();
             tp.Show();
             Close();
         }
@@ -448,29 +448,29 @@ namespace BootVerhuurWpf
         private void SelectionDatechanged(object sender, SelectionChangedEventArgs e)
         {
             selecteddate = DP.SelectedDate.Value.ToShortDateString();
-            bookboat.GetReservationTimes(id, DP.SelectedDate.Value.ToShortDateString());
-            begintimes = bookboat.begintimes;
-            endtimes = bookboat.endtimes;
+            rentalboat.GetReservationTimes(id, DP.SelectedDate.Value.ToShortDateString());
+            begintimes = rentalboat.begintimes;
+            endtimes = rentalboat.endtimes;
             AdjustTimeBox();
         }
 
         private void AccidentReport(object sender, RoutedEventArgs e)
         {
-            PDFWindow window = new PDFWindow();
+            PDF window = new PDF();
             window.Show();
             Close();
         }
 
         private void OpenReservePanel(object sender, RoutedEventArgs e)
         {
-            Temp temp = new Temp();
+            List temp = new List();
             temp.Show();
             Close();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            AdminPanel adminpanel = new AdminPanel();
+            Settings adminpanel = new Settings();
             adminpanel.Show();
             Close();
         }
@@ -481,14 +481,14 @@ namespace BootVerhuurWpf
 
         private void Backclick(object sender, RoutedEventArgs e)
         {
-            Temp tp = new Temp();
+            List tp = new List();
             tp.Show();
             Close();
         }
 
         private void Open_MemberReservations(object sender, RoutedEventArgs e)
         {
-            MemberReservations memberReservations= new MemberReservations();    
+            Reservations memberReservations= new Reservations();    
             memberReservations.Show();
             Close();
         }

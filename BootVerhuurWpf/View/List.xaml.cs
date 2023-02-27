@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-
-
+using BootVerhuurWpf.Model;
 
 namespace BootVerhuurWpf
 {
     /// <summary>
     /// Interaction logic for Temp.xaml
     /// </summary>
-    public partial class Temp : Window
+    public partial class List : Window
     {
 
         int numberOfPeople;
@@ -19,8 +18,8 @@ namespace BootVerhuurWpf
         string status;
         int countBoats;
         int id;
-        TempSql tempSql = new TempSql();
-        public Temp()
+        RentalController tempSql = new RentalController();
+        public List()
         {
             InitializeComponent();
             ShowBoats();
@@ -60,26 +59,26 @@ namespace BootVerhuurWpf
 
             i += id;
 
-            BookBoats bk = new BookBoats(i);
+            Booking bk = new Booking(i);
             bk.Show();
             Close();
         }
 
         private void MemberReservations(object sender, RoutedEventArgs e)
         {
-            MemberReservations memberreserveration = new MemberReservations();
+            Reservations memberreserveration = new Reservations();
             memberreserveration.Show();
             Close();
         }
             private void AccidentReport(object sender, RoutedEventArgs e)
             {
-                PDFWindow window = new PDFWindow();
+                PDF window = new PDF();
                 window.Show();
             }
 
             private void Logout(object sender, RoutedEventArgs e)
             {
-                LoginWindow window = new LoginWindow();
+                Login window = new Login();
                 window.Show();
                 Close();
             }

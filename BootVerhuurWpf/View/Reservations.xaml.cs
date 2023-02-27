@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-
+using BootVerhuurWpf.Model;
 
 namespace BootVerhuurWpf
 {
     /// <summary>
     /// Interaction logic for MemberReservations.xaml
     /// </summary>
-    public partial class MemberReservations : System.Windows.Window
+    public partial class Reservations : System.Windows.Window
     {
         int boatId;
         string reservationDate;
@@ -21,9 +21,9 @@ namespace BootVerhuurWpf
         string date2;
         List<int> reservationIds;
         List<int> reservationIds2;
-        MemberReservationsSql MemberReservationsSql = new MemberReservationsSql();
+        RentalController MemberReservationsSql = new RentalController();
 
-        public MemberReservations()
+        public Reservations()
         {
             InitializeComponent();
             GetReservationDates();
@@ -135,21 +135,21 @@ namespace BootVerhuurWpf
 
         private void Open_AdminPanel(object sender, RoutedEventArgs e)
         {
-            AdminPanel adminPanel= new AdminPanel();
+            Settings adminPanel= new Settings();
             adminPanel.Show();
             Close();
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
         {
-            Create create= new Create();
+            Popup create= new Popup();
             create.Show();
             Close();
         }
 
         private void Reserve(object sender, RoutedEventArgs e)
         {
-            Temp temp= new Temp();
+            List temp= new List();
             temp.Show();
             Close();
         }

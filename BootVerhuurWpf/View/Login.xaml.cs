@@ -5,17 +5,18 @@ namespace BootVerhuurWpf
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class Login : Window
     {
-        public LoginWindow()
+        public Login()
         {
-            AdminPanel panel = new AdminPanel();
+            Settings panel = new Settings();
             InitializeComponent();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
+            LoginController login = new LoginController();
+            login.GetLogin(txtUsernameOrEmail.Text, txtPassword.Password);
             bool s = login.GetLogin(txtUsernameOrEmail.Text, txtPassword.Password);
 
 
@@ -28,11 +29,5 @@ namespace BootVerhuurWpf
                 MessageBox.Show("Gebruikersnaam/Email of wachtwoord is niet correct!");
             }
         }
-
-        /*protected override void OnClosed(EventArgs e)
-        {
-            Application.Current.Shutdown();
-        }*/
-
     }
 }

@@ -1,8 +1,7 @@
 ﻿
 using System.Windows;
 using System.Windows.Media;
-
-
+using BootVerhuurWpf.Model;
 
 namespace BootVerhuurWpf
 {
@@ -21,7 +20,7 @@ namespace BootVerhuurWpf
             //Automatic database connection
             
             database.OpenConnnection();
-            Colors panel = new Colors();
+            SettingsController panel = new SettingsController();
 
             //Converters color from string to solidcolorbrush
             Color color = (Color)ColorConverter.ConvertFromString(panel.GetColors()[0]);

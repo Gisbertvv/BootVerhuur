@@ -1,4 +1,4 @@
-﻿<Window x:Class="BootVerhuurWpf.PDFWindow"
+﻿<Window x:Class="BootVerhuurWpf.PDF"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:BootVerhuurWpf"
         xmlns:PdfViewer="clr-namespace:Syncfusion.Windows.PdfViewer;assembly=Syncfusion.PdfViewer.WPF"
         xmlns:bootVerhuurWpf="clr-namespace:BootVerhuurWpf"
+        xmlns:model="clr-namespace:BootVerhuurWpf.Model"
         mc:Ignorable="d"
         Title="Schade formulier"  
         WindowState="Maximized">
     <Window.DataContext>
-        <bootVerhuurWpf:ViewModel/>
+        <model:ViewModel/>
     </Window.DataContext>
     <Grid>
         <PdfViewer:PdfViewerControl ItemSource="{Binding DocumentStream}"/>

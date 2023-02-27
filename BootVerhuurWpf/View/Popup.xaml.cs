@@ -7,9 +7,9 @@ namespace BootVerhuurWpf
     /// <summary>
     /// Interaction logic for Create.xaml
     /// </summary>
-    public partial class Create : Window
+    public partial class Popup : Window
     {
-        public Create()
+        public Popup()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -17,14 +17,14 @@ namespace BootVerhuurWpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            CreateAdmin createAdmin = new CreateAdmin();
+            Admin createAdmin = new Admin();
             createAdmin.Show();
             this.Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            CreateMember createMember = new CreateMember();
+            Member createMember = new Member();
             createMember.Show();
             this.Close();
         }
@@ -38,15 +38,14 @@ namespace BootVerhuurWpf
 
         private void OpenAdminPanel(object sender, RoutedEventArgs e)
         {
-            AdminPanel window = new AdminPanel();
+            Settings window = new Settings();
             this.Close();
             window.Show();
 
         }
         private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
-            Edit_member edit = new Edit_member();
-
+            Edit edit = new Edit();
             edit.Show();
             Close();
         }
@@ -54,7 +53,7 @@ namespace BootVerhuurWpf
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            LoginWindow window = new LoginWindow();
+            Login window = new Login();
             window.Show();
             Close();
         }

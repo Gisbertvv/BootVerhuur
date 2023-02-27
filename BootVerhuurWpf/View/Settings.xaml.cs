@@ -10,7 +10,7 @@ namespace BootVerhuurWpf
     /// <summary>
     /// Interaction logic for CreateAdmin.xaml
     /// </summary>
-    public partial class AdminPanel : Window
+    public partial class Settings : Window
     {
         /// <summary>
         ///  Paths should be changed on the installed system
@@ -19,7 +19,7 @@ namespace BootVerhuurWpf
         string pathBackground = @"C:/Users/gisbe/source/repos//BootVerhuur/BootVerhuurWpf/Images/Background/";
         string pathPDF = @"C:/Users/gisbe/source/repos/BootVerhuur/BootVerhuurWpf/PDF/";
 
-        public AdminPanel()
+        public Settings()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -52,30 +52,30 @@ namespace BootVerhuurWpf
 
         public static void SetThemeColors(string PrimaryColor, string SecondaryColor, string BackgroundColor)
         {
-            Colors.SetPrimaryColor(PrimaryColor);
-            Colors.SetSecondaryColor(SecondaryColor);
-            Colors.SetBackgroundColor(BackgroundColor);
+            SettingsController.SetPrimaryColor(PrimaryColor);
+            SettingsController.SetSecondaryColor(SecondaryColor);
+            SettingsController.SetBackgroundColor(BackgroundColor);
         }
 
     
 
         private void OpenCreateUserPanel(object sender, RoutedEventArgs e)
         {
-            Create popup = new Create();
+            Popup popup = new Popup();
             popup.ShowDialog();
             Close();
         }
 
         private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
-            Edit_member edit = new Edit_member();
+            Edit edit = new Edit();
             edit.Show();
             Close();
         }
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            LoginWindow window = new LoginWindow();
+            Login window = new Login();
             window.Show();
             Close();
         }

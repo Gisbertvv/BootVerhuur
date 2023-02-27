@@ -6,9 +6,9 @@ namespace BootVerhuurWpf
     /// <summary>
     /// Interaction logic for CreateMember.xaml
     /// </summary>
-    public partial class CreateMember : Window
+    public partial class Member : Window
     {
-        public CreateMember()
+        public Member()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -17,14 +17,14 @@ namespace BootVerhuurWpf
    
         private void ButtonAddUserClick(object sender, RoutedEventArgs e)
         {
-            CreateFellow.CreateMember(txtVoornaam.Text, txtAchternaam.Text, txtGebruikersnaam.Text, txtWachtwoord.Password, txtEmail.Text, _txtTelefoonnummer.Text, Rol.Text, Niveau.Text);
+            UserController.CreateMember(txtVoornaam.Text, txtAchternaam.Text, txtGebruikersnaam.Text, txtWachtwoord.Password, txtEmail.Text, _txtTelefoonnummer.Text, Rol.Text, Niveau.Text);
         }
 
         private void CheckAdmin(object sender, RoutedEventArgs e)
         {
             if (Rol.Text.Equals("Admin"))
             {
-                CreateAdmin createAdmin = new CreateAdmin();
+                Admin createAdmin = new Admin();
                 createAdmin.Show();
                 Close();
             }
@@ -32,7 +32,7 @@ namespace BootVerhuurWpf
 
         private void OpenAdminPanel(object sender, RoutedEventArgs e)
         {
-            AdminPanel window = new AdminPanel();
+            Settings window = new Settings();
 
             window.Show();
             Close();
@@ -40,7 +40,7 @@ namespace BootVerhuurWpf
 
         private void OpenEditUserPanel(object sender, RoutedEventArgs e)
         {
-            Edit_member edit = new Edit_member();
+            Edit edit = new Edit();
 
             edit.Show();
             Close();
@@ -48,7 +48,7 @@ namespace BootVerhuurWpf
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            LoginWindow window = new LoginWindow();
+            Login window = new Login();
             window.Show();
             Close();
         }

@@ -5,9 +5,9 @@ namespace BootVerhuurWpf
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class PDFWindow : Window
+    public partial class PDF : Window
     { 
-        public PDFWindow()
+        public PDF()
         {
             InitializeComponent();
         }
