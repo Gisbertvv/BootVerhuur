@@ -17,11 +17,23 @@ public class RentalController :Database
     public string Status { get; set; }
     public int ID { get; set; }
     
+
     string Date1;
     string Date2;
 
     public List<string> begintimes = new List<string>();
     public List<string> endtimes = new List<string>();
+
+    public int reservationscount;
+    public List<int> reservationIDS = new List<int>();
+    public List<int> reservationIDS2 = new List<int>();
+    public int BoatID { get; set; }
+    public string ReservationDate { get; set; }
+    public string ReservationFrom { get; set; }
+    public string ReservationUntil { get; set; }
+    public DateTime CreatedAt { get; set; }
+
+    public int memberID = Int32.Parse(LoginController.id);
 
     public RentalController(string date1, string date2)
     {
@@ -328,16 +340,7 @@ public class RentalController :Database
             return -1;
         }
     }
-    public int reservationscount;
-    public List<int> reservationIDS = new List<int>();
-    public List<int> reservationIDS2 = new List<int>();
-    public int BoatID { get; set; }
-    public string ReservationDate { get; set; }
-    public string ReservationFrom { get; set; }
-    public string ReservationUntil { get; set; }
-    public DateTime CreatedAt { get; set; }
 
-    public int memberID = Int32.Parse(LoginController.id);
     /// <summary>
     /// Changes the status of the active reservation that have passed their reservation date.
     /// </summary>

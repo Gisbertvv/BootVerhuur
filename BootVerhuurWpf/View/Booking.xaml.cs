@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using BootVerhuurWpf.Model;
+using CoordinateSharp;
 
 namespace BootVerhuurWpf
 {
@@ -49,9 +50,17 @@ namespace BootVerhuurWpf
             numberOfPeople = rentalboat.NumberOfPeople;
             boatingLevel = rentalboat.BoatLevel;
             steeringWheel = rentalboat.SteeringWheel;
-            sunRiseSet = new Sun();
-            sunrise = Sun.sun_rise;
-            sunset = Sun.sun_set;
+
+            //creates sunset en sunrise times for a given location
+            //using the CoordinateSharp library
+            Celestial cel = Celestial.CalculateCelestialTimes(52.2253678, 5.4875229, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
+            //add 1 hour to the time because the library is in UTC
+            sunrise = $"{cel.SunRise.Value.Hour + 1}:{cel.SunRise.Value.Minute}:{cel.SunRise.Value.Second}";
+            //add 1 hour to the time because the library is in UTC
+            sunset = $"{cel.SunSet.Value.Hour + 1}:{cel.SunSet.Value.Minute}:{cel.SunSet.Value.Second}";
+
+            MessageBox.Show($"{sunrise}  {sunset}");
+
             GetBeginAndEndTimes(sunrise, sunset);
         }
         /// <summary>
