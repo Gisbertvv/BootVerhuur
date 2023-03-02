@@ -30,9 +30,9 @@ public class UserController : Database
     }
 
     // Check to see if password contains a digit
-    private static bool ContainsDigit(string wachtwoord)
+    private static bool ContainsDigit(string password)
     {
-        foreach (var l in wachtwoord)
+        foreach (var l in password)
         {
             if (char.IsDigit(l)) digits = true;
 
@@ -43,13 +43,13 @@ public class UserController : Database
     }
 
     // Check to see if a password contains a special character
-    private static bool ContainsSpecial(string wachtwoord)
+    private static bool ContainsSpecial(string password)
     {
         var regexItem = @"\|!#$%&/+-()=?»«@£§€{}.-;'<>_,";
 
         foreach (var item in regexItem)
         {
-            if (wachtwoord.Contains(item)) special = true;
+            if (password.Contains(item)) special = true;
             if (special) break;
         }
 
@@ -57,56 +57,56 @@ public class UserController : Database
     }
 
     // Check to see if the fields or not empty
-    public static bool EmptyFieldMessageAdmin(string Gebruikersnaam, string Email)
+    public static bool EmptyFieldMessageAdmin(string username, string email)
     {
-        if (string.IsNullOrWhiteSpace(Gebruikersnaam) || string.IsNullOrWhiteSpace(Email)) return true;
+        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(email)) return true;
         return false;
     }
 
     // Check to see if any fields have been left empty
-    public static bool EmptyFieldMessage(string Voornaam, string Achternaam, string Gebruikersnaam, string Email,
-        string Telefoonnummer, string Rol, string Niveau)
+    public static bool EmptyFieldMessage(string firstname, string lastname, string username, string email,
+        string phonenumber, string role, string boatingLevel)
     {
-        if (string.IsNullOrWhiteSpace(Voornaam) || string.IsNullOrWhiteSpace(Achternaam) ||
-            string.IsNullOrWhiteSpace(Gebruikersnaam) || string.IsNullOrWhiteSpace(Email) ||
-            string.IsNullOrWhiteSpace(Telefoonnummer) || string.IsNullOrWhiteSpace(Rol) ||
-            string.IsNullOrWhiteSpace(Niveau))
+        if (string.IsNullOrWhiteSpace(firstname) || string.IsNullOrWhiteSpace(lastname) ||
+            string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(email) ||
+            string.IsNullOrWhiteSpace(phonenumber) || string.IsNullOrWhiteSpace(role) ||
+            string.IsNullOrWhiteSpace(boatingLevel))
             return true;
         return false;
     }
 
     // Check to see if the email address is valid
-    private static bool ValidEmailMessage(string Email)
+    private static bool ValidEmailMessage(string email)
     {
-        if (!IsEmailValid(Email) || (!Email.EndsWith(".nl") && !Email.EndsWith(".com"))) return true;
+        if (!IsEmailValid(email) || (!email.EndsWith(".nl") && !email.EndsWith(".com"))) return true;
 
         return false;
     }
 
     // Check to see if the password is valid
-    private static bool ValidPasswordMessage(string Password)
+    private static bool ValidPasswordMessage(string password)
     {
-        if (!digits || !special || Password.Length <= 7) return true;
+        if (!digits || !special || password.Length <= 7) return true;
         return false;
     }
 
-    private static void ValidCreationMessage(string Voornaam, string Achternaam, string Gebruikersnaam, string Password,
-        string Email, string Telefoonnummer, string Rol, string Niveau)
+    private static void ValidCreationMessage(string firstname, string lastname, string username, string password,
+        string email, string phonenumber, string role, string boatingLevel)
     {
-        new Members(Voornaam, Achternaam, Gebruikersnaam, Password, Email, Telefoonnummer, Rol, Niveau);
+        new Members(firstname, lastname, username, password, email, phonenumber, role, boatingLevel);
     }
 
     // Creates a new member in the 'member' table while being subjected to several validity checks.
-    public static void CreateMember(string Voornaam, string Achternaam, string Gebruikersnaam, string Password,
-        string Email, string Telefoonnummer, string Rol, string Niveau)
+    public static void CreateMember(string firstname, string lastname, string username, string password,
+        string email, string phonenumber, string role, string boatingLevel)
     {
-        ContainsDigit(Password);
-        ContainsSpecial(Password);
-        var emptyField = EmptyFieldMessage(Voornaam, Achternaam, Gebruikersnaam, Email, Telefoonnummer, Rol, Niveau);
-        var invalidEmail = ValidEmailMessage(Email);
-        var inValidPassword = ValidPasswordMessage(Password);
-        ValidCreationMessage(Voornaam, Achternaam, Gebruikersnaam, Password, Email, Telefoonnummer, Rol, Niveau);
-        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(Password);
+        ContainsDigit(password);
+        ContainsSpecial(password);
+        var emptyField = EmptyFieldMessage(firstname, lastname, username, email, phonenumber, role, boatingLevel);
+        var invalidEmail = ValidEmailMessage(email);
+        var inValidPassword = ValidPasswordMessage(password);
+        ValidCreationMessage(firstname, lastname, username, password, email, phonenumber, role, boatingLevel);
+        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
 
         if (emptyField)
         {
@@ -129,9 +129,9 @@ public class UserController : Database
                 connection.Open();
                 var sql = "INSERT INTO member " +
                           "(first_name, last_name, phone_number, email, boating_level, role, username, password)" +
-                          "VALUES ('" + Voornaam + "' , '" +
-                          Achternaam + "', '" + Telefoonnummer + "', '" + Email + "', '" + Niveau + "', '" + Rol +
-                          "', '" + Gebruikersnaam + "', '" + hashedPassword + "')";
+                          "VALUES ('" + firstname + "' , '" +
+                          lastname + "', '" + phonenumber + "', '" + email + "', '" + boatingLevel + "', '" + role +
+                          "', '" + username + "', '" + hashedPassword + "')";
                 using (var command = new SqlCommand(sql, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -151,14 +151,14 @@ public class UserController : Database
     }
 
     // Create a new admin instance in the 'member' table
-    public static void CreateAdmin(string Gebruikersnaam, string Password, string Email)
+    public static void CreateAdmin(string username, string password, string email)
     {
-        ContainsDigit(Password);
-        ContainsSpecial(Password);
-        var emptyFieldAdmin = EmptyFieldMessageAdmin(Gebruikersnaam, Email);
-        var invalidEmail = ValidEmailMessage(Email);
-        var inValidPassword = ValidPasswordMessage(Password);
-        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(Password);
+        ContainsDigit(password);
+        ContainsSpecial(password);
+        var emptyFieldAdmin = EmptyFieldMessageAdmin(username, email);
+        var invalidEmail = ValidEmailMessage(email);
+        var inValidPassword = ValidPasswordMessage(password);
+        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
 
         if (emptyFieldAdmin)
         {
@@ -182,9 +182,9 @@ public class UserController : Database
                 var sql = "INSERT INTO member " +
                           "(first_name, last_name, phone_number, email, boating_level, role, username, password)" +
                           "VALUES ('" + null + "' , '" +
-                          null + "', '" + null + "', '" + Email + "', '" + null + "', '" + "Admin" +
+                          null + "', '" + null + "', '" + email + "', '" + null + "', '" + "Admin" +
                           "', '" +
-                          Gebruikersnaam + "', '" + hashedPassword + "')";
+                          username + "', '" + hashedPassword + "')";
 
                 using (var command = new SqlCommand(sql, connection))
                 {
@@ -211,7 +211,7 @@ public class UserController : Database
         return newHashedPassword;
     }
 
-    public void EditUser(string firstname, string lastname, string email, string phoneNumber, string level,
+    public void EditUser(string firstname, string lastname, string email, string phonenumber, string level,
         string username, string password, string id)
     {
         try
@@ -220,7 +220,7 @@ public class UserController : Database
             {
                 var updateQuery = "UPDATE member SET first_name='" + firstname + "',last_name='" +
                                   lastname + "',email='" + email +
-                                  "',phone_number='" + phoneNumber + "',boating_level='" +
+                                  "',phone_number='" + phonenumber + "',boating_level='" +
                                   level + "',username='" + username +
                                   "',password='" + HashPassword(password) + "' WHERE id = '" + id + "'";
 
