@@ -15,7 +15,7 @@ namespace BootVerhuurWpf
         }
 
    
-        private void ButtonAddUserClick(object sender, RoutedEventArgs e)
+        private void Create_Member(object sender, RoutedEventArgs e)
         {
             UserController.CreateMember(txtVoornaam.Text, txtAchternaam.Text, txtGebruikersnaam.Text, txtWachtwoord.Password, txtEmail.Text, _txtTelefoonnummer.Text, Rol.Text, Niveau.Text);
         }
