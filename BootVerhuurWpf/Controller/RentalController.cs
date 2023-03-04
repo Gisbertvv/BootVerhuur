@@ -8,7 +8,12 @@ namespace BootVerhuurWpf;
 
 public class RentalController :Database
 {
-    public int memberId = Int32.Parse(LoginController.id);
+    //public int memberId = Int32.Parse(LoginController.id);
+    /// <summary>
+    /// For the test if there is no loginController.id, memberId is set to 0
+    /// </summary>
+    public int memberId = LoginController.id != null ? Int32.Parse(LoginController.id) : 0;
+
     public int NumberOfPeople { get; set; }
     public string BoatLevel { get; set; }
     public string BoatingLevel { get; set; }
@@ -33,7 +38,11 @@ public class RentalController :Database
     public string ReservationUntil { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    public int memberID = Int32.Parse(LoginController.id);
+    /// <summary>
+    /// For the test if there is no loginController.id, memberID is set to 0
+    /// </summary>
+    public int memberID = LoginController.id != null ? Int32.Parse(LoginController.id) : 0;
+    // public int memberID = Int32.Parse(LoginController.id);
 
     public RentalController(string date1, string date2)
     {

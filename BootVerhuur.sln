@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BootVerhuurWpf", "BootVerhuurWpf\BootVerhuurWpf.csproj", "{AE0A8C23-1EC0-4BF1-8745-CBD1CA0B541D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReservationTests", "TestProject1\ReservationTests.csproj", "{0C90558E-0C60-459C-84C0-BE34F0185997}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AE0A8C23-1EC0-4BF1-8745-CBD1CA0B541D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE0A8C23-1EC0-4BF1-8745-CBD1CA0B541D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE0A8C23-1EC0-4BF1-8745-CBD1CA0B541D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C90558E-0C60-459C-84C0-BE34F0185997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C90558E-0C60-459C-84C0-BE34F0185997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C90558E-0C60-459C-84C0-BE34F0185997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C90558E-0C60-459C-84C0-BE34F0185997}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

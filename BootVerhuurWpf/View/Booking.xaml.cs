@@ -21,8 +21,8 @@ namespace BootVerhuurWpf
         int id;
 
         string reservationendtime;
-        string date1;
-        string date2;
+       public string date1;
+        public string date2;
         string selecteddate;
 
         List<string> begintimes = new List<string>();
@@ -38,6 +38,10 @@ namespace BootVerhuurWpf
         int endhour = 0;
         int endminutes = 0;
 
+        public Booking()
+        {
+            InitializeComponent();
+        }
         public Booking(int id)
         {
             this.id = id;
@@ -110,7 +114,7 @@ namespace BootVerhuurWpf
         /// <summary>
         /// Adjust the Calender to display two days ahead. 
         /// </summary>
-        private void AdjustCalender()
+        public void AdjustCalender()
         {
             DP.DisplayDateStart = DateTime.Now;
             DateTime plusone = DateTime.Now.AddDays(1);
