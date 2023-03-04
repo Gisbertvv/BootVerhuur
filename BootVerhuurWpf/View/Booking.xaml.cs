@@ -30,9 +30,8 @@ namespace BootVerhuurWpf
         List<string> Alltimes = new List<string>();
         List<string> Reservedtimes = new List<string>();
         RentalController rentalboat;
-        Sun sunRiseSet;
-        string sunrise = Sun.sun_rise;
-        string sunset = Sun.sun_set;
+        string sunrise;
+        string sunset;
         int beginhour = 0;
         int beginminutes = 0;
         int endhour = 0;
@@ -59,7 +58,6 @@ namespace BootVerhuurWpf
             //add 1 hour to the time because the library is in UTC
             sunset = $"{cel.SunSet.Value.Hour + 1}:{cel.SunSet.Value.Minute}:{cel.SunSet.Value.Second}";
 
-            MessageBox.Show($"{sunrise}  {sunset}");
 
             GetBeginAndEndTimes(sunrise, sunset);
         }
