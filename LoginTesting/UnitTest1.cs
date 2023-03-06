@@ -1,6 +1,7 @@
+
 using BootVerhuurWpf;
 
-namespace TestProject2
+namespace LoginTesting
 {
     [TestFixture]
     public class Tests
@@ -12,9 +13,6 @@ namespace TestProject2
         [TestCase((string)"DAMIAN", "W1elkom01", false)]//Username without all caps
         [TestCase((string)"PAUL", "Havermout1325!", true)]//Correct login user
         [TestCase((string)"Damian", "W!elkom01", true)]//Correct login admin
-
-
-
         [Test]
         public void Login(string user, string password, bool expected)
         {
