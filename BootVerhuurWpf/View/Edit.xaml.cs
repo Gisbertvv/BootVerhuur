@@ -64,13 +64,6 @@ namespace BootVerhuurWpf
                 delete.DeleteUser(IDTXTBOX.Text);
             }
         }
-
-/*        protected override void OnClosed(EventArgs e)
-        {
-
-            Application.Current.Shutdown();
-        }*/
-
         private void OpenAdminPanel(object sender, RoutedEventArgs e)
         {
             Settings window = new Settings();
